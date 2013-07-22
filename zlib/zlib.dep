@@ -1,0 +1,541 @@
+# eMbedded Visual C++ Dependency File, included by zlib.vcn
+
+!IF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Release"
+
+.\adler32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Debug"
+
+.\adler32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Release"
+
+.\adler32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Debug"
+
+.\adler32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Release"
+
+.\adler32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Debug"
+
+.\adler32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Release"
+
+.\adler32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Debug"
+
+.\adler32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86) Debug"
+
+.\adler32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ENDIF 
+
+!IF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Release"
+
+.\crc32.c : \
+	".\crc32.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Debug"
+
+.\crc32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Release"
+
+.\crc32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Debug"
+
+.\crc32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Release"
+
+.\crc32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Debug"
+
+.\crc32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Release"
+
+.\crc32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Debug"
+
+.\crc32.c : \
+	".\crc32.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86) Debug"
+
+.\crc32.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ENDIF 
+
+!IF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Release"
+
+.\inffast.c : \
+	".\inffast.h"\
+	".\inflate.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Debug"
+
+.\inffast.c : \
+	".\inffast.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Release"
+
+.\inffast.c : \
+	".\inffast.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Debug"
+
+.\inffast.c : \
+	".\inffast.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Release"
+
+.\inffast.c : \
+	".\inffast.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Debug"
+
+.\inffast.c : \
+	".\inffast.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Release"
+
+.\inffast.c : \
+	".\inffast.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Debug"
+
+.\inffast.c : \
+	".\inffast.h"\
+	".\inflate.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86) Debug"
+
+.\inffast.c : \
+	".\inffast.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ENDIF 
+
+!IF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Release"
+
+.\inflate.c : \
+	".\inffast.h"\
+	".\inffixed.h"\
+	".\inflate.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Debug"
+
+.\inflate.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Release"
+
+.\inflate.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Debug"
+
+.\inflate.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Release"
+
+.\inflate.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Debug"
+
+.\inflate.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Release"
+
+.\inflate.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Debug"
+
+.\inflate.c : \
+	".\inffast.h"\
+	".\inffixed.h"\
+	".\inflate.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86) Debug"
+
+.\inflate.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ENDIF 
+
+!IF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Release"
+
+.\inftrees.c : \
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Debug"
+
+.\inftrees.c : \
+	".\inffixed.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Release"
+
+.\inftrees.c : \
+	".\inffixed.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Debug"
+
+.\inftrees.c : \
+	".\inffixed.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Release"
+
+.\inftrees.c : \
+	".\inffixed.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Debug"
+
+.\inftrees.c : \
+	".\inffixed.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Release"
+
+.\inftrees.c : \
+	".\inffixed.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Debug"
+
+.\inftrees.c : \
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86) Debug"
+
+.\inftrees.c : \
+	".\inffixed.h"\
+	".\inftrees.h"\
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ENDIF 
+
+!IF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Release"
+
+.\uncompr.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Debug"
+
+.\uncompr.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Release"
+
+.\uncompr.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Debug"
+
+.\uncompr.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Release"
+
+.\uncompr.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Debug"
+
+.\uncompr.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Release"
+
+.\uncompr.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Debug"
+
+.\uncompr.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86) Debug"
+
+.\uncompr.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	
+
+!ENDIF 
+
+!IF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Release"
+
+.\zutil.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE MIPS) Debug"
+
+.\zutil.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Release"
+
+.\zutil.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE SH3) Debug"
+
+.\zutil.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Release"
+
+.\zutil.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE ARM) Debug"
+
+.\zutil.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Release"
+
+.\zutil.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86em) Debug"
+
+.\zutil.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ELSEIF  "$(CFG)" == "zlib - Win32 (WCE x86) Debug"
+
+.\zutil.c : \
+	".\zconf.h"\
+	".\zlib.h"\
+	".\zutil.h"\
+	
+
+!ENDIF 
+

@@ -1,0 +1,318 @@
+# eMbedded Visual C++ Dependency File, included by expat.vcn
+
+!IF  "$(CFG)" == "expat - Win32 (WCE MIPS) Release"
+
+.\xmlparse.c : \
+	".\expat.h"\
+	".\internal.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE MIPS) Debug"
+
+.\xmlparse.c : \
+	".\expat.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE SH3) Release"
+
+.\xmlparse.c : \
+	".\expat.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE SH3) Debug"
+
+.\xmlparse.c : \
+	".\expat.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE ARM) Release"
+
+.\xmlparse.c : \
+	".\expat.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE ARM) Debug"
+
+.\xmlparse.c : \
+	".\expat.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE x86em) Release"
+
+.\xmlparse.c : \
+	".\expat.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE x86em) Debug"
+
+.\xmlparse.c : \
+	".\expat.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE x86) Debug"
+
+.\xmlparse.c : \
+	".\expat.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ENDIF 
+
+!IF  "$(CFG)" == "expat - Win32 (WCE MIPS) Release"
+
+.\xmlrole.c : \
+	".\ascii.h"\
+	".\internal.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE MIPS) Debug"
+
+.\xmlrole.c : \
+	".\ascii.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE SH3) Release"
+
+.\xmlrole.c : \
+	".\ascii.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE SH3) Debug"
+
+.\xmlrole.c : \
+	".\ascii.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE ARM) Release"
+
+.\xmlrole.c : \
+	".\ascii.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE ARM) Debug"
+
+.\xmlrole.c : \
+	".\ascii.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE x86em) Release"
+
+.\xmlrole.c : \
+	".\ascii.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE x86em) Debug"
+
+.\xmlrole.c : \
+	".\ascii.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE x86) Debug"
+
+.\xmlrole.c : \
+	".\ascii.h"\
+	".\winconfig.h"\
+	".\xmlrole.h"\
+	".\xmltok.h"\
+	
+
+!ENDIF 
+
+!IF  "$(CFG)" == "expat - Win32 (WCE MIPS) Release"
+
+.\xmltok.c : \
+	".\ascii.h"\
+	".\asciitab.h"\
+	".\expat.h"\
+	".\iasciitab.h"\
+	".\internal.h"\
+	".\latin1tab.h"\
+	".\nametab.h"\
+	".\utf8tab.h"\
+	".\winconfig.h"\
+	".\xmltok.h"\
+	".\xmltok_impl.c"\
+	".\xmltok_impl.h"\
+	".\xmltok_ns.c"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE MIPS) Debug"
+
+.\xmltok.c : \
+	".\ascii.h"\
+	".\asciitab.h"\
+	".\iasciitab.h"\
+	".\latin1tab.h"\
+	".\nametab.h"\
+	".\utf8tab.h"\
+	".\winconfig.h"\
+	".\xmltok.h"\
+	".\xmltok_impl.c"\
+	".\xmltok_impl.h"\
+	".\xmltok_ns.c"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE SH3) Release"
+
+.\xmltok.c : \
+	".\ascii.h"\
+	".\asciitab.h"\
+	".\iasciitab.h"\
+	".\latin1tab.h"\
+	".\nametab.h"\
+	".\utf8tab.h"\
+	".\winconfig.h"\
+	".\xmltok.h"\
+	".\xmltok_impl.c"\
+	".\xmltok_impl.h"\
+	".\xmltok_ns.c"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE SH3) Debug"
+
+.\xmltok.c : \
+	".\ascii.h"\
+	".\asciitab.h"\
+	".\iasciitab.h"\
+	".\latin1tab.h"\
+	".\nametab.h"\
+	".\utf8tab.h"\
+	".\winconfig.h"\
+	".\xmltok.h"\
+	".\xmltok_impl.c"\
+	".\xmltok_impl.h"\
+	".\xmltok_ns.c"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE ARM) Release"
+
+.\xmltok.c : \
+	".\ascii.h"\
+	".\asciitab.h"\
+	".\iasciitab.h"\
+	".\latin1tab.h"\
+	".\nametab.h"\
+	".\utf8tab.h"\
+	".\winconfig.h"\
+	".\xmltok.h"\
+	".\xmltok_impl.c"\
+	".\xmltok_impl.h"\
+	".\xmltok_ns.c"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE ARM) Debug"
+
+.\xmltok.c : \
+	".\ascii.h"\
+	".\asciitab.h"\
+	".\iasciitab.h"\
+	".\latin1tab.h"\
+	".\nametab.h"\
+	".\utf8tab.h"\
+	".\winconfig.h"\
+	".\xmltok.h"\
+	".\xmltok_impl.c"\
+	".\xmltok_impl.h"\
+	".\xmltok_ns.c"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE x86em) Release"
+
+.\xmltok.c : \
+	".\ascii.h"\
+	".\asciitab.h"\
+	".\iasciitab.h"\
+	".\latin1tab.h"\
+	".\nametab.h"\
+	".\utf8tab.h"\
+	".\winconfig.h"\
+	".\xmltok.h"\
+	".\xmltok_impl.c"\
+	".\xmltok_impl.h"\
+	".\xmltok_ns.c"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE x86em) Debug"
+
+.\xmltok.c : \
+	".\ascii.h"\
+	".\asciitab.h"\
+	".\iasciitab.h"\
+	".\latin1tab.h"\
+	".\nametab.h"\
+	".\utf8tab.h"\
+	".\winconfig.h"\
+	".\xmltok.h"\
+	".\xmltok_impl.c"\
+	".\xmltok_impl.h"\
+	".\xmltok_ns.c"\
+	
+
+!ELSEIF  "$(CFG)" == "expat - Win32 (WCE x86) Debug"
+
+.\xmltok.c : \
+	".\ascii.h"\
+	".\asciitab.h"\
+	".\iasciitab.h"\
+	".\latin1tab.h"\
+	".\nametab.h"\
+	".\utf8tab.h"\
+	".\winconfig.h"\
+	".\xmltok.h"\
+	".\xmltok_impl.c"\
+	".\xmltok_impl.h"\
+	".\xmltok_ns.c"\
+	
+
+!ENDIF 
+

@@ -1,0 +1,1499 @@
+# Microsoft eMbedded Visual Tools Generated NMAKE File, Based on libpng.vcp
+!IF "$(CFG)" == ""
+CFG=libpng - Win32 (WCE MIPS) Debug
+!MESSAGE No configuration specified. Defaulting to libpng - Win32 (WCE MIPS) Debug.
+!ENDIF 
+
+!IF "$(CESubsystem)" == ""
+CESubsystem=windowsce,2.0
+!MESSAGE Variable CESubsystem not specified. Defaulting to windowsce,2.11
+!ENDIF 
+
+!IF "$(CEVersion)" == ""
+CEVersion=200
+!MESSAGE Variable CEVersion not specified. Defaulting to 211
+!ENDIF 
+
+!IF $(CEVersion) < 201
+CECrt=L
+CECrtDebug=Ld
+CECrtMT=T
+CECrtMTDebug=Td
+CENoDefaultLib=corelibc.lib
+CEx86Corelibc= 
+!ELSE 
+CECrt=C
+CECrtDebug=C
+CECrtMT=C
+CECrtMTDebug=C
+CENoDefaultLib=libc.lib /nodefaultlib:libcd.lib /nodefaultlib:libcmt.lib /nodefaultlib:libcmtd.lib /nodefaultlib:msvcrt.lib /nodefaultlib:msvcrtd.lib
+CEx86Corelibc=corelibc.lib
+!ENDIF 
+
+!IF "$(CE_PLATFORM)"==""
+CePlatform=WIN32_PLATFORM_UNKNOWN
+!ELSE 
+CePlatform=$(CE_PLATFORM)
+!ENDIF 
+
+!IF "$(CFG)" != "libpng - Win32 (WCE MIPS) Release" && "$(CFG)" != "libpng - Win32 (WCE MIPS) Debug" && "$(CFG)" != "libpng - Win32 (WCE SH3) Release" && "$(CFG)" != "libpng - Win32 (WCE SH3) Debug" && "$(CFG)" != "libpng - Win32 (WCE ARM) Release" && "$(CFG)" != "libpng - Win32 (WCE ARM) Debug" && "$(CFG)" != "libpng - Win32 (WCE x86) Debug" && "$(CFG)" != "libpng - Win32 (WCE x86em) Release" && "$(CFG)" != "libpng - Win32 (WCE x86em) Debug"
+!MESSAGE Invalid configuration "$(CFG)" specified.
+!MESSAGE You can specify a configuration when running NMAKE
+!MESSAGE by defining the macro CFG on the command line. For example:
+!MESSAGE 
+!MESSAGE NMAKE /f "libpng.vcn" CFG="libpng - Win32 (WCE MIPS) Debug"
+!MESSAGE 
+!MESSAGE Possible choices for configuration are:
+!MESSAGE 
+!MESSAGE "libpng - Win32 (WCE MIPS) Release" (based on "Win32 (WCE MIPS) Static Library")
+!MESSAGE "libpng - Win32 (WCE MIPS) Debug" (based on "Win32 (WCE MIPS) Static Library")
+!MESSAGE "libpng - Win32 (WCE SH3) Release" (based on "Win32 (WCE SH3) Static Library")
+!MESSAGE "libpng - Win32 (WCE SH3) Debug" (based on "Win32 (WCE SH3) Static Library")
+!MESSAGE "libpng - Win32 (WCE ARM) Release" (based on "Win32 (WCE ARM) Static Library")
+!MESSAGE "libpng - Win32 (WCE ARM) Debug" (based on "Win32 (WCE ARM) Static Library")
+!MESSAGE "libpng - Win32 (WCE x86) Debug" (based on "Win32 (WCE x86) Static Library")
+!MESSAGE "libpng - Win32 (WCE x86em) Release" (based on "Win32 (WCE x86em) Static Library")
+!MESSAGE "libpng - Win32 (WCE x86em) Debug" (based on "Win32 (WCE x86em) Static Library")
+!MESSAGE 
+!ERROR An invalid configuration is specified.
+!ENDIF 
+
+!IF "$(OS)" == "Windows_NT"
+NULL=
+!ELSE 
+NULL=nul
+!ENDIF 
+
+!IF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Release"
+
+OUTDIR=.\MIPSRel
+INTDIR=.\MIPSRel
+# Begin Custom Macros
+OutDir=.\MIPSRel
+# End Custom Macros
+
+ALL : "$(OUTDIR)\libpng.lib"
+
+
+CLEAN :
+	-@erase "$(INTDIR)\png.obj"
+	-@erase "$(INTDIR)\pngerror.obj"
+	-@erase "$(INTDIR)\pngget.obj"
+	-@erase "$(INTDIR)\pngmem.obj"
+	-@erase "$(INTDIR)\pngpread.obj"
+	-@erase "$(INTDIR)\pngread.obj"
+	-@erase "$(INTDIR)\pngrio.obj"
+	-@erase "$(INTDIR)\pngrtran.obj"
+	-@erase "$(INTDIR)\pngrutil.obj"
+	-@erase "$(INTDIR)\pngset.obj"
+	-@erase "$(INTDIR)\pngtrans.obj"
+	-@erase "$(OUTDIR)\libpng.lib"
+
+"$(OUTDIR)" :
+    if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+
+CPP=clmips.exe
+CPP_PROJ=/nologo /W3 /I "../zlib" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "MIPS" /D "_MIPS_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /D "_LIB" /Fp"$(INTDIR)\libpng.pch" /YX /Fo"$(INTDIR)\\" /Oxs /M$(CECrtMT) $(EXTRACFLAGS) /c 
+
+.c{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.c{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+LIB32=link.exe -lib
+LIB32_FLAGS=/nologo /out:"$(OUTDIR)\libpng.lib" 
+LIB32_OBJS= \
+	"$(INTDIR)\png.obj" \
+	"$(INTDIR)\pngerror.obj" \
+	"$(INTDIR)\pngget.obj" \
+	"$(INTDIR)\pngmem.obj" \
+	"$(INTDIR)\pngpread.obj" \
+	"$(INTDIR)\pngread.obj" \
+	"$(INTDIR)\pngrio.obj" \
+	"$(INTDIR)\pngrtran.obj" \
+	"$(INTDIR)\pngrutil.obj" \
+	"$(INTDIR)\pngset.obj" \
+	"$(INTDIR)\pngtrans.obj"
+
+"$(OUTDIR)\libpng.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+    $(LIB32) @<<
+  $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
+<<
+
+BSC32=bscmake.exe
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\libpng.bsc" 
+BSC32_SBRS= \
+	
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug"
+
+OUTDIR=.\MIPSDbg
+INTDIR=.\MIPSDbg
+# Begin Custom Macros
+OutDir=.\MIPSDbg
+# End Custom Macros
+
+ALL : "$(OUTDIR)\libpng.lib"
+
+
+CLEAN :
+	-@erase "$(INTDIR)\png.obj"
+	-@erase "$(INTDIR)\pngerror.obj"
+	-@erase "$(INTDIR)\pngget.obj"
+	-@erase "$(INTDIR)\pngmem.obj"
+	-@erase "$(INTDIR)\pngpread.obj"
+	-@erase "$(INTDIR)\pngread.obj"
+	-@erase "$(INTDIR)\pngrio.obj"
+	-@erase "$(INTDIR)\pngrtran.obj"
+	-@erase "$(INTDIR)\pngrutil.obj"
+	-@erase "$(INTDIR)\pngset.obj"
+	-@erase "$(INTDIR)\pngtrans.obj"
+	-@erase "$(INTDIR)\vc60.pdb"
+	-@erase "$(OUTDIR)\libpng.lib"
+
+"$(OUTDIR)" :
+    if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+
+CPP=clmips.exe
+CPP_PROJ=/nologo /W3 /Zi /Od /I "../zlib" /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "MIPS" /D "_MIPS_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Fp"$(INTDIR)\libpng.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /M$(CECrtMTDebug) $(EXTRACFLAGS) /c 
+
+.c{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.c{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+LIB32=link.exe -lib
+LIB32_FLAGS=/nologo /out:"$(OUTDIR)\libpng.lib" 
+LIB32_OBJS= \
+	"$(INTDIR)\png.obj" \
+	"$(INTDIR)\pngerror.obj" \
+	"$(INTDIR)\pngget.obj" \
+	"$(INTDIR)\pngmem.obj" \
+	"$(INTDIR)\pngpread.obj" \
+	"$(INTDIR)\pngread.obj" \
+	"$(INTDIR)\pngrio.obj" \
+	"$(INTDIR)\pngrtran.obj" \
+	"$(INTDIR)\pngrutil.obj" \
+	"$(INTDIR)\pngset.obj" \
+	"$(INTDIR)\pngtrans.obj"
+
+"$(OUTDIR)\libpng.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+    $(LIB32) @<<
+  $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
+<<
+
+BSC32=bscmake.exe
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\libpng.bsc" 
+BSC32_SBRS= \
+	
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Release"
+
+OUTDIR=.\SH3Rel
+INTDIR=.\SH3Rel
+# Begin Custom Macros
+OutDir=.\SH3Rel
+# End Custom Macros
+
+ALL : "$(OUTDIR)\libpng.lib"
+
+
+CLEAN :
+	-@erase "$(INTDIR)\png.obj"
+	-@erase "$(INTDIR)\pngerror.obj"
+	-@erase "$(INTDIR)\pngget.obj"
+	-@erase "$(INTDIR)\pngmem.obj"
+	-@erase "$(INTDIR)\pngpread.obj"
+	-@erase "$(INTDIR)\pngread.obj"
+	-@erase "$(INTDIR)\pngrio.obj"
+	-@erase "$(INTDIR)\pngrtran.obj"
+	-@erase "$(INTDIR)\pngrutil.obj"
+	-@erase "$(INTDIR)\pngset.obj"
+	-@erase "$(INTDIR)\pngtrans.obj"
+	-@erase "$(OUTDIR)\libpng.lib"
+
+"$(OUTDIR)" :
+    if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+
+CPP=shcl.exe
+CPP_PROJ=/nologo /W3 /I "../zlib" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "SHx" /D "SH3" /D "_SH3_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /D "_LIB" /Fp"$(INTDIR)\libpng.pch" /YX /Fo"$(INTDIR)\\" /Oxs /M$(CECrtMT) $(EXTRACFLAGS) /c 
+
+.c{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.c{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+LIB32=link.exe -lib
+LIB32_FLAGS=/nologo /out:"$(OUTDIR)\libpng.lib" 
+LIB32_OBJS= \
+	"$(INTDIR)\png.obj" \
+	"$(INTDIR)\pngerror.obj" \
+	"$(INTDIR)\pngget.obj" \
+	"$(INTDIR)\pngmem.obj" \
+	"$(INTDIR)\pngpread.obj" \
+	"$(INTDIR)\pngread.obj" \
+	"$(INTDIR)\pngrio.obj" \
+	"$(INTDIR)\pngrtran.obj" \
+	"$(INTDIR)\pngrutil.obj" \
+	"$(INTDIR)\pngset.obj" \
+	"$(INTDIR)\pngtrans.obj"
+
+"$(OUTDIR)\libpng.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+    $(LIB32) @<<
+  $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
+<<
+
+BSC32=bscmake.exe
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\libpng.bsc" 
+BSC32_SBRS= \
+	
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Debug"
+
+OUTDIR=.\SH3Dbg
+INTDIR=.\SH3Dbg
+# Begin Custom Macros
+OutDir=.\SH3Dbg
+# End Custom Macros
+
+ALL : "$(OUTDIR)\libpng.lib"
+
+
+CLEAN :
+	-@erase "$(INTDIR)\png.obj"
+	-@erase "$(INTDIR)\pngerror.obj"
+	-@erase "$(INTDIR)\pngget.obj"
+	-@erase "$(INTDIR)\pngmem.obj"
+	-@erase "$(INTDIR)\pngpread.obj"
+	-@erase "$(INTDIR)\pngread.obj"
+	-@erase "$(INTDIR)\pngrio.obj"
+	-@erase "$(INTDIR)\pngrtran.obj"
+	-@erase "$(INTDIR)\pngrutil.obj"
+	-@erase "$(INTDIR)\pngset.obj"
+	-@erase "$(INTDIR)\pngtrans.obj"
+	-@erase "$(INTDIR)\vc60.pdb"
+	-@erase "$(OUTDIR)\libpng.lib"
+
+"$(OUTDIR)" :
+    if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+
+CPP=shcl.exe
+CPP_PROJ=/nologo /W3 /Zi /Od /I "../zlib" /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "SHx" /D "SH3" /D "_SH3_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Fp"$(INTDIR)\libpng.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /M$(CECrtMTDebug) $(EXTRACFLAGS) /c 
+
+.c{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.c{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+LIB32=link.exe -lib
+LIB32_FLAGS=/nologo /out:"$(OUTDIR)\libpng.lib" 
+LIB32_OBJS= \
+	"$(INTDIR)\png.obj" \
+	"$(INTDIR)\pngerror.obj" \
+	"$(INTDIR)\pngget.obj" \
+	"$(INTDIR)\pngmem.obj" \
+	"$(INTDIR)\pngpread.obj" \
+	"$(INTDIR)\pngread.obj" \
+	"$(INTDIR)\pngrio.obj" \
+	"$(INTDIR)\pngrtran.obj" \
+	"$(INTDIR)\pngrutil.obj" \
+	"$(INTDIR)\pngset.obj" \
+	"$(INTDIR)\pngtrans.obj"
+
+"$(OUTDIR)\libpng.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+    $(LIB32) @<<
+  $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
+<<
+
+BSC32=bscmake.exe
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\libpng.bsc" 
+BSC32_SBRS= \
+	
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Release"
+
+OUTDIR=.\ARMRel
+INTDIR=.\ARMRel
+# Begin Custom Macros
+OutDir=.\ARMRel
+# End Custom Macros
+
+ALL : "$(OUTDIR)\libpng.lib"
+
+
+CLEAN :
+	-@erase "$(INTDIR)\png.obj"
+	-@erase "$(INTDIR)\pngerror.obj"
+	-@erase "$(INTDIR)\pngget.obj"
+	-@erase "$(INTDIR)\pngmem.obj"
+	-@erase "$(INTDIR)\pngpread.obj"
+	-@erase "$(INTDIR)\pngread.obj"
+	-@erase "$(INTDIR)\pngrio.obj"
+	-@erase "$(INTDIR)\pngrtran.obj"
+	-@erase "$(INTDIR)\pngrutil.obj"
+	-@erase "$(INTDIR)\pngset.obj"
+	-@erase "$(INTDIR)\pngtrans.obj"
+	-@erase "$(OUTDIR)\libpng.lib"
+
+"$(OUTDIR)" :
+    if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+
+CPP=clarm.exe
+CPP_PROJ=/nologo /W3 /I "../zlib" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Fp"$(INTDIR)\libpng.pch" /YX /Fo"$(INTDIR)\\" /Oxs /M$(CECrtMT) $(EXTRACFLAGS) /c 
+
+.c{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.c{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+LIB32=link.exe -lib
+LIB32_FLAGS=/nologo /out:"$(OUTDIR)\libpng.lib" 
+LIB32_OBJS= \
+	"$(INTDIR)\png.obj" \
+	"$(INTDIR)\pngerror.obj" \
+	"$(INTDIR)\pngget.obj" \
+	"$(INTDIR)\pngmem.obj" \
+	"$(INTDIR)\pngpread.obj" \
+	"$(INTDIR)\pngread.obj" \
+	"$(INTDIR)\pngrio.obj" \
+	"$(INTDIR)\pngrtran.obj" \
+	"$(INTDIR)\pngrutil.obj" \
+	"$(INTDIR)\pngset.obj" \
+	"$(INTDIR)\pngtrans.obj"
+
+"$(OUTDIR)\libpng.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+    $(LIB32) @<<
+  $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
+<<
+
+BSC32=bscmake.exe
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\libpng.bsc" 
+BSC32_SBRS= \
+	
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Debug"
+
+OUTDIR=.\ARMDbg
+INTDIR=.\ARMDbg
+# Begin Custom Macros
+OutDir=.\ARMDbg
+# End Custom Macros
+
+ALL : "$(OUTDIR)\libpng.lib"
+
+
+CLEAN :
+	-@erase "$(INTDIR)\png.obj"
+	-@erase "$(INTDIR)\pngerror.obj"
+	-@erase "$(INTDIR)\pngget.obj"
+	-@erase "$(INTDIR)\pngmem.obj"
+	-@erase "$(INTDIR)\pngpread.obj"
+	-@erase "$(INTDIR)\pngread.obj"
+	-@erase "$(INTDIR)\pngrio.obj"
+	-@erase "$(INTDIR)\pngrtran.obj"
+	-@erase "$(INTDIR)\pngrutil.obj"
+	-@erase "$(INTDIR)\pngset.obj"
+	-@erase "$(INTDIR)\pngtrans.obj"
+	-@erase "$(INTDIR)\vc60.pdb"
+	-@erase "$(OUTDIR)\libpng.lib"
+
+"$(OUTDIR)" :
+    if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+
+CPP=clarm.exe
+CPP_PROJ=/nologo /W3 /Zi /Od /I "../zlib" /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Fp"$(INTDIR)\libpng.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /M$(CECrtMTDebug) $(EXTRACFLAGS) /c 
+
+.c{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.c{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+LIB32=link.exe -lib
+LIB32_FLAGS=/nologo /out:"$(OUTDIR)\libpng.lib" 
+LIB32_OBJS= \
+	"$(INTDIR)\png.obj" \
+	"$(INTDIR)\pngerror.obj" \
+	"$(INTDIR)\pngget.obj" \
+	"$(INTDIR)\pngmem.obj" \
+	"$(INTDIR)\pngpread.obj" \
+	"$(INTDIR)\pngread.obj" \
+	"$(INTDIR)\pngrio.obj" \
+	"$(INTDIR)\pngrtran.obj" \
+	"$(INTDIR)\pngrutil.obj" \
+	"$(INTDIR)\pngset.obj" \
+	"$(INTDIR)\pngtrans.obj"
+
+"$(OUTDIR)\libpng.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+    $(LIB32) @<<
+  $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
+<<
+
+BSC32=bscmake.exe
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\libpng.bsc" 
+BSC32_SBRS= \
+	
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86) Debug"
+
+OUTDIR=.\X86Dbg
+INTDIR=.\X86Dbg
+# Begin Custom Macros
+OutDir=.\X86Dbg
+# End Custom Macros
+
+ALL : "$(OUTDIR)\libpng.lib"
+
+
+CLEAN :
+	-@erase "$(INTDIR)\png.obj"
+	-@erase "$(INTDIR)\pngerror.obj"
+	-@erase "$(INTDIR)\pngget.obj"
+	-@erase "$(INTDIR)\pngmem.obj"
+	-@erase "$(INTDIR)\pngpread.obj"
+	-@erase "$(INTDIR)\pngread.obj"
+	-@erase "$(INTDIR)\pngrio.obj"
+	-@erase "$(INTDIR)\pngrtran.obj"
+	-@erase "$(INTDIR)\pngrutil.obj"
+	-@erase "$(INTDIR)\pngset.obj"
+	-@erase "$(INTDIR)\pngtrans.obj"
+	-@erase "$(INTDIR)\vc60.pdb"
+	-@erase "$(OUTDIR)\libpng.lib"
+
+"$(OUTDIR)" :
+    if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+
+CPP=cl.exe
+CPP_PROJ=/nologo /W3 /Zi /Od /I "../zlib" /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "_i386_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "_LIB" /Fp"$(INTDIR)\libpng.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /Gs8192 /GF $(EXTRACFLAGS) /c 
+
+.c{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.c{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+LIB32=link.exe -lib
+LIB32_FLAGS=/nologo /out:"$(OUTDIR)\libpng.lib" 
+LIB32_OBJS= \
+	"$(INTDIR)\png.obj" \
+	"$(INTDIR)\pngerror.obj" \
+	"$(INTDIR)\pngget.obj" \
+	"$(INTDIR)\pngmem.obj" \
+	"$(INTDIR)\pngpread.obj" \
+	"$(INTDIR)\pngread.obj" \
+	"$(INTDIR)\pngrio.obj" \
+	"$(INTDIR)\pngrtran.obj" \
+	"$(INTDIR)\pngrutil.obj" \
+	"$(INTDIR)\pngset.obj" \
+	"$(INTDIR)\pngtrans.obj"
+
+"$(OUTDIR)\libpng.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+    $(LIB32) @<<
+  $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
+<<
+
+BSC32=bscmake.exe
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\libpng.bsc" 
+BSC32_SBRS= \
+	
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Release"
+
+OUTDIR=.\X86EMRel
+INTDIR=.\X86EMRel
+# Begin Custom Macros
+OutDir=.\X86EMRel
+# End Custom Macros
+
+ALL : "$(OUTDIR)\libpng.lib"
+
+
+CLEAN :
+	-@erase "$(INTDIR)\png.obj"
+	-@erase "$(INTDIR)\pngerror.obj"
+	-@erase "$(INTDIR)\pngget.obj"
+	-@erase "$(INTDIR)\pngmem.obj"
+	-@erase "$(INTDIR)\pngpread.obj"
+	-@erase "$(INTDIR)\pngread.obj"
+	-@erase "$(INTDIR)\pngrio.obj"
+	-@erase "$(INTDIR)\pngrtran.obj"
+	-@erase "$(INTDIR)\pngrutil.obj"
+	-@erase "$(INTDIR)\pngset.obj"
+	-@erase "$(INTDIR)\pngtrans.obj"
+	-@erase "$(OUTDIR)\libpng.lib"
+
+"$(OUTDIR)" :
+    if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+
+CPP=cl.exe
+CPP_PROJ=/nologo /W3 /I "../zlib" /D _WIN32_WCE=$(CEVersion) /D "WIN32" /D "STRICT" /D "_WIN32_WCE_EMULATION" /D "INTERNATIONAL" /D "USA" /D "INTLMSG_CODEPAGE" /D "$(CePlatform)" /D "i486" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "NDEBUG" /D "_LIB" /Fp"$(INTDIR)\libpng.pch" /YX /Fo"$(INTDIR)\\" /Oxs /Gz $(EXTRACFLAGS) /c 
+
+.c{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.c{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+LIB32=link.exe -lib
+LIB32_FLAGS=/nologo /out:"$(OUTDIR)\libpng.lib" 
+LIB32_OBJS= \
+	"$(INTDIR)\png.obj" \
+	"$(INTDIR)\pngerror.obj" \
+	"$(INTDIR)\pngget.obj" \
+	"$(INTDIR)\pngmem.obj" \
+	"$(INTDIR)\pngpread.obj" \
+	"$(INTDIR)\pngread.obj" \
+	"$(INTDIR)\pngrio.obj" \
+	"$(INTDIR)\pngrtran.obj" \
+	"$(INTDIR)\pngrutil.obj" \
+	"$(INTDIR)\pngset.obj" \
+	"$(INTDIR)\pngtrans.obj"
+
+"$(OUTDIR)\libpng.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+    $(LIB32) @<<
+  $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
+<<
+
+BSC32=bscmake.exe
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\libpng.bsc" 
+BSC32_SBRS= \
+	
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+
+OUTDIR=.\X86EMDbg
+INTDIR=.\X86EMDbg
+# Begin Custom Macros
+OutDir=.\X86EMDbg
+# End Custom Macros
+
+ALL : "$(OUTDIR)\libpng.lib"
+
+
+CLEAN :
+	-@erase "$(INTDIR)\png.obj"
+	-@erase "$(INTDIR)\pngerror.obj"
+	-@erase "$(INTDIR)\pngget.obj"
+	-@erase "$(INTDIR)\pngmem.obj"
+	-@erase "$(INTDIR)\pngpread.obj"
+	-@erase "$(INTDIR)\pngread.obj"
+	-@erase "$(INTDIR)\pngrio.obj"
+	-@erase "$(INTDIR)\pngrtran.obj"
+	-@erase "$(INTDIR)\pngrutil.obj"
+	-@erase "$(INTDIR)\pngset.obj"
+	-@erase "$(INTDIR)\pngtrans.obj"
+	-@erase "$(INTDIR)\vc60.pdb"
+	-@erase "$(OUTDIR)\libpng.lib"
+
+"$(OUTDIR)" :
+    if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+
+CPP=cl.exe
+CPP_PROJ=/nologo /W3 /Zi /Od /I "../zlib" /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "WIN32" /D "STRICT" /D "_WIN32_WCE_EMULATION" /D "INTERNATIONAL" /D "USA" /D "INTLMSG_CODEPAGE" /D "$(CePlatform)" /D "i486" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "_LIB" /Fp"$(INTDIR)\libpng.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /Gz $(EXTRACFLAGS) /c 
+
+.c{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.c{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+LIB32=link.exe -lib
+LIB32_FLAGS=/nologo /out:"$(OUTDIR)\libpng.lib" 
+LIB32_OBJS= \
+	"$(INTDIR)\png.obj" \
+	"$(INTDIR)\pngerror.obj" \
+	"$(INTDIR)\pngget.obj" \
+	"$(INTDIR)\pngmem.obj" \
+	"$(INTDIR)\pngpread.obj" \
+	"$(INTDIR)\pngread.obj" \
+	"$(INTDIR)\pngrio.obj" \
+	"$(INTDIR)\pngrtran.obj" \
+	"$(INTDIR)\pngrutil.obj" \
+	"$(INTDIR)\pngset.obj" \
+	"$(INTDIR)\pngtrans.obj"
+
+"$(OUTDIR)\libpng.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+    $(LIB32) @<<
+  $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
+<<
+
+BSC32=bscmake.exe
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\libpng.bsc" 
+BSC32_SBRS= \
+	
+
+!ENDIF 
+
+
+!IF "$(NO_EXTERNAL_DEPS)" != "1"
+!IF EXISTS("libpng.dep")
+!INCLUDE "libpng.dep"
+!ELSE 
+!MESSAGE Warning: cannot find "libpng.dep"
+!ENDIF 
+!ENDIF 
+
+
+!IF "$(CFG)" == "libpng - Win32 (WCE MIPS) Release" || "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug" || "$(CFG)" == "libpng - Win32 (WCE SH3) Release" || "$(CFG)" == "libpng - Win32 (WCE SH3) Debug" || "$(CFG)" == "libpng - Win32 (WCE ARM) Release" || "$(CFG)" == "libpng - Win32 (WCE ARM) Debug" || "$(CFG)" == "libpng - Win32 (WCE x86) Debug" || "$(CFG)" == "libpng - Win32 (WCE x86em) Release" || "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+SOURCE=.\png.c
+
+!IF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Release"
+
+
+"$(INTDIR)\png.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug"
+
+
+"$(INTDIR)\png.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Release"
+
+
+"$(INTDIR)\png.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Debug"
+
+
+"$(INTDIR)\png.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Release"
+
+
+"$(INTDIR)\png.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Debug"
+
+
+"$(INTDIR)\png.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86) Debug"
+
+
+"$(INTDIR)\png.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Release"
+
+
+"$(INTDIR)\png.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+
+
+"$(INTDIR)\png.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ENDIF 
+
+SOURCE=.\pngerror.c
+
+!IF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Release"
+
+
+"$(INTDIR)\pngerror.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug"
+
+
+"$(INTDIR)\pngerror.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Release"
+
+
+"$(INTDIR)\pngerror.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Debug"
+
+
+"$(INTDIR)\pngerror.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Release"
+
+
+"$(INTDIR)\pngerror.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Debug"
+
+
+"$(INTDIR)\pngerror.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86) Debug"
+
+
+"$(INTDIR)\pngerror.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Release"
+
+
+"$(INTDIR)\pngerror.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+
+
+"$(INTDIR)\pngerror.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ENDIF 
+
+SOURCE=.\pngget.c
+
+!IF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Release"
+
+
+"$(INTDIR)\pngget.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug"
+
+
+"$(INTDIR)\pngget.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Release"
+
+
+"$(INTDIR)\pngget.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Debug"
+
+
+"$(INTDIR)\pngget.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Release"
+
+
+"$(INTDIR)\pngget.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Debug"
+
+
+"$(INTDIR)\pngget.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86) Debug"
+
+
+"$(INTDIR)\pngget.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Release"
+
+
+"$(INTDIR)\pngget.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+
+
+"$(INTDIR)\pngget.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ENDIF 
+
+SOURCE=.\pngmem.c
+
+!IF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Release"
+
+
+"$(INTDIR)\pngmem.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug"
+
+
+"$(INTDIR)\pngmem.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Release"
+
+
+"$(INTDIR)\pngmem.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Debug"
+
+
+"$(INTDIR)\pngmem.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Release"
+
+
+"$(INTDIR)\pngmem.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Debug"
+
+
+"$(INTDIR)\pngmem.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86) Debug"
+
+
+"$(INTDIR)\pngmem.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Release"
+
+
+"$(INTDIR)\pngmem.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+
+
+"$(INTDIR)\pngmem.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ENDIF 
+
+SOURCE=.\pngpread.c
+
+!IF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Release"
+
+
+"$(INTDIR)\pngpread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug"
+
+
+"$(INTDIR)\pngpread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Release"
+
+
+"$(INTDIR)\pngpread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Debug"
+
+
+"$(INTDIR)\pngpread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Release"
+
+
+"$(INTDIR)\pngpread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Debug"
+
+
+"$(INTDIR)\pngpread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86) Debug"
+
+
+"$(INTDIR)\pngpread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Release"
+
+
+"$(INTDIR)\pngpread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+
+
+"$(INTDIR)\pngpread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ENDIF 
+
+SOURCE=.\pngread.c
+
+!IF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Release"
+
+
+"$(INTDIR)\pngread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug"
+
+
+"$(INTDIR)\pngread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Release"
+
+
+"$(INTDIR)\pngread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Debug"
+
+
+"$(INTDIR)\pngread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Release"
+
+
+"$(INTDIR)\pngread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Debug"
+
+
+"$(INTDIR)\pngread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86) Debug"
+
+
+"$(INTDIR)\pngread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Release"
+
+
+"$(INTDIR)\pngread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+
+
+"$(INTDIR)\pngread.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ENDIF 
+
+SOURCE=.\pngrio.c
+
+!IF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Release"
+
+
+"$(INTDIR)\pngrio.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug"
+
+
+"$(INTDIR)\pngrio.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Release"
+
+
+"$(INTDIR)\pngrio.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Debug"
+
+
+"$(INTDIR)\pngrio.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Release"
+
+
+"$(INTDIR)\pngrio.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Debug"
+
+
+"$(INTDIR)\pngrio.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86) Debug"
+
+
+"$(INTDIR)\pngrio.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Release"
+
+
+"$(INTDIR)\pngrio.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+
+
+"$(INTDIR)\pngrio.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ENDIF 
+
+SOURCE=.\pngrtran.c
+
+!IF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Release"
+
+
+"$(INTDIR)\pngrtran.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug"
+
+
+"$(INTDIR)\pngrtran.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Release"
+
+
+"$(INTDIR)\pngrtran.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Debug"
+
+
+"$(INTDIR)\pngrtran.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Release"
+
+
+"$(INTDIR)\pngrtran.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Debug"
+
+
+"$(INTDIR)\pngrtran.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86) Debug"
+
+
+"$(INTDIR)\pngrtran.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Release"
+
+
+"$(INTDIR)\pngrtran.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+
+
+"$(INTDIR)\pngrtran.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ENDIF 
+
+SOURCE=.\pngrutil.c
+
+!IF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Release"
+
+
+"$(INTDIR)\pngrutil.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug"
+
+
+"$(INTDIR)\pngrutil.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Release"
+
+
+"$(INTDIR)\pngrutil.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Debug"
+
+
+"$(INTDIR)\pngrutil.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Release"
+
+
+"$(INTDIR)\pngrutil.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Debug"
+
+
+"$(INTDIR)\pngrutil.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86) Debug"
+
+
+"$(INTDIR)\pngrutil.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Release"
+
+
+"$(INTDIR)\pngrutil.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+
+
+"$(INTDIR)\pngrutil.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ENDIF 
+
+SOURCE=.\pngset.c
+
+!IF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Release"
+
+
+"$(INTDIR)\pngset.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug"
+
+
+"$(INTDIR)\pngset.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Release"
+
+
+"$(INTDIR)\pngset.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Debug"
+
+
+"$(INTDIR)\pngset.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Release"
+
+
+"$(INTDIR)\pngset.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Debug"
+
+
+"$(INTDIR)\pngset.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86) Debug"
+
+
+"$(INTDIR)\pngset.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Release"
+
+
+"$(INTDIR)\pngset.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+
+
+"$(INTDIR)\pngset.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ENDIF 
+
+SOURCE=.\pngtrans.c
+
+!IF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Release"
+
+
+"$(INTDIR)\pngtrans.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE MIPS) Debug"
+
+
+"$(INTDIR)\pngtrans.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Release"
+
+
+"$(INTDIR)\pngtrans.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE SH3) Debug"
+
+
+"$(INTDIR)\pngtrans.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Release"
+
+
+"$(INTDIR)\pngtrans.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE ARM) Debug"
+
+
+"$(INTDIR)\pngtrans.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86) Debug"
+
+
+"$(INTDIR)\pngtrans.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Release"
+
+
+"$(INTDIR)\pngtrans.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ELSEIF  "$(CFG)" == "libpng - Win32 (WCE x86em) Debug"
+
+
+"$(INTDIR)\pngtrans.obj" : $(SOURCE) "$(INTDIR)"
+
+
+!ENDIF 
+
+
+!ENDIF 
+

@@ -1,0 +1,25 @@
+# xml parser settings
+# font size must be in range -100..+100
+# color must be in range 1..8
+# bold and italic can be + or -
+# align can be one of C - center, R - right align, J - always justify
+# indent is <number> points
+# action can be any combination of
+#  a - element is a document section
+#  p - element is a text container, paragraph break occurs before and after
+#      this element
+#  o - this is a document container
+#  f - apply specified formatting
+#  e - add an empty line here, should not occur inside text containers
+#  s - add a space after this element
+#  t - this is a container for section title
+#  c - enable display of child elements
+#  d - this can be a link destination, name is in @id
+#  l - this element is a link, target is in @xlink:href
+#  q - append an empty line after this element
+#  x - apply user defined style from @name
+# any field can be *, which means "don't change this setting"
+# * before name means it will not be shown in styles dialog
+# _ in names will be changed to space in styles dialog
+#Name		Size	B I U Col	Align	LIndent	RIndent	FIndent Action	Aliases
+

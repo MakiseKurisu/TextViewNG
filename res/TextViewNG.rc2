@@ -1,0 +1,15 @@
+//
+// TEXTVIEWNG.RC2 - resources Microsoft eMbedded Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft eMbedded Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+#if defined(_WIN32_WCE)
+HI_RES_AWARE  CEUX  {1}
+#endif
+/////////////////////////////////////////////////////////////////////////////
