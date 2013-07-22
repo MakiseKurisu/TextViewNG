@@ -231,18 +231,6 @@
     <ClCompile Include="XListBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="expat\xmlparse.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="XMLParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="expat\xmlrole.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="expat\xmltok.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="xscanf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -432,15 +420,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="XListBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="XMLParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="expat\xmlrole.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="expat\xmltok.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="xscanf.h">

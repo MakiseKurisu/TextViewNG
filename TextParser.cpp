@@ -33,7 +33,6 @@
 #include <afxcmn.h>
 
 #include "TextParser.h"
-#include "XMLParser.h"
 #include "Unicode.h"
 #include "FastArray.h"
 #include "Image.h"
@@ -76,15 +75,15 @@ static SimpleFormat	g_simple_formats[]={
 #define	NUM_SIMPLE_FORMATS  (sizeof(g_simple_formats)/sizeof(g_simple_formats[0]))
 
 static const TCHAR	*g_ext_formats[]={
-  _T("XML"),
+//  _T("XML"),
   _T("PNG"),
   _T("JPEG")
 };
 #define	NUM_EXT_FORMATS  (sizeof(g_ext_formats)/sizeof(g_ext_formats[0]))
 
-#define	XML_FORMAT  (NUM_SIMPLE_FORMATS)
-#define	PNG_FORMAT  (NUM_SIMPLE_FORMATS+1)
-#define	JPEG_FORMAT  (NUM_SIMPLE_FORMATS+2)
+//#define	XML_FORMAT  (NUM_SIMPLE_FORMATS)
+#define	PNG_FORMAT  (NUM_SIMPLE_FORMATS)
+#define	JPEG_FORMAT  (NUM_SIMPLE_FORMATS+1)
 
 TextParser::~TextParser() {
   if (m_heap)
@@ -292,9 +291,9 @@ int		TextParser::DetectFormat(CBufFile *fp) {
 
   fp->seek(0);
   nb=fp->read(buf,2048);
-  /* check if this is some sort of xml */
+  /* check if this is some sort of xml
   if (nb>8 && (memcmp("<?xml",buf,5)==0 || memcmp("\xef\xbb\xbf<?xml",buf,8)==0))
-    return XML_FORMAT;
+    return XML_FORMAT; */
   /* check for png */
   if (nb>=4 && memcmp("\x89PNG",buf,4)==0)
     return PNG_FORMAT;
@@ -441,32 +440,39 @@ bool	ImageParser::GetImage(const wchar_t *name,HDC hDC,
 
 
 TextParser	*TextParser::Create(Meter *m,CBufFile *fp,int format,int encoding,Bookmarks *bmk) {
-  if (format<0)
-    return NULL;
-  HANDLE    heap;
+	if (format<0)
+		return NULL;
+	HANDLE    heap;
 
-  heap=HeapCreate(HEAP_NO_SERIALIZE,1048576*4,0); // reserve up to 4 megs of ram
-  if (!heap)
-    return NULL;
-  TRY {
-    if (format<NUM_SIMPLE_FORMATS) {
-      fp->seek(0);
-      return new SimpleTextParser(m,fp,heap,format,encoding,bmk);
-    } else if (format==XML_FORMAT) { /* XML */
-      XMLParser *p=XMLParser::MakeParser(m,fp,bmk,heap);
-      p->m_format=NUM_SIMPLE_FORMATS;
-      if (p->ParseFile(encoding))
-	return p;
-      delete p;
-    } else if (format==PNG_FORMAT || format==JPEG_FORMAT) { /* Images */
-      return new ImageParser(m,fp,heap,format,encoding,bmk);
-    }
-  } CATCH_ALL(e) {
-    HeapDestroy(heap);
-    THROW_LAST();
-  }
-  END_CATCH_ALL
-  return NULL;
+	heap=HeapCreate(HEAP_NO_SERIALIZE,1048576*4,0); // reserve up to 4 megs of ram
+	if (!heap)
+		return NULL;
+	TRY {
+		switch (format)
+		{
+		case PNG_FORMAT:
+		case JPEG_FORMAT: /* Images */
+			return new ImageParser(m,fp,heap,format,encoding,bmk);
+			break;
+		/*
+		case XML_FORMAT:
+			XMLParser *p=XMLParser::MakeParser(m,fp,bmk,heap);
+			p->m_format=NUM_SIMPLE_FORMATS;
+			if (p->ParseFile(encoding))
+				return p;
+			delete p;
+			break;
+		*/
+		default:	//format<NUM_SIMPLE_FORMATS
+			fp->seek(0);
+			return new SimpleTextParser(m,fp,heap,format,encoding,bmk);
+		}
+	} CATCH_ALL(e) {
+		HeapDestroy(heap);
+		THROW_LAST();
+	}
+	END_CATCH_ALL
+	return NULL;
 }
 
 // hyphenation code by Mark Lipsman, modified my Mike

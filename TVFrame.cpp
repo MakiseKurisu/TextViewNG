@@ -41,7 +41,6 @@
 #include "TVFrame.h"
 #include "FileOpenDialog.h"
 #include "DummyView.h"
-#include "XMLParser.h"
 #include "Keys.h"
 #include "TextFile.h"
 #include "TextFormatter.h"
@@ -417,7 +416,7 @@ void  CTVFrame::SaveWndPos() {
 bool  CTVFrame::InitView() {
   bool dictmode=false;
   // initialize xml parser
-  XMLParser::LoadStyles();
+  //XMLParser::LoadStyles();
   bool	triednoquote=false;
   CString filename(AfxGetApp()->m_lpCmdLine);
   if (filename==_T("-d")) { // show dictionary

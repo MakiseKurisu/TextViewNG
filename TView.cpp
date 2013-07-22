@@ -46,7 +46,6 @@
 #include "FileFormatDialog.h"
 #include "InputBox.h"
 #include "ColorSelector.h"
-#include "XMLParser.h"
 #include "StylesDlg.h"
 #include "MiscOptDlg.h"
 #include "DictSetupDlg.h"
@@ -2123,7 +2122,7 @@ void CTView::OnStyles() {
 
   if (dlg.DoModal()==IDOK) {
     if (dlg.SaveChanges()) {
-      XMLParser::SaveStyles();
+      //XMLParser::SaveStyles();
       m_textfile->Reparse();
       CFDC	  fdc(m_hWnd);
       m_formatter->Reformat(fdc);

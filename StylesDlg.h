@@ -67,7 +67,6 @@ protected:
 protected:
   void SetValues(int idx);
   void GetValues();
-  XMLParser::FmtArray		 m_fmt;
   int				 m_cur;
 
   // Generated message map functions

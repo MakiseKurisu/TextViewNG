@@ -35,7 +35,6 @@
 #include "config.h"
 #include "resource.h"
 
-#include "XMLParser.h"
 #include "StylesDlg.h"
 
 #ifdef _DEBUG
@@ -54,7 +53,7 @@ static char THIS_FILE[] = __FILE__;
 CStylesDlg::CStylesDlg(CWnd* pParent /*=NULL*/)
 : CDialog(CStylesDlg::IDD, pParent), m_cur(-1)
 {
-  m_fmt.Append(XMLParser::GetXMLStyles());
+  //m_fmt.Append(XMLParser::GetXMLStyles());
   //{{AFX_DATA_INIT(CStylesDlg)
 		// NOTE: the ClassWizard will add member initialization here
   //}}AFX_DATA_INIT
@@ -105,9 +104,9 @@ static struct {
   const TCHAR *name;
 }		    g_align[]={
   { 0,	_T("Default") },
-  { Paragraph::right, _T("Right") },
-  { Paragraph::center, _T("Center") },
-  { Paragraph::justify, _T("Justified") },
+  //{ Paragraph::right, _T("Right") },
+  //{ Paragraph::center, _T("Center") },
+  //{ Paragraph::justify, _T("Justified") },
   { 0,  _T("Inherit") },
   { 0, 0 }
 };
@@ -137,12 +136,14 @@ BOOL CStylesDlg::OnInitDialog()
     SendDlgItemMessage(IDC_COLOR,CB_ADDSTRING,0,(LPARAM)g_colors[i]);
   for (i=0;g_align[i].name;++i)
     SendDlgItemMessage(IDC_ALIGN,CB_ADDSTRING,0,(LPARAM)g_align[i].name);
+/*
   for (i=0;i<m_fmt.GetSize();++i)
     if (m_fmt[i].name.GetLength()>0 && m_fmt[i].flags&XMLParser::ElemFmt::FMT) {
       LRESULT idx=SendDlgItemMessage(IDC_ELEMENTS,CB_ADDSTRING,0,(LPARAM)(const TCHAR *)m_fmt[i].name);
       if (idx!=CB_ERR)
 	SendDlgItemMessage(IDC_ELEMENTS,CB_SETITEMDATA,idx,i);
     }
+*/
   SendDlgItemMessage(IDC_ELEMENTS,CB_SETCURSEL);
   SendDlgItemMessage(IDC_LISPIN,UDM_SETRANGE32,-100,100);
   SendDlgItemMessage(IDC_RISPIN,UDM_SETRANGE32,-100,100);
@@ -158,129 +159,11 @@ void CStylesDlg::OnSelchangeElements()
 }
 
 void CStylesDlg::GetValues() {
-  if (m_cur>=0) {
-    int	  n;
-    n=SendDlgItemMessage(IDC_FONT,CB_GETCURSEL);
-    if (n==SendDlgItemMessage(IDC_FONT,CB_GETCOUNT)-1)
-      n=XMLParser::ElemFmt::NOCHG;
-    else
-      n+=MINFSIZE;
-    m_fmt[m_cur].fsz=n;
-    n=SendDlgItemMessage(IDC_FBOLD,CB_GETCURSEL);
-    if (n==SendDlgItemMessage(IDC_FBOLD,CB_GETCOUNT)-1)
-      n=XMLParser::ElemFmt::NOCHG;
-    m_fmt[m_cur].bold=n;
-    n=SendDlgItemMessage(IDC_FITALIC,CB_GETCURSEL);
-    if (n==SendDlgItemMessage(IDC_FITALIC,CB_GETCOUNT)-1)
-      n=XMLParser::ElemFmt::NOCHG;
-    m_fmt[m_cur].italic=n;
-    n=SendDlgItemMessage(IDC_FUNDERLINE,CB_GETCURSEL);
-    if (n==SendDlgItemMessage(IDC_FUNDERLINE,CB_GETCOUNT)-1)
-      n=XMLParser::ElemFmt::NOCHG;
-    m_fmt[m_cur].underline=n;
-    n=SendDlgItemMessage(IDC_COLOR,CB_GETCURSEL);
-    if (n==SendDlgItemMessage(IDC_COLOR,CB_GETCOUNT)-1)
-      n=XMLParser::ElemFmt::NOCHG;
-    m_fmt[m_cur].color=n;
-    n=SendDlgItemMessage(IDC_ALIGN,CB_GETCURSEL);
-    if (n==SendDlgItemMessage(IDC_ALIGN,CB_GETCOUNT)-1)
-      n=XMLParser::ElemFmt::NOCHG;
-    else
-      n=g_align[n].fmt;
-    m_fmt[m_cur].align=n;
-    m_fmt[m_cur].lindent=GetDlgItemInt(IDC_LI);
-    if (m_fmt[m_cur].lindent==0)
-      m_fmt[m_cur].lindent=XMLParser::ElemFmt::NOCHG;
-    m_fmt[m_cur].rindent=GetDlgItemInt(IDC_RI);
-    if (m_fmt[m_cur].rindent==0)
-      m_fmt[m_cur].rindent=XMLParser::ElemFmt::NOCHG;
-    m_fmt[m_cur].findent=GetDlgItemInt(IDC_FIRST);
-    if (m_fmt[m_cur].findent==0)
-      m_fmt[m_cur].findent=XMLParser::ElemFmt::NOCHG;
-  }
 }
 
 void CStylesDlg::SetValues(int idx) {
-  LRESULT   ri=SendDlgItemMessage(IDC_ELEMENTS,CB_GETITEMDATA,idx);
-  if (ri==CB_ERR)
-    return;
-  int	n;
-  n=m_fmt[ri].fsz;
-  if (n==XMLParser::ElemFmt::NOCHG)
-    n=SendDlgItemMessage(IDC_FONT,CB_GETCOUNT)-1;
-  else {
-    if (n<MINFSIZE)
-      n=MINFSIZE;
-    if (n>MAXFSIZE)
-      n=MAXFSIZE;
-    n-=MINFSIZE;
-  }
-  SendDlgItemMessage(IDC_FONT,CB_SETCURSEL,n);
-  n=m_fmt[ri].bold;
-  if (n==XMLParser::ElemFmt::NOCHG)
-    n=SendDlgItemMessage(IDC_FBOLD,CB_GETCOUNT)-1;
-  SendDlgItemMessage(IDC_FBOLD,CB_SETCURSEL,n);
-  n=m_fmt[ri].italic;
-  if (n==XMLParser::ElemFmt::NOCHG)
-    n=SendDlgItemMessage(IDC_FITALIC,CB_GETCOUNT)-1;
-  SendDlgItemMessage(IDC_FITALIC,CB_SETCURSEL,n);
-  n=m_fmt[ri].underline;
-  if (n==XMLParser::ElemFmt::NOCHG)
-    n=SendDlgItemMessage(IDC_FUNDERLINE,CB_GETCOUNT)-1;
-  SendDlgItemMessage(IDC_FUNDERLINE,CB_SETCURSEL,n);
-  n=m_fmt[ri].color;
-  if (n==XMLParser::ElemFmt::NOCHG)
-    n=SendDlgItemMessage(IDC_COLOR,CB_GETCOUNT)-1;
-  SendDlgItemMessage(IDC_COLOR,CB_SETCURSEL,n);
-  n=m_fmt[ri].align;
-  if (n==XMLParser::ElemFmt::NOCHG)
-    n=SendDlgItemMessage(IDC_ALIGN,CB_GETCOUNT)-1;
-  else {
-    for (int i=0;g_align[i].name;++i)
-      if (n==g_align[i].fmt) {
-	n=i;
-	goto ok;
-      }
-    n=SendDlgItemMessage(IDC_ALIGN,CB_GETCOUNT)-1;
-ok:;
-  }
-  SendDlgItemMessage(IDC_ALIGN,CB_SETCURSEL,n);
-  SetDlgItemInt(IDC_LI,m_fmt[ri].lindent==XMLParser::ElemFmt::NOCHG ? 0 :
-    m_fmt[ri].lindent);
-  SetDlgItemInt(IDC_RI,m_fmt[ri].rindent==XMLParser::ElemFmt::NOCHG ? 0 :
-    m_fmt[ri].rindent);
-  SetDlgItemInt(IDC_FIRST,m_fmt[ri].findent==XMLParser::ElemFmt::NOCHG ? 0 :
-    m_fmt[ri].findent);
-  m_cur=ri;
 }
 
 bool CStylesDlg::SaveChanges() {
-  XMLParser::FmtArray&	fa=XMLParser::GetXMLStyles();
-  bool flag=false;
-  if (fa.GetSize()==m_fmt.GetSize()) {
-    for (int i=0;i<fa.GetSize();++i)
-      if (fa[i].align!=m_fmt[i].align ||
-	  fa[i].bold!=m_fmt[i].bold ||
-	  fa[i].color!=m_fmt[i].color ||
-	  fa[i].flags!=m_fmt[i].flags ||
-	  fa[i].fsz!=m_fmt[i].fsz ||
-	  fa[i].italic!=m_fmt[i].italic ||
-	  fa[i].underline!=m_fmt[i].underline ||
-	  fa[i].lindent!=m_fmt[i].lindent ||
-	  fa[i].rindent!=m_fmt[i].rindent ||
-	  fa[i].findent!=m_fmt[i].findent) {
-	flag=true;
-	fa[i].align=m_fmt[i].align;
-	fa[i].bold=m_fmt[i].bold;
-	fa[i].color=m_fmt[i].color;
-	fa[i].flags=m_fmt[i].flags;
-	fa[i].fsz=m_fmt[i].fsz;
-	fa[i].italic=m_fmt[i].italic;
-	fa[i].underline=m_fmt[i].underline;
-	fa[i].lindent=m_fmt[i].lindent;
-	fa[i].rindent=m_fmt[i].rindent;
-	fa[i].findent=m_fmt[i].findent;
-      }
-  }
-  return flag;
+  return true;
 }
