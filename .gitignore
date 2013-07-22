@@ -1,7 +1,11 @@
 *.res
-*.lastbuildstate
-*.intermediate.manifest
 *.obj
 *.pdb
+
+*.lastbuildstate
+*.unsuccessfulbuild
+
+*.intermediate.manifest
+
 *.tlog
 *.log
