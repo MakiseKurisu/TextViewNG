@@ -628,40 +628,52 @@ static struct InitUnicode {
   InitUnicode();
 } InitUnicode;
 
-InitUnicode::InitUnicode() {
-  // fetch system codepages
-  EnumSystemCodePages((CODEPAGE_ENUMPROC)EnumCodePagesProc,CP_INSTALLED);
-  qsort(codepages,curcp,sizeof(struct CodePage),enc_cmp);
-  // and add our own
-  DWORD	  mask;
-  int	  i;
-  for (i=mask=0;i<NUM_BUILTIN_ENCODINGS;++i) {
-    int icp=Unicode::GetIntCodePage(builtin_encodings[i].cp);
-    if (icp<0)
-      mask|=1<<i;
-    else
-      codepages[icp].table=builtin_encodings[i].unimap;
-  }
-  bool need_utf8=Unicode::GetIntCodePage(CP_UTF8)<0;
-  for (i=0;i<NUM_BUILTIN_ENCODINGS;++i)
-    if (mask&(1<<i)) {
-      int msnum=get_mscp_num(builtin_encodings[i].cp);
-      if (msnum>=0) {
-	int cp=add_codepage(ms_codepages[msnum].name,ms_codepages[msnum].cp,
-			ms_codepages[msnum].alias1,ms_codepages[msnum].alias2);
-	codepages[cp].length=TB_cp_length;
-	codepages[cp].convert=TB_cp_convert;
-	codepages[cp].table=builtin_encodings[i].unimap;
-      }
-    }
-  if (need_utf8) {
-    int	cp=add_codepage(_T("UTF-8"),CP_UTF8);
-    codepages[cp].length=UTF_cp_length;
-    codepages[cp].convert=UTF_cp_convert;
-  }
-  if (mask || need_utf8)
-    qsort(codepages,curcp,sizeof(struct CodePage),enc_cmp);
-  default_cp=Unicode::GetIntCodePage(1251); // XXX hardcoded
+InitUnicode::InitUnicode()
+{
+	// fetch system codepages
+	EnumSystemCodePages((CODEPAGE_ENUMPROC)EnumCodePagesProc,CP_INSTALLED);
+	qsort(codepages,curcp,sizeof(struct CodePage),enc_cmp);
+	// and add our own
+	DWORD	  mask;
+	int	  i;
+	for (i=mask=0;i<NUM_BUILTIN_ENCODINGS;++i)
+	{
+		int icp=Unicode::GetIntCodePage(builtin_encodings[i].cp);
+		if (icp<0)
+		{
+			mask|=1<<i;
+		}
+		else
+		{
+			codepages[icp].table=builtin_encodings[i].unimap;
+		}
+	}
+	bool need_utf8=Unicode::GetIntCodePage(CP_UTF8)<0;
+	for (i=0;i<NUM_BUILTIN_ENCODINGS;++i)
+	{
+		if (mask&(1<<i))
+		{
+			int msnum=get_mscp_num(builtin_encodings[i].cp);
+			if (msnum>=0)
+			{
+				int cp=add_codepage(ms_codepages[msnum].name,ms_codepages[msnum].cp,ms_codepages[msnum].alias1,ms_codepages[msnum].alias2);
+				codepages[cp].length=TB_cp_length;
+				codepages[cp].convert=TB_cp_convert;
+				codepages[cp].table=builtin_encodings[i].unimap;
+			}
+		}
+	}
+	if (need_utf8)
+	{
+		int	cp=add_codepage(_T("UTF-8"),CP_UTF8);
+		codepages[cp].length=UTF_cp_length;
+		codepages[cp].convert=UTF_cp_convert;
+	}
+	if (mask || need_utf8)
+	{
+		qsort(codepages,curcp,sizeof(struct CodePage),enc_cmp);
+	}
+	default_cp=Unicode::GetIntCodePage(1251); // XXX hardcoded
 }
 
 int   Unicode::WCLength(int codepage,const char *mbstr,int mblen) {

@@ -362,7 +362,7 @@ bool  CTVFrame::TryOpenFile(CString& filename) {
     if (tf) {
       if (m_realview) {
 	((CTView *)m_wndView.get())->SetFile(auto_ptr<TextFile>(tf));
-	SetWindowText(_T("HR: ")+FileName(filename));
+	SetWindowText(_T("TextViewNG: ")+FileName(filename));
       }
       return true;
     } else {
@@ -378,13 +378,16 @@ void CTVFrame::OnUpdateFileOpen(CCmdUI* pCmdUI) {
   pCmdUI->Enable();
 }
 
-void CTVFrame::OnFileOpen() {
-  CString   ipath=CTVApp::GetStr(_T("OpenPath"));
-  CString   sv=ipath;
-  CString   str=GetFileName(&ipath,this);
-  if (sv!=ipath)
-    CTVApp::SetStr(_T("OpenPath"),ipath);
-  TryOpenFile(str);
+void CTVFrame::OnFileOpen()
+{
+	CString   ipath=CTVApp::GetStr(_T("OpenPath"));
+	CString   sv=ipath;
+	CString   str=GetFileName(&ipath,this);
+	if (sv!=ipath)
+	{
+		CTVApp::SetStr(_T("OpenPath"),ipath);
+	}
+	TryOpenFile(str);
 }
 
 BOOL CTVFrame::OnCopyData(CWnd *pWnd,COPYDATASTRUCT *pcd) {
@@ -414,68 +417,88 @@ void  CTVFrame::SaveWndPos() {
 }
 
 bool  CTVFrame::InitView() {
-  bool dictmode=false;
-  // initialize xml parser
-  //XMLParser::LoadStyles();
-  bool	triednoquote=false;
-  CString filename(AfxGetApp()->m_lpCmdLine);
-  if (filename==_T("-d")) { // show dictionary
-    filename=_T("NUL");
-    dictmode=true;
-  }
-  if (filename.GetLength()==0) // no filename provided, try to fetch most recent
-    filename=Bookmarks::find_last_file();
-  TextFile *tf;
-  for (;;) { // repeat this until it works, or until the user chooses to exit
-    if (filename.GetLength()==0) { // still no luck, open fs browser
-      CString   ipath=CTVApp::GetStr(_T("OpenPath"));
-      CString   sv(ipath);
-      filename=GetFileName(&ipath,this);
-      if (sv!=ipath)
-	CTVApp::SetStr(_T("OpenPath"),ipath);
-    } else if (filename.GetLength()>4 && filename.Right(4).CompareNoCase(_T(".zip"))==0) {
-      CString	ipath=filename;
-      CString	sv(ipath);
-      filename=GetFileName(&ipath,this);
-      if (sv!=ipath)
-	CTVApp::SetStr(_T("OpenPath"),ipath);
-    }
-    if (filename.GetLength()==0) { // everything failed, barf at the user
-      MessageBox(_T("No file name provided on the command line, and no recent files found."),
-	_T("Error"),MB_ICONERROR|MB_OK);
-      return false;
-    }
-    tf=TextFile::Open(filename);
-    if (tf==NULL) {
-      if (!triednoquote && filename.GetLength()>2 && filename[0]==_T('"') &&
-	  filename[filename.GetLength()-1]==_T('"'))
-      {
-	triednoquote=true;
-	filename=filename.Mid(1,filename.GetLength()-2);
-	continue;
-      }
-      CString   msg;
-      msg.Format(_T("Can't open file '%s'"),filename);
-      MessageBox(msg,_T("Error"),MB_ICONERROR|MB_OK);
-      filename.Empty();
-    } else
-      break;
-  }
-  // replace a dummy view with a real one
-  HWND	  wnd=m_wndView->Detach();
-  CTView  *tv=new CTView;
-  tv->Attach(wnd);
-  tv->Init();
-  tv->SetFile(auto_ptr<TextFile>(tf));
-  if (dictmode) {
-    SetWindowText(_T("HR: Dictionary"));
-    if (!tv->SwitchToDict())
-      return false;
-  } else
-    SetWindowText(_T("HR: ")+FileName(filename));
-  m_wndView.reset(tv);
-  m_realview=true;
-  return true;
+	bool dictmode=false;
+	// initialize xml parser
+	//XMLParser::LoadStyles();
+	bool	triednoquote=false;
+	CString filename(AfxGetApp()->m_lpCmdLine);
+	if (filename==_T("-d")) // show dictionary
+	{
+		filename=_T("NUL");
+		dictmode=true;
+	}
+	if (filename.GetLength()==0) // no filename provided, try to fetch most recent
+	{
+		filename=Bookmarks::find_last_file();
+	}
+	TextFile *tf;
+	for (;;) // repeat this until it works, or until the user chooses to exit
+	{
+		if (filename.GetLength()==0) // still no luck, open fs browser
+		{
+			CString   ipath=CTVApp::GetStr(_T("OpenPath"));
+			CString   sv(ipath);
+			filename=GetFileName(&ipath,this);
+			if (sv!=ipath)
+			{
+				CTVApp::SetStr(_T("OpenPath"),ipath);
+			}
+		}
+		else if (filename.GetLength()>4 && filename.Right(4).CompareNoCase(_T(".zip"))==0)
+		{
+			CString	ipath=filename;
+			CString	sv(ipath);
+			filename=GetFileName(&ipath,this);
+			if (sv!=ipath)
+			{
+				CTVApp::SetStr(_T("OpenPath"),ipath);
+			}
+		}
+		if (filename.GetLength()==0) // everything failed, barf at the user
+		{
+			MessageBox(_T("No file name provided on the command line, and no recent files found."),_T("Error"),MB_ICONERROR|MB_OK);
+			return false;
+		}
+		tf=TextFile::Open(filename);
+		if (tf==NULL)
+		{
+			if (!triednoquote && filename.GetLength()>2 && filename[0]==_T('"') && filename[filename.GetLength()-1]==_T('"'))
+			{
+				triednoquote=true;
+				filename=filename.Mid(1,filename.GetLength()-2);
+				continue;
+			}
+			CString   msg;
+			msg.Format(_T("Can't open file '%s'"),filename);
+			MessageBox(msg,_T("Error"),MB_ICONERROR|MB_OK);
+			filename.Empty();
+		}
+		else
+		{
+			break;
+		}
+	}
+	// replace a dummy view with a real one
+	HWND	  wnd=m_wndView->Detach();
+	CTView  *tv=new CTView;
+	tv->Attach(wnd);
+	tv->Init();
+	tv->SetFile(auto_ptr<TextFile>(tf));
+	if (dictmode)
+	{
+		SetWindowText(_T("TextViewNG: Dictionary"));
+		if (!tv->SwitchToDict())
+		{
+			return false;
+		}
+	}
+	else
+	{
+		SetWindowText(_T("TextViewNG: ")+FileName(filename));
+	}
+	m_wndView.reset(tv);
+	m_realview=true;
+	return true;
 }
 
 void CTVFrame::OnInitView() {
@@ -540,7 +563,7 @@ void  CTVFrame::OnRecentFile(UINT cmd) {
     if (tf) {
       if (m_realview) {
 	((CTView *)m_wndView.get())->SetFile(auto_ptr<TextFile>(tf));
-	SetWindowText(_T("HR: ")+FileName(m_recentlist[cmd-RECENT_BASE]));
+	SetWindowText(_T("TextViewNG: ")+FileName(m_recentlist[cmd-RECENT_BASE]));
       }
     } else {
       CString   msg;

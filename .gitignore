@@ -9,3 +9,6 @@
 
 *.tlog
 *.log
+
+*.cache
+*.xml

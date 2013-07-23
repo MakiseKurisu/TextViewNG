@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CC9D147A-9309-4EFD-BAD7-BE8090AE2D18}</ProjectGuid>
     <Keyword>MFCProj</Keyword>
-    <ProjectName>HaaliReader</ProjectName>
+    <ProjectName>TextViewNG</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'" Label="Configuration">
@@ -88,7 +88,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>unicows.lib;kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;msimg32.lib;imm32.lib;msxml2.lib;advapi32.lib;comctl32.lib;comdlg32.lib;shell32.lib;shlwapi.lib;winspool.lib;uuid.lib;ole32.lib;oleaut32.lib;oleacc.lib;uafxcw.lib;atls.lib;libcmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\DX86UnicodeRel/HaaliReader.exe</OutputFile>
+      <OutputFile>.\DX86UnicodeRel\TextViewNG.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <ProgramDatabaseFile>.\DX86UnicodeRel/TextViewNG.pdb</ProgramDatabaseFile>

@@ -59,21 +59,31 @@ static char THIS_FILE[] = __FILE__;
     (::CompareString(LOCALE_USER_DEFAULT,NORM_IGNORECASE, \
     (s1),-1,(s2),-1)-2)
 
-CString	GetFileName(CString *filepath,CWnd *parent) {
-  CFileOpenDialog   dlg(parent);
+CString	GetFileName(CString *filepath,CWnd *parent)
+{
+	CFileOpenDialog   dlg(parent);
 
-  if (filepath && filepath->GetLength()>0) {
-    DWORD attr=GetFileAttributes(*filepath);
-    if (attr!=0xffffffff && ((attr&FILE_ATTRIBUTE_DIRECTORY) ||
-	(filepath->GetLength()>4 && filepath->Right(4).CompareNoCase(_T(".zip"))==0)))
-      dlg.m_path=*filepath;
-  }
-  int ret=dlg.DoModal();
-  if (filepath)
-    *filepath=dlg.m_path;
-  if (ret==IDOK)
-    return dlg.m_filename;
-  return CString();
+	if (filepath && filepath->GetLength()>0)
+	{
+		DWORD attr=GetFileAttributes(*filepath);
+		if (attr!=0xffffffff && ((attr&FILE_ATTRIBUTE_DIRECTORY) ||	(filepath->GetLength()>4 && filepath->Right(4).CompareNoCase(_T(".zip"))==0)))
+		{
+			dlg.m_path=*filepath;
+		}
+	}
+	int ret=dlg.DoModal();
+	if (filepath)
+	{
+		*filepath=dlg.m_path;
+	}
+	if (ret==IDOK)
+	{
+		return dlg.m_filename;
+	}
+	else
+	{
+		return CString();
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -81,7 +91,7 @@ CString	GetFileName(CString *filepath,CWnd *parent) {
 
 
 CFileOpenDialog::CFileOpenDialog(CWnd* pParent /*=NULL*/)
-: CDialog(CFileOpenDialog::IDD, pParent), m_path(_T("\\"))
+: CDialog(CFileOpenDialog::IDD, pParent), m_path(_T(""))
 {
   //{{AFX_DATA_INIT(CFileOpenDialog)
 		// NOTE: the ClassWizard will add member initialization here
@@ -131,14 +141,11 @@ static int  get_file_icon(const TCHAR *name,bool inzip=false) {
   int	l=_tcslen(name);
   if (l<=4)
     return IM_FILE;
-  if (!CmpI(name+l-4,_T(".txt")) || !CmpI(name+l-4,_T(".xml")) ||
-      !CmpI(name+l-4,_T(".prc")) || !CmpI(name+l-4,_T(".pdb")) ||
-      !CmpI(name+l-4,_T(".fb2")) || !CmpI(name+l-4,_T(".dic")))
+  if (!CmpI(name+l-4,_T(".txt")) || !CmpI(name+l-4,_T(".xml")) || !CmpI(name+l-4,_T(".dic")))
     return IM_TEXT;
   if (!inzip && !CmpI(name+l-4,_T(".zip")))
     return IM_ZIP;
-  if (!CmpI(name+l-4,_T(".png")) || !CmpI(name+l-4,_T(".jpg")) ||
-      (l>5 && !CmpI(name+l-5,_T(".jpeg"))))
+  if (!CmpI(name+l-4,_T(".png")) || !CmpI(name+l-4,_T(".jpg")) || (l>5 && !CmpI(name+l-5,_T(".jpeg"))))
     return IM_IMAGE;
   return IM_FILE;
 }
@@ -239,8 +246,7 @@ void CFileOpenDialog::FindFiles(bool showall)
     fh=FindFirstFile(pat,&fd);
     run=fh!=INVALID_HANDLE_VALUE;
     for (int i=0;run;) {
-      if (!(fd.cFileName[0]==_T('.') && (!fd.cFileName[1] ||
-	    (fd.cFileName[1]==_T('.') && !fd.cFileName[2]))))
+      if (!(fd.cFileName[0]==_T('.') && (!fd.cFileName[1] || (fd.cFileName[1]==_T('.') && !fd.cFileName[2]))))
       {
 	bool dir=(fd.dwFileAttributes&FILE_ATTRIBUTE_DIRECTORY)!=0;
 	int icon;

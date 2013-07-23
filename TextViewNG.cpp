@@ -55,10 +55,10 @@ static char THIS_FILE[] = __FILE__;
 #define WS_OVERLAPPEDWINDOW 0
 #endif
 
-#define	IPCCLASS  _T("HaaliReaderIPC")
+#define	IPCCLASS  _T("TextViewNGIPC")
 #define	IPCLEN	  (sizeof(IPCCLASS)/sizeof(TCHAR))
 
-#define	REGNAME	_T("Haali")
+#define	REGNAME	_T("TextViewNG")
 
 /////////////////////////////////////////////////////////////////////////////
 // CTVApp
@@ -103,7 +103,7 @@ BOOL CTVApp::InitInstance()
   pFrame->SetWindowPos(NULL,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_FRAMECHANGED);
 #endif
 
-  pFrame->SetWindowText(_T("Haali Reader"));
+  pFrame->SetWindowText(_T("TextViewNG"));
   pFrame->InitWindowPos(m_nCmdShow);
   pFrame->UpdateWindow();
 
