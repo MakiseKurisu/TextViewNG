@@ -1245,7 +1245,7 @@ public:
 
 #define ABOUT_FORMAT1		\
 		_T("jpeg6b Copyright (C) 1991-1998, Thomas G. Lane.\r\n\r\n") \
-		_T("libpng version 1.2.8 Copyright (c) 1998-2002 Glenn Randers-Pehrson, Copyright (c) 1996-1997 Andreas Dilger, Copyright (c) 1995-1996 Guy Eric Schalnat, Group 42, Inc.\r\n\r\n") \
+		_T("libpng version 1.6.3 Copyright (c) 1998-2013 Glenn Randers-Pehrson, Copyright (c) 1996-1997 Andreas Dilger, Copyright (c) 1995-1996 Guy Eric Schalnat, Group 42, Inc.\r\n\r\n") \
 		_T("zlib 1.2.8 Copyright (C) 1995-2013 Jean-loup Gailly and Mark Adler.")
 
 #define ABOUT_FORMAT2		\
