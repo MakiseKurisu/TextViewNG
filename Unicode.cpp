@@ -715,38 +715,56 @@ int   Unicode::GetIntCodePage(UINT mscp) {
 }
 
 static UINT   detect_encoding(const unsigned char *mbs,unsigned mblen) {
-  unsigned	i,j;
-  int		enc=0;
-  int		sv,msv=0;
-  int		hist[NUMLET*NUMLET];
-  unsigned int	prev;
-  unsigned char	*lettermap;
+	unsigned	i,j;
+	int		enc=0;
+	int		sv,msv=0;
+	int		hist[NUMLET*NUMLET];
+	unsigned int	prev;
+	unsigned char	*lettermap;
 
-  if (mblen<3) /* detection needs at least a few letters :) */
-    return CP_1252;
-  if (mbs[0]=='\xef' && mbs[1]=='\xbb' && mbs[2]=='\xbf') // utf8 bom
-    return CP_UTF8;
-  if (mblen>1024) /* don't waste too much time */
-    mblen=1024;
-  for (i=0;i<NUM_BUILTIN_ENCODINGS;++i) {
-    memset(hist,0,sizeof(int)*NUMLET*NUMLET);
-    lettermap=builtin_encodings[i].distmap;
-    for (j=prev=0;j<mblen;++j) {
-      unsigned int next=lettermap[mbs[j]];
-      if (next && prev)
-        ++hist[prev*NUMLET+next];
-      prev=next;
-    }
-    for (j=sv=0;j<NUMLET*NUMLET;++j)
-      sv+=hist[j]*russian_distrib[j];
-    if (sv>msv) {
-      enc=i;
-      msv=sv;
-    }
-  }
-  if (msv<5) /* no cyrillic letters found */
-    return CP_1252;
-  return builtin_encodings[enc].cp;
+	if (mblen<3) /* detection needs at least a few letters :) */
+	{
+		return CP_1252;
+	}
+	if (mbs[0]=='\xef' && mbs[1]=='\xbb' && mbs[2]=='\xbf') // utf8 bom
+	{
+		return CP_UTF8;
+	}
+	if (mblen>1024) /* don't waste too much time */
+	{
+		mblen=1024;
+	}
+	for (i=0;i<NUM_BUILTIN_ENCODINGS;++i)
+	{
+		memset(hist,0,sizeof(int)*NUMLET*NUMLET);
+		lettermap=builtin_encodings[i].distmap;
+		for (j=prev=0;j<mblen;++j)
+		{
+			unsigned int next=lettermap[mbs[j]];
+			if (next && prev)
+			{
+				++hist[prev*NUMLET+next];
+			}
+			prev=next;
+		}
+		for (j=sv=0;j<NUMLET*NUMLET;++j)
+		{
+			sv+=hist[j]*russian_distrib[j];
+		}
+		if (sv>msv)
+		{
+			enc=i;
+			msv=sv;
+		}	
+	}
+	if (msv<5) /* no cyrillic letters found */
+	{
+		return CP_1252;
+	}
+	else
+	{
+		return builtin_encodings[enc].cp;
+	}
 }
 
 int   Unicode::DetectCodePage(const char *mbs,int mblen) {

@@ -1,0 +1,382 @@
+﻿/////////////////////////////////////////////////////////////////////////////
+// Traditional Chinese resources
+// Converted by OpenCC v0.4.2
+
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menubar
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "工具"
+    BEGIN
+        MENUITEM "複製",                        ID_EDIT_COPY
+        MENUITEM SEPARATOR
+        MENUITEM "查找...",                     ID_FIND
+        MENUITEM "查找下一個",                  ID_FINDNEXT
+        MENUITEM SEPARATOR
+        MENUITEM "後退",                        ID_BACK
+        MENUITEM "前進",                        ID_FORWARD
+        MENUITEM SEPARATOR
+        MENUITEM "添加書籤...",                 ID_ADD_BMK
+        MENUITEM "檢視書籤...",                 ID_BOOKMARKS
+        MENUITEM "匯出書籤...",                 ID_FILE_EXPORTBMK
+        MENUITEM SEPARATOR
+        MENUITEM "開啟...",                     ID_FILE_OPEN
+        MENUITEM "關於...",                     ID_APP_ABOUT
+        MENUITEM "退出",                        ID_APP_EXIT
+    END
+    POPUP "選項"
+    BEGIN
+        MENUITEM "全屏",                        ID_FULLSCREEN
+        MENUITEM SEPARATOR
+        MENUITEM "檔案格式...",                 ID_FILEFORMAT
+        MENUITEM "顯示...",                     ID_DISP_OPTIONS
+        POPUP "進度條"
+        BEGIN
+            MENUITEM "啟用進度條",              ID_PB_TOGGLE
+            MENUITEM SEPARATOR
+            MENUITEM "顯示章節標題",            ID_PB_CHAPTER
+            MENUITEM "顯示位置",                ID_PB_POS
+            MENUITEM "顯示檔案長度",            ID_PB_TOP
+            MENUITEM "顯示自動翻頁速度",        ID_PB_AS
+            MENUITEM "顯示時間",                ID_PB_TIME
+            MENUITEM "顯示電量",                ID_PB_BATTERY
+        END
+        POPUP "配色方案..."
+        BEGIN
+            MENUITEM "修改配色方案...",         ID_COLORS
+            MENUITEM SEPARATOR
+            MENUITEM SEPARATOR
+            MENUITEM "新配色方案...",           ID_COLORS_ADDP
+            MENUITEM "刪除配色方案",            ID_COLORS_DELP
+        END
+        MENUITEM "風格...",                     ID_STYLES
+        MENUITEM "按鍵設定...",                     ID_KEYS
+        MENUITEM "雜項...",                     ID_MISCOPT
+    END
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_OPTIONS DIALOG DISCARDABLE  0, 0, 213, 124
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "顯示"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    LTEXT           "字型:",IDC_STATIC,3,7,30,8
+    COMBOBOX        IDC_FACE,3,15,80,65,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "字號:",IDC_STATIC,90,7,30,8
+    EDITTEXT        IDC_FONTSIZE,91,15,43,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SIZESPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
+                    UDS_NOTHOUSANDS,123,15,11,12
+    LTEXT           "旋轉:",IDC_STATIC,146,7,27,8
+    COMBOBOX        IDC_ROTATE,146,15,31,53,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "加粗",IDC_BOLD,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | 
+                    WS_TABSTOP,3,32,29,10
+    LTEXT           "字型平滑:",IDC_STATIC,40,32,49,8
+    COMBOBOX        IDC_CLEARTYPE,91,30,43,57,CBS_DROPDOWNLIST | WS_TABSTOP
+    LTEXT           "分欄:",IDC_STATIC,146,32,31,9
+    COMBOBOX        IDC_COLUMNS,146,44,31,53,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Sample",IDC_TEXTSAMPLE,"Button",BS_OWNERDRAW | 
+                    WS_DISABLED,3,44,131,22
+    LTEXT           "縮排:",IDC_STATIC,3,74,28,8
+    EDITTEXT        IDC_MARGINS,37,72,31,13,ES_AUTOHSCROLL
+    CONTROL         "Spin2",IDC_MARGINSPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
+                    UDS_NOTHOUSANDS,55,74,11,16
+    CONTROL         "插入連字元",IDC_SHYP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,3,92,67,10
+    CONTROL         "文字對齊",IDC_JUSTIFY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,91,92,44,10
+    DEFPUSHBUTTON   "確定",IDOK,125,105,40,15
+    PUSHBUTTON      "取消",IDCANCEL,171,105,40,15
+END
+
+IDD_FILEFORMAT DIALOG DISCARDABLE  0, 0, 138, 115
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "檔案格式"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    COMBOBOX        IDC_FILEFORMAT,7,16,124,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_ENCODING,7,46,124,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "檔案格式:",IDC_STATIC,7,7,38,8
+    LTEXT           "當前編碼:",IDC_STATIC,7,35,32,8
+    DEFPUSHBUTTON   "確定",IDOK,45,95,40,15
+    PUSHBUTTON      "取消",IDCANCEL,91,95,40,15
+    COMBOBOX        IDC_DEF_ENCODING,7,76,124,65,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "默認編碼:",IDC_STATIC,7,65,75,8
+END
+
+IDD_COLORSEL DIALOG DISCARDABLE  0, 0, 138, 132
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "配色方案"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    COMBOBOX        IDC_COLORS,33,7,97,75,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    SCROLLBAR       IDC_RED,22,23,83,9,WS_TABSTOP
+    SCROLLBAR       IDC_GREEN,22,36,83,9,WS_TABSTOP
+    SCROLLBAR       IDC_BLUE,22,49,83,9,WS_TABSTOP
+    LTEXT           "R:",IDC_STATIC,7,23,10,8
+    LTEXT           "G:",IDC_STATIC,7,37,10,8
+    LTEXT           "B:",IDC_STATIC,7,50,10,8
+    LTEXT           "",IDC_SRED,108,23,23,9
+    LTEXT           "",IDC_SGREEN,108,37,23,9
+    LTEXT           "",IDC_SBLUE,108,50,23,9
+    CONTROL         "",IDC_SAMPLE,"Button",BS_OWNERDRAW | WS_DISABLED,13,63,
+                    111,21
+    LTEXT           "顏色:",IDC_STATIC,7,9,24,9
+    DEFPUSHBUTTON   "確定",IDOK,50,113,40,15
+    PUSHBUTTON      "取消",IDCANCEL,95,113,40,15
+    LTEXT           "伽馬值:",IDC_STATIC,7,88,55,8
+    SCROLLBAR       IDC_GAMMA,7,99,122,9
+    LTEXT           "",IDC_TXTGAMMA,65,88,36,8
+END
+
+IDD_INPUTBOX DIALOG DISCARDABLE  0, 0, 162, 44
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 9, "MS Shell Dlg"
+BEGIN
+    LTEXT           "",IDC_LABEL,4,7,104,8
+    EDITTEXT        IDC_WORD,4,18,110,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "確定",IDOK,120,5,40,15
+    PUSHBUTTON      "取消",IDCANCEL,120,25,40,15
+END
+
+IDD_PROGRESS DIALOG DISCARDABLE  0, 0, 121, 47
+STYLE WS_POPUP | WS_CAPTION
+FONT 9, "MS Shell Dlg"
+BEGIN
+    CONTROL         "Progress1",IDC_PROGRESS,"msctls_progress32",PBS_SMOOTH | 
+                    WS_BORDER,7,7,107,18
+    LTEXT           "",IDC_PROGRESSTEXT,29,31,71,9
+END
+
+IDD_KEYS DIALOG DISCARDABLE  0, 0, 138, 144
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "按鍵設定"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    LTEXT           "   1. 選擇欲設定的功能",IDC_STATIC,0,2,103,8
+    CONTROL         "List1",IDC_COMMANDS,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | 
+                    WS_BORDER | WS_TABSTOP,3,11,132,88
+    LTEXT           "   2. 指定對應的按鍵",IDC_LABEL,2,101,104,8
+    PUSHBUTTON      "指定按鍵",IDASSIGN,17,112,45,12
+    PUSHBUTTON      "清除按鍵",IDCLEAR,72,112,45,12
+    DEFPUSHBUTTON   "確定",IDOK,50,128,40,12
+    PUSHBUTTON      "取消",IDCANCEL,95,128,40,12
+END
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 226, 151
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "關於TextViewNG"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,5,5,20,20
+    LTEXT           "",IDC_ABOUTVER,35,1,188,30,SS_NOPREFIX
+    LTEXT           "",IDC_ABOUTINFO,2,33,221,94,SS_NOPREFIX
+    PUSHBUTTON      "版權資訊",IDC_ABOUT_TOGGLE,123,130,45,15
+    DEFPUSHBUTTON   "確定",IDOK,175,130,45,15
+END
+
+IDD_CONTENTS DIALOG DISCARDABLE  0, 0, 226, 209
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "檢視書籤"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_CONTENTS,"XListBox",WS_GROUP | WS_TABSTOP,0,0,225,
+                    191
+    DEFPUSHBUTTON   "確定",IDOK,146,194,36,13
+    PUSHBUTTON      "取消",IDCANCEL,187,194,36,13
+END
+
+IDD_FILEOPEN DIALOG DISCARDABLE  0, 0, 226, 194
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "開啟檔案"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_FILEPATH,"Static",SS_LEFTNOWORDWRAP | SS_NOPREFIX | 
+                    WS_GROUP,0,0,226,10
+    CONTROL         "",IDC_FILELIST,"XListBox",WS_GROUP | WS_TABSTOP,0,10,
+                    226,160
+    DEFPUSHBUTTON   "確定",IDOK,135,175,40,15,WS_GROUP
+    PUSHBUTTON      "取消",IDCANCEL,181,175,40,15
+END
+
+IDD_STYLES DIALOG DISCARDABLE  0, 0, 231, 100
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "風格"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    LTEXT           "元素:",IDC_STATIC,3,10,29,8
+    COMBOBOX        IDC_ELEMENTS,37,7,87,65,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "字號:",IDC_STATIC,3,29,36,8
+    LTEXT           "顏色:",IDC_STATIC,48,29,36,8
+    LTEXT           "對齊:",IDC_STATIC,93,29,36,8
+    LTEXT           "左縮排:",IDC_STATIC,138,29,38,8
+    LTEXT           "首行:",IDC_STATIC,186,29,35,8
+    COMBOBOX        IDC_FONT,3,38,42,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_COLOR,48,38,42,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_ALIGN,93,38,42,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    EDITTEXT        IDC_LI,138,38,42,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_LISPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,164,28,16,
+                    22
+    EDITTEXT        IDC_FIRST,186,38,42,12,ES_AUTOHSCROLL
+    CONTROL         "Spin2",IDC_FIRSTSPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,212,29,11,
+                    22
+    LTEXT           "粗體:",IDC_STATIC,3,54,36,8
+    LTEXT           "斜體:",IDC_STATIC,48,54,36,8
+    LTEXT           "下劃線:",IDC_STATIC,93,54,36,8
+    LTEXT           "右縮排:",IDC_STATIC,138,54,44,8
+    COMBOBOX        IDC_FBOLD,3,63,42,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_FITALIC,48,63,42,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_FUNDERLINE,93,63,42,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    EDITTEXT        IDC_RI,138,63,42,12,ES_AUTOHSCROLL
+    CONTROL         "Spin3",IDC_RISPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,163,51,17,
+                    24
+    DEFPUSHBUTTON   "確定",IDOK,140,80,40,15
+    PUSHBUTTON      "取消",IDCANCEL,185,80,40,15
+END
+
+IDD_MISCOPT DIALOG DISCARDABLE  0, 0, 138, 105
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "雜項"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    CONTROL         "允許運行TextViewNG的多個例項",
+                    IDC_ALLOWMULTI,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | 
+                    WS_TABSTOP,3,3,132,17
+    CONTROL         "自動切換按鍵方向",IDC_ROTB,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,3,21,66,9
+    LTEXT           "字型快取大小:",IDC_STATIC,3,36,54,8
+    EDITTEXT        IDC_FCSIZE,63,33,38,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_FCSIZESPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,124,9,11,
+                    27
+    LTEXT           "種字型",IDC_STATIC,103,36,32,8
+    LTEXT           "檔案緩衝區大小:",IDC_STATIC,3,52,53,8
+    EDITTEXT        IDC_FBSIZE,63,49,38,12,ES_AUTOHSCROLL
+    CONTROL         "Spin2",IDC_FBSIZESPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,124,36,11,
+                    20
+    LTEXT           "KB",IDC_STATIC,103,52,28,8
+    LTEXT           "書籤記錄檔案數:",IDC_STATIC,3,67,66,8
+    EDITTEXT        IDC_LASTFILES,69,65,33,12,ES_AUTOHSCROLL
+    CONTROL         "Spin3",IDC_LASTFSPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,89,15,18,
+                    20
+    LTEXT           "",IDC_STATIC,106,67,28,8
+    DEFPUSHBUTTON   "確定",IDOK,50,85,40,15
+    PUSHBUTTON      "取消",IDCANCEL,95,85,40,15
+    CONTROL         "限制自動重複率",IDC_REPLIMIT,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE,4,81,41,14
+END
+
+IDD_KEYGRAB DIALOG DISCARDABLE  0, 0, 68, 58
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "等待輸入"
+FONT 9, "MS Shell Dlg"
+BEGIN
+END
+
+IDD_DICTSETUP DIALOG DISCARDABLE  0, 0, 226, 94
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "字典"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    LISTBOX         IDC_DICTLIST,0,0,186,93,NOT LBS_NOTIFY | 
+                    LBS_NOINTEGRALHEIGHT | NOT WS_BORDER | WS_VSCROLL | 
+                    WS_HSCROLL | WS_TABSTOP
+    PUSHBUTTON      "添加(&A)",IDC_ADD_DICT,189,3,33,16
+    PUSHBUTTON      "刪除(&R)",IDC_REMOVE_DICT,189,24,33,16
+    DEFPUSHBUTTON   "確定",IDOK,189,75,33,15
+    PUSHBUTTON      "取消",IDCANCEL,189,55,33,15
+END
+
+IDD_ADDBMK DIALOG DISCARDABLE  0, 0, 142, 129
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "添加書籤"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    EDITTEXT        IDC_BMKEDIT,5,15,130,89,ES_MULTILINE | ES_WANTRETURN | 
+                    WS_VSCROLL
+    DEFPUSHBUTTON   "確定",IDOK,50,110,40,15
+    PUSHBUTTON      "取消",IDCANCEL,95,110,40,15
+    LTEXT           "書籤備註:",IDC_STATIC,5,5,95,10
+END
+
+IDD_FINDDLG DIALOG DISCARDABLE  0, 0, 192, 61
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "查找"
+FONT 9, "MS Shell Dlg"
+BEGIN
+    LTEXT           "查找內容:",IDC_STATIC,7,7,69,8
+    EDITTEXT        IDC_FINDTEXT,7,17,124,12,ES_AUTOHSCROLL
+    CONTROL         "區分大小寫",IDC_MATCHCASE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,36,124,12
+    CONTROL         "從當前位置開始查找",IDC_FROMCURPOS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,48,124,12
+    DEFPUSHBUTTON   "查找",IDOK,150,5,40,15
+    PUSHBUTTON      "取消",IDCANCEL,150,25,40,15
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_BACK                 "後退"
+    ID_FIND                 "查找..."
+    ID_FINDNEXT             "查找下一個"
+    IDS_CAP_TOOLS           "工具"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CAP_OPTIONS         "選項"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FORWARD              "前進"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_ADD_BMK              "添加書籤..."
+    ID_BOOKMARKS            "檢視書籤..."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_COPY            "複製"
+END
+
+/////////////////////////////////////////////////////////////////////////////
