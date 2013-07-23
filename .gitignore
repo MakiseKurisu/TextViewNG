@@ -1,6 +1,9 @@
 *.res
 *.obj
 *.pdb
+*.bsc
+*.sbr
+*.idb
 
 *.lastbuildstate
 *.unsuccessfulbuild
@@ -12,3 +15,5 @@
 
 *.cache
 *.xml
+
+crtreport.txt

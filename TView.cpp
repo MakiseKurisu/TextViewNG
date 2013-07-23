@@ -1244,12 +1244,12 @@ public:
 		_T("File: %s\r\nSize: %d byte(s), %d paragraph(s)\r\n\r\nFormat: %s\r\nEncoding: %s\r\nCompression: %s\r\n\r\nPosition: %d:%d")
 
 #define ABOUT_FORMAT1		\
-		_T("jpeg6b Copyright (C) 1991-1998, Thomas G. Lane.\r\n\r\n") \
-		_T("libpng version 1.6.3 Copyright (c) 1998-2013 Glenn Randers-Pehrson, Copyright (c) 1996-1997 Andreas Dilger, Copyright (c) 1995-1996 Guy Eric Schalnat, Group 42, Inc.\r\n\r\n") \
-		_T("zlib 1.2.8 Copyright (C) 1995-2013 Jean-loup Gailly and Mark Adler.")
+		_T("libjpeg\t6b\tCopyright (C) 1991-1998, Thomas G. Lane.\r\n\r\n") \
+		_T("libpng\t1.6.3\tCopyright (C) 1998-2013 Glenn Randers-Pehrson\r\n\t\tCopyright (C) 1996-1997 Andreas Dilger\r\n\t\tCopyright (C) 1995-1996 Guy Eric Schalnat, Group 42, Inc.\r\n\r\n") \
+		_T("zlib\t1.2.8\tCopyright (C) 1995-2013, Jean-loup Gailly and Mark Adler.")
 
 #define ABOUT_FORMAT2		\
-		_T("TextViewNG v2.0b%d\r\nCopyright (C)\t2001-2007 Mike Matsnev@haali.su\r\n\t\t2012-2013 MakiseKurisu@Github")
+		_T("TextViewNG v2.0b%d %s\r\nCopyright (C)\t2001-2007 Mike Matsnev@haali.su\r\n\t\t2012-2013 MakiseKurisu@Github")
 
 BOOL CAboutDialog::OnInitDialog() {
   CDialog::OnInitDialog();
