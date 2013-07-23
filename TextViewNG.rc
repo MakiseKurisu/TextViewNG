@@ -1,28 +1,18 @@
-#include "resource.h"
-#define APSTUDIO_READONLY_SYMBOLS
 #include "afxres.h"
+#include "resource.h"
 #include "newres.h"
-#undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
 // Neutral resources
 
 LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 
-#if defined(APSTUDIO_INVOKED) || defined(_WIN32_DESKTOP)
-#if !defined(APSTUDIO_INVOKED)
+/////////////////////////////////////////////////////////////////////////////
+//
+// Manifest
+//
+
 IDR_MANIFEST            24      DISCARDABLE     "TextViewNG.manifest"
-#endif
-#endif
-
-#define _AFX_NO_SPLITTER_RESOURCES
-#define _AFX_NO_OLE_RESOURCES
-#define _AFX_NO_TRACKER_RESOURCES
-#define _AFX_NO_PROPERTY_RESOURCES
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#include "afxres.rc"         // Standard components
-#endif
 
 /////////////////////////////////////////////////////////////////////////////
 //

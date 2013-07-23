@@ -53,9 +53,9 @@ BEGIN
             MENUITEM "新配色方案...",           ID_COLORS_ADDP
             MENUITEM "删除配色方案",            ID_COLORS_DELP
         END
-        MENUITEM "风格...",                     ID_STYLES
+        MENUITEM "样式...",                     ID_STYLES
         MENUITEM "按键设置...",                     ID_KEYS
-        MENUITEM "杂项...",                     ID_MISCOPT
+        MENUITEM "设置...",                     ID_MISCOPT
     END
 END
 
@@ -89,14 +89,14 @@ BEGIN
                     WS_TABSTOP
     CONTROL         "Sample",IDC_TEXTSAMPLE,"Button",BS_OWNERDRAW | 
                     WS_DISABLED,3,44,131,22
-    LTEXT           "缩进:",IDC_STATIC,3,74,28,8
+    LTEXT           "页边距:",IDC_STATIC,3,74,28,8
     EDITTEXT        IDC_MARGINS,37,72,31,13,ES_AUTOHSCROLL
     CONTROL         "Spin2",IDC_MARGINSPIN,"msctls_updown32",UDS_SETBUDDYINT | 
                     UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
                     UDS_NOTHOUSANDS,55,74,11,16
     CONTROL         "插入连字符",IDC_SHYP,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,3,92,67,10
-    CONTROL         "文本对齐",IDC_JUSTIFY,"Button",BS_AUTOCHECKBOX | 
+    CONTROL         "段落重排",IDC_JUSTIFY,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,91,92,44,10
     DEFPUSHBUTTON   "确定",IDOK,125,105,40,15
     PUSHBUTTON      "取消",IDCANCEL,171,105,40,15
@@ -170,13 +170,13 @@ STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "按键设置"
 FONT 9, "MS Shell Dlg"
 BEGIN
-    LTEXT           "   1. 选择欲设置的功能",IDC_STATIC,0,2,103,8
+    LTEXT           "   1. 选择一个动作",IDC_STATIC,0,2,103,8
     CONTROL         "List1",IDC_COMMANDS,"SysListView32",LVS_REPORT | 
                     LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | 
                     WS_BORDER | WS_TABSTOP,3,11,132,88
-    LTEXT           "   2. 指定对应的按键",IDC_LABEL,2,101,104,8
-    PUSHBUTTON      "指定按键",IDASSIGN,17,112,45,12
-    PUSHBUTTON      "清除按键",IDCLEAR,72,112,45,12
+    LTEXT           "   2. 分配按键",IDC_LABEL,2,101,104,8
+    PUSHBUTTON      "分配",IDASSIGN,17,112,45,12
+    PUSHBUTTON      "清除",IDCLEAR,72,112,45,12
     DEFPUSHBUTTON   "确定",IDOK,50,128,40,12
     PUSHBUTTON      "取消",IDCANCEL,95,128,40,12
 END
@@ -219,7 +219,7 @@ END
 
 IDD_STYLES DIALOG DISCARDABLE  0, 0, 231, 100
 STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "风格"
+CAPTION "样式"
 FONT 9, "MS Shell Dlg"
 BEGIN
     LTEXT           "元素:",IDC_STATIC,3,10,29,8
@@ -264,7 +264,7 @@ END
 
 IDD_MISCOPT DIALOG DISCARDABLE  0, 0, 138, 105
 STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "杂项"
+CAPTION "设置"
 FONT 9, "MS Shell Dlg"
 BEGIN
     CONTROL         "允许运行TextViewNG的多个实例",
