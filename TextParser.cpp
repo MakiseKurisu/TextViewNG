@@ -96,6 +96,8 @@ protected:
   SimpleFormat		*m_sf;
 
   void	    GenericFileParse(CBufFile *fp,PArray& pp,DWORD mask,DWORD cmp);
+  void	    GenericFileParseA(CBufFile *fp,PArray& pp,DWORD mask,DWORD cmp);
+  void	    GenericFileParseW(CBufFile *fp,PArray& pp,DWORD mask,DWORD cmp);
   Paragraph GenericBufParse(CBufFile *fp,const Para& p,int len);
 public:
   SimpleTextParser(Meter *m,CBufFile *fp,HANDLE heap,int format,int encoding,Bookmarks *bmk) :
@@ -163,72 +165,150 @@ int   SimpleTextParser::LookupParagraph(int docid,int charpos) {
 }
 
 #define	RSPACE(x)   ((x)<=32)
-#define	SPACE(x)    (RSPACE(x) || (x)==SHY)
+#define	SPACE(x)    (RSPACE(x) || (x)==SHY || (x)==0xFEFF)
 
-static void Addpara(int enc,PArray& pp,Buffer<char>& b,
-		    int& parsed_start,int len,DWORD start)
+static void Addpara(int enc,PArray& pp,Buffer<char>& b,int& parsed_start,int len,DWORD start)
 {
-  // convert to unicode
-  int		    wclen=Unicode::WCLength(enc,b,len);
-  Buffer<wchar_t>   wb(wclen);
-  Unicode::ToWC(enc,b,len,wb,wclen);
-  // now count length
-  int		    i,plen=0;
-  // skip leading spaces
-  for (i=0;i<wclen && SPACE(wb[i]);++i);
-  // count length
-  while (i<wclen) {
-    // word
-    while (i<wclen && !RSPACE(wb[i])) {
-      if (wb[i]!=SHY)
-	++plen;
-      ++i;
-    }
-    // spaces
-    while (i<wclen && SPACE(wb[i]))
-      ++i;
-    if (i<wclen) // this was not trailing space
-      ++plen;
-  }
-  Para	p;
-  p.start=parsed_start;
-  p.rlen=len;
-  p.off=start;
-  pp.Add(p);
-  parsed_start+=plen;
+	// convert to unicode
+	int wclen=Unicode::WCLength(enc,b,len);
+	Buffer<wchar_t> wb(wclen);
+	Unicode::ToWC(enc,b,len,wb,wclen);
+	// now count length
+	int i,plen=0;
+	// skip leading spaces
+	for (i=0;i<wclen && SPACE(wb[i]);++i);
+	// count length
+	while (i<wclen)
+	{
+		// word
+		while (i<wclen && !RSPACE(wb[i]))
+		{
+			if (wb[i]!=SHY && wb[i]!=0xFEFF)
+			{
+				++plen;
+			}
+			++i;
+		}
+		// spaces
+		while (i<wclen && SPACE(wb[i]))
+		{
+			++i;
+		}
+		if (i<wclen) // this was not trailing space
+		{
+			++plen;
+		}
+	}
+
+	Para	p;
+	p.start=parsed_start;
+	p.rlen=len;
+	p.off=start;
+	pp.Add(p);
+	parsed_start+=plen;
 }
 
-void   SimpleTextParser::GenericFileParse(CBufFile *fp,PArray& pp,DWORD mask,DWORD cmp) {
-  int		  ch;
-  DWORD		  hist=0;
-  Buffer<char>	  b(MAXPLEN);
-  int		  rlen=0;
-  DWORD		  start=fp->pos();
-  int		  parsed_start=0;
-  for (;;) {
-    if ((ch=fp->ch())==BEOF) {
-      Addpara(m_encoding,pp,b,parsed_start,rlen,start);
-      break;
-    }
-    hist=hist<<8|ch;
-    if ((hist&0xffff)==0x0a0a || hist==0x0d0a0d0a || (hist&0xffff)==0x0d0d ||
-	(hist&mask)==cmp || rlen>=MAXPLEN)
-    {
-      bool f=rlen>=MAXPLEN;
-      ProgSetCur(fp->pos());
-      Addpara(m_encoding,pp,b,parsed_start,rlen,start);
-      rlen=0;
-      start=m_fp->pos();
-      if (f)
-	b[rlen++]=ch;
-    } else
-      b[rlen++]=ch;
-  }
-  Para	p;
-  p.off=0;
-  p.rlen=0;
-  p.start=parsed_start;
-  pp.Add(p);
+void   SimpleTextParser::GenericFileParseW(CBufFile *fp,PArray& pp,DWORD mask,DWORD cmp)
+{
+	int				ch=0;
+	int				ch2=0;
+	DWORD			hist=0;
+	Buffer<char>	b(MAXPLEN);
+	int				rlen=0;
+	DWORD			start=fp->pos();
+	int				parsed_start=0;
+	for (;;) 
+	{
+		ch=fp->ch();
+		ch2=fp->ch();
+		if (ch==BEOF && ch2==BEOF)
+		{
+			Addpara(m_encoding,pp,b,parsed_start,rlen,start);
+			break;
+		}
+
+		hist=hist<<8|ch;
+		hist=hist<<8|ch2;
+		if (hist==0x0d000a00 || hist==0x0d000d00|| hist==0x0a000a00 || (hist&mask)==cmp || rlen>=MAXPLEN)
+		{
+			bool f=rlen>=MAXPLEN;
+			ProgSetCur(fp->pos());
+			Addpara(m_encoding,pp,b,parsed_start,rlen,start);
+			rlen=0;
+			start=m_fp->pos();
+			if (f)
+			{
+				b[rlen++]=ch;
+				b[rlen++]=ch2;
+			}
+		}
+		else
+		{
+			b[rlen++]=ch;
+			b[rlen++]=ch2;
+		}
+	}
+
+	Para	p;
+	p.off=0;
+	p.rlen=0;
+	p.start=parsed_start;
+	pp.Add(p);
+}
+
+void   SimpleTextParser::GenericFileParseA(CBufFile *fp,PArray& pp,DWORD mask,DWORD cmp)
+{
+	int				ch=0;
+	DWORD			hist=0;
+	Buffer<char>	b(MAXPLEN);
+	int				rlen=0;
+	DWORD			start=fp->pos();
+	int				parsed_start=0;
+	for (;;) 
+	{
+		ch=fp->ch();
+		if (ch==BEOF)
+		{
+			Addpara(m_encoding,pp,b,parsed_start,rlen,start);
+			break;
+		}
+
+		hist=hist<<8|ch;
+		if ((hist&0xffff)==0x0d0a || (hist&0xffff)==0x0d0d || (hist&0xffff)==0x0a0a || (hist&mask)==cmp || rlen>=MAXPLEN)
+		{
+			bool f=rlen>=MAXPLEN;
+			ProgSetCur(fp->pos());
+			Addpara(m_encoding,pp,b,parsed_start,rlen,start);
+			rlen=0;
+			start=m_fp->pos();
+			if (f)
+			{
+				b[rlen++]=ch;
+			}
+		}
+		else
+		{
+			b[rlen++]=ch;
+		}
+	}
+
+	Para	p;
+	p.off=0;
+	p.rlen=0;
+	p.start=parsed_start;
+	pp.Add(p);
+}
+
+void   SimpleTextParser::GenericFileParse(CBufFile *fp,PArray& pp,DWORD mask,DWORD cmp)
+{
+	if (Unicode::GetCodePage(m_encoding)==CP_UTF16)
+	{
+		GenericFileParseW(fp,pp,mask,cmp);
+	}
+	else
+	{
+		GenericFileParseA(fp,pp,mask,cmp);
+	}
 }
 
 // generic buffer parser for all simple formats

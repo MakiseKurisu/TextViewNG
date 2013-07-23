@@ -451,25 +451,16 @@
     <None Include="res\dialog.bmp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\FB.pda.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\fileicon.bmp">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\HR.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\HR.pda.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\smallico.bmp">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\tree.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="xml_elements.txt">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

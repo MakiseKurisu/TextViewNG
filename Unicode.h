@@ -32,6 +32,18 @@
 #ifndef	UNICODE_H
 #define	UNICODE_H
 
+#ifndef	CP_UTF8
+#define CP_UTF8 65001
+#endif
+
+#ifndef	CP_UTF16
+#define CP_UTF16 1200
+#endif
+
+#ifndef CP_1252
+#define	CP_1252 1252
+#endif
+
 class Unicode {
 	public:
 		// conversion to unicode
@@ -65,6 +77,7 @@ class Unicode {
 		static int				GetNumCodePages();
 		static const TCHAR		*GetCodePageName(int num);
 		static const wchar_t	*GetCodePageNameW(int num);
+		static int				GetCodePage(int num);
 		static int				GetIntCodePage(UINT mscp);
 		static UINT				GetMSCodePage(int cp);
 		static int				FindCodePage(const TCHAR *name);

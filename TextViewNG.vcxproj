@@ -131,8 +131,8 @@
       <AdditionalIncludeDirectories>win32-x86;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>unicows.lib;kernel32.lib;user32.lib;gdi32.lib;advapi32.lib;comctl32.lib;comdlg32.lib;shell32.lib;shlwapi.lib;winspool.lib;uuid.lib;ole32.lib;oleaut32.lib;oleacc.lib;uafxcwd.lib;atlsd.lib;libcmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\DX86UnicodeDebug/TextViewNG.exe</OutputFile>
+      <AdditionalDependencies>unicows.lib;kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;msimg32.lib;imm32.lib;msxml2.lib;advapi32.lib;comctl32.lib;comdlg32.lib;shell32.lib;shlwapi.lib;winspool.lib;uuid.lib;ole32.lib;oleaut32.lib;oleacc.lib;uafxcwd.lib;atlsd.lib;libcmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>.\DX86UnicodeDebug\TextViewNG.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -957,13 +957,10 @@
     <None Include="res\contents.bmp" />
     <None Include="res\contentsicon.bmp" />
     <None Include="res\dialog.bmp" />
-    <None Include="res\FB.pda.ico" />
     <None Include="res\fileicon.bmp" />
     <None Include="res\HR.ico" />
-    <None Include="res\HR.pda.ico" />
     <None Include="res\smallico.bmp" />
     <None Include="res\tree.bmp" />
-    <None Include="xml_elements.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TextViewNG.rc">

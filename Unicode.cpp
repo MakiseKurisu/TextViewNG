@@ -34,14 +34,6 @@
 #include "ptr.h"
 #include "Unicode.h"
 
-#ifndef	CP_UTF8
-#define CP_UTF8	65001
-#endif
-
-#ifndef CP_1252
-#define	CP_1252 1252
-#endif
-
 // string compare
 #define	CmpI(s1,s2) \
     (::CompareString(LOCALE_USER_DEFAULT,NORM_IGNORECASE, \
@@ -89,6 +81,20 @@ static void   WS_cp_convert(struct CodePage *cp,const char *mbs,int mblen,
   const char  *mbe=mbs+min(mblen,wclen);
   while (mbs<mbe)
     *wcs++=(unsigned char)*mbs++;
+}
+
+static int    Unicode_cp_length(struct CodePage *cp,const char *mbs,int mblen)
+{
+	return mblen/2;
+}
+
+static void   Unicode_cp_convert(struct CodePage *cp,const char *mbs,int mblen,wchar_t *wcs,int wclen)
+{
+	for (int i = 0; i < wclen; i++)
+	{
+		wcs[i] = ((wchar_t *)mbs)[i];
+	}
+	//If we use lstrlen, we will lost the last wchar in the file since lstrlen(xxx,xxx,length + 0x0000)
 }
 
 static int    UTF_cp_length(struct CodePage *cp,const char *mbs,int mblen) {
@@ -271,18 +277,26 @@ struct {
 };
 #define	NUM_MSCP    (sizeof(ms_codepages)/sizeof(ms_codepages[0]))
 
-static int  get_mscp_num(UINT cp) {
-  int	  i=0,j=NUM_MSCP-1;
-  while (i<=j) {
-    int	  m=(i+j)>>1;
-    if (cp<ms_codepages[m].cp)
-      j=m-1;
-    else if (cp>ms_codepages[m].cp)
-      i=m+1;
-    else
-      return m;
-  }
-  return -1;
+static int  get_mscp_num(UINT cp)
+{
+    int	  i=0,j=NUM_MSCP-1;
+    while (i<=j)
+    {
+        int	  m=(i+j)>>1;
+        if (cp<ms_codepages[m].cp)
+        {
+            j=m-1;
+        }
+        else if (cp>ms_codepages[m].cp)
+        {
+            i=m+1;
+        }
+        else
+        {
+            return m;
+        }
+    }
+    return -1;
 }
 
 static struct {
@@ -609,13 +623,14 @@ static unsigned short russian_distrib[NUMLET*NUMLET]={
 };
 
 BOOL CALLBACK EnumCodePagesProc(LPTSTR name) {
-  UINT		id;
-  int		msnum;
+    UINT    id;
+    int     msnum;
 
-  if ((id=_tcstoul(name,NULL,10))!=0 && (msnum=get_mscp_num(id))>=0)
-    add_codepage(ms_codepages[msnum].name,id,ms_codepages[msnum].alias1,
-	ms_codepages[msnum].alias2);
-  return TRUE;
+    if ((id=_tcstoul(name,NULL,10))!=0 && (msnum=get_mscp_num(id))>=0)
+    {
+        add_codepage(ms_codepages[msnum].name,id,ms_codepages[msnum].alias1,ms_codepages[msnum].alias2);
+    }
+    return TRUE;
 }
 
 static int    _cdecl enc_cmp(const void *v1,const void *v2) {
@@ -634,8 +649,8 @@ InitUnicode::InitUnicode()
 	EnumSystemCodePages((CODEPAGE_ENUMPROC)EnumCodePagesProc,CP_INSTALLED);
 	qsort(codepages,curcp,sizeof(struct CodePage),enc_cmp);
 	// and add our own
-	DWORD	  mask;
-	int	  i;
+	DWORD   mask;
+	int     i;
 	for (i=mask=0;i<NUM_BUILTIN_ENCODINGS;++i)
 	{
 		int icp=Unicode::GetIntCodePage(builtin_encodings[i].cp);
@@ -648,7 +663,6 @@ InitUnicode::InitUnicode()
 			codepages[icp].table=builtin_encodings[i].unimap;
 		}
 	}
-	bool need_utf8=Unicode::GetIntCodePage(CP_UTF8)<0;
 	for (i=0;i<NUM_BUILTIN_ENCODINGS;++i)
 	{
 		if (mask&(1<<i))
@@ -663,13 +677,24 @@ InitUnicode::InitUnicode()
 			}
 		}
 	}
+/*
+    bool need_utf8=Unicode::GetIntCodePage(CP_UTF8)<0;
 	if (need_utf8)
 	{
 		int	cp=add_codepage(_T("UTF-8"),CP_UTF8);
 		codepages[cp].length=UTF_cp_length;
 		codepages[cp].convert=UTF_cp_convert;
 	}
-	if (mask || need_utf8)
+*/
+    bool need_utf16=Unicode::GetIntCodePage(CP_UTF16)<0;
+    if (need_utf16)
+    {
+        int	cp=add_codepage(_T("UTF-16"),CP_UTF16);
+        codepages[cp].length=Unicode_cp_length;
+		codepages[cp].convert=Unicode_cp_convert;
+    }
+
+	if (mask || need_utf16)
 	{
 		qsort(codepages,curcp,sizeof(struct CodePage),enc_cmp);
 	}
@@ -682,21 +707,41 @@ int   Unicode::WCLength(int codepage,const char *mbstr,int mblen) {
   return 0;
 }
 
-void  Unicode::ToWC(int codepage,const char *mbstr,int mblen,
-		    wchar_t *wcstr,int wclen)
+void  Unicode::ToWC(int codepage,const char *mbstr,int mblen,wchar_t *wcstr,int wclen)
 {
-  if (codepage>=0 && codepage<curcp)
-    codepages[codepage].convert(codepages+codepage,mbstr,mblen,wcstr,wclen);
+	if (codepage>=0 && codepage<curcp)
+	{
+		codepages[codepage].convert(codepages+codepage,mbstr,mblen,wcstr,wclen);
+	}
 }
 
-int   Unicode::GetNumCodePages() {
-  return curcp;
+int   Unicode::GetNumCodePages()
+{
+	return curcp;
 }
 
-const TCHAR  *Unicode::GetCodePageName(int num) {
-  if (num>=0 && num<curcp)
-    return codepages[num].name;
-  return NULL;
+const TCHAR  *Unicode::GetCodePageName(int num)
+{
+	if (num>=0 && num<curcp)
+	{
+		return codepages[num].name;
+	}
+	else
+	{
+		return NULL;
+	}
+}
+
+int   Unicode::GetCodePage(int num)
+{
+	if (num>=0 && num<curcp)
+	{
+		return codepages[num].codepage;
+	}
+	else
+	{
+		return NULL;
+	}
 }
 
 int   Unicode::GetIntCodePage(UINT mscp) {
@@ -726,14 +771,20 @@ static UINT   detect_encoding(const unsigned char *mbs,unsigned mblen) {
 	{
 		return CP_1252;
 	}
-	if (mbs[0]=='\xef' && mbs[1]=='\xbb' && mbs[2]=='\xbf') // utf8 bom
-	{
-		return CP_UTF8;
-	}
-	if (mblen>1024) /* don't waste too much time */
+	else if (mblen>1024) /* don't waste too much time */
 	{
 		mblen=1024;
 	}
+
+	if (mbs[0]==0xEF && mbs[1]==0xBB && mbs[2]==0xBF) // utf8 bom
+	{
+		return CP_UTF8;
+	}
+	else if (mbs[0]==0xFF && mbs[1]==0xFE) // utf16 bom
+	{
+		return CP_UTF16;
+	}
+
 	for (i=0;i<NUM_BUILTIN_ENCODINGS;++i)
 	{
 		memset(hist,0,sizeof(int)*NUMLET*NUMLET);
