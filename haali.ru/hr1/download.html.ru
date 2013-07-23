@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+ <head>
+  <title>
+   Haali Reader - §á§â§à§Ô§â§Ñ§Þ§Þ§Ñ §Õ§Ý§ñ §é§ä§Ö§ß§Ú§ñ §Ü§ß§Ú§Ô §á§à§Õ Windows CE
+  </title>
+  <link rel="stylesheet" type="text/css" href="=.css">
+ </head>
+ <body>
+<div class="topmenu">
+ <a class="menu sep" href="index.html.ru">§¤§Ý§Ñ§Ó§ß§Ñ§ñ</a>
+ <a class="menu sep" href="news.html.ru">§¯§à§Ó§à§ã§ä§Ú</a>
+ <a class="menu sep" href="download.html.ru">§³§Ü§Ñ§é§Ñ§ä§î</a>
+ <a class="menu sep" href="scripts.html.ru">§³§Ü§â§Ú§á§ä§í</a>
+ <a class="menu" href="index.html.en">English page</a>
+<!-- <br>
+ <a class="menu small sep" href="http://haali.cs.msu.ru/pocketpc/">§©§Ö§â§Ü§Ñ§Ý§à 1</a>
+ <a class="menu small" href="http://haali.rt.ru/pocketpc/">§©§Ö§â§Ü§Ñ§Ý§à 2</a></p> -->
+</div>
+<!-- vim: set syn=html : -->
+
+  <h4>§³§Ü§Ñ§é§Ñ§ä§î. §±§à§ã§Ý§Ö§Õ§ß§ñ§ñ §Ó§Ö§â§ã§Ú§ñ: 171</h4>
+  <p>§µ§ã§ä§Ñ§ß§à§Ó§ë§Ú§Ü §Õ§Ý§ñ Pocket PC §Ú Palm size PC §á§à§Õ §ß§Ñ§ã§ä§à§Ý§î§ß§í§Û Windows: <a href="HaaliReaderSetup.exe">HaaliReaderSetup</a></p>
+  <p>§ª§ã§á§à§Ý§ß§ñ§Ö§Þ§í§Ö §æ§Ñ§Û§Ý§í §â§à§ã§ã§í§á§î§ð:</a>
+  <table>
+   <tr>
+    <td>Pocket PC (CE3.0)</td>
+     <td><a href="HaaliReader.PPC.ARM.zip">ARM</a>,
+     <a href="HaaliReader.PPC.MIPS.zip">MIPS</a>,
+     <a href="HaaliReader.PPC.SH3.zip">SH3</a></td>
+   </tr>
+   <tr>
+    <td>Palm size PC (CE2.11)</td>
+     <td><a href="HaaliReader.PsPC.MIPS.zip">MIPS</a>,
+     <a href="HaaliReader.PsPC.SH3.zip">SH3</a></td>
+   </tr>
+   <tr>
+    <td>HPC Pro (CE2.11)</td>
+     <td><a href="HaaliReader.HPCPro.ARM.zip">ARM</a>,
+     <a href="HaaliReader.HPCPro.MIPS.zip">MIPS</a>,
+     <a href="HaaliReader.HPCPro.SH3.zip">SH3</a></td>
+   </tr>
+   <tr>
+    <td>HPC 2000 (CE3.0)</td>
+     <td><a href="HaaliReader.HPC.ARM.zip">ARM</a>,
+     <a href="HaaliReader.HPC.MIPS.zip">MIPS</a></td>
+   </tr>
+   <tr>
+    <td>Casio BE300</td>
+    <td><a href="HaaliReader.BE300.zip">MIPS</a></td>
+    </tr>
+  </table>
+  <p>§£§Ö§â§ã§Ú§Ú §Õ§Ý§ñ 2.11 §Þ§Ö§ã§ä§Ñ§Þ§Ú §â§Ñ§Ò§à§ä§Ñ§ð§ä §Ü§â§Ú§Ó§à §Ú §ß§Ö§Ü§à§ä§à§â§í§Ö §Ó§Ö§ë§Ú §ß§Ö §á§à§Õ§Õ§Ö§â§Ø§Ú§Ó§Ñ§ð§ä.</p>
+  <h4>§¥§à§á§à§Ý§ß§Ú§ä§Ö§Ý§î§ß§í§Ö §á§à§Ý§Ö§Ù§ß§à§ã§ä§Ú</h4>
+  <p><a href="TextViewNG.zip">§ª§ã§ç§à§Õ§ß§Ú§Ü§Ú</a>,
+  <a href="english-russian.dic">§¡§ß§Ô§Ý§à-§â§å§ã§ã§Ü§Ú§Û §ã§Ý§à§Ó§Ñ§â§î</a>,
+  <a href="mkdict.exe">§±§â§à§Ô§â§Ñ§Þ§Þ§Ñ §Õ§Ý§ñ §Ú§Ù§Ô§à§ä§à§Ó§Ý§Ö§ß§Ú§ñ §ã§Ý§à§Ó§Ñ§â§Ö§Û</a>.</p>
+  <p>§¶§à§â§Þ§Ñ§ä §Ú§ã§ç§à§Õ§ß§Ú§Ü§Ñ §ã§Ý§à§Ó§Ñ§â§ñ §Ü§â§Ñ§Û§ß§Ö §á§â§à§ã§ä: §á§à §à§Õ§ß§à§Û §ã§ä§Ñ§ä§î§Ö §ß§Ñ §ã§ä§â§à§Ü§Ö,
+  §Ù§Ñ§Ô§à§Ý§à§Ó§à§Ü §ã§ä§Ñ§ä§î§Ú §à§ä§Õ§Ö§Ý§ñ§Ö§ä§ã§ñ §à§ä §ä§Ö§Ý§Ñ §Õ§Ó§å§Þ§ñ §á§â§à§Ò§Ö§Ý§Ñ§Þ§Ú.</p>
+  
+<hr noshade="1">
+<div class="update">§±§à§ã§Ý§Ö§Õ§ß§Ö§Ö §à§Ò§ß§à§Ó§Ý§Ö§ß§Ú§Ö: 2002/09/04 12:29</div>
+§¡§Ó§ä§à§â: <a href="mailto:mike@haali.net">§®§Ú§ç§Ñ§Ú§Ý §®§Ñ§è§ß§Ö§Ó, mike@haali.net</a>
+
+ </body>
+</html>

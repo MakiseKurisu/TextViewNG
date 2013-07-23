@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+  <head>
+    <title>Haali Reader - §á§â§à§Ô§â§Ñ§Þ§Þ§Ñ §Õ§Ý§ñ §é§ä§Ö§ß§Ú§ñ §Ü§ß§Ú§Ô §á§à§Õ Windows CE</title>
+    <link rel="stylesheet" type="text/css" href="=.css">
+  </head>
+  <body>
+    <div class="topmenu">
+      <div class="logo"><img class="noborder" src="logo.png"></div>
+      <!--<div class="mirror">
+	<a class="menu small" href="http://haali.rt.ru/pocketpc/">§©§Ö§â§Ü§Ñ§Ý§à 1</a><br>
+	<a class="menu small" href="http://haali.cs.msu.ru/pocketpc/">§©§Ö§â§Ü§Ñ§Ý§à 2</a>
+      </div>-->
+      <a class="menu sep" href="index.html.ru">§¤§Ý§Ñ§Ó§ß§Ñ§ñ</a>
+      <a class="menu sep" href="news.html.ru">§¯§à§Ó§à§ã§ä§Ú</a>
+      <a class="menu sep" href="download.html.ru">§³§Ü§Ñ§é§Ñ§ä§î</a>
+      <a class="menu sep" href="screenshots.html.ru">§¬§Ñ§â§ä§Ú§ß§Ü§Ú</a>
+      <a class="menu sep" href="docs.html.ru">§¥§à§Ü§å§Þ§Ö§ß§ä§Ñ§è§Ú§ñ</a>
+      <a class="menu sep" href="bugs.html.ru">§°§ê§Ú§Ò§Ü§Ú</a>
+      <a class="menu sep" href="scripts.html.ru">FB Tools</a>
+      <a class="menu sep" href="fb2.html.ru">FB2.0</a>
+      <a class="menu" href="index.html.en">English page</a>
+    </div>
+    <div class="main">
+
+<!-- vim: set syn=html : -->
+
+
+  <h3>§¬§Ñ§â§ä§Ú§ß§Ü§Ú</h3>
+  <table class="center">
+   <tr>
+    <td valign=top>
+     <img class="bb" src="img/m.png"><br>§¤§Ý§Ñ§Ó§ß§à§Ö §à§Ü§ß§à
+    </td>
+    <td valign=top>
+     <img class="bb" src="img/d.png"><br>§³§Ý§à§Ó§Ñ§â§î
+    </td>
+    <td valign=top>
+     <img class="bb" src="img/me.png"><br>§¡§ß§Ô§Ý§Ú§Û§ã§Ü§Ú§Û §ä§Ö§Ü§ã§ä
+    </td>
+    <td valign=top>
+     <img class="bb" src="img/mr90f.png"><br>§±§à§Ó§Ö§â§ß§å§ä§í§Û §ß§Ñ 90 §Ô§â§Ñ§Õ§å§ã§à§Ó §ä§Ö§Ü§ã§ä + §á§à§Ý§ß§à§ï§Ü§â§Ñ§ß§ß§í§Û §â§Ö§Ø§Ú§Þ
+    </td>
+   </tr>
+  </table>
+
+
+
+      <hr noshade="1">
+      <div class="update">§±§à§ã§Ý§Ö§Õ§ß§Ö§Ö §à§Ò§ß§à§Ó§Ý§Ö§ß§Ú§Ö: 2002/09/06 15:28</div>
+      §¡§Ó§ä§à§â: <a href="mailto:mike@haali.net">§®§Ú§ç§Ñ§Ú§Ý §®§Ñ§è§ß§Ö§Ó, mike@haali.net</a>
+    </div>
+  </body>
+</html>

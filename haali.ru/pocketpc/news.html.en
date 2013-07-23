@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+  <title>Haali Reader - a book reader for Windows CE</title>
+  <link rel="stylesheet" type="text/css" href="=.css">
+</head>
+  <body>
+  <div class="topmenu">
+    <div class="logo"><img class="noborder" src="logo.png"></div>
+    <!--<div class="mirror">
+      <a class="menu small" href="http://haali.rt.ru/pocketpc/">Mirror 1</a><br>
+      <a class="menu small" href="http://haali.cs.msu.ru/pocketpc/">Mirror 2</a>
+    </div>-->
+    <a class="menu sep" href="index.html.en">Home</a>
+    <a class="menu sep" href="news.html.en">News</a>
+    <a class="menu sep" href="docs.html.en">Docs</a>
+    <a class="menu sep" href="FictionBook_description.html">FB 2.0</a>
+    <a class="menu sep" href="scripts.html.en">FB2.0 Scripts&Utilitites</a>
+    <a class="menu" href="index.html.ru">Russian page</a>
+  </div>
+  <div class="main">
+<!-- vim: set syn=html : -->
+
+
+  <h3>News:</h3>
+  <ul>
+   <li> 02/04/07 2.0b264 Added an option to search from current position, added Longvo 12 support.</li>
+   <li> 07/09/06 2.0b257 Bugfixes.</li>
+   <li> 23/02/05 FBTools: hotkeys for scripts (Ctrl-1..9), direct access to HTML editor from scripts.</li>
+   <li> 27/01/05 FBTools: added ability to execute JavaScript, see demo.js in app folder.</li>
+   <li> 12/01/05 Small fixes in ExportXML word macro.</li>
+   <li> 03/01/05 FBTools: small fixes.</li>
+   <li> 03/11/04 2.0b249 HiRes support.</li>
+   <li> 29/09/04 2.0b243 Fixed PDB reader.</li>
+   <li> 17/09/04 2.0b242 Small fixes and improvements.</li>
+   <li> 05/04/04 Small fixes, bookmarks export to text files.</li>
+   <li> 02/02/04 Updated FBTools build, no longer has WinXP dependencies.</li>
+   <li> 09/01/04 New FBTools version.</li>
+   <li> 04/12/03 2.0b237 Fixed chapter title display in status bar, fixed search in builtin dictionary.</li>
+   <li> 22/10/03 2.0b227 Fixed a few small issues.</li>
+   <li> 21/10/03 2.0b223 Fixed lingvo call, current chapter title can be shown in progress bar now.</li>
+   <li> 06/10/03 2.0b221 Fixed incorrect drawing of rotated text, context menu is now drawn rotated, total document size can be shown in progress bar, device suspend is disabled when autoscroll is active.</li>
+   <li> 06/10/03 2.0b216 Added more F1-F10 and other function keys to buttons setup dialog, window position is now save on close, added inline images support, fixed loading paletted png images with transparency, added lingvo support.</li>
+   <li> 28/07/03 2.0b186 Added a simple autoscroll, controlled from keyboard/buttons only. Settings
+                 are in Options-&gt;Buttons.</li>
+   <li> 25/07/03 2.0b183 Fixed Open File dialog in desktop windows version, no updates in PDA versions.</li>
+   <li> 21/07/03 2.0b174 Tree like contents is back.</li>
+   <li> 02/07/03 2.0b170 Fixed a contents dialog painting glitch.</li>
+   <li> 30/06/03 2.0b168 Added png transparency support, changed File Open and Contents dialogs,
+                 added TCR files support (written by Andrey Chicherov).</li>
+   <li> 22/06/03 A lot of improvements/fixes in FB Tools, added an XML source editor.</li>
+   <li> 28/05/03 2.0b156 Added a CE .NET/MIPS build, fixed hangups on CE Phone Edition machines
+                 (these could happed on other devices too, though I didn't see them), added
+                 a "Lookup in dictionary" menu item to the context menu, added a field to
+                 change the default encoding to the File format dialog.</li>
+   <li> 12/04/03 2.0b153 Added a context menu that is automatically displayed after selecting text,
+		 fixed a bug that prevented display of the application icon under desktop win32,
+		 dictionary shortcut now causes a switch to dictionary mode in the main copy of
+		 HR.</li>
+   <li> 12/04/03 FB Tools: a new version of <a href="files/FictionBook Tools v2.0 Setup.exe">FB Tools</a>
+		 includes an FB2 Editor and runs under Windows NT/2K/XP only.</li>
+   <li> 26/02/03 2.0b140 Fixed case insensitive search, text length in dictionary search panel is limited by
+		 panel width now, selected text is automatically added to search dialog, bookmark text is
+		 automatically shown when navigating to next/previous bookmark, contents windows is now shown
+		 when no bookmarks are present, but the book has more than one subdocument, added Ok/Cancel
+		 buttons to the contents dialog in the desktop version, added optional autorepeat rate limiter.</li>
+   <li> 15/02/03 FB Tools: a new version is in the works, in the meantime, please note that the FB Tools
+		 archive still contains an outdated version of HR, use an updated version from a separate
+		 installer.</li>
+   <li> 15/02/03 2.0b134 fixed display of PNG images with alpha channel, version for desktop Windows is
+		 now distributed separately from FB Tools.</li>
+   <li> 19/01/03 2.0b124 fixed stylesheet handling, fixed image cache, imported an updated expat XML parser.</li>
+   <li> 20/12/02 Updated the demo FB2 document.</li>
+   <li> 06/11/02 FB Tools: fixed a bug in importing JPEG images.</li>
+   <li> 07/10/02 FB Tools: added utilities for pictures embedding/extracting and conversion to HTML.</li>
+   <li> 07/10/02 Fixed a bug in the Options-&gt;General dialog under desktop Win32, fixed a
+		 bug in "Prev Section" command.</li>
+   <li> 28/09/02 Added epigraph/poem/cite styles to ExportXML.dot.</li>
+   <li> 28/09/02 2.0b105 Added SlovoEd support.</li>
+   <li> 17/09/02 Small corrections to english docs.</li>
+   <li> 09/09/02 Fixed endnotes handling in ExportXML.dot.</li>
+   <li> 09/09/02 Up maximum article size in mkdict to 64kb.</li>
+   <li> 06/09/02 Fixed footnotes and endnotes export in the ExportXML word macro.</li>
+   <li> 06/09/02 2.0b99 Added a dictionary shortcut when installing via ActiveSync, added a CE .NET
+			executable, XML documents are now strictly checked for FB2 conformance,
+			added Prev/Next Section commands that ignore bookmarks.</li>
+   <li> 06/09/02 FB Tools update. Fixed a crash in explorer when MSXML4 was not installed.</li>
+   <li> 02/09/02 A new mirror is in place, this should work much better than the troubled
+		 haali.cs.msu.ru.</li>
+   <li> 22/08/02 2.0b65 improved drawing code to reduce flicker, contents dialog now handles
+			double taps better, progress bar in dictionary mode behaves better,
+			can choose more font smoothing methods in desktop version, fixed
+			a bug that prevented dictionary from working when there were no
+			bookmarks set, removed executables for some ancient cpu/os versions.</li>
+   <li> 06/08/02 Updated FB Tools version.</li>
+   <li> 06/08/02 2.0b55 on PocketPC in dictionary mode an OK button is shown that backtracks
+			in history until it gets out of dictionary mode, fixed a couple of bugs
+			in new expat library, enabled +/- buttons for root elements in
+			contents dialog, bookmark text is now shown when tapping a bookmark.</li>
+  </ul>
+
+
+
+      <hr noshade="1">
+      <div class="update">Last modified: 2007/04/02 08:38</div>
+      Author: <a href="mailto:mike@haali.net">Mike Matsnev, mike@haali.net</a>
+    </div>
+  </body>
+</html>

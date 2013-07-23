@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+ <head>
+  <title>
+   Haali Reader - a book reader for Windows CE
+  </title>
+  <link rel="stylesheet" type="text/css" href="=.css">
+ </head>
+ <body>
+  <div class="topmenu">
+ <a class="menu" href="index.html.ru">Russian page</a>
+</div>
+<!-- vim: set syn=html : -->
+
+  <h3>Haali Reader - a book reader for Windows CE</h3>
+  <p>After I tried a few existing apps I still couldnt find anything that had
+  all required features and was easy to use. The main problem was the lack of
+  support for cyrillic encodings. So I decided to write my own bookreader.
+  </p>
+  <p>Some (scarce) <a href="docs.html.en">documentation</a>, thanks to Chris Clark for providing a skeleton</p>
+  <h4>Download: Last version: 171</h4>
+  <p>Desktop installer for Pocket PC and Palm size PC: <a href="HaaliReaderSetup.exe">HaaliReaderSetup</a></p>
+  <p>Executable files for use directly on a pda:</a>
+  <table border="1">
+   <tbody>
+   <tr>
+    <td>&nbsp;</td><td>ARM</td><td>MIPS</td><td>SH3</td>
+   </tr>
+   <tr>
+    <td>Pocket PC (CE3.0)</td>
+     <td><a href="HaaliReader.PPC.ARM.zip">+</a></td>
+     <td><a href="HaaliReader.PPC.MIPS.zip">+</a></td>
+     <td><a href="HaaliReader.PPC.SH3.zip">+</a></td>
+   </tr>
+   <tr>
+    <td>Palm size PC (CE2.11)</td>
+     <td>na</td>
+     <td><a href="HaaliReader.PsPC.MIPS.zip">+</a></td>
+     <td><a href="HaaliReader.PsPC.SH3.zip">+</a></td>
+   </tr>
+   <tr>
+    <td>HPC Pro (CE2.11)</td>
+     <td><a href="HaaliReader.HPCPro.ARM.zip">+</a></td>
+     <td><a href="HaaliReader.HPCPro.MIPS.zip">+</a></td>
+     <td><a href="HaaliReader.HPCPro.SH3.zip">+</a></td>
+   </tr>
+   <tr>
+    <td>HPC 2000 (CE3.0)</td>
+     <td><a href="HaaliReader.HPC.ARM.zip">+</a></td>
+     <td><a href="HaaliReader.HPC.MIPS.zip">+</a></td>
+     <td>na</td>
+   </tr>
+   <tr>
+    <td>Casio BE300</td>
+     <td>na</td>
+     <td><a href="HaaliReader.BE300.zip">+</a></td>
+     <td>na</td>
+   </tr>
+   </tbody>
+  </table>
+  <p>Versions for 2.11 don't support some features present in pocketpc version.</p>
+  <h4>Other goodies</h4>
+  <p><a href="TextViewNG.zip">Sources</a>,
+  <a href="english-russian.dic">An english-russian dictionary</a>.</p>
+  <h4>Main features:</h4>
+  <ul>
+   <li>Loads plain text and XML files, more info about XML: <a href="http://www.ebookstools.net/xml2lit/xml2lit_r.htm">xml2lit</a>,
+       <a href="http://www.gribuser.ru/freeware/cleartxt/index.shtml">ClearTXT</a>,
+       books in XML format are available at <a href="http://lit.km.ru/">Muhomor's library</a>, mostly in Russian. <b>There were rumours that Haali Reader can open Microsoft LIT files. This is not the case. LIT format is not supported and will never be supported.</b></li>
+   <li>Cyrillic encodings support with autodetection.</li>
+   <li>Last viewed position in file is saved on exit.</li>
+   <li>ClearType support.</li>
+   <li>Any font/size can be selected.</li>
+   <li>Fullscreen and landscape mode.</li>
+   <li>Colors can be adjusted.</li>
+   <li>Text search.</li>
+   <li>Dictionary support. Tapping a word opens a translation window.</li>
+   <li>Automatic hyphenation (russian language only).</li>
+   <li>Table of contents and bookmarks</li>
+   <li>Multiple columns support (1-4)</li>
+   <li>PRC/PDB files support (plain text and XMl only, HTML is not supported).</li>
+   <li>Builtin ZIP archives support.</li>
+  </ul>
+  <h4>Controls</h4>
+  <ul>
+   <li>Buttons: 
+    <ul>
+     <li>Up,PgUp - page backward.</li>
+     <li>Down,Space,PgDn - page forward.</li>
+     <li>Left,Home - save current position and move to start of file.</li>
+     <li>Right,End - save current position and move to end of file.</li>
+     <li>Enter,Action - toggle fullscreen.</li>
+    </ul></li>
+   <li>Stylus:
+    <ul>
+     <li>Tap - lookup word in dictionary (can be turned off).</li>
+     <li>Double Tap - toggle fullscreen</li>
+    </ul></li>
+  </ul>
+  
+<hr noshade="1">
+<div class="update">Last modified: 2002/09/04 12:29</div>
+Author: <a href="mailto:mike@haali.net">Mike Matsnev, mike@haali.net</a>
+
+ </body>
+</html>

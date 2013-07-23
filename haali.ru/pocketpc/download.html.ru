@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+  <head>
+    <title>Haali Reader - §á§â§à§Ô§â§Ñ§Þ§Þ§Ñ §Õ§Ý§ñ §é§ä§Ö§ß§Ú§ñ §Ü§ß§Ú§Ô §á§à§Õ Windows CE</title>
+    <link rel="stylesheet" type="text/css" href="=.css">
+  </head>
+  <body>
+    <div class="topmenu">
+      <div class="logo"><img class="noborder" src="logo.png"></div>
+      <!--<div class="mirror">
+	<a class="menu small" href="http://haali.rt.ru/pocketpc/">§©§Ö§â§Ü§Ñ§Ý§à 1</a><br>
+	<a class="menu small" href="http://haali.cs.msu.ru/pocketpc/">§©§Ö§â§Ü§Ñ§Ý§à 2</a>
+      </div>-->
+      <a class="menu sep" href="index.html.ru">§¤§Ý§Ñ§Ó§ß§Ñ§ñ</a>
+      <a class="menu sep" href="news.html.ru">§¯§à§Ó§à§ã§ä§Ú</a>
+      <a class="menu sep" href="download.html.ru">§³§Ü§Ñ§é§Ñ§ä§î</a>
+      <a class="menu sep" href="screenshots.html.ru">§¬§Ñ§â§ä§Ú§ß§Ü§Ú</a>
+      <a class="menu sep" href="docs.html.ru">§¥§à§Ü§å§Þ§Ö§ß§ä§Ñ§è§Ú§ñ</a>
+      <a class="menu sep" href="bugs.html.ru">§°§ê§Ú§Ò§Ü§Ú</a>
+      <a class="menu sep" href="scripts.html.ru">FB Tools</a>
+      <a class="menu sep" href="fb2.html.ru">FB2.0</a>
+      <a class="menu" href="index.html.en">English page</a>
+    </div>
+    <div class="main">
+
+<!-- vim: set syn=html : -->
+
+
+  <h3>§³§Ü§Ñ§é§Ñ§ä§î. §±§à§ã§Ý§Ö§Õ§ß§ñ§ñ §Ó§Ö§â§ã§Ú§ñ: 2.0b264
+</h3>
+  <br><br>
+
+  <table>
+   <tr>
+    <td class="pl pb" valign=top><strong>§°§Ò§í§é§ß§í§Û Windows</strong></td>
+    <td class="pb"><a href="files/Haali Reader v2.0 Setup.exe">Haali Reader §Õ§Ý§ñ §à§Ò§í§é§ß§à§Ô§à Windows</a>
+                   ( 538k)
+    </td>
+   </tr>
+
+   <tr>
+    <td class="pl pt pb" valign=top><strong>§¬§±§¬</strong></td>
+    <td class="pt pb"><a href="files/Haali Reader CE v2.0 Setup.exe">ActiveSync-§µ§ã§ä§Ñ§ß§à§Ó§ë§Ú§Ü</a>
+                      ( 790k) §Õ§Ý§ñ Pocket PC, PocketPC 2002,
+                      WM2003, WM2005. §¥§Ý§ñ §å§ã§ä§Ñ§ß§à§Ó§Ü§Ú §Ù§Ñ§á§å§ã§ä§Ú§ä§Ö §ï§ä§à§ä §æ§Ñ§Û§Ý §ß§Ñ §à§Ò§í§é§ß§à§Û §Þ§Ñ§ê§Ú§ß§Ö, §á§â§à§Ô§â§Ñ§Þ§Þ§Ñ §Ò§å§Õ§Ö§ä §å§ã§ä§Ñ§ß§à§Ó§Ý§Ö§ß§Ñ §ß§Ñ
+                      §¬§±§¬ §é§Ö§â§Ö§Ù ActiveSync. §±§â§Ú §å§ã§ä§Ñ§ß§à§Ó§Ü§Ö §ß§Ñ WM2005 §Þ§à§Ø§Ö§ä §Ó§í§Õ§Ñ§Ó§Ñ§ä§î§ã§ñ §ã§à§à§Ò§ë§Ö§ß§Ú§Ö, §é§ä§à §á§â§à§Ô§â§Ñ§Þ§Þ§Ñ §Þ§à§Ø§Ö§ä
+                      §ß§Ö§Ü§à§â§â§Ö§Ü§ä§ß§à §à§ä§à§Ò§â§Ñ§Ø§Ñ§ä§î§ã§ñ, §ä.§Ü. §ã§Õ§Ö§Ý§Ñ§ß§Ñ §Õ§Ý§ñ §Ò§à§Ý§Ö§Ö §ã§ä§Ñ§â§à§Û §Ó§Ö§â§ã§Ú§Ú WM. §¦§Ô§à §Þ§à§Ø§ß§à §Ú§Ô§ß§à§â§Ú§â§à§Ó§Ñ§ä§î, §Ó§ã§Ö
+                      §Ò§å§Õ§Ö§ä §â§Ñ§Ò§à§ä§Ñ§ä§î §ß§à§â§Þ§Ñ§Ý§î§ß§à.
+    </td>
+   </tr>
+
+   <tr>
+    <td class="pl pt pb" valign=top><strong>§ª§ã§á§à§Ý§ß§ñ§Ö§Þ§í§Ö §æ§Ñ§Û§Ý§í §â§à§ã§ã§í§á§î§ð, §á§â§Ú§Ô§à§Õ§ß§í §Õ§Ý§ñ §Ù§Ñ§á§å§ã§Ü§Ñ §ä§à§Ý§î§Ü§à §ß§Ñ §¬§±§¬</strong></td>
+    <td class="pt pb">§¿§ä§à§ä §Ó§Ñ§â§Ú§Ñ§ß§ä §ß§å§Ø§Ö§ß, §Ö§ã§Ý§Ú §Ó§í §ã§Ü§Ñ§é§Ú§Ó§Ñ§Ö§ä§Ö §á§â§à§Ô§â§Ñ§Þ§Þ§å §ã§â§Ñ§Ù§å §ß§Ñ §¬§±§¬ §Ú§Ý§Ú §ç§à§ä§Ú§ä§Ö §à§Ò§ß§à§Ó§Ú§ä§î §Ö§Ö §Ó§â§å§é§ß§å§ð.
+                      §²§Ñ§ã§á§Ñ§Ü§å§Û§ä§Ö §Ñ§â§ç§Ú§Ó §Ú §á§Ö§â§Ö§á§Ú§ê§Ú§ä§Ö §Ú§ã§á§à§Ý§ß§ñ§Ö§Þ§í§Û §æ§Ñ§Û§Ý §ß§Ñ §¬§±§¬. §£ §à§Ò§í§é§ß§à§Þ Windows §à§ß §â§Ñ§Ò§à§ä§Ñ§ä§î §ß§Ö §Ò§å§Õ§Ö§ä.<br><br>
+
+                       <table style="font-size: smaller">
+   <tr>
+     <td class="border">Pocket PC, PocketPC 2002 (CE3.0), WM2003 (CE4.2), WM2005</td>
+     <td class="border"><strong>2.0b264
+</td>
+     <td class="border"><a href="files/HaaliReader.PPC.ARM.zip">ARM</a> ( 205k),
+     <a href="files/HaaliReader.PPC.MIPS.zip">MIPS</a> ( 255k),
+     <a href="files/HaaliReader.PPC.SH3.zip">SH3</a> ( 233k)</td>
+   </tr>
+   <tr>
+     <td class="border">Palm size PC (CE2.11)</td>
+     <td class="border"><strong>2.0b227</strong></td>
+     <td class="border"><a href="files/HaaliReader.PsPC.MIPS.zip">MIPS</a> ( 232k),
+     <a href="files/HaaliReader.PsPC.SH3.zip">SH3</a> ( 209k)</td>
+   </tr>
+   <tr>
+     <td class="border">HPC Pro (CE2.11)</td>
+     <td class="border"><strong>2.0b227</strong></td>
+     <td class="border"><a href="files/HaaliReader.HPCPro.ARM.zip">ARM</a> ( 185k),
+     <a href="files/HaaliReader.HPCPro.SH3.zip">SH3</a> ( 209k)</td>
+   </tr>
+   <tr>
+     <td class="border">HPC 2000 (CE3.0)</td>
+     <td class="border"><strong>2.0b227</strong></td>
+     <td class="border"><a href="files/HaaliReader.HPC.ARM.zip">ARM</a> ( 183k),
+     <a href="files/HaaliReader.HPC.MIPS.zip">MIPS</a> ( 232k)</td>
+   </tr>
+   <tr>
+     <td class="border">WinCE .NET</td>
+     <td class="border"><strong>2.0b227</strong></td>
+    <td class="border"><a href="files/HaaliReader.NET.ARMV4.zip">ARMV4</a> ( 190k),
+    <a href="files/HaaliReader.NET.MIPSII.zip">MIPS</a> ( 199k)</td>
+    </tr>
+  </table>
+
+
+    </td>
+   </tr>
+
+   <tr>
+    <td class="pl pt pb" valign=top><strong>BE300 (2.0b186)</strong></td>
+    <td class="pt pb">§µ§ã§ä§Ñ§ß§à§Ó§ë§Ú§Ü §Õ§Ý§ñ BE300 §á§à§Õ §ß§Ñ§ã§ä§à§Ý§î§ß§í§Û Windows:
+                      <a href="files/Haali Reader for BE300 v2.0 Setup.exe">Haali Reader for BE300 v2.0 Setup</a>
+                      ( 284k)<br>
+
+                      §ª§ã§á§à§Ý§ß§ñ§Ö§Þ§í§Û §æ§Ñ§Û§Ý: <a href="files/HaaliReader.BE300.zip">HaaliReader.BE300.zip</a>
+                      ( 226k)
+    </td>
+   </tr>
+
+   <tr>
+    <td class="pl pt" valign=top><strong>§¥§à§á§à§Ý§ß§Ú§ä§Ö§Ý§î§ß§í§Ö §á§à§Ý§Ö§Ù§ß§à§ã§ä§Ú</strong></td>
+    <td class="pt"><a href="files/TextViewNG.zip">§ª§ã§ç§à§Õ§ß§Ú§Ü§Ú</a> ( 736k),
+                   <a href="files/english-russian.dic">§¡§ß§Ô§Ý§à-§â§å§ã§ã§Ü§Ú§Û §ã§Ý§à§Ó§Ñ§â§î</a>
+                   ( 2.4M),
+                   <a href="files/mkdict.exe">§±§â§à§Ô§â§Ñ§Þ§Þ§Ñ §Õ§Ý§ñ §Ú§Ù§Ô§à§ä§à§Ó§Ý§Ö§ß§Ú§ñ §ã§Ý§à§Ó§Ñ§â§Ö§Û</a>
+                   (  41k).<br>
+
+                   §¶§à§â§Þ§Ñ§ä §Ú§ã§ç§à§Õ§ß§Ú§Ü§Ñ §ã§Ý§à§Ó§Ñ§â§ñ §Ü§â§Ñ§Û§ß§Ö §á§â§à§ã§ä: §á§à §à§Õ§ß§à§Û §ã§ä§Ñ§ä§î§Ö §ß§Ñ §ã§ä§â§à§Ü§Ö,
+                   §Ù§Ñ§Ô§à§Ý§à§Ó§à§Ü §ã§ä§Ñ§ä§î§Ú §à§ä§Õ§Ö§Ý§ñ§Ö§ä§ã§ñ §à§ä §ä§Ö§Ý§Ñ §Õ§Ó§å§Þ§ñ §á§â§à§Ò§Ö§Ý§Ñ§Þ§Ú. §¬ §ã§à§Ø§Ñ§Ý§Ö§ß§Ú§ð, <code>mkdict</code>
+                   §â§Ñ§Ò§à§ä§Ñ§Ö§ä §ä§à§Ý§î§Ü§à §á§à§Õ Win2K/XP.<br>
+
+                   §¢§à§Ý§î§ê§Ñ§ñ §Ü§à§Ý§Ý§Ö§Ü§è§Ú§ñ §ã§Ý§à§Ó§Ñ§â§Ö§Û §Ö§ã§ä§î §ß§Ñ <a href="http://pda.look.ru/book/">pda.look.ru</a>.
+    </td>
+   </tr>
+  </table>
+  <br><br>
+
+
+
+      <hr noshade="1">
+      <div class="update">§±§à§ã§Ý§Ö§Õ§ß§Ö§Ö §à§Ò§ß§à§Ó§Ý§Ö§ß§Ú§Ö: 2006/05/07 22:32</div>
+      §¡§Ó§ä§à§â: <a href="mailto:mike@haali.net">§®§Ú§ç§Ñ§Ú§Ý §®§Ñ§è§ß§Ö§Ó, mike@haali.net</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Haali Reader docs</title>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+<h4>Main screen</h4>
+The main window consists of the text pane, the progress bar and the menu/toolbar.
+Drag the stylus over the text pane to select text, use Tools-&gt;Copy to
+copy the selected text to the clipboard. Tap text to perform dictionary lookup
+(if "use dictionary" is selected in general options). Double tap any whitespace
+are to toggle fullscreen mode. Tap on the progress bar moves the current
+position in the document. Tap on the small arrows at the ends of the progress
+bar moves to current position to the next/previous contents item. Toolbar
+buttons provide shortcut access to the following menu items in order from
+left to right: Back, Contents, Add bookmark, Find, Find next.<br>
+<br>
+<h4>Menus</h4>
+<blockquote><b><big>Tools</big></b><br>
+  <ul>
+    <li><big>Copy </big>-&nbsp;copy selected text to the clipboard.</li>
+    <li><big>Find </big>- find text in the document, case sensitive.</li>
+    <li><big>Find </big>next</li>
+    <li><big>Back</big> - undo last "large" movement - basically anything
+other than page/line up/down.<br>
+    </li>
+    <li><big>Go to</big> - brings up goto dialogue box, enter in a percentage
+followed by the percent sign (e.g. enter "50%"). Or enter in paragraph number
+(with an optional character position, e.g. enter "30" for paragraph 30, "30:50"
+for paragraph 30, character 50.</li>
+    <li><big>Add bookmark</big> - brings up create bookmark dialogue box,
+enter in bookmark name OR before choosing "Add bookmark", select text on
+screen to use as name and dialogue box will have selected text ready to be
+accepted / edited as the new bookmark name, you don't need to copy the selection
+to clipboard to use this feature.</li>
+    <li><big>Contents</big> -&nbsp;bring up the book's contents. For XML
+documents this will probably be a tree of parts and sections, for plain text
+documents a simplistic algorithm is used to detect chapter headings. Bookmarks
+are inserted into the tree according to their position in the document. These
+are marked with a picture of a pen, and section titles are marked with a
+red triangle/double triangle. To navigate to the selected item either select
+one and hit ok or double tap it. Tap user created bookmark's quickly to edit
+(rename), tap and hold to: see position in document in percent, edit, or
+delete / remove bookmark. Tap red cross in bottom left hand corner of screen
+to cancel.</li>
+    <li><big>Recent files</big> -&nbsp;select recently opened document(s).</li>
+    <li><big>Open<small> -</small></big> bring up file selection dialogue.
+Tap red cross in bottom left hand corner of screen to cancel.</li>
+    <li><big>About<small> - </small></big>bring up a useful about screen.
+Lists author, version of HaaliReader, full file name/path, size of text (uncompressed),
+compression ratio (if any), number of paragraphs, format of file/text, position
+in file as Paragraph_number:Character_number.</li>
+    <li><big>Exit</big> - exit / quit without prompt.<br>
+    </li>
+  </ul>
+</blockquote>
+<blockquote><b><big><br>
+Options</big></b><br>
+  <ul>
+    <li><big>Fullscreen </big>- toggle fullscreen mode (turns off title bar
+and toolbar).</li>
+    <li><big>File format</big> - select file format from the following list:
+Auto, Line per paragraph, Indented first line, MAC line per paragraph, MAC
+indented first line, XML. The first five deal with different formatting of
+plain text documents, MAC variants are used for files which use \r (0x0d)
+as end of line markers instead of traditional \n or \r\n. File encoding can
+also be select from the encodings available in your windows version. HaaliReader
+has five builtin encodings that are always available: windows-1252 (a superset
+of iso-8859-1), windows-1251, cp866, koi8-r - these are cyrillic encodings,
+and utf-8 for unicode texts.</li>
+    <li><big>Display </big>- set various text display options. The top part
+of the dialog is used to select the base font for the text. At the botom
+there are input boxes for ajusting side margins and the botom margin, display
+rotation and selecting the number of columns on screen (this is handy for
+HPCs which have a wide screen). Use soft hyphens checkbox turns on the builtin
+hyphenation module for russian language.</li>
+    <li><big>Colors </big>- allows the user to adjust the colors of the interfaces
+elements. Various highlight items work together with the Styles dialog and
+are only useful for rendering XML documents.</li>
+    <li><big>Styles </big>- select format to use for each XML style / tag.
+Style is specified as a modifier to main font selection.</li>
+    <li><big>Buttons </big>- assign function to hardware buttons and if present
+keyboard buttons. Use grab key to assign funtions to hardware buttons. Hardware
+buttons are released back to the operating system when HaaliReader's window
+loses focus.&nbsp;If rotate is mapped to a hardware button, screen is rotated
+90 degrees anti-clockwise.</li>
+    <li><big>Dictionaries </big>- add, remove, view HaaliReader dictionaries.
+Dictionary should be in .DIC format (see mkdict tool on how to make a custom
+dictionary). Only one active dictionary is used for word lookup, to change
+the active dictionary select it in the list and tap OK button. The active
+dictionary can also be selected from the menu in the dictionary dialog.</li>
+    <li><big>General </big>- adjust all other propram's options. Use dictionary
+checkbox specifies wheter single taps in the main window should cause word
+lookup, rotate buttons tells the program to swap functions of the cursor
+control buttons when the display orientation chages. File buffer size specifies
+the amount of file data cached in memory, can set it to some high value if
+you read books from a microdrive to avoid frequent access to the storage
+device. Save bookmarks directly to XML files is an experimental option that
+stores bookmarks at the end of XML files as processing instructions. The
+last input field specifies how many most recently opened files are tracked
+in the registry. &nbsp;Bookmarks are also stored in the registry. </li>
+  </ul>
+</blockquote>
+<h4>Keyboard reference </h4>
+Accelerator keys that are not present in the buttons dialog:<br>
+<br>
+Control-O - Open<br>
+Control-F - Find<br>
+Control-G, F3 - Find next<br>
+Control-Q - Exit<br>
+Backspace - Back<br>
+<br>
+F2 - edit bookmark in the contents dialog<br>
+<br>
+File position specification can be entered directly into the main window
+without brining the Go To dialog. Use following format: &lt;number&gt;% to
+move to certain percentage, or &lt;number&gt;= to move to a certain paragraph.<br>
+<br>
+<h4>Dictionary dialog </h4>
+Once viewing dictionary entry you may select word in the definition window
+and look that up too, just hit '...' button, may also look at previous/next
+word in dictionary (in alphabetical order). If word not found, then the closest
+match (using the first letters) to word is looked up. <br>
+<br>
+</body>
+</html>

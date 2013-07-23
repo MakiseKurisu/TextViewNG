@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+  <title>Haali Reader - a book reader for Windows CE</title>
+  <link rel="stylesheet" type="text/css" href="=.css">
+</head>
+  <body>
+  <div class="topmenu">
+    <div class="logo"><img class="noborder" src="logo.png"></div>
+    <!--<div class="mirror">
+      <a class="menu small" href="http://haali.rt.ru/pocketpc/">Mirror 1</a><br>
+      <a class="menu small" href="http://haali.cs.msu.ru/pocketpc/">Mirror 2</a>
+    </div>-->
+    <a class="menu sep" href="index.html.en">Home</a>
+    <a class="menu sep" href="news.html.en">News</a>
+    <a class="menu sep" href="docs.html.en">Docs</a>
+    <a class="menu sep" href="FictionBook_description.html">FB 2.0</a>
+    <a class="menu sep" href="scripts.html.en">FB2.0 Scripts&Utilitites</a>
+    <a class="menu" href="index.html.ru">Russian page</a>
+  </div>
+  <div class="main">
+<!-- vim: set syn=html : -->
+
+
+  <h3>Haali Reader - a book reader for Windows CE</h3>
+  <h4>Main features:</h4>
+  <ul>
+   <li>Loads plain text and XML files.
+       <b>There were rumours that Haali Reader can open Microsoft LIT files. This is not the case. LIT format is not supported and will never be supported.</b></li>
+   <li>Cyrillic encodings support with autodetection.</li>
+   <li>Last viewed position in file is saved on exit.</li>
+   <li>ClearType support.</li>
+   <li>Any font/size can be selected.</li>
+   <li>Fullscreen and landscape mode.</li>
+   <li>Colors can be adjusted.</li>
+   <li>Text search.</li>
+   <li>Dictionary support. Tapping a word opens a translation window.</li>
+   <li>Automatic hyphenation (russian language only).</li>
+   <li>Table of contents and bookmarks</li>
+   <li>Multiple columns support (1-4)</li>
+   <li>PRC/PDB files support (plain text and XML only, HTML is not supported).</li>
+   <li>Builtin ZIP archives support.</li>
+   <li>Autoscroll (controlled from keyboard/buttons only, settings are in Options-&gt;Buttons).</li>
+  </ul>
+<h4>Download: Last version: 2.0b264
+</h4>
+  <p><strong>Warning: downloaders like GetRight do not work with this site, you'll need to click on the links directly to download.</strong></p>
+  <p>Installer for desktop windows: <a href="files/Haali Reader v2.0 Setup.exe">Haali Reader v2.0 Setup</a> ( 538k)</p>
+  <p>Desktop installer for Pocket PC, PocketPC 2003, WM2003: <a href="files/Haali Reader CE v2.0 Setup.exe">Haali Reader CE v2.0 Setup</a> ( 790k)</p>
+  <p>Executable files for use directly on a pda:</a>
+    <table style="font-size: smaller">
+   <tr>
+     <td class="border">Pocket PC, PocketPC 2002 (CE3.0), WM2003 (CE4.2), WM2005</td>
+     <td class="border"><strong>2.0b264
+</td>
+     <td class="border"><a href="files/HaaliReader.PPC.ARM.zip">ARM</a> ( 205k),
+     <a href="files/HaaliReader.PPC.MIPS.zip">MIPS</a> ( 255k),
+     <a href="files/HaaliReader.PPC.SH3.zip">SH3</a> ( 233k)</td>
+   </tr>
+   <tr>
+     <td class="border">Palm size PC (CE2.11)</td>
+     <td class="border"><strong>2.0b227</strong></td>
+     <td class="border"><a href="files/HaaliReader.PsPC.MIPS.zip">MIPS</a> ( 232k),
+     <a href="files/HaaliReader.PsPC.SH3.zip">SH3</a> ( 209k)</td>
+   </tr>
+   <tr>
+     <td class="border">HPC Pro (CE2.11)</td>
+     <td class="border"><strong>2.0b227</strong></td>
+     <td class="border"><a href="files/HaaliReader.HPCPro.ARM.zip">ARM</a> ( 185k),
+     <a href="files/HaaliReader.HPCPro.SH3.zip">SH3</a> ( 209k)</td>
+   </tr>
+   <tr>
+     <td class="border">HPC 2000 (CE3.0)</td>
+     <td class="border"><strong>2.0b227</strong></td>
+     <td class="border"><a href="files/HaaliReader.HPC.ARM.zip">ARM</a> ( 183k),
+     <a href="files/HaaliReader.HPC.MIPS.zip">MIPS</a> ( 232k)</td>
+   </tr>
+   <tr>
+     <td class="border">WinCE .NET</td>
+     <td class="border"><strong>2.0b227</strong></td>
+    <td class="border"><a href="files/HaaliReader.NET.ARMV4.zip">ARMV4</a> ( 190k),
+    <a href="files/HaaliReader.NET.MIPSII.zip">MIPS</a> ( 199k)</td>
+    </tr>
+  </table>
+
+
+  <h4>Other goodies</h4>
+  <p><a href="files/TextViewNG.zip">Sources</a> ( 736k),
+  <a href="files/english-russian.dic">An english-russian dictionary</a> ( 2.4M),
+  <a href="files/mkdict.exe">mkdict</a> (  41k) - a tool for creating custom dictionaries,
+  dictionary source should be a plain text file with one entry per line, entry title should be
+  separated from the body with two spaces.</p>
+  <p>The dictionary format is different from 1.x versions, so to use a dictionary in new versions
+  either download a new dictionary file or decode the old dictionary with <code>mkdict</code>
+  tool and recreate it from source.
+  The new file should be in a new format. You'll need an Win2k/XP system to convert existing
+  dictionaries, <code>mkdict</code> won't work on Win98/ME systems.</p>
+  <p>Some (scarce) <a href="docs.html.en">documentation</a>, thanks to Chris Clark for providing a skeleton.</p>
+  <p>An <a href="FictionBook_description.html">article</a> about FictionBook XML.</p>
+
+
+
+      <hr noshade="1">
+      <div class="update">Last modified: 2003/12/04 11:43</div>
+      Author: <a href="mailto:mike@haali.net">Mike Matsnev, mike@haali.net</a>
+    </div>
+  </body>
+</html>

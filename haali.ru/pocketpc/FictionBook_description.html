@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+  <title>FictionBook description</title>
+  <link rel="stylesheet" type="text/css" href="=.css">
+</head>
+  <body>
+  <div class="topmenu">
+    <div class="logo"><img class="noborder" src="logo.png"></div>
+    <!--<div class="mirror">
+      <a class="menu small" href="http://haali.rt.ru/pocketpc/">Mirror 1</a><br>
+      <a class="menu small" href="http://haali.cs.msu.ru/pocketpc/">Mirror 2</a>
+    </div>-->
+    <a class="menu sep" href="index.html.en">Home</a>
+    <a class="menu sep" href="news.html.en">News</a>
+    <a class="menu sep" href="docs.html.en">Docs</a>
+    <a class="menu sep" href="FictionBook_description.html">FB 2.0</a>
+    <a class="menu sep" href="scripts.html.en">FB2.0 Scripts&Utilitites</a>
+    <a class="menu" href="index.html.ru">Russian page</a>
+  </div>
+  <div class="main">
+<!-- vim: set syn=html : -->
+
+
+<h2>FictionBook description</h2>
+ FictionBook is based on the XML standard from W3C, and FictionBook documents 
+are well-formed XML documents, conforming to the FictionBook schema. Since 
+the adoption of hyperlinks in FictionBook version 2.0, XML namespaces are 
+now mandatory for all FictionBook documents. The main FictionBook namespace 
+is &#8220;http://www.gribuser.ru/xml/fictionbook/2.0&#8221;, the version number in the 
+namespace URL will change as new versions of the standard are developed. The
+other required namespace is &#8220;http://www.w3.org/1999/xlink&#8221; for XLink. It
+should be included if any hyperlink elements are used in the document.<br>
+ <br>
+ The overall document structure is straightforward and resembles that of
+HTML. However, the main goal of this work is to design an XML based document
+that focuses on the document&#8217;s logical structure, and not on the presentation 
+features. An essential characteristic of structured markup is that it explicitly 
+distinguishes the structure and semantic content of a document. It does not 
+mark up the way in which the document will appear to the reader, in print 
+or otherwise. In this specification we deliberately didn&#8217;t include any direct 
+means for specifying presentation features. The only way to influence the 
+rendering process is by specifying styles for paragraphs and strings of characters. 
+Instead some unique elements are provided to separate logical parts of book, 
+like poems, citations, and epigraphs.<br>
+ The complete FictionBook schema is available in <a
+ href="files/FictionBook.xsd">FictionBook.xsd</a> and <a
+ href="files/FictionBookLinks.xsd">FictionBookLinks.xsd</a>, so I will only 
+provide a high level description of the elements here.<br>
+ <br>
+ All text in the document is stored in the following paragraph-type elements: 
+<code>p</code>, <code>v</code>, and <code>subtitle</code>. An <code>empty-line</code> 
+element that has no content is used to insert one line of vertical space. 
+A few more complex containers are built from these basic elements: <code>title 
+</code>(contains any number of <code>p</code> and <code>empty-line</code>), 
+<code>annotation</code>, <code>poem</code>, <code>cite</code>, <code>epigraph</code>.<br>
+ <br>
+ All documents start with the <code>FictionBook</code> root element, under 
+which <code>stylesheet</code>, <code>description</code>, <code>body</code> and 
+<code>binary </code>elements can occur. The <code>stylesheet</code>elements immediately 
+below root contain stylesheets; their type attribute contains the MIME type 
+of stylesheet. It is recommended to include one text/css stylesheet to ease 
+conversion to other formats if any styles are used in the document. <code>Binary 
+</code>elements are quite simple too and contain any base64-encoded opaque 
+data that might be needed to render the document. They must always have the 
+id and content-type attributes.<br>
+ <br>
+ <code>Description </code>element contains all information about the book 
+that is further divided into four main categories: <code>title-info</code>, 
+<code>document-info</code>, <code>publish-info</code>, and <code>custom-info</code>.<br>
+ <br>
+ <code>Title-info</code> holds data related to the book itself. <code>Genre</code>
+specifies the book&#8217;s genre, the <code>match</code> attribute is used when
+the genre is not exactly identified by the single genre keyword, e.g. some
+book might be both a detective and a science fiction story. Authors list
+is stored in the <code>author</code> element, that has traditional <code>first-name</code>,
+<code>middle-name</code>, <code>last-name</code> fields, and a couple of
+optional <code>home-page</code> and <code>email</code> subelements. <code>Book-title</code>
+is the book&#8217;s title. <code>Annotation</code> contains a free form short description
+of the book. <code>Keywords</code> field lists any relevant keywords that
+can be used by the search engines. <code>Date</code> element specifies a
+free format date the book was written at, the optional <code>value</code>
+attribute must have the date in computer readable format if present. <code>Src-lang</code>
+and <code>lang</code> elements have the original language and the document&#8217;s 
+language if this is a translation. <code>Translator</code> elements have exactly
+the same structure as the <code>author</code> element above, and are used
+to list the translators of the book if this is a translation.<br>
+ <br>
+ Information about this particular document is gathered in the <code>document-info</code> 
+element, that contains <code>author</code>, <code>program-used</code>, <code>date</code>,
+<code>src-url</code>, <code>src-ocr</code>, <code>version</code>, and <code>history</code>
+elements. <code>Author</code> and <code>date</code> elements have the same
+type as in the <code>title-info</code> group. <code>History</code>&#8217;s type
+is the same as in <code>annotation</code>; it is intended to list major changes
+to the document. <code>Version</code> has the free format version of the
+document, and should be incremented when the document is changed.<br>
+ <br>
+ <code>Publish-info</code> block is used when the document is created from
+a hardcopy edition, and has a few bibliographical fields like <code>book-name</code>, 
+<code>publisher</code>, <code>city</code>, <code>year</code> and <code>isbn</code>.<br>
+ <code>Custom-info</code> records should be used to store information that
+does not fit into any of the above fields. These must always have the required
+<code>info-type</code> attribute.<br>
+ <br>
+ The next major part of FictionBook document is <code>body</code> that contains
+the actual book&#8217;s text. The first <code>body</code> element is always the 
+main subdocument in the book. Subsequent bodies can be used to store footnotes,
+comments and other stuff that does not belong to the normal text flow in
+the book. Each <code>body</code> element can contain an optional <code>title</code>,
+optional <code>epigraph</code> and at least one <code>section</code>.<br>
+ <br>
+ There are two distinct kinds of sections. One contains other subsections 
+only, and the other contains actual text paragraphs. It is not possible to 
+mix subsections and paragraphs inside the same container in the current version 
+of FictionBook standard. Each <code>section</code> can have a number of optional
+header fields: <code>title</code>, <code>epigraph</code>, <code>image</code>, 
+and <code>annotation</code>. After these, there must be at least one paragraph-type
+element for text sections or at least one subsection for others.<br>
+ <br>
+ The FictionBook provides a few elements for hyperlinking, an essential feature 
+for electronic documents in our modern times. Hyperlinks in FictionBook are 
+based on the XLink specification from the W3 consortium, and are a subset 
+of the XLink. Currently only simple links from the XLink are included in FictionBook.
+First is the <code>a</code> element, that can be included in any paragraph-type 
+element. It has two required attributes: <code>xlink:type</code> with the
+fixed value of &#8220;simple&#8221;, and the <code>xlink:href</code>, that specifies the
+link destination in XPath/XPointer language. For link destinations within
+the same document, a simple form of XPointer expression can be used: &#8220;#&lt;id&gt;&#8221;.
+The optional <code>type</code> attribute can be used to further specify the
+meaning of the link. At this time only one possible value for this attribute
+is defined, &#8220;note&#8221; for footnotes. The second hyperlinking element is <code>image</code>
+that has the same mandatory XLink attributes, and is used for inserting inline
+images into the text flow. Link destinations are marked with the <code>id</code>
+attribute that can occur on all paragraph-type elements, on most high-level
+containers, and on the <code>binary</code> elements.<br>
+ <br>
+ <br>
+ To illustrate the description there is a short FictionBook example, first few paragraphs
+ from "A study in scarlet", taken from Project Gutenberg: <br>
+<br>
+<br>
+<pre>
+<span class="c28">&lt;?</span><span class="c34">xml</span><span class="c34"> </span><span class="c34">version</span>=<span class="c29">&quot;1.0&quot;</span><span class="c34"> </span><span class="c34">encoding</span>=<span class="c29">&quot;iso-8859-1&quot;</span><span class="c28">?&gt;</span>
+
+<span class="c31">&lt;</span><span class="c31">FictionBook</span><span class="c31"> </span><span class="c34">xmlns</span><span class="c28">:</span><span class="c34">xlink</span>=<span class="c29">&quot;http://www.w3.org/1999/xlink&quot;</span>
+<span class="c31">  </span><span class="c34">xmlns</span>=<span class="c29">&quot;http://www.gribuser.ru/xml/fictionbook/2.0&quot;</span><span class="c31">&gt;</span>
+  <span class="c31">&lt;</span><span class="c31">description</span><span class="c31">&gt;</span>
+    <span class="c31">&lt;</span><span class="c31">title-info</span><span class="c31">&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">genre</span><span class="c31"> </span><span class="c34">match</span>=<span class="c29">&quot;100&quot;</span><span class="c31">&gt;</span>detective<span class="c31">&lt;/genre&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">author</span><span class="c31">&gt;</span>
+        <span class="c31">&lt;</span><span class="c31">first-name</span><span class="c31">&gt;</span>Arthur<span class="c31">&lt;/first-name&gt;</span>
+        <span class="c31">&lt;</span><span class="c31">middle-name</span><span class="c31">&gt;</span>Conan<span class="c31">&lt;/middle-name&gt;</span>
+        <span class="c31">&lt;</span><span class="c31">last-name</span><span class="c31">&gt;</span>Doyle<span class="c31">&lt;/last-name&gt;</span>
+      <span class="c31">&lt;/author&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">book-title</span><span class="c31">&gt;</span>A Study in Scarlet<span class="c31">&lt;/book-title&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">annotation</span><span class="c31">&gt;</span>
+      <span class="c31">&lt;/annotation&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">date</span><span class="c31"> </span><span class="c34">value</span>=<span class="c29">&quot;1887-01-01&quot;</span><span class="c31">&gt;</span>1887<span class="c31">&lt;/date&gt;</span>
+    <span class="c31">&lt;/title-info&gt;</span>
+    <span class="c31">&lt;</span><span class="c31">document-info</span><span class="c31">&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">author</span><span class="c31">&gt;</span>
+        <span class="c31">&lt;</span><span class="c31">first-name</span><span class="c31">/&gt;</span>
+        <span class="c31">&lt;</span><span class="c31">last-name</span><span class="c31">/&gt;</span>
+        <span class="c31">&lt;</span><span class="c31">nickname</span><span class="c31">&gt;</span>Haali<span class="c31">&lt;/nickname&gt;</span>
+      <span class="c31">&lt;/author&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">program-used</span><span class="c31">&gt;</span>vim, perl<span class="c31">&lt;/program-used&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">date</span><span class="c31"> </span><span class="c34">value</span>=<span class="c29">&quot;2002-06-01&quot;</span><span class="c31">&gt;</span>2002-06-01<span class="c31">&lt;/date&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">src-ocr</span><span class="c31">&gt;</span>
+        Project Gutenberg, file: study10.txt
+
+        This etext is prepared directly from an 1887 edition, and care has
+        been taken to duplicate the original exactly, including typographical
+        and punctuation vagaries. Additions to the text include adding the
+        underscore character (_) to indicate italics, and textual end-notes
+        in curly braces ({}). Thanks to Randolph Cox for providing the book
+        for etexting. Etext prepared by Roger Squires rsquires@unm.edu
+      <span class="c31">&lt;/src-ocr&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">version</span><span class="c31">&gt;</span>1.0<span class="c31">&lt;/version&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">history</span><span class="c31">&gt;</span>
+        <span class="c31">&lt;</span><span class="c31">p</span><span class="c31">&gt;</span>2002-06-01 Initial version<span class="c31">&lt;/p&gt;</span>
+      <span class="c31">&lt;/history&gt;</span>
+    <span class="c31">&lt;/document-info&gt;</span>
+  <span class="c31">&lt;/description&gt;</span>
+  <span class="c31">&lt;</span><span class="c31">body</span><span class="c31">&gt;</span>
+    <span class="c31">&lt;</span><span class="c31">section</span><span class="c31">&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">p</span><span class="c31">&gt;</span>Frontispiece, with the caption: &quot;He examined with his glass the word
+        upon the wall, going over every letter of it with the most minute
+        exactness.&quot; (<span class="c31">&lt;</span><span class="c31">emphasis</span><span class="c31">&gt;</span>Page<span class="c31">&lt;/emphasis&gt;</span> 23.)<span class="c31">&lt;/p&gt;</span>
+    <span class="c31">&lt;/section&gt;</span>
+    <span class="c31">&lt;</span><span class="c31">section</span><span class="c31">&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">title</span><span class="c31">&gt;&lt;</span><span class="c31">p</span><span class="c31">&gt;</span>PART I.<span class="c31">&lt;/p&gt;&lt;/title&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">section</span><span class="c31">&gt;</span>
+        <span class="c31">&lt;</span><span class="c31">p</span><span class="c31">&gt;</span>(<span class="c31">&lt;</span><span class="c31">emphasis</span><span class="c31">&gt;</span>Being a reprint from the reminiscences of<span class="c31">&lt;/emphasis&gt;</span> JOHN
+          H. WATSON, M.D.,<span class="c31">&lt;</span><span class="c31">emphasis</span><span class="c31">&gt;</span> late of the Army Medical
+            Department.<span class="c31">&lt;/emphasis&gt;</span>) <span class="c31">&lt;</span><span class="c31">a</span><span class="c31"> </span><span class="c34">xlink</span><span class="c28">:</span><span class="c34">href</span>=<span class="c29">&quot;#N2&quot;</span><span class="c31"> </span><span class="c34">type</span>=<span class="c29">&quot;note&quot;</span><span class="c31">&gt;</span>2<span class="c31">&lt;/a&gt;&lt;/p&gt;</span>
+      <span class="c31">&lt;/section&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">section</span><span class="c31">&gt;</span>
+        <span class="c31">&lt;</span><span class="c31">title</span><span class="c31">&gt;&lt;</span><span class="c31">p</span><span class="c31">&gt;</span>CHAPTER I. MR. SHERLOCK HOLMES.<span class="c31">&lt;/p&gt;&lt;/title&gt;</span>
+        <span class="c31">&lt;</span><span class="c31">p</span><span class="c31">&gt;</span>IN the year 1878 I took my degree of Doctor of Medicine of the
+          University of London, and proceeded to Netley to go through the
+          course prescribed for surgeons in the army. Having completed my
+          studies there, I was duly attached to the Fifth Northumberland
+          Fusiliers as Assistant Surgeon. The regiment was stationed in India
+          at the time, and before I could join it, the second Afghan war had
+          broken out. On landing at Bombay, I learned that my corps had
+          advanced through the passes, and was already deep in the enemy's
+          country. I followed, however, with many other officers who were in
+          the same situation as myself, and succeeded in reaching Candahar in
+          safety, where I found my regiment, and at once entered upon my new
+          duties.<span class="c31">&lt;/p&gt;</span>
+        <span class="c31">&lt;</span><span class="c31">p</span><span class="c31">&gt;</span>The campaign brought honours and promotion to many, but for me it
+          had nothing but misfortune and disaster. I was removed from my
+          brigade and attached to the Berkshires, with whom I served at the
+          fatal battle of Maiwand. There I was struck on the shoulder by a
+          Jezail bullet, which shattered the bone and grazed the subclavian
+          artery. I should have fallen into the hands of the murderous Ghazis
+          had it not been for the devotion and courage shown by Murray, my
+          orderly, who threw me across a pack-horse, and succeeded in bringing
+          me safely to the British lines.<span class="c31">&lt;/p&gt;</span>
+      <span class="c31">&lt;/section&gt;</span>
+    <span class="c31">&lt;/section&gt;</span>
+  <span class="c31">&lt;/body&gt;</span>
+  <span class="c31">&lt;</span><span class="c31">body</span><span class="c31"> </span><span class="c34">name</span>=<span class="c29">&quot;footnotes&quot;</span><span class="c31">&gt;</span>
+    <span class="c31">&lt;</span><span class="c31">section</span><span class="c31">&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">subtitle</span><span class="c31"> </span><span class="c34">id</span>=<span class="c29">&quot;N2&quot;</span><span class="c31">&gt;</span>2<span class="c31">&lt;/subtitle&gt;</span>
+      <span class="c31">&lt;</span><span class="c31">p</span><span class="c31">&gt;</span>&quot;JOHN H. WATSON, M.D.&quot;: the initial letters in the name are
+        capitalized, the other letters in small caps. All chapter titles are in
+        small caps. The initial words of chapters are in small caps with first
+        letter capitalized.<span class="c31">&lt;/p&gt;</span>
+    <span class="c31">&lt;/section&gt;</span>
+  <span class="c31">&lt;/body&gt;</span>
+<span class="c31">&lt;/FictionBook&gt;</span>
+</pre>
+
+
+
+      <hr noshade="1">
+      <div class="update">Last modified: 2002/08/06 20:57</div>
+      Author: <a href="mailto:mike@haali.net">Mike Matsnev, mike@haali.net</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+  <title>Haali Reader docs</title>
+  <link rel="stylesheet" type="text/css" href="=.css">
+</head>
+  <body>
+  <div class="topmenu">
+    <div class="logo"><img class="noborder" src="logo.png"></div>
+    <!--<div class="mirror">
+      <a class="menu small" href="http://haali.rt.ru/pocketpc/">Mirror 1</a><br>
+      <a class="menu small" href="http://haali.cs.msu.ru/pocketpc/">Mirror 2</a>
+    </div>-->
+    <a class="menu sep" href="index.html.en">Home</a>
+    <a class="menu sep" href="news.html.en">News</a>
+    <a class="menu sep" href="docs.html.en">Docs</a>
+    <a class="menu sep" href="FictionBook_description.html">FB 2.0</a>
+    <a class="menu sep" href="scripts.html.en">FB2.0 Scripts&Utilitites</a>
+    <a class="menu" href="index.html.ru">Russian page</a>
+  </div>
+  <div class="main">
+<!-- vim: set syn=html : -->
+
+
+<h4>Main screen</h4>
+The main window consists of the text pane, the progress bar and the menu/toolbar.
+Drag the stylus over the text pane to select text, use Tools-&gt;Copy to
+copy the selected text to the clipboard. Tap text to perform dictionary lookup
+(if "use dictionary" is selected in general options). While in dictionary mode
+you can enter words directly into the main window to perform word lookup.
+Double tap any whitespace to toggle fullscreen mode. Tap on the progress bar moves the current
+position in the document. Tap on the small arrows at the ends of the progress
+bar moves current position to the next/previous contents item. Toolbar
+buttons provide shortcut access to the following menu items in order from
+left to right: Back, Forward, Contents, Add bookmark, Find, Find next, Copy.<br>
+<br>
+<h4>Menus</h4>
+<blockquote><b><big>Tools</big></b><br>
+  <ul>
+    <li><big>Copy </big>-&nbsp;copy selected text to the clipboard.</li>
+    <li><big>Find </big>- find text in the document.</li>
+    <li><big>Find </big>next</li>
+    <li><big>Back</big> - undo last "large" movement - basically anything
+other than page/line up/down.<br>
+    </li>
+    <li><big>Add bookmark</big> - brings up create bookmark dialogue box,
+enter in bookmark name OR before choosing "Add bookmark", select text on
+screen to use as name and dialogue box will have selected text ready to be
+accepted / edited as the new bookmark name, you don't need to copy the selection
+to clipboard to use this feature.</li>
+    <li><big>Contents</big> -&nbsp;bring up the book's contents. For XML
+documents this will probably be a tree of parts and sections, for plain text
+documents a simplistic algorithm is used to detect chapter headings. Bookmarks
+are inserted into the tree according to their position in the document. These
+are marked with a picture of a pen, and section titles are marked with a
+red triangle/double triangle. To navigate to the selected item either select
+one and hit ok or double tap it. Tap user created bookmark's quickly to edit
+(rename), tap and hold to: see position in document in percent, edit, or
+delete / remove bookmark. Tap red cross in bottom left hand corner of screen
+to cancel.</li>
+    <li><big>Recent files</big> -&nbsp;select recently opened document(s).</li>
+    <li><big>Open<small> -</small></big> bring up file selection dialogue.
+Tap red cross in bottom left hand corner of screen to cancel.</li>
+    <li><big>About<small> - </small></big>bring up a useful about screen.
+Lists author, version of HaaliReader, full file name/path, size of text (uncompressed),
+compression ratio (if any), number of paragraphs, format of file/text, position
+in file as Paragraph_number:Character_number.</li>
+    <li><big>Exit</big> - exit / quit without prompt.<br>
+    </li>
+  </ul>
+</blockquote>
+<blockquote><b><big><br>
+Options</big></b><br>
+  <ul>
+    <li><big>Fullscreen </big>- toggle fullscreen mode (turns off title bar
+and toolbar).</li>
+    <li><big>File format</big> - select file format from the following list:
+Auto, Line per paragraph, Indented first line, MAC line per paragraph, MAC
+indented first line, XML. The first five deal with different formatting of
+plain text documents, MAC variants are available for files which use \r (0x0d)
+as end of line markers instead of traditional \n or \r\n. File encoding can
+also be selected from the encodings available in your windows version. HaaliReader
+has five builtin encodings that are always available: windows-1252 (a superset
+of iso-8859-1), windows-1251, cp866, koi8-r - these are cyrillic encodings,
+and utf-8 for unicode texts.</li>
+    <li><big>Display </big>- set various text display options. The top part
+of the dialog is used to select the base font for the text. At the botom
+there are input boxes for ajusting side margins and the botom margin, display
+rotation and selecting the number of columns on screen (this is handy for
+HPCs which have a wide screen). Use soft hyphens checkbox turns on the builtin
+hyphenation module for russian language.</li>
+    <li><big>Colors </big>- allows the user to adjust the colors of the interfaces
+elements. Various highlight items work together with the Styles dialog and
+are only useful for rendering XML documents.</li>
+    <li><big>Styles </big>- select format to use for each XML style / tag.
+Style is specified as a modifier to main font selection.</li>
+    <li><big>Buttons </big>- assign function to hardware buttons and if present
+keyboard buttons. Use grab key to assign funtions to hardware buttons. Hardware
+buttons are released back to the operating system when HaaliReader's window
+loses focus.&nbsp;If rotate is mapped to a hardware button, screen is rotated
+90 degrees anti-clockwise.</li>
+    <li><big>Dictionaries </big>- add, remove, view HaaliReader dictionaries.
+Dictionary should be in .DIC format (see mkdict tool on how to make a custom
+dictionary). Only one active dictionary is used for word lookup, to change
+the active dictionary select it in the list and tap OK button. </li>
+    <li><big>General </big>- adjust all other propram's options. Use dictionary
+checkbox specifies wheter single taps in the main window should cause word
+lookup, rotate buttons tells the program to swap functions of the cursor
+control buttons when the display orientation chages. File buffer size specifies
+the amount of file data cached in memory, can set it to some high value if
+you read books from a microdrive to avoid frequent access to the storage
+device. The
+last input field specifies how many most recently opened files are tracked
+in the registry. &nbsp;Bookmarks are also stored in the registry. </li>
+  </ul>
+</blockquote>
+<h4>Keyboard reference </h4>
+Accelerator keys that are not present in the buttons dialog:<br>
+<br>
+Control-C - Copy<br>
+Control-O - Open<br>
+Control-F - Find<br>
+Control-G, Control-3, F3 - Find next<br>
+Control-Q - Exit<br>
+Alt-Left - Back<br>
+Alt-Right - Forward<br>
+<br>
+F2 - edit bookmark in the contents dialog<br>
+<br>
+File position specification can be entered directly into the main window.
+Use following format: &lt;number&gt;% to
+move to certain percentage, or &lt;number&gt;= to move to a certain paragraph.<br>
+In regexp terms: <code>([0-9]+)([;:][0-9]+)?([lLpP%=gG])</code><br>
+When $3 is p, P, %: move to $1 percentage into the document<br>
+When $3 is l, L: move to a virtual page $1 (virtual page is 2048 charactes long)<br>
+When $3 is =, g, G: move to paragraph $1, character $2<br>
+<br>
+When dictionary view is active, word lookup can be performed by entering text into
+the main window. A temporary panel in shown with the entered text, and a dictionary
+lookup is attempted as you enter text. Tab key clears the input panel, unfortunately,
+the default input method in PocketPC/PsPC systems doesn't include the escape key, so I
+had to choose something else to cancel current input.
+
+
+
+      <hr noshade="1">
+      <div class="update">Last modified: 2002/09/17 06:36</div>
+      Author: <a href="mailto:mike@haali.net">Mike Matsnev, mike@haali.net</a>
+    </div>
+  </body>
+</html>

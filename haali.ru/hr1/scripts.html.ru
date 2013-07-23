@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+ <head>
+  <title>
+   §³§Ü§â§Ú§á§ä§í §Õ§Ý§ñ §â§Ñ§Ò§à§ä§í §ã §ï§Ý§Ö§Ü§ä§â§à§ß§ß§í§Þ§Ú §Ü§ß§Ú§Ô§Ñ§Þ§Ú
+  </title>
+  <link rel="stylesheet" type="text/css" href="=.css">
+ </head>
+ <body>
+  <div class="topmenu">
+ <a class="menu sep" href="index.html.ru">§¤§Ý§Ñ§Ó§ß§Ñ§ñ</a>
+ <a class="menu sep" href="news.html.ru">§¯§à§Ó§à§ã§ä§Ú</a>
+ <a class="menu sep" href="download.html.ru">§³§Ü§Ñ§é§Ñ§ä§î</a>
+ <a class="menu sep" href="scripts.html.ru">§³§Ü§â§Ú§á§ä§í</a>
+ <a class="menu" href="index.html.en">English page</a>
+<!-- <br>
+ <a class="menu small sep" href="http://haali.cs.msu.ru/pocketpc/">§©§Ö§â§Ü§Ñ§Ý§à 1</a>
+ <a class="menu small" href="http://haali.rt.ru/pocketpc/">§©§Ö§â§Ü§Ñ§Ý§à 2</a></p> -->
+</div>
+<!-- vim: set syn=html : -->
+
+  <h4>§¿§Ý§Ö§Ü§ä§â§à§ß§ß§í§Ö §Ü§ß§Ú§Ô§Ú §æ§à§â§Þ§Ñ§ä§Ö XML</h4>
+  <p>§±§â§Ö§à§Ò§â§Ñ§Ù§à§Ó§Ñ§ß§Ú§Ö §Ú§Ù §á§â§à§ã§ä§à§Ô§à §ä§Ö§Ü§ã§ä§Ñ §Ó XML: §â§Ñ§ã§ã§é§Ú§ä§Ñ§ß§à
+  §ß§Ñ §Ü§ß§Ú§Ô§Ú §Ú§Ù <a href="http://lib.ru/">§Ò§Ú§Ò§Ý§Ú§à§ä§Ö§Ü§Ú §®§Ñ§Ü§ã§Ú§Þ§Ñ §®§à§ê§Ü§à§Ó§Ñ</a>, §ß§à§â§Þ§Ñ§Ý§î§ß§à §á§à§ß§Ú§Þ§Ñ§Ö§ä
+  HTML §Ó§Ñ§â§Ú§Ñ§ß§ä §Ü§ß§Ú§Ô. §¯§Ñ §Ò§à§Ý§Ö§Ö §ã§Ý§à§Ø§ß§à§Þ HTML §ã§Ü§à§â§Ö§Ö §Ó§ã§Ö§Ô§à §Ò§å§Õ§Ö§ä §Ô§Ý§ð§é§Ú§ä§î. §¥§Ý§ñ §Ù§Ñ§á§å§ã§Ü§Ñ §ß§å§Ø§Ö§ß
+  Perl §á§à§Õ Windows §Ú §Þ§à§Õ§å§Ý§î Win32::GUI.</p>
+  <p><a href="wtxt2xml.pl">wtxt2xml.pl</a> - §ã Win32 GUI,
+  <a href="txt2xml.pl">txt2xml.pl</a> - §Ù§Ñ§á§å§ã§Ü §Ú§Ù §Ü§à§Þ§Ñ§ß§Õ§ß§à§Û §ã§ä§â§à§Ü§Ú, §â§Ñ§Ò§à§ä§Ñ§Ö§ä §Ó§Ö§Ù§Õ§Ö,
+  <a href="T2X.pm">T2X.pm</a> - §à§Ò§ë§Ú§Û §Þ§à§Õ§å§Ý§î §á§â§Ö§à§Ò§â§Ñ§Ù§à§Ó§Ñ§ß§Ú§ñ.</p>
+  <p>§±§â§Ö§à§Ò§â§Ñ§Ù§à§Ó§Ñ§ß§Ú§Ö §Ú§Ù HTML §Ó XML, §ç§à§â§à§ê§à §â§Ñ§Ù§Ò§Ú§â§Ñ§Ö§ä HTML,
+  §Ü§à§ä§à§â§í§Û §á§Ú§ê§Ö§ä M$ Office: <a href="html2xml.pl">html2xml.pl</a></p>
+  <ul>
+   <li>05/04/02 §ª§Ù§Ó§Ý§Ö§Ü§Ñ§Ö§ä §ß§Ö§Ü§à§ä§à§â§í§Ö §ã§Ó§à§Û§ã§ä§Ó§Ñ §Õ§à§Ü§å§Þ§Ö§ß§ä§Ñ §Ú§Ù §Ù§Ñ§Ô§à§Ý§à§Ó§Ü§Ñ, §Õ§Ý§ñ §ï§ä§à§Ô§à §ß§å§Ø§Ö§ß Win32::COM §Ú MSXML4</li>
+   <li>19/02/02 §¥§à§Ò§Ñ§Ó§Ú§Ý §â§Ñ§ã§á§à§Ù§ß§Ñ§Ó§Ñ§ß§Ú§Ö §ã§ß§à§ã§à§Ü §Ú §á§à§é§Ú§ß§Ú§Ý §Ü§Ñ§Ü§Ú§Ö-§ä§à §Þ§Ö§Ý§à§é§Ú.</li>
+  </ul>
+  
+<hr noshade="1">
+<div class="update">§±§à§ã§Ý§Ö§Õ§ß§Ö§Ö §à§Ò§ß§à§Ó§Ý§Ö§ß§Ú§Ö: 2002/09/04 12:29</div>
+§¡§Ó§ä§à§â: <a href="mailto:mike@haali.net">§®§Ú§ç§Ñ§Ú§Ý §®§Ñ§è§ß§Ö§Ó, mike@haali.net</a>
+
+ </body>
+</html>

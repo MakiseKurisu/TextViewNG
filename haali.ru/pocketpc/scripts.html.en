@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+  <title>Scripts and utilities</title>
+  <link rel="stylesheet" type="text/css" href="=.css">
+</head>
+  <body>
+  <div class="topmenu">
+    <div class="logo"><img class="noborder" src="logo.png"></div>
+    <!--<div class="mirror">
+      <a class="menu small" href="http://haali.rt.ru/pocketpc/">Mirror 1</a><br>
+      <a class="menu small" href="http://haali.cs.msu.ru/pocketpc/">Mirror 2</a>
+    </div>-->
+    <a class="menu sep" href="index.html.en">Home</a>
+    <a class="menu sep" href="news.html.en">News</a>
+    <a class="menu sep" href="docs.html.en">Docs</a>
+    <a class="menu sep" href="FictionBook_description.html">FB 2.0</a>
+    <a class="menu sep" href="scripts.html.en">FB2.0 Scripts&Utilitites</a>
+    <a class="menu" href="index.html.ru">Russian page</a>
+  </div>
+  <div class="main">
+<!-- vim: set syn=html : -->
+
+
+  <h3>Scripts and utilities</h3>
+  <h4>FictionBook Tools</h4>
+  FB Tools provide a few utilities to simplify handling FB2 documents on a desktop pc:
+  <ul>
+    <li>FB2 Validator</li>
+    <li>FB2 files editor</li>
+    <li>Infotips and columns provider for Windows Explorer</li>
+  </ul>
+  These utilities are integrated with Explorer and add items to the context menu for .fb2
+  files and directories.<br><br>
+  Download: <a href="files/FictionBook Tools v2.0 Setup.exe">FictionBook Tools v2.0 Setup.exe</a>
+		  ( 523k).<br><br>
+  FB Tools require <a href="http://www.microsoft.com/downloads/details.aspx?familyid=3144b72b-b4f2-46da-b4b6-c5d7485f2b42&displaylang=en">MSXML4</a>, to function properly,
+  also some programs are written in VB and may need mscomctl.ocx and msvbvm60.dll to run.<br>
+   <div class="center">
+   <img src="img/explorer_xp.png"><br>
+   Windows Explorer in WinXP with FB Tools
+   </div>
+  <h4>Direct HTML to XML conversion</h4>
+  <a href="files/html2xml.pl">html2xml.pl</a> - a simple perl script, requires HTML::Tree package.
+  Supports only normal paragraphs with minimal formatting (bold/italic), can detect section
+  headings.
+  <h4>Export from Microsoft Word to XML</h4>
+  <a href="files/ExportXML.dot">ExportXML.dot</a>. Features:
+  <ul>
+   <li>Detects section headings according to Word document structure</li>
+   <li>Converts bold and italic text to <b>strong</b> and <b>emphasis</b> XML elements</li>
+   <li>Understands "Epigraph", "Epigraph Author" and "Annotation" styles at start of sections</li>
+   <li>Understands "Poem Title", "Stanza", "Cite", "Cite Author" styles in text</li>
+   <li>Converts footnotes and endnotes to FB2.0 hyperlinks</li>
+  </ul>
+  To run the script you'll need MSXML3 parser that is included with IE6 or can
+  be downloaded separately from <a href="http://msdn.microsoft.com/downloads/default.asp?url=/downloads/sample.asp?url=/msdn-files/027/001/772/msdncompositedoc.xml">Microsoft</a>.
+  To use the macro open some Word document, assign the ExportXML.dot template to it, apply styles
+  to the text and select the "Export as FictionBook XML" command from File menu.
+
+
+
+      <hr noshade="1">
+      <div class="update">Last modified: 2004/06/16 14:41</div>
+      Author: <a href="mailto:mike@haali.net">Mike Matsnev, mike@haali.net</a>
+    </div>
+  </body>
+</html>
