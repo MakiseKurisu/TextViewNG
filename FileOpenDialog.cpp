@@ -29,6 +29,9 @@
  * 
  */
 
+#pragma warning(disable:4100)
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afxcmn.h>
 
 #include "resource.h"

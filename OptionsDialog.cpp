@@ -29,6 +29,9 @@
  * 
  */
 
+#pragma warning(disable:4100)
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afxext.h>
 
 #include "config.h"
@@ -117,7 +120,7 @@ void COptionsDialog::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT ds)
       lf.lfQuality=NONANTIALIASED_QUALITY;
 #endif
     lf.lfPitchAndFamily=DEFAULT_PITCH|FF_DONTCARE;
-    _tcsncpy(lf.lfFaceName,m_face,LF_FACESIZE-1);
+    _tcsncpy_s(lf.lfFaceName,LF_FACESIZE,m_face,LF_FACESIZE-1);
     CFont   font;
     font.CreateFontIndirect(&lf);
     HGDIOBJ prev=SelectObject(ds->hDC,font);

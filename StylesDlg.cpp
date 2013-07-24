@@ -29,6 +29,9 @@
  * 
  */
 
+#pragma warning(disable:4100)
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afxext.h>
 #include <afxtempl.h>
 
@@ -145,9 +148,9 @@ BOOL CStylesDlg::OnInitDialog()
     }
 */
   SendDlgItemMessage(IDC_ELEMENTS,CB_SETCURSEL);
-  SendDlgItemMessage(IDC_LISPIN,UDM_SETRANGE32,-100,100);
-  SendDlgItemMessage(IDC_RISPIN,UDM_SETRANGE32,-100,100);
-  SendDlgItemMessage(IDC_FIRSTSPIN,UDM_SETRANGE32,-100,100);
+  SendDlgItemMessage(IDC_LISPIN,UDM_SETRANGE32,(WPARAM)-100,100);
+  SendDlgItemMessage(IDC_RISPIN,UDM_SETRANGE32,(WPARAM)-100,100);
+  SendDlgItemMessage(IDC_FIRSTSPIN,UDM_SETRANGE32,(WPARAM)-100,100);
   SetValues(0);
   return TRUE;
 }

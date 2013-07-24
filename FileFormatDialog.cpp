@@ -28,6 +28,9 @@
  * $Id: FileFormatDialog.cpp,v 1.9.2.3 2004/10/21 15:35:24 mike Exp $
  * 
  */
+
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afxext.h>
 #include <afxtempl.h>
 

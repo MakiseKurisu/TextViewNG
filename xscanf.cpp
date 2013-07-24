@@ -29,6 +29,8 @@
  * 
  */
 
+#pragma warning(disable:4100)
+
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>

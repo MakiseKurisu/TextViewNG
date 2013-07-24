@@ -31,6 +31,9 @@
 
 // XXX handle out of memory exceptions gracefully
 
+#pragma warning(disable:4100)
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #ifdef STANDALONE
 #include <windows.h>
 #else
@@ -632,7 +635,8 @@ static imagestore *bminit(HDC hDC,int w,int h,int maxw,int maxh,int rotate)
   bi.h.biHeight=im->realheight;
   bi.h.biPlanes=1;
   bi.h.biBitCount=bpp==2 ? 16 : 24;
-  if (!(im->bmp=CreateDIBSection(hDC,(BITMAPINFO*)&bi,DIB_RGB_COLORS,&data,NULL,0))) {
+  im->bmp=CreateDIBSection(hDC,(BITMAPINFO*)&bi,DIB_RGB_COLORS,&data,NULL,0);
+  if (!im->bmp) {
     DWORD err=GetLastError();
     free(im);
     return NULL;

@@ -162,7 +162,7 @@ FONT 10, "MS Shell Dlg"
 BEGIN
     CONTROL         "Progress1",IDC_PROGRESS,"msctls_progress32",PBS_SMOOTH | 
                     WS_BORDER,7,7,107,18
-    LTEXT           "",IDC_PROGRESSTEXT,29,31,71,9
+    LTEXT           "",IDC_PROGRESSTEXT,7,31,107,9
 END
 
 IDD_KEYS DIALOG DISCARDABLE  0, 0, 138, 144

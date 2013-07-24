@@ -29,6 +29,8 @@
  * 
  */
 
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afx.h>
 
 #include "config.h"
@@ -152,24 +154,20 @@ Font  *FontCache::FindOrAlloc(int size,unsigned flags,int an) {
   lf.lfCharSet=DEFAULT_CHARSET;
   lf.lfOutPrecision=OUT_DEFAULT_PRECIS;
   lf.lfClipPrecision=CLIP_DEFAULT_PRECIS;
-#ifdef _WIN32_WCE
-  lf.lfQuality=m_cleartype ? CLEARTYPE_QUALITY : DEFAULT_QUALITY;
-#else
   if (m_cleartype==1)
     lf.lfQuality=CLEARTYPE_QUALITY;
   else if (m_cleartype==2)
     lf.lfQuality=ANTIALIASED_QUALITY;
   else
     lf.lfQuality=NONANTIALIASED_QUALITY;
-#endif
   lf.lfPitchAndFamily=DEFAULT_PITCH|FF_DONTCARE;
   if (flags&CFDC::FORCETAHOMA)
-    _tcsncpy(lf.lfFaceName,_T("Tahoma"),LF_FACESIZE-1);
+    _tcsncpy_s(lf.lfFaceName,LF_FACESIZE,_T("Tahoma"),LF_FACESIZE-1);
   else if (flags&Attr::XFONT) {
-    _tcsncpy(lf.lfFaceName,_T("NewtonUni"),LF_FACESIZE-1);
+    _tcsncpy_s(lf.lfFaceName,LF_FACESIZE,_T("NewtonUni"),LF_FACESIZE-1);
     lf.lfHeight-=2; // adjust relative size to tahoma
   } else
-    _tcsncpy(lf.lfFaceName,m_face,LF_FACESIZE-1);
+    _tcsncpy_s(lf.lfFaceName,LF_FACESIZE,m_face,LF_FACESIZE-1);
   f->m_font=CreateFontIndirect(&lf);
   f->m_size=size;
   f->m_flags=flags;

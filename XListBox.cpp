@@ -29,6 +29,8 @@
  * 
  */
 
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afxwin.h>
 #include <afxcmn.h>
 
@@ -462,7 +464,7 @@ static void   XLB_InitFont(XLB *x,HDC hDC) {
 #else
   lf.lfQuality=DEFAULT_QUALITY;
 #endif
-  _tcscpy(lf.lfFaceName,_T("Tahoma"));
+  _tcscpy_s(lf.lfFaceName,LF_FACESIZE,_T("Tahoma"));
 
   x->font=::CreateFontIndirect(&lf);
 

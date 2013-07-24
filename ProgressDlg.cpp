@@ -29,6 +29,8 @@
  * 
  */
 
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afxwin.h>
 #include <afxtempl.h>
 
@@ -114,7 +116,7 @@ void	CProgressDlg::SetCur(DWORD cur) {
       if (timedelta>0)
 	speed=(DWORD)(((__int64)m_curbytes*1000/timedelta)>>10);
       TCHAR   buf[128];
-      _sntprintf(buf,sizeof(buf)/sizeof(TCHAR),_T("%d KB  %d KB/s"),cur>>10,speed);
+      _sntprintf_s(buf,sizeof(buf)/sizeof(buf[0]),_TRUNCATE,_T("%d KB\t%d KB/s"),cur>>10,speed);
       SetDlgItemText(IDC_PROGRESSTEXT,buf);
       GetDlgItem(IDC_PROGRESSTEXT)->UpdateWindow();
       m_lastupdate=tm;

@@ -29,6 +29,8 @@
  * 
  */
 
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afxcmn.h>
 #include <afxtempl.h>
 #include <afxext.h>

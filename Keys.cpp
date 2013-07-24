@@ -29,6 +29,9 @@
  * 
  */
 
+#pragma warning(disable:4100)
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afxext.h>
 
 #include "Keys.h"
@@ -150,9 +153,9 @@ static const TCHAR  *GetKeyName(UINT vk) {
       return g_keys[i].name;
   static TCHAR	  buf[32];
   if (vk>=MINHK && vk<MAXHK)
-    _stprintf(buf,_T("App %d"),vk-MINHK);
+    _stprintf_s(buf,32,_T("App %d"),vk-MINHK);
   else
-    _stprintf(buf,_T("Key %02x"),vk);
+    _stprintf_s(buf,32,_T("Key %02x"),vk);
   return buf;
 }
 
@@ -223,7 +226,7 @@ void Keys::InitKeys() {
     kn.Format(_T("%u"),g_actions[i].cmd);
     CString   val(AfxGetApp()->GetProfileString(_T("Keys2"),kn));
     if (!val.IsEmpty())
-      if (_stscanf(val,_T("%u,%u,%u"),&g_actions[i].vk1,&g_actions[i].vk2,&g_actions[i].vk3) != 3)
+      if (_stscanf_s(val,_T("%u,%u,%u"),&g_actions[i].vk1,&g_actions[i].vk2,&g_actions[i].vk3) != 3)
 	g_actions[i].vk1 = g_actions[i].vk2 = g_actions[i].vk3 = 0;
   }
 

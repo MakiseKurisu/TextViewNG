@@ -29,6 +29,8 @@
  * 
  */
 
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afxwin.h>
 #include <afxtempl.h>
 
@@ -67,7 +69,7 @@ static CString	param_escape(const CString& str) {
     if (T::isgoodch(str[i]))
       *cp++=str[i];
     else {
-      _stprintf(cp,_T("%%%04X"),((unsigned)str[i])&0xffff);
+      _stprintf_s(cp,rlen,_T("%%%04X"),((unsigned)str[i])&0xffff);
       cp+=5;
     }
   ret.ReleaseBuffer(rlen);
@@ -80,7 +82,8 @@ static CString	param_escape(const CString& str) {
 
 static CString	unescape(const CString& str) {
   int	  rlen;
-  int	  i,j,n;
+  int	  i,j;
+  TCHAR   n;
   CString ret;
   TCHAR	  *cp;
 
@@ -125,8 +128,7 @@ Bookmarks::Bookmarks(const CString& filename) : m_filename(filename),
   // find info in registry
   CString info=AfxGetApp()->GetProfileString(_T("Bookmarks"),escape2(m_shortname));
   DWORD	dummy;
-  if (!info.GetLength() || _stscanf(info,_T("%d,%d,%u,%u"),
-				    &m_format,&m_encoding,&dummy,&dummy)!=4)
+  if (!info.GetLength() || _stscanf_s(info,_T("%d,%d,%u,%u"),&m_format,&m_encoding,&dummy,&dummy)!=4)
   {
     m_format=-1;
     m_encoding=CTVApp::GetInt(_T("DefEncoding"),-1);
@@ -297,7 +299,7 @@ void  Bookmarks::LoadFromRegistry() {
     DWORD     type,len=sizeof(buf);
     if (RegQueryValueEx(res,NULL,0,&type,(LPBYTE)buf,&len)==ERROR_SUCCESS && type==REG_SZ) {
       FilePos	pp;
-      if (_stscanf(buf,_T("%d,%d,%d"),&pp.para,&pp.off,&pp.docid)>=2)
+      if (_stscanf_s(buf,_T("%d,%d,%d"),&pp.para,&pp.off,&pp.docid)>=2)
 	SetStartPos(pp);
     }
     for (int i=0;;++i) {
@@ -305,9 +307,9 @@ void  Bookmarks::LoadFromRegistry() {
       len=sizeof(buf);
       if (RegQueryValueEx(res,name,0,&type,(LPBYTE)buf,&len)==ERROR_SUCCESS && type==REG_SZ) {
 	FilePos	pp;
-	TCHAR	*cp=value.GetBuffer(sizeof(buf)/sizeof(TCHAR));
-	if (_stscanf(buf,_T("%d,%d,%d,%[^\001]"),&pp.para,&pp.off,&pp.docid,cp)==4 ||
-	    _stscanf(buf,_T("%d,%d,%[^\001]"),&pp.para,&pp.off,cp)==3)
+	int		size_cp=sizeof(buf)/sizeof(TCHAR);
+	TCHAR	*cp=value.GetBuffer(size_cp);
+	if (_stscanf_s(buf,_T("%d,%d,%d,%[^\001]"),&pp.para,&pp.off,&pp.docid,cp,size_cp==4 || _stscanf_s(buf,_T("%d,%d,%[^\001]"),&pp.para,&pp.off,cp,size_cp)==3))
 	{
 	  value.ReleaseBuffer();
 	  Add(value,pp);
@@ -341,7 +343,7 @@ CString	Bookmarks::find_last_file() {
     int	    dummy;
     TCHAR   *cp=tmp.GetBuffer(valuelen);
     FILETIME  tm;
-    if (_stscanf(value,_T("%d,%d,%u,%u,%[^\001]"),&dummy,&dummy,&tm.dwLowDateTime,&tm.dwHighDateTime,cp)!=5) {
+    if (_stscanf_s(value,_T("%d,%d,%u,%u,%[^\001]"),&dummy,&dummy,&tm.dwLowDateTime,&tm.dwHighDateTime,cp,valuelen)!=5) {
       tmp.ReleaseBuffer(0);
       continue;
     }
@@ -394,8 +396,7 @@ void Bookmarks::CleanupRegistry(int max_count) {
     if (type!=REG_SZ)
       continue;
     int	    dummy;
-    if (_stscanf(value,_T("%d,%d,%u,%u,"),&dummy,&dummy,
-      &ii.time.dwLowDateTime,&ii.time.dwHighDateTime)!=4)
+    if (_stscanf_s(value,_T("%d,%d,%u,%u,"),&dummy,&dummy,&ii.time.dwLowDateTime,&ii.time.dwHighDateTime)!=4)
       continue;
     ii.name=_tcsdup(name);
     if (ii.name)
@@ -432,8 +433,7 @@ void Bookmarks::get_recent_files(CStringArray& fl,int num,FILETIME& toptime) {
       continue;
     int	    dummy;
     TCHAR   *cp=tmp.GetBuffer(valuelen);
-    if (_stscanf(value,_T("%d,%d,%u,%u,%[^\001]"),&dummy,&dummy,
-      &ii.time.dwLowDateTime,&ii.time.dwHighDateTime,cp)!=5)
+    if (_stscanf_s(value,_T("%d,%d,%u,%u,%[^\001]"),&dummy,&dummy,&ii.time.dwLowDateTime,&ii.time.dwHighDateTime,cp,valuelen)!=5)
     {
       tmp.ReleaseBuffer(0);
       continue;
@@ -612,7 +612,9 @@ bool  Bookmarks::ExportAllBookmarks(const CString& destfile) {
     cls.ReleaseBuffer(clslen);
 
     // we have a file name at this point
+	MessageBox(0,name,0,0);
     name=unescape(name);
+	MessageBox(0,name,0,0);
 
     // enumerate bookmarks
     HKEY  hKey;

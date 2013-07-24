@@ -29,6 +29,9 @@
  * 
  */
 
+#pragma warning(disable:4100)
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afxcmn.h>
 #include <stdarg.h>
 #include <afxext.h>
@@ -129,7 +132,7 @@ void CTVApp::Barf(const TCHAR *format,...) {
   va_list   ap;
 
   va_start  (ap,format);
-  _vsntprintf(buffer,sizeof(buffer)/sizeof(TCHAR),format,ap);
+  _vsntprintf_s(buffer,sizeof(buffer)/sizeof(buffer[0]),_TRUNCATE,format,ap);
   va_end(ap);
   CWnd	  *wnd=AfxGetMainWnd();
   if (wnd)
@@ -195,7 +198,7 @@ static bool  FindOtherWindow(CWinThread* pThread,LPCTSTR cmdline) {
   }
   if (allow)
     return false;
-  _tcscpy(szTempName,szExeName);
+  _tcscpy_s(szTempName,MAX_PATH,szExeName);
   for(i = 0; i < iValue; i++) 
   {
     if (szTempName[i]=='\\') 

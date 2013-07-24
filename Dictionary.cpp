@@ -29,6 +29,8 @@
  * 
  */
 
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afx.h>
 #include <afxtempl.h>
 
@@ -522,7 +524,7 @@ IDict::DictInit	  *IDict::DictInit::m_head;
 IDict::DictInit::DictInit(const char *sig,IDict *(*create)(RFile *)) {
   m_next=m_head;
   m_create=create;
-  strncpy(m_sig,sig,sizeof(m_sig));
+  strncpy_s(m_sig,sizeof(m_sig),sig,sizeof(m_sig)-1);
   m_head=this;
 }
 

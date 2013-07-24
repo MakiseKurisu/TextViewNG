@@ -29,6 +29,8 @@
  * 
  */
 
+#pragma warning(disable:4100)
+
 #if !defined(AFX_TEXTPARSER_H__2F6237F5_E47E_45B8_9597_CB0AAAA1413C__INCLUDED_)
 #define AFX_TEXTPARSER_H__2F6237F5_E47E_45B8_9597_CB0AAAA1413C__INCLUDED_
 
@@ -127,8 +129,7 @@ public:
   virtual int		LookupParagraph(int docid,int charpos) = 0;
 
   // images, optional
-  virtual bool		GetImage(const wchar_t *name,HDC hDC,
-    int maxwidth,int maxheight,int rotation,Image& img) { return false; }
+  virtual bool		GetImage(const wchar_t *name,HDC hDC,int maxwidth,int maxheight,int rotation,Image& img) { return false; }
   virtual void		InvalidateImageCache() { }
   virtual bool		IsImage() { return false; }
 
@@ -137,9 +138,7 @@ public:
   virtual CString	GetSubDocName(int docid) { return _T("Main"); }
 
   // links, optional
-  virtual bool		LookupReference(const wchar_t *rname,FilePos& dest) {
-    return false;
-  }
+  virtual bool		LookupReference(const wchar_t *rname,FilePos& dest) { return false; }
 
   // helper functions
   static int		DetectFormat(CBufFile *fp);

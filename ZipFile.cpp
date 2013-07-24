@@ -28,6 +28,9 @@
  * $Id: ZipFile.cpp,v 1.17.2.8 2004/07/07 12:04:47 mike Exp $
  * 
  */
+
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afx.h>
 #include <afxwin.h>
 

@@ -29,6 +29,8 @@
  * 
  */
 
+#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+
 #include <afxcmn.h>
 #include <afxtempl.h>
 #include <afxext.h>
@@ -186,7 +188,7 @@ bool  NextColorProfile() {
       break;
 
     int	    id;
-    if (_stscanf(name,_T("%d"),&id) != 1)
+    if (_stscanf_s(name,_T("%d"),&id) != 1)
       continue;
 
     if (found) {
@@ -235,7 +237,7 @@ void  AddColorProfileNames(void *vmenu,int startpos) {
       break;
 
     int	    id;
-    if (_stscanf(name,_T("%d"),&id) != 1)
+    if (_stscanf_s(name,_T("%d"),&id) != 1)
       continue;
 
     TCHAR   data[64];
@@ -751,19 +753,19 @@ void CTView::PaintProgressBar(CFDC& dc,const RECT& rc,const RECT& cli) {
 
   if (m_Window.pb.battery && m_Window.pd.bat>=0) {
     if (m_Window.pd.bat>100)
-      wcscpy(buf,L"AC");
+      wcscpy_s(buf,sizeof(buf)/sizeof(buf[0]),L"AC");
     else
-      swprintf(buf,L"%d%%",m_Window.pd.bat);
+      swprintf(buf,sizeof(buf)/sizeof(buf[0]),L"%d%%",m_Window.pd.bat);
     PaintSbItem(dc,buf,-1,rc,m_Window.cli,m_Window.pb_width);
   }
 
   if (m_Window.pb.time) {
-    swprintf(buf,L"%02d:%02d",m_Window.pd.tm>>8,m_Window.pd.tm&0xff);
+    swprintf(buf,sizeof(buf)/sizeof(buf[0]),L"%02d:%02d",m_Window.pd.tm>>8,m_Window.pd.tm&0xff);
     PaintSbItem(dc,buf,-1,rc,m_Window.cli,m_Window.pb_width);
   }
 
   if (m_Window.pb.as_delay && m_AS.timer) {
-    swprintf(buf,L"%d",m_Window.pd.as);
+    swprintf(buf,sizeof(buf)/sizeof(buf[0]),L"%d",m_Window.pd.as);
     PaintSbItem(dc,buf,-1,rc,m_Window.cli,m_Window.pb_width);
   }
 
@@ -771,11 +773,11 @@ void CTView::PaintProgressBar(CFDC& dc,const RECT& rc,const RECT& cli) {
   if (m_Window.pb.position || (m_Window.pb.top && m_Window.pd.pos>=0)) {
     if (m_Window.pd.pos>=0) {
       if (m_Window.pb.top)
-	swprintf(buf,L"%d/%d",m_Window.pd.pos,m_Window.pd.top>>11);
+	swprintf(buf,sizeof(buf)/sizeof(buf[0]),L"%d/%d",m_Window.pd.pos,m_Window.pd.top>>11);
       else
-	swprintf(buf,L"%d",m_Window.pd.pos);
+	swprintf(buf,sizeof(buf)/sizeof(buf[0]),L"%d",m_Window.pd.pos);
     } else
-      swprintf(buf,L"%d%%",-m_Window.pd.pos-1);
+      swprintf(buf,sizeof(buf)/sizeof(buf[0]),L"%d%%",-m_Window.pd.pos-1);
     PaintSbItem(dc,buf,-1,rc,m_Window.cli,m_Window.pb_width);
   }
 
