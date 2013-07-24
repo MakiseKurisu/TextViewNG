@@ -119,8 +119,7 @@ BOOL CTVApp::InitInstance()
   RegisterClass(&wc);
   TCHAR	szExeName[MAX_PATH];
   ::GetModuleFileName(NULL,szExeName,MAX_PATH);
-  HWND hWnd=CreateWindow(IPCCLASS,szExeName,WS_POPUP,0,0,1,1,pFrame->m_hWnd,NULL,
-    wc.hInstance,NULL);
+  CreateWindow(IPCCLASS,szExeName,WS_POPUP,0,0,1,1,pFrame->m_hWnd,NULL,wc.hInstance,NULL);
 
   pFrame->PostMessage(WM_COMMAND,ID_INIT);
 

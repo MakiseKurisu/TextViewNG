@@ -1049,7 +1049,6 @@ void  CTView::ComplexLine(CFDC& dc,const RECT& cli,RECT& line,
 normal_draw:
   while (len>0) {
     line.right=x0+x;
-    COLORREF  bg=v_C_BG();
     Attr      attr=l.attr[off];
     int	      run=0;
     if (attr.img) {
@@ -3116,7 +3115,7 @@ void  CTView::InvalidateRange(const FilePos& x,const FilePos& y) {
   int line=0;
   while (line<nlines) {
     int	  col_last=line+m_formatter->PageLength(column);
-    int	  ystart=-1,yend;
+    int	  ystart=-1,yend=0;
     int	  cury=0;
     while (line<col_last) {
       const Line&   ll=m_formatter->GetLine(line);

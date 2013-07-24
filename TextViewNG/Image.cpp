@@ -569,7 +569,7 @@ static imagestore *bminit(HDC hDC,int w,int h,int maxw,int maxh,int rotate)
   if (!im)
     return NULL;
   void		*data;
-  int		bpp;
+  int		bpp=0;
   s32		rowstep;
 
   im->bmformat=get_bitmap_format();
@@ -593,14 +593,7 @@ static imagestore *bminit(HDC hDC,int w,int h,int maxw,int maxh,int rotate)
     break;
   case BF_888:
     bpp=3;
-#ifdef _WIN32_WCE
-    bi.masks[0]=0xFF0000;
-    bi.masks[1]=0x00FF00;
-    bi.masks[2]=0x0000FF;
-    bi.h.biCompression=BI_BITFIELDS;
-#else
     bi.h.biCompression=BI_RGB;
-#endif
     im->packbits=packbits_24_to_24;
     break;
 #ifndef STANDALONE
@@ -637,7 +630,6 @@ static imagestore *bminit(HDC hDC,int w,int h,int maxw,int maxh,int rotate)
   bi.h.biBitCount=bpp==2 ? 16 : 24;
   im->bmp=CreateDIBSection(hDC,(BITMAPINFO*)&bi,DIB_RGB_COLORS,&data,NULL,0);
   if (!im->bmp) {
-    DWORD err=GetLastError();
     free(im);
     return NULL;
   }

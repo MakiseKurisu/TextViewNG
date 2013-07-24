@@ -248,11 +248,11 @@ void CFileOpenDialog::FindFiles(bool showall)
 
     fh=FindFirstFile(pat,&fd);
     run=fh!=INVALID_HANDLE_VALUE;
-    for (int i=0;run;) {
+    for (;run;) {
       if (!(fd.cFileName[0]==_T('.') && (!fd.cFileName[1] || (fd.cFileName[1]==_T('.') && !fd.cFileName[2]))))
       {
 	bool dir=(fd.dwFileAttributes&FILE_ATTRIBUTE_DIRECTORY)!=0;
-	int icon;
+	int icon=IM_DIR;
 	if (!dir) {
 	  icon=get_file_icon(fd.cFileName);
 	  ui.LowPart=fd.nFileSizeLow;

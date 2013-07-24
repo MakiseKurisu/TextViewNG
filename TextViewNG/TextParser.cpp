@@ -331,7 +331,6 @@ Paragraph  SimpleTextParser::GenericBufParse(CBufFile *fp,const Para& p,int len)
   // strip whitespace and soft hyphens
   Paragraph	  ret(len);
   wchar_t	  *bp=ret.str;
-  Attr		  *cfp=ret.cflags;
   Attr		  fmt;
   int		  count=0;
   int		  i;
@@ -554,7 +553,7 @@ TextParser	*TextParser::Create(Meter *m,CBufFile *fp,int format,int encoding,Boo
 		THROW_LAST();
 	}
 	END_CATCH_ALL
-	return NULL;
+	//return NULL;
 }
 
 // hyphenation code by Mark Lipsman, modified my Mike

@@ -79,7 +79,7 @@ void  TextFormatter::GetTextExtent(CFDC& dc,Paragraph& line,int off,
   while (len>0 && width>0) {
     int	  i;
     int   n=0;
-    SIZE  sz;
+	SIZE  sz={0,0};
     Attr  curatt=att[0];
     if (curatt.img) { // inline image
       int   idx=*sp;

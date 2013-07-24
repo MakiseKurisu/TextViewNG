@@ -1077,5 +1077,5 @@ void   XLB_Init() {
 #endif
   wc.lpszClassName=_T("XListBox");
 
-  ATOM cls=::RegisterClass(&wc);
+  ::RegisterClass(&wc);
 }
