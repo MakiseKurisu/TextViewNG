@@ -105,7 +105,7 @@ static void	set_gamma(double image_gamma) {
   int	    i;
 
   for (i=0;i<256;++i)
-    gamma_table[i]=((int)(pow(i/256.0,g)*256.0));
+    gamma_table[i]=(u8)((int)(pow(i/256.0,g)*256.0));
 }
 
 // returns resized line with pixels scaled by inw
@@ -342,7 +342,7 @@ __inline s32 CLIP(s32 v,s32 m) {
   rs->nexterror[i-3+c] += (e*3)>>4; \
   rs->nexterror[i+0+c] += (e*5)>>4; \
   rs->nexterror[i+3+c] += e>>4; \
-  rs->dest[i+c] = v;
+  rs->dest[i+c] = (u8)v;
 #define PIXEL_ODD(rs,i,c) \
   u = CLIPADD(rs,i,c); \
   v = M64(u,rs->outscale,rs->mask[c]); \
@@ -351,7 +351,7 @@ __inline s32 CLIP(s32 v,s32 m) {
   rs->nexterror[i+3+c] += (e*3)>>4; \
   rs->nexterror[i+0+c] += (e*5)>>4; \
   rs->nexterror[i-3+c] += e>>4; \
-  rs->dest[i+c]=v;
+  rs->dest[i+c] = (u8)v;
 
 // dither lb into dest, left to right
 void	resize_dither_even(struct resize_state *rs) {

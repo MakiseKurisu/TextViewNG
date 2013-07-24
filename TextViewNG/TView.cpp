@@ -1386,7 +1386,8 @@ void  CTView::PushPos() {
     m_History.pstack.GetNext(m_History.stacktop);
     m_History.pstack.RemoveAt(tmp);
   }
-  m_History.pstack.AddTail(m_formatter->Top());
+  FilePos   top=m_formatter->Top();
+  m_History.pstack.AddTail(top);
   if (m_History.pstack.GetCount()>100)
     m_History.pstack.RemoveHead();
 }
@@ -1488,7 +1489,8 @@ void CTView::OnBack() {
     TextFile  *tf=OpenNextImage(m_textfile->Name(),false);
     if (tf) {
       AfxGetMainWnd()->SetWindowText(FileName(tf->Name()));
-      SetFile(auto_ptr<TextFile>(tf));
+	  auto_ptr<TextFile> text(tf);
+      SetFile(text);
     }
     return;
   }
@@ -2947,14 +2949,16 @@ void CTView::OnForward() {
     TextFile  *tf=OpenNextImage(m_textfile->Name(),true);
     if (tf) {
       AfxGetMainWnd()->SetWindowText(FileName(tf->Name()));
-      SetFile(auto_ptr<TextFile>(tf));
+	  auto_ptr<TextFile> text(tf);
+      SetFile(text);
     }
     return;
   }
 
   if (m_History.stacktop!=NULL) {
     FilePos   next=m_History.pstack.GetAt(m_History.stacktop);
-    m_History.pstack.SetAt(m_History.stacktop,m_formatter->Top());
+	FilePos   top=m_formatter->Top();
+    m_History.pstack.SetAt(m_History.stacktop,top);
     m_History.pstack.GetNext(m_History.stacktop);
     MoveAbs(next);
   }

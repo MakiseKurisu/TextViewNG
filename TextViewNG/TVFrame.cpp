@@ -363,7 +363,8 @@ bool  CTVFrame::TryOpenFile(CString& filename) {
     }
     if (tf) {
       if (m_realview) {
-	((CTView *)m_wndView.get())->SetFile(auto_ptr<TextFile>(tf));
+	auto_ptr<TextFile> text(tf);
+	((CTView *)m_wndView.get())->SetFile(text);
 	SetWindowText(_T("TextViewNG: ")+FileName(filename));
       }
       return true;
@@ -485,7 +486,8 @@ bool  CTVFrame::InitView() {
 	CTView  *tv=new CTView;
 	tv->Attach(wnd);
 	tv->Init();
-	tv->SetFile(auto_ptr<TextFile>(tf));
+	auto_ptr<TextFile> text(tf);
+	tv->SetFile(text);
 	if (dictmode)
 	{
 		SetWindowText(_T("TextViewNG: Dictionary"));
@@ -564,7 +566,8 @@ void  CTVFrame::OnRecentFile(UINT cmd) {
     TextFile	*tf=TextFile::Open(m_recentlist[cmd-RECENT_BASE]);
     if (tf) {
       if (m_realview) {
-	((CTView *)m_wndView.get())->SetFile(auto_ptr<TextFile>(tf));
+	auto_ptr<TextFile> text(tf);
+	((CTView *)m_wndView.get())->SetFile(text);
 	SetWindowText(_T("TextViewNG: ")+FileName(m_recentlist[cmd-RECENT_BASE]));
       }
     } else {

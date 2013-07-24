@@ -575,7 +575,8 @@ DictParser  *DictParser::OpenDict(const CString& path,CString *errmsg) {
   IDict	  *d=IDict::Create(path,errmsg);
   if (!d)
     return NULL;
-  return new DictParser(auto_ptr<IDict>(d));
+  auto_ptr<IDict> dict(d);
+  return new DictParser(dict);
 }
 
 bool  DictParser::LookupReference(const wchar_t *rname,FilePos& dest) {

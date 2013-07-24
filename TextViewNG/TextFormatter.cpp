@@ -442,7 +442,8 @@ bool	    TextFormatter::FormatBack(CFDC& dc,FilePos start,FilePos prev_top) {
 	para.len=pos.off;
       else
 	pos.off=para.len;
-      WrapLine(dc,para,FilePos(pos.para,0,pos.docid),cp,0,32768);
+	  FilePos fp = FilePos(pos.para,0,pos.docid);
+      WrapLine(dc,para,fp,cp,0,32768);
       // insert the formatted paragraph at start of list
       tmp.InsertAt(0,&cp);
       for (int i=0;i<cp.GetSize();++i)
@@ -703,7 +704,8 @@ void  TextFormatter::FormatPlainText(CFDC& dc,
       p.cflags[i].wa=attr.wa;
     p.findent=3; // XXX
     int last=lines.GetSize();
-    int lh=WrapLine(dc,p,FilePos(),lines,curh,height-curh);
+	FilePos fp = FilePos();
+    int lh=WrapLine(dc,p,fp,lines,curh,height-curh);
     if (lh<0) { // it still might add something
       while (last<lines.GetSize())
 	curh+=lines[last++].height;

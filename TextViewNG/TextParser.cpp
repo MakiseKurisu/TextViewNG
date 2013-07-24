@@ -240,14 +240,14 @@ void   SimpleTextParser::GenericFileParseW(CBufFile *fp,PArray& pp,DWORD mask,DW
 			start=m_fp->pos();
 			if (f)
 			{
-				b[rlen++]=ch;
-				b[rlen++]=ch2;
+				b[rlen++]=(char)ch;
+				b[rlen++]=(char)ch2;
 			}
 		}
 		else
 		{
-			b[rlen++]=ch;
-			b[rlen++]=ch2;
+			b[rlen++]=(char)ch;
+			b[rlen++]=(char)ch2;
 		}
 	}
 
@@ -285,12 +285,12 @@ void   SimpleTextParser::GenericFileParseA(CBufFile *fp,PArray& pp,DWORD mask,DW
 			start=m_fp->pos();
 			if (f)
 			{
-				b[rlen++]=ch;
+				b[rlen++]=(char)ch;
 			}
 		}
 		else
 		{
-			b[rlen++]=ch;
+			b[rlen++]=(char)ch;
 		}
 	}
 

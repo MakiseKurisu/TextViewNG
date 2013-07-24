@@ -61,7 +61,8 @@ TextFile::TextFile(RFile *fp,const CString& name) :
   if (m_enc>=Unicode::GetNumCodePages())
     m_enc=-1;
   // create a buffered file for it
-  m_fp=new CBufFile(auto_ptr<RFile>(fp));
+  auto_ptr<RFile> rf(fp);
+  m_fp=new CBufFile(rf);
   // and initialize parser
   m_bookmarks.LoadFromRegistry();
   SetFormatEncodingImp(m_format,m_enc,&m_bookmarks);
