@@ -698,7 +698,11 @@ InitUnicode::InitUnicode()
 	{
 		qsort(codepages,curcp,sizeof(struct CodePage),enc_cmp);
 	}
-	default_cp=Unicode::GetIntCodePage(1251); // XXX hardcoded
+//	default_cp=Unicode::GetIntCodePage(GetACP());
+//	if (default_cp == -1)
+	{
+		default_cp=Unicode::GetIntCodePage(1251); // XXX hardcoded
+	}
 }
 
 int   Unicode::WCLength(int codepage,const char *mbstr,int mblen) {
@@ -759,31 +763,29 @@ int   Unicode::GetIntCodePage(UINT mscp) {
   return -1;
 }
 
-static UINT   detect_encoding(const unsigned char *mbs,unsigned mblen) {
+static UINT   detect_encoding(const unsigned char *mbs,unsigned mblen)
+{
+	if (mbs[0]==0xEF && mbs[1]==0xBB && mbs[2]==0xBF) // utf8le bom
+	{
+		return CP_UTF8;
+	}
+	else if (mbs[0]==0xFF && mbs[1]==0xFE) // utf16le bom
+	{
+		return CP_UTF16;
+	}
+	else
+	{
+		return GetACP();
+	}
+/*
+	//Seriously, we need some really encode detecting code instead of GUESS
+	//If you can't, just return the default code page and assume our users perfer to read their native language
 	unsigned	i,j;
 	int		enc=0;
 	int		sv,msv=0;
 	int		hist[NUMLET*NUMLET];
 	unsigned int	prev;
 	unsigned char	*lettermap;
-
-	if (mblen<3) /* detection needs at least a few letters :) */
-	{
-		return CP_1252;
-	}
-	else if (mblen>1024) /* don't waste too much time */
-	{
-		mblen=1024;
-	}
-
-	if (mbs[0]==0xEF && mbs[1]==0xBB && mbs[2]==0xBF) // utf8 bom
-	{
-		return CP_UTF8;
-	}
-	else if (mbs[0]==0xFF && mbs[1]==0xFE) // utf16 bom
-	{
-		return CP_UTF16;
-	}
 
 	for (i=0;i<NUM_BUILTIN_ENCODINGS;++i)
 	{
@@ -808,7 +810,7 @@ static UINT   detect_encoding(const unsigned char *mbs,unsigned mblen) {
 			msv=sv;
 		}	
 	}
-	if (msv<5) /* no cyrillic letters found */
+	if (msv<5) // no cyrillic letters found
 	{
 		return CP_1252;
 	}
@@ -816,6 +818,7 @@ static UINT   detect_encoding(const unsigned char *mbs,unsigned mblen) {
 	{
 		return builtin_encodings[enc].cp;
 	}
+*/
 }
 
 int   Unicode::DetectCodePage(const char *mbs,int mblen) {

@@ -111,8 +111,8 @@ BEGIN
                     WS_TABSTOP
     COMBOBOX        IDC_ENCODING,7,46,124,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
                     WS_TABSTOP
-    LTEXT           "文件格式:",IDC_STATIC,7,7,38,8
-    LTEXT           "当前编码:",IDC_STATIC,7,35,32,8
+    LTEXT           "文件格式:",IDC_STATIC,7,7,75,8
+    LTEXT           "当前编码:",IDC_STATIC,7,35,75,8
     DEFPUSHBUTTON   "确定",IDOK,45,95,40,15
     PUSHBUTTON      "取消",IDCANCEL,91,95,40,15
     COMBOBOX        IDC_DEF_ENCODING,7,76,124,65,CBS_DROPDOWNLIST | 
