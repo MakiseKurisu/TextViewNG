@@ -15,40 +15,42 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\Cmdbar.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\contents.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\contentsicon.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\dialog.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\fileicon.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\HR.ico">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\smallico.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\tree.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="TextViewNG.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="TextViewNG.manifest" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="buildnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\crc32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\deflate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\gzguts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inffast.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inffixed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inflate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inftrees.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\trees.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="libpng\png.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -70,299 +72,161 @@
     <ClInclude Include="libpng\pngstruct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="libjpeg\jversion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jpeglib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jpegint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jmorecfg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jmemsys.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jinclude.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jerror.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jdhuff.h">
+    <ClInclude Include="libjpeg\jconfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="libjpeg\jdct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="libjpeg\jconfig.h">
+    <ClInclude Include="libjpeg\jdhuff.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\zutil.h">
+    <ClInclude Include="libjpeg\jerror.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\zlib.h">
+    <ClInclude Include="libjpeg\jinclude.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\zconf.h">
+    <ClInclude Include="libjpeg\jmemsys.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\trees.h">
+    <ClInclude Include="libjpeg\jmorecfg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\inftrees.h">
+    <ClInclude Include="libjpeg\jpegint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\inflate.h">
+    <ClInclude Include="libjpeg\jpeglib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\inffixed.h">
+    <ClInclude Include="libjpeg\jversion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\inffast.h">
+    <ClInclude Include="TextViewNG\Attr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\gzguts.h">
+    <ClInclude Include="TextViewNG\Bookmarks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\deflate.h">
+    <ClInclude Include="TextViewNG\BufFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\crc32.h">
+    <ClInclude Include="TextViewNG\Colors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ZipFile.h">
+    <ClInclude Include="TextViewNG\ColorSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="xscanf.h">
+    <ClInclude Include="TextViewNG\config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="XListBox.h">
+    <ClInclude Include="TextViewNG\ContentsDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WMap.h">
+    <ClInclude Include="TextViewNG\Dictionary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Unicode.h">
+    <ClInclude Include="TextViewNG\DictSetupDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TView.h">
+    <ClInclude Include="TextViewNG\DummyView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TVFrame.h">
+    <ClInclude Include="TextViewNG\FastArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextViewNG.h">
+    <ClInclude Include="TextViewNG\FDC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextParser.h">
+    <ClInclude Include="TextViewNG\FileFormatDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextFormatter.h">
+    <ClInclude Include="TextViewNG\FileOpenDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextFile.h">
+    <ClInclude Include="TextViewNG\FilePos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TCRFile.h">
+    <ClInclude Include="TextViewNG\Image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StylesDlg.h">
+    <ClInclude Include="TextViewNG\InputBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StrBuf.h">
+    <ClInclude Include="TextViewNG\Keys.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Rotate.h">
+    <ClInclude Include="TextViewNG\MiscOptDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RFile.h">
+    <ClInclude Include="TextViewNG\newres.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="TextViewNG\OptionsDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ptr.h">
+    <ClInclude Include="TextViewNG\PDBFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ProgressDlg.h">
+    <ClInclude Include="TextViewNG\ProgressDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PDBFile.h">
+    <ClInclude Include="TextViewNG\ptr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OptionsDialog.h">
+    <ClInclude Include="TextViewNG\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="newres.h">
+    <ClInclude Include="TextViewNG\RFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MiscOptDlg.h">
+    <ClInclude Include="TextViewNG\Rotate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Keys.h">
+    <ClInclude Include="TextViewNG\StrBuf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputBox.h">
+    <ClInclude Include="TextViewNG\StylesDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Image.h">
+    <ClInclude Include="TextViewNG\TCRFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FilePos.h">
+    <ClInclude Include="TextViewNG\TextFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileOpenDialog.h">
+    <ClInclude Include="TextViewNG\TextFormatter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileFormatDialog.h">
+    <ClInclude Include="TextViewNG\TextParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FDC.h">
+    <ClInclude Include="TextViewNG\TextViewNG.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FastArray.h">
+    <ClInclude Include="TextViewNG\TVFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DummyView.h">
+    <ClInclude Include="TextViewNG\TView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DictSetupDlg.h">
+    <ClInclude Include="TextViewNG\Unicode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dictionary.h">
+    <ClInclude Include="TextViewNG\WMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ContentsDlg.h">
+    <ClInclude Include="TextViewNG\XListBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="config.h">
+    <ClInclude Include="TextViewNG\xscanf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ColorSelector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Colors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="buildnum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BufFile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Bookmarks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Attr.h">
+    <ClInclude Include="TextViewNG\ZipFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ZipFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="xscanf.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="XListBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Unicode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TVFrame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextViewNG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextFormatter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TCRFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StylesDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StrBuf.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Rotate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ProgressDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PDBFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OptionsDialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MiscOptDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Keys.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FileOpenDialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FileFormatDialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FDC.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FastArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DummyView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DictSetupDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dictionary.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ContentsDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ColorSelector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BufFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Bookmarks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="zlib\adler32.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -435,74 +299,215 @@
     <ClCompile Include="libpng\pngwutil.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="libjpeg\jutils.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jmemnobs.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jmemmgr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jidctred.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jidctint.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jidctfst.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jerror.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdtrans.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdsample.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdpostct.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdphuff.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdmerge.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdmaster.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdmarker.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdmainct.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdinput.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdhuff.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jddctmgr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdcolor.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdcoefct.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="libjpeg\jdapistd.c">
+    <ClCompile Include="libjpeg\jcomapi.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="libjpeg\jdapimin.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="libjpeg\jcomapi.c">
+    <ClCompile Include="libjpeg\jdapistd.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="libjpeg\jdcoefct.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jdcolor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jddctmgr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jdhuff.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jdinput.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jdmainct.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jdmarker.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jdmaster.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jdmerge.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jdphuff.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jdpostct.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jdsample.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jdtrans.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jerror.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jidctfst.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jidctint.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jidctred.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jmemmgr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jmemnobs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libjpeg\jutils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\Bookmarks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\BufFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\ColorSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\ContentsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\Dictionary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\DictSetupDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\DummyView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\FastArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\FDC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\FileFormatDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\FileOpenDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\Image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\InputBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\Keys.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\MiscOptDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\OptionsDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\PDBFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\ProgressDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\RFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\Rotate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\StrBuf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\StylesDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\TCRFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\TextFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\TextFormatter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\TextParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\TextViewNG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\TVFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\TView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\Unicode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\WMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\XListBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\xscanf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextViewNG\ZipFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\Cmdbar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resource\contents.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resource\contents_hr.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resource\dialog.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resource\dialog_hr.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resource\HR.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resource\mainframe_hr.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resource\smallico.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resource\tree.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="Resource\TextViewNG.manifest">
+      <Filter>Resource Files</Filter>
+    </Manifest>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource\TextViewNG.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

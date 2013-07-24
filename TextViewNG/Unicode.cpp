@@ -150,7 +150,6 @@ static void   UTF_cp_convert(struct CodePage *cp,const char *mbs,int mblen,
 			    wchar_t *wcs,int wclen)
 {
   const unsigned char *mb=(const unsigned char *)mbs;
-  int		      len=0;
   wchar_t	      *wce=wcs+wclen;
 
   while (mblen>0 && wcs<wce) {

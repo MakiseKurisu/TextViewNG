@@ -117,14 +117,14 @@ END
 // Bitmap
 //
 
-IDR_MAINFRAME           BITMAP  DISCARDABLE     "res\\Cmdbar.bmp"
-IDB_SMALLICONS          BITMAP  DISCARDABLE     "res\\smallico.bmp"
-IDR_DIALOG              BITMAP  DISCARDABLE     "res\\dialog.bmp"
-IDB_TREE                BITMAP  DISCARDABLE     "res\\tree.bmp"
-IDR_CONTENTS            BITMAP  DISCARDABLE     "res\\contents.bmp"
-IDR_DIALOG_HR           BITMAP  DISCARDABLE     "res\\dialog_hr.bmp"
-IDR_CONTENTS_HR         BITMAP  DISCARDABLE     "res\\contents_hr.bmp"
-IDR_MAINFRAME_HR        BITMAP  DISCARDABLE     "res\\mainframe_hr.bmp"
+IDR_MAINFRAME           BITMAP  DISCARDABLE     "Cmdbar.bmp"
+IDB_SMALLICONS          BITMAP  DISCARDABLE     "smallico.bmp"
+IDR_DIALOG              BITMAP  DISCARDABLE     "dialog.bmp"
+IDB_TREE                BITMAP  DISCARDABLE     "tree.bmp"
+IDR_CONTENTS            BITMAP  DISCARDABLE     "contents.bmp"
+IDR_DIALOG_HR           BITMAP  DISCARDABLE     "dialog_hr.bmp"
+IDR_CONTENTS_HR         BITMAP  DISCARDABLE     "contents_hr.bmp"
+IDR_MAINFRAME_HR        BITMAP  DISCARDABLE     "mainframe_hr.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -133,11 +133,11 @@ IDR_MAINFRAME_HR        BITMAP  DISCARDABLE     "res\\mainframe_hr.bmp"
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON    DISCARDABLE     "res\\HR.ico"
+IDR_MAINFRAME           ICON    DISCARDABLE     "HR.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 
 #pragma code_page(65001)
-#include "res/lang/en-US.rc"
-#include "res/lang/zh-CN.rc"
-#include "res/lang/zh-TW.rc"
+#include "lang\en-US.rc"
+#include "lang\zh-CN.rc"
+#include "lang\zh-TW.rc"
