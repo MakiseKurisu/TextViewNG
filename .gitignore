@@ -5,6 +5,9 @@
 *.sbr
 *.idb
 
+*.psess
+*.vsp
+
 *.lastbuildstate
 *.unsuccessfulbuild
 

@@ -20,12 +20,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110_xp</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -55,7 +57,7 @@
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'" />
     <CustomBuildBeforeTargets Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">
     </CustomBuildBeforeTargets>
-    <RunCodeAnalysis Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">true</RunCodeAnalysis>
+    <RunCodeAnalysis Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">false</RunCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">
     <Midl>
@@ -71,7 +73,7 @@
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>zlib;libjpeg;libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>TextViewNG;zlib;libjpeg;libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>
@@ -88,10 +90,10 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>
       </Culture>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>TextViewNG;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>unicows.lib;kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;msimg32.lib;imm32.lib;msxml2.lib;advapi32.lib;comctl32.lib;comdlg32.lib;shell32.lib;shlwapi.lib;winspool.lib;uuid.lib;ole32.lib;oleaut32.lib;oleacc.lib;uafxcw.lib;atls.lib;libcmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>unicows.lib;kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;msimg32.lib;imm32.lib;msxml2.lib;uxtheme.lib;windowscodecs.lib;advapi32.lib;comctl32.lib;comdlg32.lib;shell32.lib;shlwapi.lib;winspool.lib;uuid.lib;ole32.lib;oleaut32.lib;oleacc.lib;uafxcw.lib;atls.lib;libcmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
@@ -122,7 +124,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>zlib;libjpeg;libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>TextViewNG;zlib;libjpeg;libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -133,20 +135,20 @@
       <ObjectFileName>$(IntDir)\</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)\</ProgramDataBaseFileName>
       <BrowseInformation>true</BrowseInformation>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <CompileAs>Default</CompileAs>
-      <EnablePREfast>true</EnablePREfast>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>
       </Culture>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>TextViewNG;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>unicows.lib;kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;msimg32.lib;imm32.lib;msxml2.lib;advapi32.lib;comctl32.lib;comdlg32.lib;shell32.lib;shlwapi.lib;winspool.lib;uuid.lib;ole32.lib;oleaut32.lib;oleacc.lib;uafxcwd.lib;atlsd.lib;libcmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>unicows.lib;kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;msimg32.lib;imm32.lib;msxml2.lib;uxtheme.lib;windowscodecs.lib;advapi32.lib;comctl32.lib;comdlg32.lib;shell32.lib;shlwapi.lib;winspool.lib;uuid.lib;ole32.lib;oleaut32.lib;oleacc.lib;uafxcwd.lib;atlsd.lib;libcmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
@@ -158,52 +160,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="res\Cmdbar.bmp" />
-    <None Include="res\contents.bmp" />
-    <None Include="res\contentsicon.bmp" />
-    <None Include="res\dialog.bmp" />
-    <None Include="res\fileicon.bmp" />
-    <None Include="res\HR.ico" />
-    <None Include="res\smallico.bmp" />
-    <None Include="res\tree.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="TextViewNG.rc">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">_DEBUG</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">NDEBUG</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
     <CustomBuildStep Include="HaaliReader.manifest">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">true</ExcludedFromBuild>
     </CustomBuildStep>
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="TextViewNG.manifest" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Attr.h" />
-    <ClInclude Include="Bookmarks.h" />
-    <ClInclude Include="BufFile.h" />
     <ClInclude Include="buildnum.h" />
-    <ClInclude Include="Colors.h" />
-    <ClInclude Include="ColorSelector.h" />
-    <ClInclude Include="config.h" />
-    <ClInclude Include="ContentsDlg.h" />
-    <ClInclude Include="Dictionary.h" />
-    <ClInclude Include="DictSetupDlg.h" />
-    <ClInclude Include="DummyView.h" />
-    <ClInclude Include="FastArray.h" />
-    <ClInclude Include="FDC.h" />
-    <ClInclude Include="FileFormatDialog.h" />
-    <ClInclude Include="FileOpenDialog.h" />
-    <ClInclude Include="FilePos.h" />
-    <ClInclude Include="Image.h" />
-    <ClInclude Include="InputBox.h" />
-    <ClInclude Include="Keys.h" />
     <ClInclude Include="libjpeg\jconfig.h" />
     <ClInclude Include="libjpeg\jdct.h" />
     <ClInclude Include="libjpeg\jdhuff.h" />
@@ -221,29 +184,47 @@
     <ClInclude Include="libpng\pnglibconf.h" />
     <ClInclude Include="libpng\pngpriv.h" />
     <ClInclude Include="libpng\pngstruct.h" />
-    <ClInclude Include="MiscOptDlg.h" />
-    <ClInclude Include="newres.h" />
-    <ClInclude Include="OptionsDialog.h" />
-    <ClInclude Include="PDBFile.h" />
-    <ClInclude Include="ProgressDlg.h" />
-    <ClInclude Include="ptr.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="RFile.h" />
-    <ClInclude Include="Rotate.h" />
-    <ClInclude Include="StrBuf.h" />
-    <ClInclude Include="StylesDlg.h" />
-    <ClInclude Include="TCRFile.h" />
-    <ClInclude Include="TextFile.h" />
-    <ClInclude Include="TextFormatter.h" />
-    <ClInclude Include="TextParser.h" />
-    <ClInclude Include="TextViewNG.h" />
-    <ClInclude Include="TVFrame.h" />
-    <ClInclude Include="TView.h" />
-    <ClInclude Include="Unicode.h" />
-    <ClInclude Include="WMap.h" />
-    <ClInclude Include="XListBox.h" />
-    <ClInclude Include="xscanf.h" />
-    <ClInclude Include="ZipFile.h" />
+    <ClInclude Include="TextViewNG\Attr.h" />
+    <ClInclude Include="TextViewNG\Bookmarks.h" />
+    <ClInclude Include="TextViewNG\BufFile.h" />
+    <ClInclude Include="TextViewNG\Colors.h" />
+    <ClInclude Include="TextViewNG\ColorSelector.h" />
+    <ClInclude Include="TextViewNG\config.h" />
+    <ClInclude Include="TextViewNG\ContentsDlg.h" />
+    <ClInclude Include="TextViewNG\Dictionary.h" />
+    <ClInclude Include="TextViewNG\DictSetupDlg.h" />
+    <ClInclude Include="TextViewNG\DummyView.h" />
+    <ClInclude Include="TextViewNG\FastArray.h" />
+    <ClInclude Include="TextViewNG\FDC.h" />
+    <ClInclude Include="TextViewNG\FileFormatDialog.h" />
+    <ClInclude Include="TextViewNG\FileOpenDialog.h" />
+    <ClInclude Include="TextViewNG\FilePos.h" />
+    <ClInclude Include="TextViewNG\Image.h" />
+    <ClInclude Include="TextViewNG\InputBox.h" />
+    <ClInclude Include="TextViewNG\Keys.h" />
+    <ClInclude Include="TextViewNG\MiscOptDlg.h" />
+    <ClInclude Include="TextViewNG\newres.h" />
+    <ClInclude Include="TextViewNG\OptionsDialog.h" />
+    <ClInclude Include="TextViewNG\PDBFile.h" />
+    <ClInclude Include="TextViewNG\ProgressDlg.h" />
+    <ClInclude Include="TextViewNG\ptr.h" />
+    <ClInclude Include="TextViewNG\resource.h" />
+    <ClInclude Include="TextViewNG\RFile.h" />
+    <ClInclude Include="TextViewNG\Rotate.h" />
+    <ClInclude Include="TextViewNG\StrBuf.h" />
+    <ClInclude Include="TextViewNG\StylesDlg.h" />
+    <ClInclude Include="TextViewNG\TCRFile.h" />
+    <ClInclude Include="TextViewNG\TextFile.h" />
+    <ClInclude Include="TextViewNG\TextFormatter.h" />
+    <ClInclude Include="TextViewNG\TextParser.h" />
+    <ClInclude Include="TextViewNG\TextViewNG.h" />
+    <ClInclude Include="TextViewNG\TVFrame.h" />
+    <ClInclude Include="TextViewNG\TView.h" />
+    <ClInclude Include="TextViewNG\Unicode.h" />
+    <ClInclude Include="TextViewNG\WMap.h" />
+    <ClInclude Include="TextViewNG\XListBox.h" />
+    <ClInclude Include="TextViewNG\xscanf.h" />
+    <ClInclude Include="TextViewNG\ZipFile.h" />
     <ClInclude Include="zlib\crc32.h" />
     <ClInclude Include="zlib\deflate.h" />
     <ClInclude Include="zlib\gzguts.h" />
@@ -257,20 +238,6 @@
     <ClInclude Include="zlib\zutil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Bookmarks.cpp" />
-    <ClCompile Include="BufFile.cpp" />
-    <ClCompile Include="ColorSelector.cpp" />
-    <ClCompile Include="ContentsDlg.cpp" />
-    <ClCompile Include="Dictionary.cpp" />
-    <ClCompile Include="DictSetupDlg.cpp" />
-    <ClCompile Include="DummyView.cpp" />
-    <ClCompile Include="FastArray.cpp" />
-    <ClCompile Include="FDC.cpp" />
-    <ClCompile Include="FileFormatDialog.cpp" />
-    <ClCompile Include="FileOpenDialog.cpp" />
-    <ClCompile Include="Image.cpp" />
-    <ClCompile Include="InputBox.cpp" />
-    <ClCompile Include="Keys.cpp" />
     <ClCompile Include="libjpeg\jcomapi.c" />
     <ClCompile Include="libjpeg\jdapimin.c" />
     <ClCompile Include="libjpeg\jdapistd.c" />
@@ -309,26 +276,40 @@
     <ClCompile Include="libpng\pngwrite.c" />
     <ClCompile Include="libpng\pngwtran.c" />
     <ClCompile Include="libpng\pngwutil.c" />
-    <ClCompile Include="MiscOptDlg.cpp" />
-    <ClCompile Include="OptionsDialog.cpp" />
-    <ClCompile Include="PDBFile.cpp" />
-    <ClCompile Include="ProgressDlg.cpp" />
-    <ClCompile Include="RFile.cpp" />
-    <ClCompile Include="Rotate.cpp" />
-    <ClCompile Include="StrBuf.cpp" />
-    <ClCompile Include="StylesDlg.cpp" />
-    <ClCompile Include="TCRFile.cpp" />
-    <ClCompile Include="TextFile.cpp" />
-    <ClCompile Include="TextFormatter.cpp" />
-    <ClCompile Include="TextParser.cpp" />
-    <ClCompile Include="TextViewNG.cpp" />
-    <ClCompile Include="TVFrame.cpp" />
-    <ClCompile Include="TView.cpp" />
-    <ClCompile Include="Unicode.cpp" />
-    <ClCompile Include="WMap.cpp" />
-    <ClCompile Include="XListBox.cpp" />
-    <ClCompile Include="xscanf.cpp" />
-    <ClCompile Include="ZipFile.cpp" />
+    <ClCompile Include="TextViewNG\Bookmarks.cpp" />
+    <ClCompile Include="TextViewNG\BufFile.cpp" />
+    <ClCompile Include="TextViewNG\ColorSelector.cpp" />
+    <ClCompile Include="TextViewNG\ContentsDlg.cpp" />
+    <ClCompile Include="TextViewNG\Dictionary.cpp" />
+    <ClCompile Include="TextViewNG\DictSetupDlg.cpp" />
+    <ClCompile Include="TextViewNG\DummyView.cpp" />
+    <ClCompile Include="TextViewNG\FastArray.cpp" />
+    <ClCompile Include="TextViewNG\FDC.cpp" />
+    <ClCompile Include="TextViewNG\FileFormatDialog.cpp" />
+    <ClCompile Include="TextViewNG\FileOpenDialog.cpp" />
+    <ClCompile Include="TextViewNG\Image.cpp" />
+    <ClCompile Include="TextViewNG\InputBox.cpp" />
+    <ClCompile Include="TextViewNG\Keys.cpp" />
+    <ClCompile Include="TextViewNG\MiscOptDlg.cpp" />
+    <ClCompile Include="TextViewNG\OptionsDialog.cpp" />
+    <ClCompile Include="TextViewNG\PDBFile.cpp" />
+    <ClCompile Include="TextViewNG\ProgressDlg.cpp" />
+    <ClCompile Include="TextViewNG\RFile.cpp" />
+    <ClCompile Include="TextViewNG\Rotate.cpp" />
+    <ClCompile Include="TextViewNG\StrBuf.cpp" />
+    <ClCompile Include="TextViewNG\StylesDlg.cpp" />
+    <ClCompile Include="TextViewNG\TCRFile.cpp" />
+    <ClCompile Include="TextViewNG\TextFile.cpp" />
+    <ClCompile Include="TextViewNG\TextFormatter.cpp" />
+    <ClCompile Include="TextViewNG\TextParser.cpp" />
+    <ClCompile Include="TextViewNG\TextViewNG.cpp" />
+    <ClCompile Include="TextViewNG\TVFrame.cpp" />
+    <ClCompile Include="TextViewNG\TView.cpp" />
+    <ClCompile Include="TextViewNG\Unicode.cpp" />
+    <ClCompile Include="TextViewNG\WMap.cpp" />
+    <ClCompile Include="TextViewNG\XListBox.cpp" />
+    <ClCompile Include="TextViewNG\xscanf.cpp" />
+    <ClCompile Include="TextViewNG\ZipFile.cpp" />
     <ClCompile Include="zlib\adler32.c" />
     <ClCompile Include="zlib\crc32.c" />
     <ClCompile Include="zlib\deflate.c" />
@@ -338,6 +319,23 @@
     <ClCompile Include="zlib\trees.c" />
     <ClCompile Include="zlib\uncompr.c" />
     <ClCompile Include="zlib\zutil.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\Cmdbar.bmp" />
+    <Image Include="Resource\contents.bmp" />
+    <Image Include="Resource\contents_hr.bmp" />
+    <Image Include="Resource\dialog.bmp" />
+    <Image Include="Resource\dialog_hr.bmp" />
+    <Image Include="Resource\HR.ico" />
+    <Image Include="Resource\mainframe_hr.bmp" />
+    <Image Include="Resource\smallico.bmp" />
+    <Image Include="Resource\tree.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="Resource\TextViewNG.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource\TextViewNG.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
