@@ -1,7 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="utf-8" lang="utf-8">
   <head>
     <title>FictionBook 2.0</title>
     <link rel="stylesheet" type="text/css" href="=.css">
@@ -10,15 +10,15 @@
     <div class="topmenu">
       <div class="logo"><img class="noborder" src="logo.png"></div>
       <!--<div class="mirror">
-	<a class="menu small" href="http://haali.rt.ru/pocketpc/">���֧�ܧѧݧ� 1</a><br>
-	<a class="menu small" href="http://haali.cs.msu.ru/pocketpc/">���֧�ܧѧݧ� 2</a>
+	<a class="menu small" href="http://haali.rt.ru/pocketpc/">Зеркало 1</a><br>
+	<a class="menu small" href="http://haali.cs.msu.ru/pocketpc/">Зеркало 2</a>
       </div>-->
-      <a class="menu sep" href="index.ru.html">���ݧѧӧߧѧ�</a>
-      <a class="menu sep" href="news.ru.html">����ӧ����</a>
-      <a class="menu sep" href="download.ru.html">���ܧѧ�ѧ��</a>
-      <a class="menu sep" href="screenshots.ru.html">���ѧ��ڧߧܧ�</a>
-      <a class="menu sep" href="docs.ru.html">����ܧ�ާ֧ߧ�ѧ�ڧ�</a>
-      <a class="menu sep" href="bugs.ru.html">����ڧҧܧ�</a>
+      <a class="menu sep" href="index.ru.html">Главная</a>
+      <a class="menu sep" href="news.ru.html">Новости</a>
+      <a class="menu sep" href="download.ru.html">Скачать</a>
+      <a class="menu sep" href="screenshots.ru.html">Картинки</a>
+      <a class="menu sep" href="docs.ru.html">Документация</a>
+      <a class="menu sep" href="bugs.ru.html">Ошибки</a>
       <a class="menu sep" href="scripts.ru.html">FB Tools</a>
       <a class="menu sep" href="fb2.ru.html">FB2.0</a>
       <a class="menu" href="index.en.html">English page</a>
@@ -29,27 +29,27 @@
 
 
 <h3>FB 2.0</h3>
-FB 2.0 - �٧ߧѧ�ڧ�֧ݧ�ߧ�� ����էӧڧا֧ߧڧ� �ӧ�֧�֧� ��� ���ѧӧߧ֧ߧڧ� �� ���֧է��է��ڧާ� �ӧ֧��ڧ�ާ�.
-����֧է� ���ߧ�ӧߧ��� �ڧ٧ާ֧ߧ֧ߧڧ�:<br>
-* ��������ڧݧѧ�� �����ܧ���� �է�ܧ�ާ֧ߧ�� - �ҧ�ݧ��� �ߧڧԧէ� �ߧ֧� �ѧ��ڧҧ��� title, ����ѧӧݧ֧� ���ݧ�ܧ� ��ݧ֧ާ֧ߧ� &lt;title&gt;<br>
-* ���ҧ�ѧߧ� �ӧ�� ��ԧ�ѧߧڧ�֧ߧڧ� �ߧ� �ڧ���ݧ�٧�ӧѧߧڧ� &lt;empty-line&gt; ��֧�ӧ��� ��ݧ֧ާ֧ߧ��� �� �ܧ�ߧ�֧ۧߧ֧��.<br>
-* ����ҧѧӧݧ֧ߧ� �ԧڧ�֧�����ݧܧ�, �����اڧ� �ߧ� html: &lt;a xlink:href="#ref"&gt;<br>
-* ���ҧ�ѧ� ��ݧ֧ާ֧ߧ� &lt;note&gt;, �ӧާ֧��� �ߧ֧ԧ� ��ݧ֧է�֧� ���ݧ�٧�ӧѧ���� �����ݧܧѧާ� �ӧڧէ� &lt;a xlink:href="#note1" type="note"&gt;<br>
-* ���ݧ֧ާ֧ߧ��� &lt;body&gt; ��֧�֧�� �ާ�ا֧� �ҧ���� �ߧ֧�ܧ�ݧ�ܧ�, ��ߧ��ܧ� ��ݧ֧է�֧� ��ѧ٧ާ֧�ѧ�� �ӧߧ���� �է���ݧߧڧ�֧ݧ�ߧ��� body<br>
-* ����ҧѧӧݧ֧� ��ݧ֧ާ֧ߧ� &lt;stylesheet&gt; ��֧�֧� &lt;description&gt; �էݧ� �٧ѧէѧߧڧ� ��ѧҧݧڧ� ���ڧݧ֧�<br>
+FB 2.0 - значительное продвижение вперед по сравнению с предыдущими версиями.
+Среди основных изменений:<br>
+* Упростилась структура документа - больше нигде нет атрибута title, оставлен только элемент &lt;title&gt;<br>
+* Убраны все ограничения на использование &lt;empty-line&gt; первым элементом в контейнере.<br>
+* Добавлены гиперссылки, похожие на html: &lt;a xlink:href="#ref"&gt;<br>
+* Убран элемент &lt;note&gt;, вместо него следует пользоваться ссылками вида &lt;a xlink:href="#note1" type="note"&gt;<br>
+* Элементов &lt;body&gt; теперь может быть несколько, сноски следует размещать внутри дополнительных body<br>
+* Добавлен элемент &lt;stylesheet&gt; перед &lt;description&gt; для задания таблиц стилей<br>
 <br>
-�� ���էԧ���ӧڧ� �ߧ�ӧ�� ���ܧ�ާާ֧ߧ�ڧ��ӧѧߧߧ�� ���֧ާ� �� ���ڧާ֧� �����ӧ֧���ӧ���֧ԧ� �֧� �է�ܧ�ާ֧ߧ��:<br>
+Я подготовил новую откомментированную схему и пример соответствующего ей документа:<br>
 <a href="files/FictionBook.xsd">FictionBook.xsd</a>,
 <a href="files/FictionBookLinks.xsd">FictionBookLinks.xsd</a>,
 <a href="files/demo.fb2">demo.fb2</a>.
 <br>
-���ѧܧا� �֧��� <a href="FictionBook_description.html">���ڧ�ѧߧڧ� FB2.0</a> �ߧ� �ѧߧԧ�. ��٧��ܧ�.
+Также есть <a href="FictionBook_description.html">описание FB2.0</a> на англ. языке.
 
 
 
       <hr noshade="1">
-      <div class="update">�����ݧ֧էߧ֧� ��ҧߧ�ӧݧ֧ߧڧ�: 2002/08/06 21:04</div>
-      ���ӧ���: <a href="mailto:mike@haali.net">���ڧ�ѧڧ� ���ѧ�ߧ֧�, mike@haali.net</a>
+      <div class="update">Последнее обновление: 2002/08/06 21:04</div>
+      Автор: <a href="mailto:mike@haali.net">Михаил Мацнев, mike@haali.net</a>
     </div>
   </body>
 </html>

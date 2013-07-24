@@ -1,43 +1,43 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="utf-8" lang="utf-8">
  <head>
   <title>
-   ���ܧ�ڧ��� �էݧ� ��ѧҧ��� �� ��ݧ֧ܧ���ߧߧ��ާ� �ܧߧڧԧѧާ�
+   Скрипты для работы с электронными книгами
   </title>
   <link rel="stylesheet" type="text/css" href="=.css">
  </head>
  <body>
   <div class="topmenu">
- <a class="menu sep" href="index.ru.html">���ݧѧӧߧѧ�</a>
- <a class="menu sep" href="news.ru.html">����ӧ����</a>
- <a class="menu sep" href="download.ru.html">���ܧѧ�ѧ��</a>
- <a class="menu sep" href="scripts.ru.html">���ܧ�ڧ���</a>
+ <a class="menu sep" href="index.ru.html">Главная</a>
+ <a class="menu sep" href="news.ru.html">Новости</a>
+ <a class="menu sep" href="download.ru.html">Скачать</a>
+ <a class="menu sep" href="scripts.ru.html">Скрипты</a>
  <a class="menu" href="index.en.html">English page</a>
 <!-- <br>
- <a class="menu small sep" href="http://haali.cs.msu.ru/pocketpc/">���֧�ܧѧݧ� 1</a>
- <a class="menu small" href="http://haali.rt.ru/pocketpc/">���֧�ܧѧݧ� 2</a></p> -->
+ <a class="menu small sep" href="http://haali.cs.msu.ru/pocketpc/">Зеркало 1</a>
+ <a class="menu small" href="http://haali.rt.ru/pocketpc/">Зеркало 2</a></p> -->
 </div>
 <!-- vim: set syn=html : -->
 
-  <h4>���ݧ֧ܧ���ߧߧ��� �ܧߧڧԧ� ����ާѧ�� XML</h4>
-  <p>����֧�ҧ�ѧ٧�ӧѧߧڧ� �ڧ� �������ԧ� ��֧ܧ��� �� XML: ��ѧ���ڧ�ѧߧ�
-  �ߧ� �ܧߧڧԧ� �ڧ� <a href="http://lib.ru/">�ҧڧҧݧڧ��֧ܧ� ���ѧܧ�ڧާ� �����ܧ�ӧ�</a>, �ߧ��ާѧݧ�ߧ� ���ߧڧާѧ֧�
-  HTML �ӧѧ�ڧѧߧ� �ܧߧڧ�. ���� �ҧ�ݧ֧� ��ݧ�اߧ�� HTML ��ܧ��֧� �ӧ�֧ԧ� �ҧ�է֧� �ԧݧ��ڧ��. ���ݧ� �٧ѧ���ܧ� �ߧ�ا֧�
-  Perl ���� Windows �� �ާ�է�ݧ� Win32::GUI.</p>
-  <p><a href="wtxt2xml.pl">wtxt2xml.pl</a> - �� Win32 GUI,
-  <a href="txt2xml.pl">txt2xml.pl</a> - �٧ѧ���� �ڧ� �ܧ�ާѧߧէߧ�� �����ܧ�, ��ѧҧ��ѧ֧� �ӧ֧٧է�,
-  <a href="T2X.pm">T2X.pm</a> - ��ҧ�ڧ� �ާ�է�ݧ� ���֧�ҧ�ѧ٧�ӧѧߧڧ�.</p>
-  <p>����֧�ҧ�ѧ٧�ӧѧߧڧ� �ڧ� HTML �� XML, ������� ��ѧ٧ҧڧ�ѧ֧� HTML,
-  �ܧ������� ��ڧ�֧� M$ Office: <a href="html2xml.pl">html2xml.pl</a></p>
+  <h4>Электронные книги формате XML</h4>
+  <p>Преобразование из простого текста в XML: рассчитано
+  на книги из <a href="http://lib.ru/">библиотеки Максима Мошкова</a>, нормально понимает
+  HTML вариант книг. На более сложном HTML скорее всего будет глючить. Для запуска нужен
+  Perl под Windows и модуль Win32::GUI.</p>
+  <p><a href="wtxt2xml.pl">wtxt2xml.pl</a> - с Win32 GUI,
+  <a href="txt2xml.pl">txt2xml.pl</a> - запуск из командной строки, работает везде,
+  <a href="T2X.pm">T2X.pm</a> - общий модуль преобразования.</p>
+  <p>Преобразование из HTML в XML, хорошо разбирает HTML,
+  который пишет M$ Office: <a href="html2xml.pl">html2xml.pl</a></p>
   <ul>
-   <li>05/04/02 ���٧ӧݧ֧ܧѧ֧� �ߧ֧ܧ������� ��ӧ�ۧ��ӧ� �է�ܧ�ާ֧ߧ�� �ڧ� �٧ѧԧ�ݧ�ӧܧ�, �էݧ� ����ԧ� �ߧ�ا֧� Win32::COM �� MSXML4</li>
-   <li>19/02/02 ����ҧѧӧڧ� ��ѧ���٧ߧѧӧѧߧڧ� ��ߧ���� �� ����ڧߧڧ� �ܧѧܧڧ�-��� �ާ֧ݧ���.</li>
+   <li>05/04/02 Извлекает некоторые свойства документа из заголовка, для этого нужен Win32::COM и MSXML4</li>
+   <li>19/02/02 Добавил распознавание сносок и починил какие-то мелочи.</li>
   </ul>
   
 <hr noshade="1">
-<div class="update">�����ݧ֧էߧ֧� ��ҧߧ�ӧݧ֧ߧڧ�: 2002/09/04 12:29</div>
-���ӧ���: <a href="mailto:mike@haali.net">���ڧ�ѧڧ� ���ѧ�ߧ֧�, mike@haali.net</a>
+<div class="update">Последнее обновление: 2002/09/04 12:29</div>
+Автор: <a href="mailto:mike@haali.net">Михаил Мацнев, mike@haali.net</a>
 
  </body>
 </html>
