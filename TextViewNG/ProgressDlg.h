@@ -1,33 +1,33 @@
 /*
- * Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1. Redistributions of source code must retain the above copyright
- *    notice immediately at the beginning of the file, without modification,
- *    this list of conditions, and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- * 3. Absolutely no warranty of function or purpose is made by the author
- *    Mike Matsnev.
- *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
- * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
- * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
- * $Id: ProgressDlg.h,v 1.11.2.1 2003/04/12 22:52:33 mike Exp $
- * 
- */
+* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+*
+* Redistribution and use in source and binary forms, with or without
+* modification, are permitted provided that the following conditions
+* are met:
+*
+* 1. Redistributions of source code must retain the above copyright
+*    notice immediately at the beginning of the file, without modification,
+*    this list of conditions, and the following disclaimer.
+* 2. Redistributions in binary form must reproduce the above copyright
+*    notice, this list of conditions and the following disclaimer in the
+*    documentation and/or other materials provided with the distribution.
+* 3. Absolutely no warranty of function or purpose is made by the author
+*    Mike Matsnev.
+*
+* THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+* IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+* OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+* IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+* INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+* NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+* DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+* THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+* THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*
+* $Id: ProgressDlg.h,v 1.11.2.1 2003/04/12 22:52:33 mike Exp $
+*
+*/
 
 #if !defined(AFX_PROGRESSDLG_H__D12B829A_6B89_4FA7_A77F_7C51E76560E4__INCLUDED_)
 #define AFX_PROGRESSDLG_H__D12B829A_6B89_4FA7_A77F_7C51E76560E4__INCLUDED_
@@ -43,46 +43,46 @@
 
 class CProgressDlg : public CDialog, public TextParser::Meter
 {
-// Construction
+	// Construction
 public:
-  CProgressDlg(const CString& msg,CWnd* pParent = NULL);   // standard constructor
+	CProgressDlg(const CString& msg, CWnd* pParent = NULL);   // standard constructor
 
-  virtual void	SetMax(DWORD max);
-  virtual void	SetCur(DWORD cur);
+	virtual void	SetMax(DWORD max);
+	virtual void	SetCur(DWORD cur);
 
-  // Dialog Data
-  //{{AFX_DATA(CProgressDlg)
-  enum { IDD = IDD_PROGRESS };
-  // NOTE: the ClassWizard will add data members here
-  //}}AFX_DATA
-  
-  
-  // Overrides
-  // ClassWizard generated virtual function overrides
-  //{{AFX_VIRTUAL(CProgressDlg)
+	// Dialog Data
+	//{{AFX_DATA(CProgressDlg)
+	enum { IDD = IDD_PROGRESS };
+	// NOTE: the ClassWizard will add data members here
+	//}}AFX_DATA
+
+
+	// Overrides
+	// ClassWizard generated virtual function overrides
+	//{{AFX_VIRTUAL(CProgressDlg)
 protected:
-  virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-  //}}AFX_VIRTUAL
-  
-  // Implementation
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+	//}}AFX_VIRTUAL
+
+	// Implementation
 protected:
-  enum { MAXSAMP=128 };
-  CString	  m_msg;
-  DWORD		  m_last;
-  DWORD		  m_starttime;
-  DWORD		  m_samples[2*MAXSAMP];
-  DWORD		  m_tail;
-  DWORD		  m_nsamp;
-  DWORD		  m_curbytes;
-  DWORD		  m_lastbytes;
-  DWORD		  m_lastupdate;
-  bool		  m_visible;
-  // Generated message map functions
-  //{{AFX_MSG(CProgressDlg)
-  virtual BOOL OnInitDialog();
-  //}}AFX_MSG
-  afx_msg void OnSettingChange(UINT uFlags,LPCTSTR lpszSection);
-  DECLARE_MESSAGE_MAP()
+	enum { MAXSAMP = 128 };
+	CString	  m_msg;
+	DWORD		  m_last;
+	DWORD		  m_starttime;
+	DWORD		  m_samples[2 * MAXSAMP];
+	DWORD		  m_tail;
+	DWORD		  m_nsamp;
+	DWORD		  m_curbytes;
+	DWORD		  m_lastbytes;
+	DWORD		  m_lastupdate;
+	bool		  m_visible;
+	// Generated message map functions
+	//{{AFX_MSG(CProgressDlg)
+	virtual BOOL OnInitDialog();
+	//}}AFX_MSG
+	afx_msg void OnSettingChange(UINT uFlags, LPCTSTR lpszSection);
+	DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

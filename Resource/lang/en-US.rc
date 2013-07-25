@@ -3,379 +3,379 @@
 
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
-/////////////////////////////////////////////////////////////////////////////
-//
-// Menubar
-//
+	/////////////////////////////////////////////////////////////////////////////
+	//
+	// Menubar
+	//
 
-IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
-BEGIN
-    POPUP "Tools"
-    BEGIN
-        MENUITEM "Copy",                        ID_EDIT_COPY
-        MENUITEM SEPARATOR
-        MENUITEM "Find...",                     ID_FIND
-        MENUITEM "Find next",                   ID_FINDNEXT
-        MENUITEM SEPARATOR
-        MENUITEM "Back",                        ID_BACK
-        MENUITEM "Forward",                     ID_FORWARD
-        MENUITEM SEPARATOR
-        MENUITEM "Add bookmark...",             ID_ADD_BMK
-        MENUITEM "Contents...",                 ID_BOOKMARKS
-        MENUITEM "Export bookmarks...",         ID_FILE_EXPORTBMK
-        MENUITEM SEPARATOR
-        MENUITEM "Open...",                     ID_FILE_OPEN
-        MENUITEM "About...",                    ID_APP_ABOUT
-        MENUITEM "Exit",                        ID_APP_EXIT
-    END
-    POPUP "Options"
-    BEGIN
-        MENUITEM "Fullscreen",                  ID_FULLSCREEN
-        MENUITEM SEPARATOR
-        MENUITEM "File format...",              ID_FILEFORMAT
-        MENUITEM "Display...",                  ID_DISP_OPTIONS
-        POPUP "Progress bar"
-        BEGIN
-            MENUITEM "Enable",                      ID_PB_TOGGLE
-            MENUITEM SEPARATOR
-            MENUITEM "Chapter title",               ID_PB_CHAPTER
-            MENUITEM "Position",                    ID_PB_POS
-            MENUITEM "Document length",             ID_PB_TOP
-            MENUITEM "Autoscroll speed",            ID_PB_AS
-            MENUITEM "Time",                        ID_PB_TIME
-            MENUITEM "Battery",                     ID_PB_BATTERY
-        END
-        POPUP "Colors..."
-        BEGIN
-            MENUITEM "Change...",                   ID_COLORS
-            MENUITEM SEPARATOR
-            MENUITEM SEPARATOR
-            MENUITEM "New profile...",              ID_COLORS_ADDP
-            MENUITEM "Delete profile",              ID_COLORS_DELP
-        END
-        MENUITEM "Styles...",                   ID_STYLES
-        MENUITEM "Buttons...",                  ID_KEYS
-        MENUITEM "General...",                  ID_MISCOPT
-    END
-END
+	IDR_MAINFRAME MENU PRELOAD DISCARDABLE
+	BEGIN
+	POPUP "Tools"
+	BEGIN
+	MENUITEM "Copy", ID_EDIT_COPY
+	MENUITEM SEPARATOR
+	MENUITEM "Find...", ID_FIND
+	MENUITEM "Find next", ID_FINDNEXT
+	MENUITEM SEPARATOR
+	MENUITEM "Back", ID_BACK
+	MENUITEM "Forward", ID_FORWARD
+	MENUITEM SEPARATOR
+	MENUITEM "Add bookmark...", ID_ADD_BMK
+	MENUITEM "Contents...", ID_BOOKMARKS
+	MENUITEM "Export bookmarks...", ID_FILE_EXPORTBMK
+	MENUITEM SEPARATOR
+	MENUITEM "Open...", ID_FILE_OPEN
+	MENUITEM "About...", ID_APP_ABOUT
+	MENUITEM "Exit", ID_APP_EXIT
+	END
+	POPUP "Options"
+	BEGIN
+	MENUITEM "Fullscreen", ID_FULLSCREEN
+	MENUITEM SEPARATOR
+	MENUITEM "File format...", ID_FILEFORMAT
+	MENUITEM "Display...", ID_DISP_OPTIONS
+	POPUP "Progress bar"
+	BEGIN
+	MENUITEM "Enable", ID_PB_TOGGLE
+	MENUITEM SEPARATOR
+	MENUITEM "Chapter title", ID_PB_CHAPTER
+	MENUITEM "Position", ID_PB_POS
+	MENUITEM "Document length", ID_PB_TOP
+	MENUITEM "Autoscroll speed", ID_PB_AS
+	MENUITEM "Time", ID_PB_TIME
+	MENUITEM "Battery", ID_PB_BATTERY
+	END
+	POPUP "Colors..."
+	BEGIN
+	MENUITEM "Change...", ID_COLORS
+	MENUITEM SEPARATOR
+	MENUITEM SEPARATOR
+	MENUITEM "New profile...", ID_COLORS_ADDP
+	MENUITEM "Delete profile", ID_COLORS_DELP
+	END
+	MENUITEM "Styles...", ID_STYLES
+	MENUITEM "Buttons...", ID_KEYS
+	MENUITEM "General...", ID_MISCOPT
+	END
+	END
 
-/////////////////////////////////////////////////////////////////////////////
-//
-// Dialog
-//
+	/////////////////////////////////////////////////////////////////////////////
+	//
+	// Dialog
+	//
 
-IDD_OPTIONS DIALOG DISCARDABLE  0, 0, 213, 124
-STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Options"
-FONT 10, "MS Shell Dlg"
-BEGIN
-    LTEXT           "Font:",IDC_STATIC,3,7,30,8
-    COMBOBOX        IDC_FACE,3,15,80,65,CBS_DROPDOWN | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Size:",IDC_STATIC,90,7,30,8
-    EDITTEXT        IDC_FONTSIZE,91,15,43,12,ES_AUTOHSCROLL
-    CONTROL         "Spin1",IDC_SIZESPIN,"msctls_updown32",UDS_SETBUDDYINT | 
-                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
-                    UDS_NOTHOUSANDS,123,15,11,12
-    LTEXT           "Rotate:",IDC_STATIC,146,7,27,8
-    COMBOBOX        IDC_ROTATE,146,15,31,53,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    CONTROL         "Bold",IDC_BOLD,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | 
-                    WS_TABSTOP,3,32,29,10
-    LTEXT           "Font smoothing:",IDC_STATIC,40,32,49,8
-    COMBOBOX        IDC_CLEARTYPE,91,30,43,57,CBS_DROPDOWNLIST | WS_TABSTOP
-    LTEXT           "Columns:",IDC_STATIC,146,32,31,9
-    COMBOBOX        IDC_COLUMNS,146,44,31,53,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    CONTROL         "Sample",IDC_TEXTSAMPLE,"Button",BS_OWNERDRAW | 
-                    WS_DISABLED,3,44,131,22
-    LTEXT           "Margins:",IDC_STATIC,3,74,28,8
-    EDITTEXT        IDC_MARGINS,37,72,31,13,ES_AUTOHSCROLL
-    CONTROL         "Spin2",IDC_MARGINSPIN,"msctls_updown32",UDS_SETBUDDYINT | 
-                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
-                    UDS_NOTHOUSANDS,55,74,11,16
-    CONTROL         "Hyphenate text",IDC_SHYP,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,3,92,67,10
-    CONTROL         "Justify",IDC_JUSTIFY,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,91,92,44,10
-    DEFPUSHBUTTON   "OK",IDOK,125,105,40,15
-    PUSHBUTTON      "Cancel",IDCANCEL,171,105,40,15
-END
+	IDD_OPTIONS DIALOG DISCARDABLE  0, 0, 213, 124
+	STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+	CAPTION "Options"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	LTEXT           "Font:", IDC_STATIC, 3, 7, 30, 8
+	COMBOBOX        IDC_FACE, 3, 15, 80, 65, CBS_DROPDOWN | CBS_SORT |
+	WS_VSCROLL | WS_TABSTOP
+	LTEXT           "Size:", IDC_STATIC, 90, 7, 30, 8
+	EDITTEXT        IDC_FONTSIZE, 91, 15, 43, 12, ES_AUTOHSCROLL
+	CONTROL         "Spin1", IDC_SIZESPIN, "msctls_updown32", UDS_SETBUDDYINT |
+	UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS |
+	UDS_NOTHOUSANDS, 123, 15, 11, 12
+	LTEXT           "Rotate:", IDC_STATIC, 146, 7, 27, 8
+	COMBOBOX        IDC_ROTATE, 146, 15, 31, 53, CBS_DROPDOWNLIST | WS_VSCROLL |
+	WS_TABSTOP
+	CONTROL         "Bold", IDC_BOLD, "Button", BS_AUTOCHECKBOX | BS_NOTIFY |
+	WS_TABSTOP, 3, 32, 29, 10
+	LTEXT           "Font smoothing:", IDC_STATIC, 40, 32, 49, 8
+	COMBOBOX        IDC_CLEARTYPE, 91, 30, 43, 57, CBS_DROPDOWNLIST | WS_TABSTOP
+	LTEXT           "Columns:", IDC_STATIC, 146, 32, 31, 9
+	COMBOBOX        IDC_COLUMNS, 146, 44, 31, 53, CBS_DROPDOWNLIST | WS_VSCROLL |
+	WS_TABSTOP
+	CONTROL         "Sample", IDC_TEXTSAMPLE, "Button", BS_OWNERDRAW |
+	WS_DISABLED, 3, 44, 131, 22
+	LTEXT           "Margins:", IDC_STATIC, 3, 74, 28, 8
+	EDITTEXT        IDC_MARGINS, 37, 72, 31, 13, ES_AUTOHSCROLL
+	CONTROL         "Spin2", IDC_MARGINSPIN, "msctls_updown32", UDS_SETBUDDYINT |
+	UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS |
+	UDS_NOTHOUSANDS, 55, 74, 11, 16
+	CONTROL         "Hyphenate text", IDC_SHYP, "Button", BS_AUTOCHECKBOX |
+	WS_TABSTOP, 3, 92, 67, 10
+	CONTROL         "Justify", IDC_JUSTIFY, "Button", BS_AUTOCHECKBOX |
+	WS_TABSTOP, 91, 92, 44, 10
+	DEFPUSHBUTTON   "OK", IDOK, 125, 105, 40, 15
+	PUSHBUTTON      "Cancel", IDCANCEL, 171, 105, 40, 15
+	END
 
-IDD_FILEFORMAT DIALOG DISCARDABLE  0, 0, 138, 115
-STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "File Format"
-FONT 10, "MS Shell Dlg"
-BEGIN
-    COMBOBOX        IDC_FILEFORMAT,7,16,124,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    COMBOBOX        IDC_ENCODING,7,46,124,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    LTEXT           "File format:",IDC_STATIC,7,7,75,8
-    LTEXT           "Encoding:",IDC_STATIC,7,35,75,8
-    DEFPUSHBUTTON   "OK",IDOK,45,95,40,15
-    PUSHBUTTON      "Cancel",IDCANCEL,91,95,40,15
-    COMBOBOX        IDC_DEF_ENCODING,7,76,124,65,CBS_DROPDOWNLIST | 
-                    WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Default encoding:",IDC_STATIC,7,65,75,8
-END
+	IDD_FILEFORMAT DIALOG DISCARDABLE  0, 0, 138, 115
+	STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+	CAPTION "File Format"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	COMBOBOX        IDC_FILEFORMAT, 7, 16, 124, 65, CBS_DROPDOWNLIST | WS_VSCROLL |
+	WS_TABSTOP
+	COMBOBOX        IDC_ENCODING, 7, 46, 124, 65, CBS_DROPDOWNLIST | WS_VSCROLL |
+	WS_TABSTOP
+	LTEXT           "File format:", IDC_STATIC, 7, 7, 75, 8
+	LTEXT           "Encoding:", IDC_STATIC, 7, 35, 75, 8
+	DEFPUSHBUTTON   "OK", IDOK, 45, 95, 40, 15
+	PUSHBUTTON      "Cancel", IDCANCEL, 91, 95, 40, 15
+	COMBOBOX        IDC_DEF_ENCODING, 7, 76, 124, 65, CBS_DROPDOWNLIST |
+	WS_VSCROLL | WS_TABSTOP
+	LTEXT           "Default encoding:", IDC_STATIC, 7, 65, 75, 8
+	END
 
-IDD_COLORSEL DIALOG DISCARDABLE  0, 0, 138, 132
-STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Colors"
-FONT 10, "MS Shell Dlg"
-BEGIN
-    COMBOBOX        IDC_COLORS,33,7,97,75,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    SCROLLBAR       IDC_RED,22,23,83,9,WS_TABSTOP
-    SCROLLBAR       IDC_GREEN,22,36,83,9,WS_TABSTOP
-    SCROLLBAR       IDC_BLUE,22,49,83,9,WS_TABSTOP
-    LTEXT           "R:",IDC_STATIC,7,23,10,8
-    LTEXT           "G:",IDC_STATIC,7,37,10,8
-    LTEXT           "B:",IDC_STATIC,7,50,10,8
-    LTEXT           "",IDC_SRED,108,23,23,9
-    LTEXT           "",IDC_SGREEN,108,37,23,9
-    LTEXT           "",IDC_SBLUE,108,50,23,9
-    CONTROL         "",IDC_SAMPLE,"Button",BS_OWNERDRAW | WS_DISABLED,13,63,
-                    111,21
-    LTEXT           "Color:",IDC_STATIC,7,9,24,9
-    DEFPUSHBUTTON   "OK",IDOK,50,113,40,15
-    PUSHBUTTON      "Cancel",IDCANCEL,95,113,40,15
-    LTEXT           "Display gamma:",IDC_STATIC,7,88,55,8
-    SCROLLBAR       IDC_GAMMA,7,99,122,9
-    LTEXT           "",IDC_TXTGAMMA,65,88,36,8
-END
+	IDD_COLORSEL DIALOG DISCARDABLE  0, 0, 138, 132
+	STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+	CAPTION "Colors"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	COMBOBOX        IDC_COLORS, 33, 7, 97, 75, CBS_DROPDOWNLIST | WS_VSCROLL |
+	WS_TABSTOP
+	SCROLLBAR       IDC_RED, 22, 23, 83, 9, WS_TABSTOP
+	SCROLLBAR       IDC_GREEN, 22, 36, 83, 9, WS_TABSTOP
+	SCROLLBAR       IDC_BLUE, 22, 49, 83, 9, WS_TABSTOP
+	LTEXT           "R:", IDC_STATIC, 7, 23, 10, 8
+	LTEXT           "G:", IDC_STATIC, 7, 37, 10, 8
+	LTEXT           "B:", IDC_STATIC, 7, 50, 10, 8
+	LTEXT           "", IDC_SRED, 108, 23, 23, 9
+	LTEXT           "", IDC_SGREEN, 108, 37, 23, 9
+	LTEXT           "", IDC_SBLUE, 108, 50, 23, 9
+	CONTROL         "", IDC_SAMPLE, "Button", BS_OWNERDRAW | WS_DISABLED, 13, 63,
+	111, 21
+	LTEXT           "Color:", IDC_STATIC, 7, 9, 24, 9
+	DEFPUSHBUTTON   "OK", IDOK, 50, 113, 40, 15
+	PUSHBUTTON      "Cancel", IDCANCEL, 95, 113, 40, 15
+	LTEXT           "Display gamma:", IDC_STATIC, 7, 88, 55, 8
+	SCROLLBAR       IDC_GAMMA, 7, 99, 122, 9
+	LTEXT           "", IDC_TXTGAMMA, 65, 88, 36, 8
+	END
 
-IDD_INPUTBOX DIALOG DISCARDABLE  0, 0, 162, 44
-STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-FONT 10, "MS Shell Dlg"
-BEGIN
-    LTEXT           "",IDC_LABEL,4,7,104,8
-    EDITTEXT        IDC_WORD,4,18,110,12,ES_AUTOHSCROLL
-    DEFPUSHBUTTON   "OK",IDOK,120,5,40,15
-    PUSHBUTTON      "Cancel",IDCANCEL,120,25,40,15
-END
+	IDD_INPUTBOX DIALOG DISCARDABLE  0, 0, 162, 44
+	STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	LTEXT           "", IDC_LABEL, 4, 7, 104, 8
+	EDITTEXT        IDC_WORD, 4, 18, 110, 12, ES_AUTOHSCROLL
+	DEFPUSHBUTTON   "OK", IDOK, 120, 5, 40, 15
+	PUSHBUTTON      "Cancel", IDCANCEL, 120, 25, 40, 15
+	END
 
-IDD_PROGRESS DIALOG DISCARDABLE  0, 0, 121, 47
-STYLE WS_POPUP | WS_CAPTION
-FONT 10, "MS Shell Dlg"
-BEGIN
-    CONTROL         "Progress1",IDC_PROGRESS,"msctls_progress32",PBS_SMOOTH | 
-                    WS_BORDER,7,7,107,18
-    LTEXT           "",IDC_PROGRESSTEXT,7,31,107,9
-END
+	IDD_PROGRESS DIALOG DISCARDABLE  0, 0, 121, 47
+	STYLE WS_POPUP | WS_CAPTION
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	CONTROL         "Progress1", IDC_PROGRESS, "msctls_progress32", PBS_SMOOTH |
+	WS_BORDER, 7, 7, 107, 18
+	LTEXT           "", IDC_PROGRESSTEXT, 7, 31, 107, 9
+	END
 
-IDD_KEYS DIALOG DISCARDABLE  0, 0, 138, 144
-STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Buttons"
-FONT 10, "MS Shell Dlg"
-BEGIN
-    LTEXT           "   1. Select command",IDC_STATIC,0,2,103,8
-    CONTROL         "List1",IDC_COMMANDS,"SysListView32",LVS_REPORT | 
-                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | 
-                    WS_BORDER | WS_TABSTOP,3,11,132,88
-    LTEXT           "   2. Assign buttons",IDC_LABEL,2,101,104,8
-    PUSHBUTTON      "Assign",IDASSIGN,17,112,45,12
-    PUSHBUTTON      "Clear",IDCLEAR,72,112,45,12
-    DEFPUSHBUTTON   "OK",IDOK,50,128,40,12
-    PUSHBUTTON      "Cancel",IDCANCEL,95,128,40,12
-END
+	IDD_KEYS DIALOG DISCARDABLE  0, 0, 138, 144
+	STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+	CAPTION "Buttons"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	LTEXT           "   1. Select command", IDC_STATIC, 0, 2, 103, 8
+	CONTROL         "List1", IDC_COMMANDS, "SysListView32", LVS_REPORT |
+	LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER |
+	WS_BORDER | WS_TABSTOP, 3, 11, 132, 88
+	LTEXT           "   2. Assign buttons", IDC_LABEL, 2, 101, 104, 8
+	PUSHBUTTON      "Assign", IDASSIGN, 17, 112, 45, 12
+	PUSHBUTTON      "Clear", IDCLEAR, 72, 112, 45, 12
+	DEFPUSHBUTTON   "OK", IDOK, 50, 128, 40, 12
+	PUSHBUTTON      "Cancel", IDCANCEL, 95, 128, 40, 12
+	END
 
-IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 226, 151
-STYLE WS_POPUP | WS_CAPTION
-CAPTION "About Haali Reader"
-FONT 10, "MS Shell Dlg"
-BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,5,5,20,20
-    LTEXT           "",IDC_ABOUTVER,35,1,188,30,SS_NOPREFIX
-    LTEXT           "",IDC_ABOUTINFO,2,33,221,94,SS_NOPREFIX
-    PUSHBUTTON      "Copyrights",IDC_ABOUT_TOGGLE,123,130,45,15
-    DEFPUSHBUTTON   "OK",IDOK,175,130,45,15
-END
+	IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 226, 151
+	STYLE WS_POPUP | WS_CAPTION
+	CAPTION "About Haali Reader"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	ICON            IDR_MAINFRAME, IDC_STATIC, 5, 5, 20, 20
+	LTEXT           "", IDC_ABOUTVER, 35, 1, 188, 30, SS_NOPREFIX
+	LTEXT           "", IDC_ABOUTINFO, 2, 33, 221, 94, SS_NOPREFIX
+	PUSHBUTTON      "Copyrights", IDC_ABOUT_TOGGLE, 123, 130, 45, 15
+	DEFPUSHBUTTON   "OK", IDOK, 175, 130, 45, 15
+	END
 
-IDD_CONTENTS DIALOG DISCARDABLE  0, 0, 226, 209
-STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Contents"
-FONT 10, "MS Shell Dlg"
-BEGIN
-    CONTROL         "",IDC_CONTENTS,"XListBox",WS_GROUP | WS_TABSTOP,0,0,225,
-                    191
-    DEFPUSHBUTTON   "OK",IDOK,146,194,36,13
-    PUSHBUTTON      "Cancel",IDCANCEL,187,194,36,13
-END
+	IDD_CONTENTS DIALOG DISCARDABLE  0, 0, 226, 209
+	STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+	CAPTION "Contents"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	CONTROL         "", IDC_CONTENTS, "XListBox", WS_GROUP | WS_TABSTOP, 0, 0, 225,
+	191
+	DEFPUSHBUTTON   "OK", IDOK, 146, 194, 36, 13
+	PUSHBUTTON      "Cancel", IDCANCEL, 187, 194, 36, 13
+	END
 
-IDD_FILEOPEN DIALOG DISCARDABLE  0, 0, 226, 194
-STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Open file"
-FONT 10, "MS Shell Dlg"
-BEGIN
-    CONTROL         "",IDC_FILEPATH,"Static",SS_LEFTNOWORDWRAP | SS_NOPREFIX | 
-                    WS_GROUP,0,0,226,10
-    CONTROL         "",IDC_FILELIST,"XListBox",WS_GROUP | WS_TABSTOP,0,10,
-                    226,160
-    DEFPUSHBUTTON   "OK",IDOK,135,175,40,15,WS_GROUP
-    PUSHBUTTON      "Cancel",IDCANCEL,181,175,40,15
-END
+	IDD_FILEOPEN DIALOG DISCARDABLE  0, 0, 226, 194
+	STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+	CAPTION "Open file"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	CONTROL         "", IDC_FILEPATH, "Static", SS_LEFTNOWORDWRAP | SS_NOPREFIX |
+	WS_GROUP, 0, 0, 226, 10
+	CONTROL         "", IDC_FILELIST, "XListBox", WS_GROUP | WS_TABSTOP, 0, 10,
+	226, 160
+	DEFPUSHBUTTON   "OK", IDOK, 135, 175, 40, 15, WS_GROUP
+	PUSHBUTTON      "Cancel", IDCANCEL, 181, 175, 40, 15
+	END
 
-IDD_STYLES DIALOG DISCARDABLE  0, 0, 231, 100
-STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Styles"
-FONT 10, "MS Shell Dlg"
-BEGIN
-    LTEXT           "Element:",IDC_STATIC,3,10,29,8
-    COMBOBOX        IDC_ELEMENTS,37,7,87,65,CBS_DROPDOWNLIST | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Font size:",IDC_STATIC,3,29,36,8
-    LTEXT           "Color:",IDC_STATIC,48,29,36,8
-    LTEXT           "Align:",IDC_STATIC,93,29,36,8
-    LTEXT           "Left indent:",IDC_STATIC,138,29,38,8
-    LTEXT           "First line:",IDC_STATIC,186,29,35,8
-    COMBOBOX        IDC_FONT,3,38,42,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    COMBOBOX        IDC_COLOR,48,38,42,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    COMBOBOX        IDC_ALIGN,93,38,42,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    EDITTEXT        IDC_LI,138,38,42,12,ES_AUTOHSCROLL
-    CONTROL         "Spin1",IDC_LISPIN,"msctls_updown32",UDS_SETBUDDYINT | 
-                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,164,28,16,
-                    22
-    EDITTEXT        IDC_FIRST,186,38,42,12,ES_AUTOHSCROLL
-    CONTROL         "Spin1",IDC_FIRSTSPIN,"msctls_updown32",UDS_SETBUDDYINT | 
-                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,212,29,11,
-                    22
-    LTEXT           "Bold:",IDC_STATIC,3,54,36,8
-    LTEXT           "Italic:",IDC_STATIC,48,54,36,8
-    LTEXT           "Underline:",IDC_STATIC,93,54,36,8
-    LTEXT           "Right indent:",IDC_STATIC,138,54,44,8
-    COMBOBOX        IDC_FBOLD,3,63,42,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    COMBOBOX        IDC_FITALIC,48,63,42,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    COMBOBOX        IDC_FUNDERLINE,93,63,42,65,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    EDITTEXT        IDC_RI,138,63,42,12,ES_AUTOHSCROLL
-    CONTROL         "Spin2",IDC_RISPIN,"msctls_updown32",UDS_SETBUDDYINT | 
-                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,163,51,17,
-                    24
-    DEFPUSHBUTTON   "OK",IDOK,140,80,40,15
-    PUSHBUTTON      "Cancel",IDCANCEL,185,80,40,15
-END
+	IDD_STYLES DIALOG DISCARDABLE  0, 0, 231, 100
+	STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+	CAPTION "Styles"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	LTEXT           "Element:", IDC_STATIC, 3, 10, 29, 8
+	COMBOBOX        IDC_ELEMENTS, 37, 7, 87, 65, CBS_DROPDOWNLIST | CBS_SORT |
+	WS_VSCROLL | WS_TABSTOP
+	LTEXT           "Font size:", IDC_STATIC, 3, 29, 36, 8
+	LTEXT           "Color:", IDC_STATIC, 48, 29, 36, 8
+	LTEXT           "Align:", IDC_STATIC, 93, 29, 36, 8
+	LTEXT           "Left indent:", IDC_STATIC, 138, 29, 38, 8
+	LTEXT           "First line:", IDC_STATIC, 186, 29, 35, 8
+	COMBOBOX        IDC_FONT, 3, 38, 42, 65, CBS_DROPDOWNLIST | WS_VSCROLL |
+	WS_TABSTOP
+	COMBOBOX        IDC_COLOR, 48, 38, 42, 65, CBS_DROPDOWNLIST | WS_VSCROLL |
+	WS_TABSTOP
+	COMBOBOX        IDC_ALIGN, 93, 38, 42, 65, CBS_DROPDOWNLIST | WS_VSCROLL |
+	WS_TABSTOP
+	EDITTEXT        IDC_LI, 138, 38, 42, 12, ES_AUTOHSCROLL
+	CONTROL         "Spin1", IDC_LISPIN, "msctls_updown32", UDS_SETBUDDYINT |
+	UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS, 164, 28, 16,
+	22
+	EDITTEXT        IDC_FIRST, 186, 38, 42, 12, ES_AUTOHSCROLL
+	CONTROL         "Spin1", IDC_FIRSTSPIN, "msctls_updown32", UDS_SETBUDDYINT |
+	UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS, 212, 29, 11,
+	22
+	LTEXT           "Bold:", IDC_STATIC, 3, 54, 36, 8
+	LTEXT           "Italic:", IDC_STATIC, 48, 54, 36, 8
+	LTEXT           "Underline:", IDC_STATIC, 93, 54, 36, 8
+	LTEXT           "Right indent:", IDC_STATIC, 138, 54, 44, 8
+	COMBOBOX        IDC_FBOLD, 3, 63, 42, 65, CBS_DROPDOWNLIST | WS_VSCROLL |
+	WS_TABSTOP
+	COMBOBOX        IDC_FITALIC, 48, 63, 42, 65, CBS_DROPDOWNLIST | WS_VSCROLL |
+	WS_TABSTOP
+	COMBOBOX        IDC_FUNDERLINE, 93, 63, 42, 65, CBS_DROPDOWNLIST | WS_VSCROLL |
+	WS_TABSTOP
+	EDITTEXT        IDC_RI, 138, 63, 42, 12, ES_AUTOHSCROLL
+	CONTROL         "Spin2", IDC_RISPIN, "msctls_updown32", UDS_SETBUDDYINT |
+	UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS, 163, 51, 17,
+	24
+	DEFPUSHBUTTON   "OK", IDOK, 140, 80, 40, 15
+	PUSHBUTTON      "Cancel", IDCANCEL, 185, 80, 40, 15
+	END
 
-IDD_MISCOPT DIALOG DISCARDABLE  0, 0, 138, 105
-STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Miscellaneous options"
-FONT 10, "MS Shell Dlg"
-BEGIN
-    CONTROL         "Allow running multiple instances of TextViewNG",
-                    IDC_ALLOWMULTI,"Button",BS_AUTOCHECKBOX | BS_MULTILINE | 
-                    WS_TABSTOP,3,3,132,17
-    CONTROL         "Rotate buttons",IDC_ROTB,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,3,21,66,9
-    LTEXT           "Font cache size:",IDC_STATIC,3,36,54,8
-    EDITTEXT        IDC_FCSIZE,63,33,38,12,ES_AUTOHSCROLL
-    CONTROL         "Spin1",IDC_FCSIZESPIN,"msctls_updown32",UDS_SETBUDDYINT | 
-                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,124,9,11,
-                    27
-    LTEXT           "fonts",IDC_STATIC,103,36,32,8
-    LTEXT           "File buffer size:",IDC_STATIC,3,52,53,8
-    EDITTEXT        IDC_FBSIZE,63,49,38,12,ES_AUTOHSCROLL
-    CONTROL         "Spin2",IDC_FBSIZESPIN,"msctls_updown32",UDS_SETBUDDYINT | 
-                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,124,36,11,
-                    20
-    LTEXT           "KB",IDC_STATIC,103,52,28,8
-    LTEXT           "Save bookmarks for",IDC_STATIC,3,67,66,8
-    EDITTEXT        IDC_LASTFILES,69,65,33,12,ES_AUTOHSCROLL
-    CONTROL         "Spin1",IDC_LASTFSPIN,"msctls_updown32",UDS_SETBUDDYINT | 
-                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,89,15,18,
-                    20
-    LTEXT           "last files",IDC_STATIC,106,67,28,8
-    DEFPUSHBUTTON   "OK",IDOK,50,85,40,15
-    PUSHBUTTON      "Cancel",IDCANCEL,95,85,40,15
-    CONTROL         "Limit autorepeat rate",IDC_REPLIMIT,"Button",
-                    BS_AUTOCHECKBOX | NOT WS_VISIBLE,4,81,41,14
-END
+	IDD_MISCOPT DIALOG DISCARDABLE  0, 0, 138, 105
+	STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+	CAPTION "Miscellaneous options"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	CONTROL         "Allow running multiple instances of TextViewNG",
+	IDC_ALLOWMULTI, "Button", BS_AUTOCHECKBOX | BS_MULTILINE |
+	WS_TABSTOP, 3, 3, 132, 17
+	CONTROL         "Rotate buttons", IDC_ROTB, "Button", BS_AUTOCHECKBOX |
+	WS_TABSTOP, 3, 21, 66, 9
+	LTEXT           "Font cache size:", IDC_STATIC, 3, 36, 54, 8
+	EDITTEXT        IDC_FCSIZE, 63, 33, 38, 12, ES_AUTOHSCROLL
+	CONTROL         "Spin1", IDC_FCSIZESPIN, "msctls_updown32", UDS_SETBUDDYINT |
+	UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS, 124, 9, 11,
+	27
+	LTEXT           "fonts", IDC_STATIC, 103, 36, 32, 8
+	LTEXT           "File buffer size:", IDC_STATIC, 3, 52, 53, 8
+	EDITTEXT        IDC_FBSIZE, 63, 49, 38, 12, ES_AUTOHSCROLL
+	CONTROL         "Spin2", IDC_FBSIZESPIN, "msctls_updown32", UDS_SETBUDDYINT |
+	UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS, 124, 36, 11,
+	20
+	LTEXT           "KB", IDC_STATIC, 103, 52, 28, 8
+	LTEXT           "Save bookmarks for", IDC_STATIC, 3, 67, 66, 8
+	EDITTEXT        IDC_LASTFILES, 69, 65, 33, 12, ES_AUTOHSCROLL
+	CONTROL         "Spin1", IDC_LASTFSPIN, "msctls_updown32", UDS_SETBUDDYINT |
+	UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS, 89, 15, 18,
+	20
+	LTEXT           "last files", IDC_STATIC, 106, 67, 28, 8
+	DEFPUSHBUTTON   "OK", IDOK, 50, 85, 40, 15
+	PUSHBUTTON      "Cancel", IDCANCEL, 95, 85, 40, 15
+	CONTROL         "Limit autorepeat rate", IDC_REPLIMIT, "Button",
+	BS_AUTOCHECKBOX | NOT WS_VISIBLE, 4, 81, 41, 14
+	END
 
-IDD_KEYGRAB DIALOG DISCARDABLE  0, 0, 68, 58
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Grab key"
-FONT 10, "MS Shell Dlg"
-BEGIN
-END
+	IDD_KEYGRAB DIALOG DISCARDABLE  0, 0, 68, 58
+	STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+	CAPTION "Grab key"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	END
 
-IDD_DICTSETUP DIALOG DISCARDABLE  0, 0, 226, 94
-STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Dictionaries"
-FONT 10, "MS Shell Dlg"
-BEGIN
-    LISTBOX         IDC_DICTLIST,0,0,186,93,NOT LBS_NOTIFY | 
-                    LBS_NOINTEGRALHEIGHT | NOT WS_BORDER | WS_VSCROLL | 
-                    WS_HSCROLL | WS_TABSTOP
-    PUSHBUTTON      "&Add...",IDC_ADD_DICT,189,3,33,16
-    PUSHBUTTON      "&Remove",IDC_REMOVE_DICT,189,24,33,16
-    DEFPUSHBUTTON   "OK",IDOK,189,75,33,15
-    PUSHBUTTON      "Cancel",IDCANCEL,189,55,33,15
-END
+	IDD_DICTSETUP DIALOG DISCARDABLE  0, 0, 226, 94
+	STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+	CAPTION "Dictionaries"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	LISTBOX         IDC_DICTLIST, 0, 0, 186, 93, NOT LBS_NOTIFY |
+	LBS_NOINTEGRALHEIGHT | NOT WS_BORDER | WS_VSCROLL |
+	WS_HSCROLL | WS_TABSTOP
+	PUSHBUTTON      "&Add...", IDC_ADD_DICT, 189, 3, 33, 16
+	PUSHBUTTON      "&Remove", IDC_REMOVE_DICT, 189, 24, 33, 16
+	DEFPUSHBUTTON   "OK", IDOK, 189, 75, 33, 15
+	PUSHBUTTON      "Cancel", IDCANCEL, 189, 55, 33, 15
+	END
 
-IDD_ADDBMK DIALOG DISCARDABLE  0, 0, 142, 129
-STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Add bookmark"
-FONT 10, "MS Shell Dlg"
-BEGIN
-    EDITTEXT        IDC_BMKEDIT,5,15,130,89,ES_MULTILINE | ES_WANTRETURN | 
-                    WS_VSCROLL
-    DEFPUSHBUTTON   "OK",IDOK,50,110,40,15
-    PUSHBUTTON      "Cancel",IDCANCEL,95,110,40,15
-    LTEXT           "Bookmark text:",IDC_STATIC,5,5,95,10
-END
+	IDD_ADDBMK DIALOG DISCARDABLE  0, 0, 142, 129
+	STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+	CAPTION "Add bookmark"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	EDITTEXT        IDC_BMKEDIT, 5, 15, 130, 89, ES_MULTILINE | ES_WANTRETURN |
+	WS_VSCROLL
+	DEFPUSHBUTTON   "OK", IDOK, 50, 110, 40, 15
+	PUSHBUTTON      "Cancel", IDCANCEL, 95, 110, 40, 15
+	LTEXT           "Bookmark text:", IDC_STATIC, 5, 5, 95, 10
+	END
 
-IDD_FINDDLG DIALOG DISCARDABLE  0, 0, 192, 61
-STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Find text"
-FONT 10, "MS Shell Dlg"
-BEGIN
-    LTEXT           "Find what:",IDC_STATIC,7,7,69,8
-    EDITTEXT        IDC_FINDTEXT,7,17,124,12,ES_AUTOHSCROLL
-    CONTROL         "Match case",IDC_MATCHCASE,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,7,36,124,12
-    CONTROL         "Find from current position",IDC_FROMCURPOS,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,7,48,124,12
-    DEFPUSHBUTTON   "Find Next",IDOK,150,5,40,15
-    PUSHBUTTON      "Cancel",IDCANCEL,150,25,40,15
-END
+	IDD_FINDDLG DIALOG DISCARDABLE  0, 0, 192, 61
+	STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+	CAPTION "Find text"
+	FONT 10, "MS Shell Dlg"
+	BEGIN
+	LTEXT           "Find what:", IDC_STATIC, 7, 7, 69, 8
+	EDITTEXT        IDC_FINDTEXT, 7, 17, 124, 12, ES_AUTOHSCROLL
+	CONTROL         "Match case", IDC_MATCHCASE, "Button", BS_AUTOCHECKBOX |
+	WS_TABSTOP, 7, 36, 124, 12
+	CONTROL         "Find from current position", IDC_FROMCURPOS, "Button", BS_AUTOCHECKBOX |
+	WS_TABSTOP, 7, 48, 124, 12
+	DEFPUSHBUTTON   "Find Next", IDOK, 150, 5, 40, 15
+	PUSHBUTTON      "Cancel", IDCANCEL, 150, 25, 40, 15
+	END
 
-/////////////////////////////////////////////////////////////////////////////
-//
-// String Table
-//
+	/////////////////////////////////////////////////////////////////////////////
+	//
+	// String Table
+	//
 
-STRINGTABLE DISCARDABLE 
-BEGIN
-    ID_BACK                 "Back"
-    ID_FIND                 "Find..."
-    ID_FINDNEXT             "Find next"
-    IDS_CAP_TOOLS           "Tools"
-END
+	STRINGTABLE DISCARDABLE
+	BEGIN
+	ID_BACK                 "Back"
+	ID_FIND                 "Find..."
+	ID_FINDNEXT             "Find next"
+	IDS_CAP_TOOLS           "Tools"
+	END
 
-STRINGTABLE DISCARDABLE 
-BEGIN
-    IDS_CAP_OPTIONS         "Options"
-END
+	STRINGTABLE DISCARDABLE
+	BEGIN
+	IDS_CAP_OPTIONS         "Options"
+	END
 
-STRINGTABLE DISCARDABLE 
-BEGIN
-    ID_FORWARD              "Forward"
-END
+	STRINGTABLE DISCARDABLE
+	BEGIN
+	ID_FORWARD              "Forward"
+	END
 
-STRINGTABLE DISCARDABLE 
-BEGIN
-    ID_ADD_BMK              "Add a bookmark..."
-    ID_BOOKMARKS            "Table of contents and bookmarks..."
-END
+	STRINGTABLE DISCARDABLE
+	BEGIN
+	ID_ADD_BMK              "Add a bookmark..."
+	ID_BOOKMARKS            "Table of contents and bookmarks..."
+	END
 
-STRINGTABLE DISCARDABLE 
-BEGIN
-    ID_EDIT_COPY            "Copy"
-END
+	STRINGTABLE DISCARDABLE
+	BEGIN
+	ID_EDIT_COPY            "Copy"
+	END
 
-/////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////
