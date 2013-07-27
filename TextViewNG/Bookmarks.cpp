@@ -615,9 +615,7 @@ bool  Bookmarks::ExportAllBookmarks(const CString& destfile) {
 		cls.ReleaseBuffer(clslen);
 
 		// we have a file name at this point
-		MessageBox(0, name, 0, 0);
 		name = unescape(name);
-		MessageBox(0, name, 0, 0);
 
 		// enumerate bookmarks
 		HKEY  hKey;

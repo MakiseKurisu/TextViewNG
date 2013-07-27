@@ -51,13 +51,13 @@ public:
 	// Dialog Data
 	//{{AFX_DATA(COptionsDialog)
 	enum { IDD = IDD_OPTIONS };
-	BOOL	    m_bold;
-	int	    m_cleartype;
-	CString   m_face;
-	int	    m_size;
-	BOOL	    m_justify;
+	BOOL    m_bold;
+	int     m_cleartype;
+	CString m_face;
+	int     m_size;
+	BOOL    m_justify;
 	int	    m_margins;
-	BOOL	    m_hyphenate;
+	BOOL    m_hyphenate;
 	int	    m_angle;
 	int	    m_columns;
 	//}}AFX_DATA

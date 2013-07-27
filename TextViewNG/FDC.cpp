@@ -155,12 +155,20 @@ Font  *FontCache::FindOrAlloc(int size, unsigned flags, int an) {
 	lf.lfCharSet = DEFAULT_CHARSET;
 	lf.lfOutPrecision = OUT_DEFAULT_PRECIS;
 	lf.lfClipPrecision = CLIP_DEFAULT_PRECIS;
-	if (m_cleartype == 1)
-		lf.lfQuality = CLEARTYPE_QUALITY;
-	else if (m_cleartype == 2)
-		lf.lfQuality = ANTIALIASED_QUALITY;
-	else
-		lf.lfQuality = NONANTIALIASED_QUALITY;
+    switch (m_cleartype)
+    {
+    case 1:
+        lf.lfQuality = CLEARTYPE_QUALITY;
+        break;
+    case 2:
+        lf.lfQuality = CLEARTYPE_NATURAL_QUALITY;
+        break;
+    case 3:
+        lf.lfQuality = ANTIALIASED_QUALITY;
+        break;
+    default:
+        lf.lfQuality = NONANTIALIASED_QUALITY;
+    }
 	lf.lfPitchAndFamily = DEFAULT_PITCH | FF_DONTCARE;
 	if (flags&CFDC::FORCETAHOMA)
 		_tcsncpy_s(lf.lfFaceName, LF_FACESIZE, _T("Tahoma"), LF_FACESIZE - 1);
