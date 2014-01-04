@@ -1,0 +1,95 @@
+body {
+  color: black;
+  background: white;
+  font-family: sans-serif;
+  margin: 0px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table.center {
+  text-align: center;
+}
+
+td.border {
+  border: solid black 1px;
+  padding: 0.2em;
+}
+
+td.pb {
+  border-bottom: solid gray 2px;
+  padding-bottom: 1.3em;
+}
+
+td.pt {
+  padding-top: 1.3em;
+}
+
+td.pl {
+  width: 15em;
+  padding-right: 1em;
+}
+
+.bb {
+  border: solid black 1px;
+}
+
+div.main {
+  margin: 0.3em;
+}
+
+div.topmenu {
+  background: rgb(0,0,128);
+  padding: 0.3em;
+  text-align: center;
+}
+
+a.menu {
+  text-decoration: none;
+  font-weight: bolder;
+  color: gray;
+}
+
+div.update {
+  float: right;
+}
+
+div.logo {
+  float: left;
+}
+
+div.mirror {
+  float: right;
+  border: solid black 1px;
+  background: rgb(32,64,96);
+  padding-left: 0.1em;
+  padding-right: 0.2em;
+  padding-bottom: 0.1em;
+}
+
+div.center {
+  text-align: center;
+}
+
+a.sep {
+  padding-right: 0.3em;
+  border-right: solid black 1px;
+}
+
+a.small {
+  font-size: smaller;
+  font-weight: normal;
+}
+
+img.noborder {
+  border: none;
+}
+
+.c29 { color: #009999; font-weight: bold; }
+.c31 { color: #009999; }
+pre { font-size: larger; font-weight: bolder; }
+.c28 { color: #00ff00; }
+.c34 { color: #2e8b57; font-weight: bold; }
+
