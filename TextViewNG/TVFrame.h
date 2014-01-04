@@ -73,12 +73,8 @@ public:
 
 protected:  // control bar embedded members
 
-#ifdef _WIN32_WCE
-	CCeCommandBar		m_wndCommandBar;
-#else
 	CToolBar		m_wndCommandBar;
 	CMenu			*m_mainmenu;
-#endif
 
 	auto_ptr<CWnd>	m_wndView;
 	bool			m_realview;
@@ -90,24 +86,17 @@ protected:  // control bar embedded members
 	RECT			m_normsize;
 	bool			m_okstate;
 
-#if BE300
-	bool			m_fSQTray;
-#endif
-
 	HMENU			m_recent;
-	HMENU			m_dicts;
 	HMENU			m_colors;
 	int			m_in_fullscreen;
 	bool			m_fullscreen;
 
-#ifndef _WIN32_WCE
 	WINDOWPLACEMENT	m_wndpos;
-#endif
+
 	void			SaveWndPos();
 
 	void			DoFullScreen(bool fs);
 	void			UpdateRecentFiles(CMenu *menu);
-	void			UpdateDictionaries(CMenu *menu);
 	void			UpdateColors(CMenu *menu);
 	bool			TryOpenFile(CString& filename);
 	//{{AFX_MSG(CTVFrame)
@@ -130,12 +119,10 @@ protected:  // control bar embedded members
 	afx_msg void OnRecentFile(UINT cmd);
 	afx_msg void OnUpdateRecentFile(CCmdUI *pCmdUI);
 	afx_msg LRESULT OnOpenFile(WPARAM wParam, LPARAM lParam);
-#ifdef WM_POWERBROADCAST
 	afx_msg LRESULT OnPower(WPARAM wParam, LPARAM lParam) {
 		if (m_wndView.get()) return m_wndView->SendMessage(WM_POWERBROADCAST, wParam, lParam);
 		return TRUE;
 	}
-#endif
 	DECLARE_MESSAGE_MAP()
 };
 

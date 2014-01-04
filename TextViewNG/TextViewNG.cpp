@@ -222,11 +222,7 @@ static bool  FindOtherWindow(CWinThread* pThread, LPCTSTR cmdline) {
 					cd.lpData = (void *) cmdline;
 					::SendMessage(hFrame, WM_COPYDATA, 0, (LPARAM)&cd);
 				}
-#ifdef _WIN32_WCE
-				::SetForegroundWindow((HWND) (((DWORD) hFrame) | 0x01));
-#else
 				::SetForegroundWindow(hFrame);
-#endif
 				return true;
 			}
 		}

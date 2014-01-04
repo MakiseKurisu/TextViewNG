@@ -45,7 +45,6 @@ class CTView : public CWnd, public CRotate
 public:
 	CTView();
 	void SetFile(auto_ptr<TextFile> tfile);
-	bool SwitchToDict();
 
 	// Overrides
 	// ClassWizard generated virtual function overrides
@@ -260,8 +259,6 @@ protected:
 	void		  HandleMouseDown(CPoint point);
 	void		  TrackMouse();
 	void		  DisplaySelectionMenu(CPoint point);
-	bool		  OpenDict(bool *changed = NULL);
-	void		  InitDictName();
 	FilePos	  CurFilePos();
 
 
@@ -299,8 +296,6 @@ protected:
 
 	bool		  CanAddUIChar(TCHAR ch);
 
-	void		  LookupText(Buffer<wchar_t> text);
-
 	COLORREF	  v_C_BG();
 
 	// autoscroll support
@@ -320,8 +315,6 @@ protected:
 	afx_msg void OnUpdateBack(CCmdUI* pCmdUI);
 	afx_msg void OnBack();
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnDictSetup();
-	afx_msg void OnUpdateDictSetup(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateFind(CCmdUI* pCmdUI);
 	afx_msg void OnFind();
 	afx_msg void OnFindnext();
@@ -360,7 +353,6 @@ protected:
 	afx_msg void OnForward();
 	afx_msg void OnUpdateForward(CCmdUI* pCmdUI);
 	afx_msg void OnOK();
-	afx_msg void OnLookupSel();
 	afx_msg void OnKillFocus(CWnd* pNewWnd);
 	afx_msg void OnSetFocus(CWnd* pOldWnd);
 	afx_msg void StopAS();
@@ -395,17 +387,13 @@ protected:
 	//}}AFX_MSG
 	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	afx_msg LRESULT OnHotkey(WPARAM, LPARAM);
-	afx_msg void OnDict(UINT cmd);
-	afx_msg void OnUpdateDict(CCmdUI *pCmdUI);
 	afx_msg void OnSelColor(UINT cmd);
 	afx_msg void OnUpdateSelColor(CCmdUI *pCmdUI);
-#ifdef WM_POWERBROADCAST
 	afx_msg LRESULT OnPower(WPARAM wParam, LPARAM lParam) {
 		if (wParam == PBT_APMQUERYSUSPEND)
 			return m_AS.timer && m_hWnd == ::GetFocus() ? BROADCAST_QUERY_DENY : TRUE;
 		return TRUE;
 	}
-#endif
 	DECLARE_MESSAGE_MAP()
 };
 

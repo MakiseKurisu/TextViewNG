@@ -229,14 +229,6 @@ void Keys::InitKeys() {
 			if (_stscanf_s(val, _T("%u,%u,%u"), &g_actions[i].vk1, &g_actions[i].vk2, &g_actions[i].vk3) != 3)
 				g_actions[i].vk1 = g_actions[i].vk2 = g_actions[i].vk3 = 0;
 	}
-
-#ifdef _WIN32_WCE
-	if (!g_UnregisterFunc1) {
-		HMODULE hLib = GetModuleHandle(_T("coredll.dll"));
-		if (hLib)
-			g_UnregisterFunc1 = (BOOL(*)(UINT, UINT))GetProcAddress(hLib, _T("UnregisterFunc1"));
-	}
-#endif
 }
 
 static void SaveKeys() {
@@ -283,12 +275,6 @@ void Keys::SetWindow(HWND hWnd) {
 	g_keyowner = hWnd;
 	if (g_keyowner)
 		GrabAllKeys(g_keyowner);
-	else {
-#ifdef SPI_APPBUTTONCHANGE
-		// WinCE doesn't have SendMessageTimeout, so we have to post it
-		::PostMessage(HWND_BROADCAST, WM_WININICHANGE, SPI_APPBUTTONCHANGE, 0);
-#endif
-	}
 }
 
 bool  Keys::TranslateKey(UINT vk, UINT& cmd, int angle) {
@@ -418,46 +404,12 @@ BOOL CKeysDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-#if POCKETPC
-	((CCeCommandBar *) m_pWndEmptyCB)->LoadToolBar(cIDR_DIALOG);
-#endif
-
-#if POCKETPC
-	// resize the list box
-	RECT	    rcC, rcB1, rcB2, rcL;
-	GetClientRect(&rcC);
-
-	::GetWindowRect(::GetDlgItem(m_hWnd, IDC_LABEL), &rcL); ScreenToClient(&rcL);
-	::GetWindowRect(::GetDlgItem(m_hWnd, IDASSIGN), &rcB1); ScreenToClient(&rcB1);
-	::GetWindowRect(::GetDlgItem(m_hWnd, IDCLEAR), &rcB2); ScreenToClient(&rcB2);
-
-	int	    delta = rcC.bottom - rcB1.bottom - 4;
-
-	if (delta > 0) {
-		rcL.top += delta; rcL.bottom += delta;
-		rcB1.top += delta; rcB1.bottom += delta;
-		rcB2.top += delta; rcB2.bottom += delta;
-		GetDlgItem(IDC_LABEL)->MoveWindow(&rcL);
-		GetDlgItem(IDASSIGN)->MoveWindow(&rcB1);
-		GetDlgItem(IDCLEAR)->MoveWindow(&rcB2);
-
-		GetDlgItem(IDC_COMMANDS)->GetWindowRect(&rcL);
-		ScreenToClient(&rcL);
-		rcL.bottom += delta;
-		rcL.left = rcC.left - 1;
-		rcL.right = rcC.right + 1;
-		GetDlgItem(IDC_COMMANDS)->MoveWindow(&rcL);
-	}
-#endif
-
 	::EnableWindow(::GetDlgItem(m_hWnd, IDASSIGN), FALSE);
 	::EnableWindow(::GetDlgItem(m_hWnd, IDCLEAR), FALSE);
 
 	CWnd	  *lv = GetDlgItem(IDC_COMMANDS);
 
-#ifdef LVS_EX_FULLROWSELECT
 	lv->SendMessage(LVM_SETEXTENDEDLISTVIEWSTYLE, LVS_EX_FULLROWSELECT, LVS_EX_FULLROWSELECT);
-#endif
 
 	RECT	  rcLV;
 	lv->GetClientRect(&rcLV);

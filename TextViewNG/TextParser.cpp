@@ -37,7 +37,6 @@
 #include "TextParser.h"
 #include "Unicode.h"
 #include "FastArray.h"
-#include "Image.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -428,101 +427,6 @@ const TCHAR	*TextParser::GetFormatName(int format) {
 	return g_simple_formats[format].name;
 }
 
-/* Image parser */
-class ImageParser : public TextParser, public ImageLoader::BinReader {
-protected:
-	Image	  m_cache;
-	int	  m_crot, m_cmaxw, m_cmaxh;
-public:
-	ImageParser(Meter *m, CBufFile *fp, HANDLE heap, int format, int encoding, Bookmarks *bmk) :
-		TextParser(m, fp, heap, bmk)
-	{
-		m_format = format;
-		m_encoding = encoding;
-		m_cache.hBmp = 0;
-	}
-	~ImageParser() {
-		if (m_cache.hBmp)
-			DeleteObject(m_cache.hBmp);
-	}
-
-	// paragraphs
-	virtual int		Length(int docid) { return 1; } // in paragraphs
-	virtual Paragraph	GetParagraph(int docid, int para);
-	virtual int		GetPLength(int docid, int para) { return para == 0 ? 32 : 0; }
-	virtual int		GetPStart(int docid, int para) { return 0; }
-	virtual int		GetTotalLength(int docid) { return 32; }
-	virtual int		LookupParagraph(int docid, int charpos) { return 0; }
-
-	// images
-	virtual bool		GetImage(const wchar_t *name, HDC hDC,
-		int maxwidth, int maxheight, int rotation, Image& img);
-	virtual void		InvalidateImageCache() {
-		if (m_cache.hBmp) {
-			DeleteObject(m_cache.hBmp);
-			m_cache.hBmp = 0;
-		}
-	}
-	virtual bool		IsImage() { return true; }
-
-	// BinReader interface
-	virtual int		Read(void *buffer, int count) {
-		return m_fp->read(buffer, count);
-	}
-};
-
-Paragraph ImageParser::GetParagraph(int docid, int para) {
-	if (para != 0)
-		return Paragraph();
-	Paragraph	p(ImageLoader::IMAGE_VSIZE);
-	p.lindent = p.rindent = p.findent = 0;
-	for (int i = 0; i < ImageLoader::IMAGE_VSIZE; ++i) {
-		p.str[i] = L' ';
-		p.cflags[i].wa = 0;
-	}
-	// abuse links for image href
-	p.links = Buffer<Paragraph::Link>(1);
-	p.links[0].off = 0;
-	p.links[0].len = ImageLoader::IMAGE_VSIZE;
-	p.links[0].target = L"1";
-	p.flags = Paragraph::image;
-	return p;
-}
-
-bool	ImageParser::GetImage(const wchar_t *name, HDC hDC,
-	int maxwidth, int maxheight, int rotation, Image& img)
-{
-	if (!name || wcscmp(name, L"1"))
-		return false;
-	if (m_cache.hBmp &&
-		(m_cmaxw == maxwidth || (m_cache.width < m_cmaxw && m_cache.width < maxwidth)) &&
-		(m_cmaxh == maxheight || (m_cache.height < m_cmaxh && m_cache.height < maxheight)) &&
-		m_crot == rotation)
-	{
-		img = m_cache;
-		return true;
-	}
-	if (m_cache.hBmp) {
-		DeleteObject(m_cache.hBmp);
-		m_cache.hBmp = 0;
-	}
-	m_fp->seek(0);
-	bool ret = ImageLoader::Load(hDC,
-		m_format == PNG_FORMAT ? L"image/png" : L"image/jpeg",
-		this, maxwidth, maxheight, rotation,
-		m_cache.hBmp, m_cache.width, m_cache.height);
-	if (ret) {
-		img = m_cache;
-		m_crot = rotation;
-		m_cmaxh = maxheight;
-		m_cmaxw = maxwidth;
-	}
-	else
-		m_cache.hBmp = 0;
-	return ret;
-}
-
-
 TextParser	*TextParser::Create(Meter *m, CBufFile *fp, int format, int encoding, Bookmarks *bmk) {
 	if (format < 0)
 		return NULL;
@@ -535,18 +439,7 @@ TextParser	*TextParser::Create(Meter *m, CBufFile *fp, int format, int encoding,
 		switch (format)
 		{
 		case PNG_FORMAT:
-		case JPEG_FORMAT: /* Images */
-			return new ImageParser(m, fp, heap, format, encoding, bmk);
-			break;
-			/*
-			case XML_FORMAT:
-			XMLParser *p=XMLParser::MakeParser(m,fp,bmk,heap);
-			p->m_format=NUM_SIMPLE_FORMATS;
-			if (p->ParseFile(encoding))
-			return p;
-			delete p;
-			break;
-			*/
+		case JPEG_FORMAT:
 		default:	//format<NUM_SIMPLE_FORMATS
 			fp->seek(0);
 			return new SimpleTextParser(m, fp, heap, format, encoding, bmk);

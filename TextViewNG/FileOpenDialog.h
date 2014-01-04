@@ -36,8 +36,6 @@
 #pragma once
 #endif // _MSC_VER >= 1000
 
-#include "ZipFile.h"
-
 // FileOpenDialog.h : header file
 //
 
@@ -72,8 +70,6 @@ protected:
 	void OpenItem(const CString& path);
 	void ActivateItem(HWND hWnd, int item);
 	void FindFiles(bool showall = true);
-
-	auto_ptr<ZipFile> m_zip; // zip file if any
 
 	// Generated message map functions
 	//{{AFX_MSG(CFileOpenDialog)
