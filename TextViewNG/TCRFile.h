@@ -13,30 +13,30 @@ class TCRFile : public RFile {
 
 public:
 
-	TCRFile(const CString& fn);
+    TCRFile(const CString& fn);
 
-	// generic file operations
+    // generic file operations
 
-	virtual DWORD size() { return m_length; }
-	virtual DWORD read(void *buf);
-	virtual void seek(DWORD pos);
+    virtual DWORD size() { return m_length; }
+    virtual DWORD read(void *buf);
+    virtual void seek(DWORD pos);
 
-	// compression
+    // compression
 
-	virtual CString CompressionInfo();
+    virtual CString CompressionInfo();
 
-	// check if this is a tcr file
+    // check if this is a tcr file
 
-	static bool IsTCR(RFile *fp);
+    static bool IsTCR(RFile *fp);
 
 protected:
 
-	struct Block { DWORD size, off, usize, uoff; };
-	Buffer<unsigned char> Dictonary[256];
-	Buffer<Block> m_blocks;
-	DWORD m_length, m_ptr;
+    struct Block { DWORD size, off, usize, uoff; };
+    Buffer<unsigned char> Dictonary[256];
+    Buffer<Block> m_blocks;
+    DWORD m_length, m_ptr;
 
-	static bool	CheckTCR(RFile *fp);
+    static bool	CheckTCR(RFile *fp);
 };
 
 #endif

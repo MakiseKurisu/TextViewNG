@@ -43,7 +43,7 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
-static char THIS_FILE [] = __FILE__;
+static char THIS_FILE[] = __FILE__;
 #endif
 
 #define	SHOWDELAY 700
@@ -54,100 +54,88 @@ static char THIS_FILE [] = __FILE__;
 
 
 CProgressDlg::CProgressDlg(const CString& msg, CWnd* pParent /*=NULL*/)
-	: CDialog(CProgressDlg::IDD, pParent), m_msg(msg), m_last(0), m_tail(0), m_nsamp(0),
-	m_curbytes(0), m_lastbytes(0), m_lastupdate(0)
+: CDialog(CProgressDlg::IDD, pParent), m_msg(msg), m_last(0), m_tail(0), m_nsamp(0),
+m_curbytes(0), m_lastbytes(0), m_lastupdate(0)
 {
-#if POCKETPC
-	m_bFullScreen = false;
-#endif
-	Create(CProgressDlg::IDD, pParent);
-	CenterWindow();
-	m_starttime = GetTickCount();
-	m_visible = false;
-	//{{AFX_DATA_INIT(CProgressDlg)
-	// NOTE: the ClassWizard will add member initialization here
-	//}}AFX_DATA_INIT
+    Create(CProgressDlg::IDD, pParent);
+    CenterWindow();
+    m_starttime = GetTickCount();
+    m_visible = false;
+    //{{AFX_DATA_INIT(CProgressDlg)
+    // NOTE: the ClassWizard will add member initialization here
+    //}}AFX_DATA_INIT
 }
 
 
 void CProgressDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CProgressDlg)
-	// NOTE: the ClassWizard will add DDX and DDV calls here
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CProgressDlg)
+    // NOTE: the ClassWizard will add DDX and DDV calls here
+    //}}AFX_DATA_MAP
 }
 
 void	CProgressDlg::SetMax(DWORD max) {
-	SendDlgItemMessage(IDC_PROGRESS, PBM_SETRANGE32, 0, max);
-	m_starttime = GetTickCount();
+    SendDlgItemMessage(IDC_PROGRESS, PBM_SETRANGE32, 0, max);
+    m_starttime = GetTickCount();
 }
 
 void	CProgressDlg::SetCur(DWORD cur) {
-	if (cur > m_last) {
-		m_last = (cur + 65535)&~65535;
-		SendDlgItemMessage(IDC_PROGRESS, PBM_SETPOS, cur);
-		DWORD   tm = GetTickCount();
-		DWORD   delta = cur - m_lastbytes;
-		m_lastbytes = cur;
-		// delete older samples
-		while (m_nsamp > 0 && (tm - m_samples[m_tail << 1] > 1000 || m_nsamp == MAXSAMP)) {
-			m_curbytes -= m_samples[(m_tail << 1) + 1];
-			if (++m_tail >= MAXSAMP)
-				m_tail = 0;
-			--m_nsamp;
-		}
-		// append last sample
-		DWORD   pos = m_tail + m_nsamp;
-		if (pos >= MAXSAMP)
-			pos -= MAXSAMP;
-		m_samples[pos << 1] = tm;
-		m_samples[(pos << 1) + 1] = delta;
-		m_curbytes += delta;
-		++m_nsamp;
-		if (!m_visible && tm - m_starttime > SHOWDELAY) {
-			m_visible = true;
-			ShowWindow(SW_SHOW);
-			UpdateWindow();
-		}
-		if (m_visible && tm - m_lastupdate > MINUPDATE) {
-			// calculate speed
-			DWORD   timedelta = tm - m_samples[m_tail << 1];
-			DWORD   speed = 0;
-			if (timedelta > 0)
-				speed = (DWORD) (((__int64) m_curbytes * 1000 / timedelta) >> 10);
-			TCHAR   buf[128];
-			_sntprintf_s(buf, sizeof(buf) / sizeof(buf[0]), _TRUNCATE, _T("%u KB\t%u KB/s"), cur >> 10, speed);
-			SetDlgItemText(IDC_PROGRESSTEXT, buf);
-			GetDlgItem(IDC_PROGRESSTEXT)->UpdateWindow();
-			m_lastupdate = tm;
-		}
-	}
+    if (cur > m_last) {
+        m_last = (cur + 65535)&~65535;
+        SendDlgItemMessage(IDC_PROGRESS, PBM_SETPOS, cur);
+        DWORD   tm = GetTickCount();
+        DWORD   delta = cur - m_lastbytes;
+        m_lastbytes = cur;
+        // delete older samples
+        while (m_nsamp > 0 && (tm - m_samples[m_tail << 1] > 1000 || m_nsamp == MAXSAMP)) {
+            m_curbytes -= m_samples[(m_tail << 1) + 1];
+            if (++m_tail >= MAXSAMP)
+                m_tail = 0;
+            --m_nsamp;
+        }
+        // append last sample
+        DWORD   pos = m_tail + m_nsamp;
+        if (pos >= MAXSAMP)
+            pos -= MAXSAMP;
+        m_samples[pos << 1] = tm;
+        m_samples[(pos << 1) + 1] = delta;
+        m_curbytes += delta;
+        ++m_nsamp;
+        if (!m_visible && tm - m_starttime > SHOWDELAY) {
+            m_visible = true;
+            ShowWindow(SW_SHOW);
+            UpdateWindow();
+        }
+        if (m_visible && tm - m_lastupdate > MINUPDATE) {
+            // calculate speed
+            DWORD   timedelta = tm - m_samples[m_tail << 1];
+            DWORD   speed = 0;
+            if (timedelta > 0)
+                speed = (DWORD)(((__int64)m_curbytes * 1000 / timedelta) >> 10);
+            TCHAR   buf[128];
+            _sntprintf_s(buf, sizeof(buf) / sizeof(buf[0]), _TRUNCATE, _T("%u KB\t%u KB/s"), cur >> 10, speed);
+            SetDlgItemText(IDC_PROGRESSTEXT, buf);
+            GetDlgItem(IDC_PROGRESSTEXT)->UpdateWindow();
+            m_lastupdate = tm;
+        }
+    }
 }
 
 BEGIN_MESSAGE_MAP(CProgressDlg, CDialog)
-	//{{AFX_MSG_MAP(CProgressDlg)
-	//}}AFX_MSG_MAP
-#if POCKETPC
-	ON_WM_SETTINGCHANGE()
-#endif
+    //{{AFX_MSG_MAP(CProgressDlg)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CProgressDlg message handlers
 
 BOOL CProgressDlg::OnInitDialog() {
-	CDialog::OnInitDialog();
+    CDialog::OnInitDialog();
 
-	CString	  msg;
-	msg.Format(_T("Loading %s..."), (LPCTSTR) m_msg);
-	SetWindowText(msg);
+    CString	  msg;
+    msg.Format(_T("Loading %s..."), (LPCTSTR)m_msg);
+    SetWindowText(msg);
 
-	return TRUE;
+    return TRUE;
 }
-
-#if POCKETPC
-void CProgressDlg::OnSettingChange(UINT uFlags, LPCTSTR lpszSection) {
-	CWnd::OnSettingChange(uFlags, lpszSection);
-}
-#endif

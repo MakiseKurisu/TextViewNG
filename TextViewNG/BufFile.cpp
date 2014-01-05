@@ -38,68 +38,68 @@
 
 #ifdef _DEBUG
 #undef THIS_FILE
-static char THIS_FILE [] = __FILE__;
+static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif
 
 CBufFile::CBufFile(auto_ptr<RFile> file) :
-	m_fp(file),
-	m_ptr(0)
+m_fp(file),
+m_ptr(0)
 {
-	m_cur = &m_b1;
+    m_cur = &m_b1;
 }
 
 void CBufFile::swapbuf() {
-	if (m_cur->len)
-		m_cur = m_cur == &m_b1 ? &m_b2 : &m_b1;
+    if (m_cur->len)
+        m_cur = m_cur == &m_b1 ? &m_b2 : &m_b1;
 }
 
 int CBufFile::nextbuf_ch()
 {
-	seek(m_cur->off + m_ptr);
-	return m_ptr < m_cur->len ? m_cur->buf[m_ptr++] : BEOF;
+    seek(m_cur->off + m_ptr);
+    return m_ptr < m_cur->len ? m_cur->buf[m_ptr++] : BEOF;
 }
 
 int CBufFile::read(void *buf, int count) {
-	BYTE	  *bp = (BYTE*) buf;
-	while (count > 0) {
-		// fill in our buffer
-		if (m_ptr >= m_cur->len)
-			seek(m_cur->off + m_ptr);
-		// if there are no bytes still, then exit
-		if (m_ptr >= m_cur->len)
-			break;
-		// copy whatever is left in our buffer
-		int	  nb = m_cur->len - m_ptr;
-		if (nb > count)
-			nb = count;
-		memcpy(bp, m_cur->buf + m_ptr, nb);
-		m_ptr += nb;
-		bp += nb;
-		count -= nb;
-	}
-	return bp - (BYTE*) buf;
+    BYTE	  *bp = (BYTE*)buf;
+    while (count > 0) {
+        // fill in our buffer
+        if (m_ptr >= m_cur->len)
+            seek(m_cur->off + m_ptr);
+        // if there are no bytes still, then exit
+        if (m_ptr >= m_cur->len)
+            break;
+        // copy whatever is left in our buffer
+        int	  nb = m_cur->len - m_ptr;
+        if (nb > count)
+            nb = count;
+        memcpy(bp, m_cur->buf + m_ptr, nb);
+        m_ptr += nb;
+        bp += nb;
+        count -= nb;
+    }
+    return bp - (BYTE*)buf;
 }
 
 void  CBufFile::seek(DWORD pos) {
-	if (pos >= m_cur->off && pos < m_cur->off + m_cur->len) // inside current buffer
-		m_ptr = pos - m_cur->off;
-	else {
-		swapbuf();
-		if (pos >= m_cur->off && pos < m_cur->off + m_cur->len) // inside other buffer
-			m_ptr = pos - m_cur->off;
-		else if (pos >= m_fp->size()) {
-			// don't seek past eof
-			m_cur->off = pos;
-			m_cur->len = m_ptr = 0;
-		}
-		else {
-			// do seek on underlying file and fill next buffer
-			m_cur->off = pos&RFile::BMASK;
-			m_fp->seek(m_cur->off);
-			m_cur->len = m_fp->read(m_cur->buf);
-			m_ptr = pos - m_cur->off;
-		}
-	}
+    if (pos >= m_cur->off && pos < m_cur->off + m_cur->len) // inside current buffer
+        m_ptr = pos - m_cur->off;
+    else {
+        swapbuf();
+        if (pos >= m_cur->off && pos < m_cur->off + m_cur->len) // inside other buffer
+            m_ptr = pos - m_cur->off;
+        else if (pos >= m_fp->size()) {
+            // don't seek past eof
+            m_cur->off = pos;
+            m_cur->len = m_ptr = 0;
+        }
+        else {
+            // do seek on underlying file and fill next buffer
+            m_cur->off = pos&RFile::BMASK;
+            m_fp->seek(m_cur->off);
+            m_cur->len = m_fp->read(m_cur->buf);
+            m_ptr = pos - m_cur->off;
+        }
+    }
 }
 

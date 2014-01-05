@@ -41,73 +41,73 @@
 class TextFile
 {
 protected:
-	TextFile(RFile *fp, const CString& name);
-	void		  SetFormatEncodingImp(int format, int enc, Bookmarks *bmk);
-	TextParser	  *Parser(int docid) { return docid == -1 && m_dictp ? m_dictp : m_tp.get(); }
+    TextFile(RFile *fp, const CString& name);
+    void		  SetFormatEncodingImp(int format, int enc, Bookmarks *bmk);
+    TextParser	  *Parser(int docid) { return docid == -1 && m_dictp ? m_dictp : m_tp.get(); }
 public:
-	~TextFile() { }
+    ~TextFile() { }
 
-	int		  ByteLength() { return m_fp->size(); }
+    int		  ByteLength() { return m_fp->size(); }
 
-	// all these proxy functions switch to the dictionary when docid==-1
+    // all these proxy functions switch to the dictionary when docid==-1
 
-	// paragraphs
-	int		  Length(int docid) { return Parser(docid)->Length(docid); }
-	int		  GetPLength(int docid, int para);
-	Paragraph	  GetParagraph(int docid, int para);
-	int		  GetPStart(int docid, int para) { return Parser(docid)->GetPStart(docid, para); }
-	int		  GetTotalLength(int docid) { return Parser(docid)->GetTotalLength(docid); }
-	int		  LookupParagraph(int docid, int charpos) { return Parser(docid)->LookupParagraph(docid, charpos); }
+    // paragraphs
+    int		  Length(int docid) { return Parser(docid)->Length(docid); }
+    int		  GetPLength(int docid, int para);
+    Paragraph	  GetParagraph(int docid, int para);
+    int		  GetPStart(int docid, int para) { return Parser(docid)->GetPStart(docid, para); }
+    int		  GetTotalLength(int docid) { return Parser(docid)->GetTotalLength(docid); }
+    int		  LookupParagraph(int docid, int charpos) { return Parser(docid)->LookupParagraph(docid, charpos); }
 
-	// documents
-	int		  GetSubDocCount() { return m_tp->GetSubDocCount(); }
-	CString	  GetSubDocName(int docid) { return m_tp->GetSubDocName(docid); }
+    // documents
+    int		  GetSubDocCount() { return m_tp->GetSubDocCount(); }
+    CString	  GetSubDocName(int docid) { return m_tp->GetSubDocName(docid); }
 
-	// links
-	bool		  LookupReference(const wchar_t *name, FilePos& dest) { return m_tp->LookupReference(name, dest); }
-	bool		  LookupDict(const wchar_t *name, FilePos& dest);
-	bool		  GetImage(const wchar_t *name, HDC hDC,
-		int maxwidth, int maxheight, int rotation, Image& img) {
-			return m_tp->GetImage(name, hDC, maxwidth, maxheight, rotation, img);
-	}
-	void		  InvalidateImageCache() { m_tp->InvalidateImageCache(); }
+    // links
+    bool		  LookupReference(const wchar_t *name, FilePos& dest) { return m_tp->LookupReference(name, dest); }
+    bool		  LookupDict(const wchar_t *name, FilePos& dest);
+    bool		  GetImage(const wchar_t *name, HDC hDC,
+        int maxwidth, int maxheight, int rotation, Image& img) {
+        return m_tp->GetImage(name, hDC, maxwidth, maxheight, rotation, img);
+    }
+    void		  InvalidateImageCache() { m_tp->InvalidateImageCache(); }
 
-	// a small helper
-	int		  AbsPos(const FilePos& p) { return Parser(p.docid)->GetPStart(p.docid, p.para) + p.off; }
+    // a small helper
+    int		  AbsPos(const FilePos& p) { return Parser(p.docid)->GetPStart(p.docid, p.para) + p.off; }
 
-	int		  GetEncoding() { return m_enc; }
-	int		  GetFormat() { return m_format; }
-	int		  GetRealEncoding() { return m_tp->GetEncoding(); }
-	int		  GetRealFormat() { return m_tp->GetFormat(); }
-	void		  SetFormatEncoding(int format, int enc) {
-		SetFormatEncodingImp(format, enc, NULL);
-	}
-	void		  Reparse();
-	static const TCHAR *GetEncodingName(int enc);
-	static const TCHAR *GetFormatName(int format);
+    int		  GetEncoding() { return m_enc; }
+    int		  GetFormat() { return m_format; }
+    int		  GetRealEncoding() { return m_tp->GetEncoding(); }
+    int		  GetRealFormat() { return m_tp->GetFormat(); }
+    void		  SetFormatEncoding(int format, int enc) {
+        SetFormatEncodingImp(format, enc, NULL);
+    }
+    void		  Reparse();
+    static const TCHAR *GetEncodingName(int enc);
+    static const TCHAR *GetFormatName(int format);
 
-	static TextFile *Open(const CString& filename);
-	const CString&  Name() const { return m_name; }
+    static TextFile *Open(const CString& filename);
+    const CString&  Name() const { return m_name; }
 
-	CString	  CompressionInfo() { return m_fp->CompressionInfo(); }
+    CString	  CompressionInfo() { return m_fp->CompressionInfo(); }
 
-	bool		  Ok() { return m_fp.get() && m_tp.get(); }
+    bool		  Ok() { return m_fp.get() && m_tp.get(); }
 
-	Bookmarks&	  bmk() { return m_bookmarks; }
-	void		  SaveBookmarks(FilePos cur);
+    Bookmarks&	  bmk() { return m_bookmarks; }
+    void		  SaveBookmarks(FilePos cur);
 
-	void		  SetDict(TextParser *dp) { m_dictp = dp; }
+    void		  SetDict(TextParser *dp) { m_dictp = dp; }
 
-	// images
-	bool		  IsImage() { return m_tp->IsImage(); }
+    // images
+    bool		  IsImage() { return m_tp->IsImage(); }
 protected:
-	auto_ptr<CBufFile>	m_fp;
-	auto_ptr<TextParser>  m_tp;
-	TextParser		*m_dictp;
-	int			m_enc;
-	int			m_format;
-	CString		m_name;
-	Bookmarks		m_bookmarks;
+    auto_ptr<CBufFile>	m_fp;
+    auto_ptr<TextParser>  m_tp;
+    TextParser		*m_dictp;
+    int			m_enc;
+    int			m_format;
+    CString		m_name;
+    Bookmarks		m_bookmarks;
 };
 
 #endif // !defined(AFX_TEXTFILE_H__37F37F43_6FC5_4C70_AFBB_1187E125D777__INCLUDED_)

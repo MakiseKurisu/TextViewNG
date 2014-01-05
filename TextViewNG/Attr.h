@@ -34,36 +34,36 @@
 
 // unified attributes
 struct Attr {
-	// XXX assumes little endian byteorder and M$ extensions
-	// bit fields
-	union {
-		struct {
-			signed char   fsize : 6;  // font size
-			unsigned char bold : 1;   // bold flag
-			unsigned char italic : 1; // italic flag
-			unsigned char xfont : 1;  // alternate dictionary font
-			unsigned char img : 1;    // this is an inline image
+    // XXX assumes little endian byteorder and M$ extensions
+    // bit fields
+    union {
+        struct {
+            signed char   fsize : 6;  // font size
+            unsigned char bold : 1;   // bold flag
+            unsigned char italic : 1; // italic flag
+            unsigned char xfont : 1;  // alternate dictionary font
+            unsigned char img : 1;    // this is an inline image
 
-			unsigned char underline : 1; // underline flag
-			unsigned char color : 3;  // color index
-			unsigned char hibg : 1;   // highlight background
+            unsigned char underline : 1; // underline flag
+            unsigned char color : 3;  // color index
+            unsigned char hibg : 1;   // highlight background
 
-			unsigned char hyphen : 1; // can break word here
+            unsigned char hyphen : 1; // can break word here
 
-		};
+        };
 
-		WORD	  wa;
-	};
-	WORD	fontattr() { return wa & 0x5c0; }
-	WORD	fontflags() { return wa & 0x3ff; }
-	enum {
-		BOLD = 0x40,
-		ITALIC = 0x80,
-		UNDERLINE = 0x400,
-		XFONT = 0x100
-	};
-	bool	operator==(Attr other) { return wa == other.wa; }
-	bool	operator!=(Attr other) { return wa != other.wa; }
+        WORD	  wa;
+    };
+    WORD	fontattr() { return wa & 0x5c0; }
+    WORD	fontflags() { return wa & 0x3ff; }
+    enum {
+        BOLD = 0x40,
+        ITALIC = 0x80,
+        UNDERLINE = 0x400,
+        XFONT = 0x100
+    };
+    bool	operator==(Attr other) { return wa == other.wa; }
+    bool	operator!=(Attr other) { return wa != other.wa; }
 };
 
 #endif

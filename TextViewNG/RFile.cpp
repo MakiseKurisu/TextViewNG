@@ -41,120 +41,120 @@ int RFile::BSZ = 16384;
 int RFile::BMASK = ~16383;
 
 void  RFile::InitBufSize() {
-	int	rfbs = CTVApp::GetInt(_T("FileBufSize"), 16384);
-	if (rfbs < 8192)
-		rfbs = 8192;
-	if (rfbs > 1048576)
-		rfbs = 1048576;
-	int fbs = 8192;
-	while ((fbs << 1) <= rfbs)
-		fbs <<= 1;
-	BSZ = fbs;
-	BMASK = ~(fbs - 1);
+    int	rfbs = CTVApp::GetInt(_T("FileBufSize"), 16384);
+    if (rfbs < 8192)
+        rfbs = 8192;
+    if (rfbs > 1048576)
+        rfbs = 1048576;
+    int fbs = 8192;
+    while ((fbs << 1) <= rfbs)
+        fbs <<= 1;
+    BSZ = fbs;
+    BMASK = ~(fbs - 1);
 }
 
 CString	FileExceptionInfo(const CString& filename, DWORD dwErr) {
-	CString ret;
-	TCHAR	  *buf = ret.GetBuffer(1024);
-	FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, dwErr, LANG_USER_DEFAULT, buf, 1024, NULL);
-	ret.ReleaseBuffer();
-	return filename + _T(": ") + ret;
+    CString ret;
+    TCHAR	  *buf = ret.GetBuffer(1024);
+    FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, dwErr, LANG_USER_DEFAULT, buf, 1024, NULL);
+    ret.ReleaseBuffer();
+    return filename + _T(": ") + ret;
 }
 
 CString	FileName(const CString& file) {
-	return file.Right(file.GetLength() - max(file.ReverseFind(_T('/')),
-		file.ReverseFind(_T('\\'))) - 1);
+    return file.Right(file.GetLength() - max(file.ReverseFind(_T('/')),
+        file.ReverseFind(_T('\\'))) - 1);
 }
 
 void RFile::ShowError() {
-	if (m_diderror)
-		return;
+    if (m_diderror)
+        return;
 
-	m_diderror = true;
+    m_diderror = true;
 
-	DWORD	dwErr = GetLastError();
+    DWORD	dwErr = GetLastError();
 
-	AfxMessageBox(FileExceptionInfo(m_fn, dwErr), MB_ICONERROR | MB_OK, 0);
+    AfxMessageBox(FileExceptionInfo(m_fn, dwErr), MB_ICONERROR | MB_OK, 0);
 }
 
 bool  RFile::Reopen() {
-	if (m_didreopen)
-		return false;
-	if (m_fh != INVALID_HANDLE_VALUE) {
-		CloseHandle(m_fh);
-		m_fh = INVALID_HANDLE_VALUE;
-	}
+    if (m_didreopen)
+        return false;
+    if (m_fh != INVALID_HANDLE_VALUE) {
+        CloseHandle(m_fh);
+        m_fh = INVALID_HANDLE_VALUE;
+    }
 
-	HANDLE fh = CreateFile(m_fn, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
-	if (fh == INVALID_HANDLE_VALUE) {
-		m_didreopen = true;
-		return false;
-	}
-	m_fh = fh;
-	SetFilePointer(fh, m_ptr, NULL, FILE_BEGIN);
-	return true;
+    HANDLE fh = CreateFile(m_fn, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+    if (fh == INVALID_HANDLE_VALUE) {
+        m_didreopen = true;
+        return false;
+    }
+    m_fh = fh;
+    SetFilePointer(fh, m_ptr, NULL, FILE_BEGIN);
+    return true;
 }
 
 // to avoid dealing with exceptions we access the file handle directly
 DWORD RFile::size() {
-	DWORD ret = GetFileSize(m_fh, NULL);
-	if (ret == 0xffffffff) {
-		if (GetLastError() == 1617) {
-			if (!Reopen()) {
-				AfxMessageBox(_T("Can't reopen file."), MB_ICONERROR | MB_OK, 0);
-				return 0;
-			}
-			ret = GetFileSize(m_fh, NULL);
-			if (ret == 0xffffffff)
-				goto err;
-		}
-		else {
-		err:
-			ShowError();
-			ret = 0;
-		}
-	}
-	return ret;
+    DWORD ret = GetFileSize(m_fh, NULL);
+    if (ret == 0xffffffff) {
+        if (GetLastError() == 1617) {
+            if (!Reopen()) {
+                AfxMessageBox(_T("Can't reopen file."), MB_ICONERROR | MB_OK, 0);
+                return 0;
+            }
+            ret = GetFileSize(m_fh, NULL);
+            if (ret == 0xffffffff)
+                goto err;
+        }
+        else {
+        err:
+            ShowError();
+            ret = 0;
+        }
+    }
+    return ret;
 }
 DWORD RFile::read(void *buf) { return read2(buf, BSZ); }
 DWORD RFile::read2(void *buf, DWORD size) {
-	DWORD	rd = 0;
+    DWORD	rd = 0;
 
-	if (!ReadFile(m_fh, buf, size, &rd, NULL)) {
-		if (GetLastError() == 1617) {
-			if (!Reopen()) {
-				AfxMessageBox(_T("Can't reopen file."), MB_ICONERROR | MB_OK, 0);
-				return 0;
-			}
-			if (!ReadFile(m_fh, buf, size, &rd, NULL))
-				ShowError();
-		}
-		else
-			ShowError();
-	}
-	m_ptr += rd;
-	return rd;
+    if (!ReadFile(m_fh, buf, size, &rd, NULL)) {
+        if (GetLastError() == 1617) {
+            if (!Reopen()) {
+                AfxMessageBox(_T("Can't reopen file."), MB_ICONERROR | MB_OK, 0);
+                return 0;
+            }
+            if (!ReadFile(m_fh, buf, size, &rd, NULL))
+                ShowError();
+        }
+        else
+            ShowError();
+    }
+    m_ptr += rd;
+    return rd;
 }
 
 void  RFile::seek2(DWORD pos, DWORD how) {
-	DWORD np;
-	if ((np = SetFilePointer(m_fh, pos, NULL, how)) == 0xffffffff) {
-		if (GetLastError() == 1617) {
-			if (!Reopen()) {
-				AfxMessageBox(_T("Can't reopen file."), MB_ICONERROR | MB_OK, 0);
-				return;
-			}
-			if ((np = SetFilePointer(m_fh, pos, NULL, how)) == 0xffffffff)
-				ShowError();
-		}
-		else
-			ShowError();
-	}
-	if (np != 0xffffffff)
-		m_ptr = np;
+    DWORD np;
+    if ((np = SetFilePointer(m_fh, pos, NULL, how)) == 0xffffffff) {
+        if (GetLastError() == 1617) {
+            if (!Reopen()) {
+                AfxMessageBox(_T("Can't reopen file."), MB_ICONERROR | MB_OK, 0);
+                return;
+            }
+            if ((np = SetFilePointer(m_fh, pos, NULL, how)) == 0xffffffff)
+                ShowError();
+        }
+        else
+            ShowError();
+    }
+    if (np != 0xffffffff)
+        m_ptr = np;
 }
 void  RFile::seek(DWORD pos) { seek2(pos, FILE_BEGIN); }
 
 DWORD RFile::pos() {
-	return m_ptr;
+    return m_ptr;
 }

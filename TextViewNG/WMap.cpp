@@ -38,18 +38,18 @@
 #include "WMap.h"
 
 WMap::WMap(HANDLE heap, bool freemem) : m_hepool(heap, freemem),
-	m_strbuf(heap, freemem), m_heap(heap), m_freemem(freemem),
-	m_cursize(STARTSIZE), m_curmask(STARTSIZE - 1), m_numkeys(0)
+m_strbuf(heap, freemem), m_heap(heap), m_freemem(freemem),
+m_cursize(STARTSIZE), m_curmask(STARTSIZE - 1), m_numkeys(0)
 {
-	m_array = (HE**) HeapAlloc(m_heap, HEAP_NO_SERIALIZE | HEAP_ZERO_MEMORY,
-		m_cursize*sizeof(HE*) );
-	if (!m_array)
-		AfxThrowMemoryException();
+    m_array = (HE**)HeapAlloc(m_heap, HEAP_NO_SERIALIZE | HEAP_ZERO_MEMORY,
+        m_cursize*sizeof(HE*));
+    if (!m_array)
+        AfxThrowMemoryException();
 }
 
 WMap::~WMap() {
-	if (m_freemem)
-		HeapFree(m_heap, HEAP_NO_SERIALIZE, m_array);
+    if (m_freemem)
+        HeapFree(m_heap, HEAP_NO_SERIALIZE, m_array);
 }
 
 // Hash algorithm is One-at-a-Time by Bob Jenkins,
@@ -63,78 +63,78 @@ WMap::~WMap() {
 //   tmp|=1
 //   x*tmp
 unsigned int	WMap::Hash(const wchar_t *data) {
-	unsigned int hash;
-	if (!*data) // shortcut
-		return 0;
-	hash = 0;
-	do {
-		hash += *data++;
-		hash += hash << 10;
-		hash ^= hash >> 6;
-	} while (*data);
-	hash += hash << 3;
-	hash ^= hash >> 11;
-	hash += hash << 15;
-	return hash;
+    unsigned int hash;
+    if (!*data) // shortcut
+        return 0;
+    hash = 0;
+    do {
+        hash += *data++;
+        hash += hash << 10;
+        hash ^= hash >> 6;
+    } while (*data);
+    hash += hash << 3;
+    hash ^= hash >> 11;
+    hash += hash << 15;
+    return hash;
 }
 
 WMap::HE  *WMap::RealLookup(const wchar_t *key, bool add, bool copykey) {
-	UINT	  hash = Hash(key);
-	UINT	  bucket = hash&m_curmask;
-	HE	  *he;
+    UINT	  hash = Hash(key);
+    UINT	  bucket = hash&m_curmask;
+    HE	  *he;
 
-	for (he = m_array[bucket]; he; he = he->next)
-		if (!wcscmp(key, he->key))
-			return he;
-	if (!add)
-		return NULL;
-	he = m_hepool.Get();
-	he->key = copykey ? m_strbuf.Append(key, wcslen(key) + 1) : key;
-	he->hash = hash;
-	he->next = m_array[bucket];
-	m_array[bucket] = he;
-	if (++m_numkeys*FILLFACTOR > m_cursize)
-		Extend();
-	return he;
+    for (he = m_array[bucket]; he; he = he->next)
+        if (!wcscmp(key, he->key))
+            return he;
+    if (!add)
+        return NULL;
+    he = m_hepool.Get();
+    he->key = copykey ? m_strbuf.Append(key, wcslen(key) + 1) : key;
+    he->hash = hash;
+    he->next = m_array[bucket];
+    m_array[bucket] = he;
+    if (++m_numkeys*FILLFACTOR > m_cursize)
+        Extend();
+    return he;
 }
 
 bool	WMap::Lookup(const wchar_t *key, void*& value) {
-	HE	*he = RealLookup(key, false, false);
-	if (he) {
-		value = he->value;
-		return true;
-	}
-	return false;
+    HE	*he = RealLookup(key, false, false);
+    if (he) {
+        value = he->value;
+        return true;
+    }
+    return false;
 }
 
 void	WMap::RemoveAll() {
-	m_hepool.RemoveAll();
-	m_strbuf.RemoveAll();
-	m_numkeys = 0;
+    m_hepool.RemoveAll();
+    m_strbuf.RemoveAll();
+    m_numkeys = 0;
 }
 
 void	WMap::Extend() {
-	int	newsize = m_cursize << 1;
-	HE	**na = (HE**) HeapReAlloc(m_heap, HEAP_NO_SERIALIZE, m_array, newsize*sizeof(HE*) );
-	if (!na)
-		AfxThrowMemoryException();
-	memset(na + m_cursize, 0, m_cursize*sizeof(HE**) );
-	for (int i = 0; i < m_cursize; ++i) {
-		HE	  **prev = &na[i], *cur = na[i];
-		while (cur) {
-			if (cur->hash & m_cursize) {
-				*prev = cur->next;
-				cur->next = na[i + m_cursize];
-				na[i + m_cursize] = cur;
-				cur = *prev;
-			}
-			else {
-				prev = &cur->next;
-				cur = cur->next;
-			}
-		}
-	}
-	m_cursize = newsize;
-	m_curmask = m_cursize - 1;
-	m_array = na;
+    int	newsize = m_cursize << 1;
+    HE	**na = (HE**)HeapReAlloc(m_heap, HEAP_NO_SERIALIZE, m_array, newsize*sizeof(HE*));
+    if (!na)
+        AfxThrowMemoryException();
+    memset(na + m_cursize, 0, m_cursize*sizeof(HE**));
+    for (int i = 0; i < m_cursize; ++i) {
+        HE	  **prev = &na[i], *cur = na[i];
+        while (cur) {
+            if (cur->hash & m_cursize) {
+                *prev = cur->next;
+                cur->next = na[i + m_cursize];
+                na[i + m_cursize] = cur;
+                cur = *prev;
+            }
+            else {
+                prev = &cur->next;
+                cur = cur->next;
+            }
+        }
+    }
+    m_cursize = newsize;
+    m_curmask = m_cursize - 1;
+    m_array = na;
 }

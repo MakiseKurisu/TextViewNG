@@ -35,46 +35,46 @@
 #include "StrBuf.h"
 
 StrBuf::~StrBuf() {
-	if (m_freemem)
-		RemoveAll();
+    if (m_freemem)
+        RemoveAll();
 }
 
 void  StrBuf::RemoveAll() {
-	for (int i = 0; i <= m_cblk; ++i)
-		HeapFree(m_heap, HEAP_NO_SERIALIZE, m_blocks[i].data);
-	if (m_numblk > 0)
-		HeapFree(m_heap, HEAP_NO_SERIALIZE, m_blocks);
-	m_numblk = 0;
-	m_cblk = -1;
+    for (int i = 0; i <= m_cblk; ++i)
+        HeapFree(m_heap, HEAP_NO_SERIALIZE, m_blocks[i].data);
+    if (m_numblk > 0)
+        HeapFree(m_heap, HEAP_NO_SERIALIZE, m_blocks);
+    m_numblk = 0;
+    m_cblk = -1;
 }
 
 wchar_t	    *StrBuf::Get(int char_length) {
-	if (m_numblk == 0 || m_blocks[m_cblk].cur + char_length > m_blocks[m_cblk].max) {
-		// shrink the block if too much is wasted
-		if (m_numblk != 0 && m_blocks[m_cblk].cur + MAX_WASTE < m_blocks[m_cblk].max &&
-			HeapReAlloc(m_heap, HEAP_NO_SERIALIZE | HEAP_REALLOC_IN_PLACE_ONLY,
-			m_blocks[m_cblk].data, m_blocks[m_cblk].cur))
-			m_blocks[m_cblk].max = m_blocks[m_cblk].cur;
-		// allocate a new blocks list if needed
-		if (m_cblk + 1 >= m_numblk) {
-			int newblk = m_numblk + BLOCKSADD;
-			void  *mem = m_blocks ? HeapReAlloc(m_heap, HEAP_NO_SERIALIZE, m_blocks, newblk*sizeof(Block)) :
-				HeapAlloc(m_heap, HEAP_NO_SERIALIZE, newblk*sizeof(Block));
-			if (mem == NULL)
-				AfxThrowMemoryException();
-			m_blocks = (Block*) mem;
-			m_numblk = newblk;
-		}
-		// allocate a new block
-		m_blocks[m_cblk + 1].max = char_length > m_blocksize ? char_length : m_blocksize;
-		m_blocks[m_cblk + 1].data = (wchar_t*) HeapAlloc(m_heap, HEAP_NO_SERIALIZE,
-			m_blocks[m_cblk + 1].max*sizeof(wchar_t) );
-		if (m_blocks[m_cblk + 1].data == NULL)
-			AfxThrowMemoryException();
-		++m_cblk;
-		m_blocks[m_cblk].cur = 0;
-	}
-	wchar_t   *ret = m_blocks[m_cblk].data + m_blocks[m_cblk].cur;
-	m_blocks[m_cblk].cur += char_length;
-	return ret;
+    if (m_numblk == 0 || m_blocks[m_cblk].cur + char_length > m_blocks[m_cblk].max) {
+        // shrink the block if too much is wasted
+        if (m_numblk != 0 && m_blocks[m_cblk].cur + MAX_WASTE < m_blocks[m_cblk].max &&
+            HeapReAlloc(m_heap, HEAP_NO_SERIALIZE | HEAP_REALLOC_IN_PLACE_ONLY,
+            m_blocks[m_cblk].data, m_blocks[m_cblk].cur))
+            m_blocks[m_cblk].max = m_blocks[m_cblk].cur;
+        // allocate a new blocks list if needed
+        if (m_cblk + 1 >= m_numblk) {
+            int newblk = m_numblk + BLOCKSADD;
+            void  *mem = m_blocks ? HeapReAlloc(m_heap, HEAP_NO_SERIALIZE, m_blocks, newblk*sizeof(Block)) :
+                HeapAlloc(m_heap, HEAP_NO_SERIALIZE, newblk*sizeof(Block));
+            if (mem == NULL)
+                AfxThrowMemoryException();
+            m_blocks = (Block*)mem;
+            m_numblk = newblk;
+        }
+        // allocate a new block
+        m_blocks[m_cblk + 1].max = char_length > m_blocksize ? char_length : m_blocksize;
+        m_blocks[m_cblk + 1].data = (wchar_t*)HeapAlloc(m_heap, HEAP_NO_SERIALIZE,
+            m_blocks[m_cblk + 1].max*sizeof(wchar_t));
+        if (m_blocks[m_cblk + 1].data == NULL)
+            AfxThrowMemoryException();
+        ++m_cblk;
+        m_blocks[m_cblk].cur = 0;
+    }
+    wchar_t   *ret = m_blocks[m_cblk].data + m_blocks[m_cblk].cur;
+    m_blocks[m_cblk].cur += char_length;
+    return ret;
 }

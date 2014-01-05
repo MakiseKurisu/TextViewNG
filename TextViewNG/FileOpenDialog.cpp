@@ -42,10 +42,6 @@
 #include "config.h"
 #include "XListBox.h"
 
-#if POCKETPC
-#include <afxext.h>
-#endif
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE

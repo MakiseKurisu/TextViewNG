@@ -34,11 +34,11 @@
 
 class Keys {
 public:
-	static bool		  TranslateKey(UINT vk, UINT& cmd, int angle = 0);
+    static bool		  TranslateKey(UINT vk, UINT& cmd, int angle = 0);
 
-	static void		  InitKeys();
-	static void		  SetupKeys(CWnd *parent);
-	static void		  SetWindow(HWND hWnd);
+    static void		  InitKeys();
+    static void		  SetupKeys(CWnd *parent);
+    static void		  SetWindow(HWND hWnd);
 };
 
 #endif

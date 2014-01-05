@@ -33,12 +33,12 @@
 #define COLORS_H
 
 struct ColorItem {
-	const TCHAR	*name;
-	COLORREF	value;
-	COLORREF	tempval;
+    const TCHAR	*name;
+    COLORREF	value;
+    COLORREF	tempval;
 };
 
-extern ColorItem	g_colors [];
+extern ColorItem	g_colors[];
 extern int		g_color_profile;
 
 // first four are A_ attributes

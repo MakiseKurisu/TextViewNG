@@ -41,7 +41,7 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
-static char THIS_FILE [] = __FILE__;
+static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
@@ -49,149 +49,91 @@ static char THIS_FILE [] = __FILE__;
 
 
 InputBox::InputBox(const CString& prompt, const CString& title,
-	CWnd* pParent /*=NULL*/)
-	: CDialog(InputBox::IDD, pParent),
-	m_prompt(prompt), m_title(title)
+    CWnd* pParent /*=NULL*/)
+    : CDialog(InputBox::IDD, pParent),
+    m_prompt(prompt), m_title(title)
 {
-	//{{AFX_DATA_INIT(InputBox)
-	m_str = _T("");
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(InputBox)
+    m_str = _T("");
+    //}}AFX_DATA_INIT
 }
 
 
 void InputBox::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(InputBox)
-	DDX_Text(pDX, IDC_WORD, m_str);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(InputBox)
+    DDX_Text(pDX, IDC_WORD, m_str);
+    //}}AFX_DATA_MAP
 }
 
 BEGIN_MESSAGE_MAP(InputBox, CDialog)
-	//{{AFX_MSG_MAP(InputBox)
-	ON_EN_SETFOCUS(IDC_WORD, OnWordSetFocus)
-	ON_EN_KILLFOCUS(IDC_WORD, OnWordKillFocus)
-	//}}AFX_MSG_MAP
-#if POCKETPC
-	ON_WM_SETTINGCHANGE()
-#endif
+    //{{AFX_MSG_MAP(InputBox)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // InputBox message handlers
 
 bool	GetUserInput(const CString& prompt, const CString& title,
-	CString& str, CWnd *parent)
+    CString& str, CWnd *parent)
 {
-	InputBox    box(prompt, title, parent);
-	box.m_str = str;;
-	if (box.DoModal() == IDOK) {
-		str = box.m_str;
-		return true;
-	}
-	return false;
+    InputBox    box(prompt, title, parent);
+    box.m_str = str;;
+    if (box.DoModal() == IDOK) {
+        str = box.m_str;
+        return true;
+    }
+    return false;
 }
 
 BOOL InputBox::OnInitDialog()
 {
-	CDialog::OnInitDialog();
-	SetDlgItemText(IDC_LABEL, m_prompt);
-	SetWindowText(m_title);
-#if POCKETPC
-	// resize input to full width
-	RECT	rcC, rcW;
-	GetClientRect(&rcC);
-	GetDlgItem(IDC_WORD)->GetWindowRect(&rcW);
-	ScreenToClient(&rcW);
-	rcW.right = rcC.right - (rcW.left - rcC.left);
-	GetDlgItem(IDC_WORD)->MoveWindow(&rcW);
-#endif
-	return TRUE;
+    CDialog::OnInitDialog();
+    SetDlgItemText(IDC_LABEL, m_prompt);
+    SetWindowText(m_title);
+    return TRUE;
 }
-
-void InputBox::OnWordSetFocus() {
-#if POCKETPC
-	HWND hWnd;
-	GetDlgItem(IDC_WORD, &hWnd);
-	if (hWnd)
-		SHSipPreference(hWnd, SIP_UP);
-#endif
-}
-
-void InputBox::OnWordKillFocus() {
-#if POCKETPC
-	HWND hWnd;
-	GetDlgItem(IDC_WORD, &hWnd);
-	if (hWnd)
-		SHSipPreference(hWnd, SIP_DOWN);
-#endif
-}
-
-#if POCKETPC
-void InputBox::OnSettingChange(UINT uFlags, LPCTSTR lpszSection) {
-	CWnd::OnSettingChange(uFlags, lpszSection);
-}
-#endif
 /////////////////////////////////////////////////////////////////////////////
 // CAddBmDialog dialog
 
 
 CAddBmDialog::CAddBmDialog(CWnd* pParent /*=NULL*/)
-	: CDialog(CAddBmDialog::IDD, pParent)
+: CDialog(CAddBmDialog::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CAddBmDialog)
-	// NOTE: the ClassWizard will add member initialization here
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CAddBmDialog)
+    // NOTE: the ClassWizard will add member initialization here
+    //}}AFX_DATA_INIT
 }
 
 
 void CAddBmDialog::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CAddBmDialog)
-	DDX_Text(pDX, IDC_BMKEDIT, m_text);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CAddBmDialog)
+    DDX_Text(pDX, IDC_BMKEDIT, m_text);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CAddBmDialog, CDialog)
-	//{{AFX_MSG_MAP(CAddBmDialog)
-	ON_EN_SETFOCUS(IDC_BMKEDIT, OnSetfocusBmkedit)
-	ON_EN_KILLFOCUS(IDC_BMKEDIT, OnKillfocusBmkedit)
-	ON_WM_SIZE()
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CAddBmDialog)
+    ON_WM_SIZE()
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CAddBmDialog message handlers
 
-void CAddBmDialog::OnSetfocusBmkedit() {
-#if POCKETPC
-	HWND hWnd;
-	GetDlgItem(IDC_BMKEDIT, &hWnd);
-	if (hWnd)
-		SHSipPreference(hWnd, SIP_UP);
-#endif
-}
-
-void CAddBmDialog::OnKillfocusBmkedit() {
-#if POCKETPC
-	HWND hWnd;
-	GetDlgItem(IDC_BMKEDIT, &hWnd);
-	if (hWnd)
-		SHSipPreference(hWnd, SIP_DOWN);
-#endif
-}
-
 void CAddBmDialog::OnSize(UINT nType, int cx, int cy)
 {
-	CDialog::OnSize(nType, cx, cy);
-	RECT	rc;
-	GetClientRect(&rc);
-	HWND	  hWnd;
-	GetDlgItem(IDC_BMKEDIT, &hWnd);
-	if (hWnd)
-		::SetWindowPos(hWnd, NULL, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, SWP_NOZORDER | SWP_NOACTIVATE);
+    CDialog::OnSize(nType, cx, cy);
+    RECT	rc;
+    GetClientRect(&rc);
+    HWND	  hWnd;
+    GetDlgItem(IDC_BMKEDIT, &hWnd);
+    if (hWnd)
+        ::SetWindowPos(hWnd, NULL, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, SWP_NOZORDER | SWP_NOACTIVATE);
 }
 
 
@@ -200,31 +142,29 @@ void CAddBmDialog::OnSize(UINT nType, int cx, int cy)
 
 
 CFindDlg::CFindDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CFindDlg::IDD, pParent)
+: CDialog(CFindDlg::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CFindDlg)
-	// NOTE: the ClassWizard will add member initialization here
-	m_matchcase = 0;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CFindDlg)
+    // NOTE: the ClassWizard will add member initialization here
+    m_matchcase = 0;
+    //}}AFX_DATA_INIT
 }
 
 
 void CFindDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CFindDlg)
-	DDX_Text(pDX, IDC_FINDTEXT, m_text);
-	DDX_Check(pDX, IDC_MATCHCASE, m_matchcase);
-	DDX_Check(pDX, IDC_FROMCURPOS, m_fromcurpos);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CFindDlg)
+    DDX_Text(pDX, IDC_FINDTEXT, m_text);
+    DDX_Check(pDX, IDC_MATCHCASE, m_matchcase);
+    DDX_Check(pDX, IDC_FROMCURPOS, m_fromcurpos);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CFindDlg, CDialog)
-	//{{AFX_MSG_MAP(CFindDlg)
-	ON_EN_SETFOCUS(IDC_FINDTEXT, OnSetfocusFindtext)
-	ON_EN_KILLFOCUS(IDC_FINDTEXT, OnKillfocusFindtext)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CFindDlg)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -232,35 +172,11 @@ END_MESSAGE_MAP()
 
 BOOL CAddBmDialog::OnInitDialog()
 {
-	CDialog::OnInitDialog();
-#if POCKETPC
-	((CCeCommandBar *) m_pWndEmptyCB)->LoadToolBar(cIDR_DIALOG);
-#endif
-	return TRUE;
-}
-
-void CFindDlg::OnSetfocusFindtext() {
-#if POCKETPC
-	HWND hWnd;
-	GetDlgItem(IDC_FINDTEXT, &hWnd);
-	if (hWnd)
-		SHSipPreference(hWnd, SIP_UP);
-#endif
-}
-
-void CFindDlg::OnKillfocusFindtext() {
-#if POCKETPC
-	HWND hWnd;
-	GetDlgItem(IDC_FINDTEXT, &hWnd);
-	if (hWnd)
-		SHSipPreference(hWnd, SIP_DOWN);
-#endif
+    CDialog::OnInitDialog();
+    return TRUE;
 }
 
 BOOL CFindDlg::OnInitDialog() {
-	CDialog::OnInitDialog();
-#if POCKETPC
-	((CCeCommandBar *) m_pWndEmptyCB)->LoadToolBar(cIDR_DIALOG);
-#endif
-	return TRUE;
+    CDialog::OnInitDialog();
+    return TRUE;
 }

@@ -44,34 +44,34 @@
 
 class CFileFormatDialog : public CDialog
 {
-	// Construction
+    // Construction
 public:
-	CFileFormatDialog(CWnd* pParent = NULL);   // standard constructor
+    CFileFormatDialog(CWnd* pParent = NULL);   // standard constructor
 
-	// Dialog Data
-	//{{AFX_DATA(CFileFormatDialog)
-	enum { IDD = IDD_FILEFORMAT };
-	int		m_encoding;
-	int		m_format;
-	int		m_defencoding;
-	//}}AFX_DATA
+    // Dialog Data
+    //{{AFX_DATA(CFileFormatDialog)
+    enum { IDD = IDD_FILEFORMAT };
+    int		m_encoding;
+    int		m_format;
+    int		m_defencoding;
+    //}}AFX_DATA
 
 
-	// Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CFileFormatDialog)
+    // Overrides
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CFileFormatDialog)
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    //}}AFX_VIRTUAL
 
-	// Implementation
+    // Implementation
 protected:
 
-	// Generated message map functions
-	//{{AFX_MSG(CFileFormatDialog)
-	virtual BOOL OnInitDialog();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CFileFormatDialog)
+    virtual BOOL OnInitDialog();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

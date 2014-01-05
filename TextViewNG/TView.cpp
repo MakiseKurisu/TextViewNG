@@ -64,7 +64,7 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
-static char THIS_FILE [] = __FILE__;
+static char THIS_FILE[] = __FILE__;
 #endif
 
 #ifndef CSIDL_STARTMENU
@@ -437,9 +437,7 @@ BEGIN_MESSAGE_MAP(CTView, CWnd)
     ON_UPDATE_COMMAND_UI(ID_NEXT_PROFILE, OnUpdateNextColorProfile)
     ON_COMMAND(ID_NEXT_PROFILE, OnNextColorProfile)
     //}}AFX_MSG_MAP
-#ifndef _WIN32_WCE
     ON_WM_MOUSEWHEEL()
-#endif
     ON_MESSAGE(WM_HOTKEY, OnHotkey)
     ON_COMMAND_RANGE(COLORS_BASE, COLORS_BASE + COLORS_MAX, OnSelColor)
     ON_UPDATE_COMMAND_UI_RANGE(COLORS_BASE, COLORS_BASE + COLORS_MAX, OnUpdateSelColor)
@@ -682,13 +680,8 @@ bool CTView::UpdateWindowPD() {
         m_Window.pd.tm = cur;
     }
 
-#ifdef _WIN32_WCE
-    SYSTEM_POWER_STATUS_EX  pws;
-    BOOL		    ok = GetSystemPowerStatusEx(&pws, FALSE);
-#else
     SYSTEM_POWER_STATUS	    pws;
     BOOL		    ok = GetSystemPowerStatus(&pws);
-#endif
     if (ok && pws.BatteryLifePercent >= 0 && pws.BatteryLifePercent <= 100) {
         if (pws.ACLineStatus == 1)
             cur = 101;
@@ -1475,24 +1468,6 @@ void CTView::OnUpdateBack(CCmdUI* pCmdUI) {
 
     pCmdUI->Enable(!m_History.pstack.IsEmpty() &&
         m_History.stacktop != m_History.pstack.GetHeadPosition());
-#if POCKETPC
-    // tweak ok button
-    // when current view is a dict, and there are !dict items below
-    if (m_formatter->DocId() < 0)
-        for (POSITION q = m_History.pstack.GetHeadPosition(); q && q != m_History.stacktop;)
-            if (m_History.pstack.GetNext(q).docid >= 0) {
-                // ok, enable
-                if (!m_Dict.okstate) {
-                    ShowDoneButton(TRUE);
-                    m_Dict.okstate = true;
-                }
-                return;
-            }
-    if (m_Dict.okstate) {
-        ShowDoneButton(FALSE);
-        m_Dict.okstate = false;
-    }
-#endif
 }
 
 void CTView::OnBack() {
@@ -2294,11 +2269,7 @@ UINT  CCustomMenu::TrackPopupMenu(CWnd *parent, int reqx, int reqy, int angle) {
     rc.right = tlx + sw; rc.bottom = tly + sh;
 
     // initialize
-#ifdef _WIN32_WCE
-    m_selection = 0;
-#else
     m_selection = -1;
-#endif
 
     HWND	hFocus = ::GetFocus();
 
@@ -2408,12 +2379,6 @@ void CTView::OnUpdateMiscopt(CCmdUI* pCmdUI) {
 }
 
 void  CTView::CopyToClipboard(const wchar_t *text, int length, HWND hWnd) {
-#ifdef _WIN32_WCE
-    wchar_t   *result = (wchar_t*) LocalAlloc(0, sizeof(wchar_t) *(length + 1));
-    if (!result)
-        return;
-#define hMem  result
-#else
     HGLOBAL   hMem = GlobalAlloc(GMEM_MOVEABLE, sizeof(wchar_t)*(length + 1));
     if (!hMem)
         return;
@@ -2422,12 +2387,11 @@ void  CTView::CopyToClipboard(const wchar_t *text, int length, HWND hWnd) {
         GlobalFree(hMem);
         return;
     }
-#endif
     memcpy(result, text, sizeof(wchar_t)*length);
     result[length] = L'\0';
-#ifndef _WIN32_WCE
+
     GlobalUnlock(hMem);
-#endif
+
     if (::OpenClipboard(hWnd)) {
         if (EmptyClipboard())
             if (::SetClipboardData(CF_UNICODETEXT, hMem)) {
@@ -2436,13 +2400,9 @@ void  CTView::CopyToClipboard(const wchar_t *text, int length, HWND hWnd) {
             }
         CloseClipboard();
     }
-#ifdef _WIN32_WCE
-    LocalFree(result);
-#else
+
     GlobalFree(hMem);
-#endif
 }
-#undef hMem
 
 void CTView::OnEditCopy() {
     // wastes memory, but easy to implement
@@ -2927,7 +2887,6 @@ void  CTView::HideBookmarkPopup() {
     }
 }
 
-#ifndef _WIN32_WCE
 BOOL CTView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt) {
     // just pretend it's up/down
     zDelta *= 5;
@@ -2945,7 +2904,6 @@ BOOL CTView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt) {
     }
     return TRUE;
 }
-#endif
 
 void  CTView::StartAS() {
     if (m_AS.timer)
@@ -3007,11 +2965,6 @@ void  CTView::StepAS() {
         StopAS();
         return;
     }
-
-    // avoid suspend
-#ifdef _WIN32_WCE
-    SystemIdleTimerReset();
-#endif
 
     // currently highlighted line is in m_AS
     // here we a) repaint it, b) advance it, and c) underline the next line

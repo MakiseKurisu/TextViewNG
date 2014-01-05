@@ -54,7 +54,7 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
-static char THIS_FILE [] = __FILE__;
+static char THIS_FILE[] = __FILE__;
 #endif
 
 #define	MSG_OPEN_FILE (WM_APP+1)
@@ -101,21 +101,17 @@ m_okstate(false)
     m_toptime.dwLowDateTime = m_toptime.dwHighDateTime = 0;
     m_tooltips = NULL;
     m_buttoncount = 0;
-#ifndef _WIN32_WCE
     m_mainmenu = NULL;
     memset(&m_wndpos, 0, sizeof(m_wndpos));
-#endif
 }
 
 CTVFrame::~CTVFrame() {
     for (int i = 0; i < m_buttoncount; ++i)
         delete[] m_tooltips[i];
     delete[] m_tooltips;
-#ifndef _WIN32_WCE
     delete m_mainmenu;
     if (m_wndpos.length)
         AfxGetApp()->WriteProfileBinary(_T("Parameters"), _T("WindowPos"), (LPBYTE)&m_wndpos, sizeof(m_wndpos));
-#endif
 }
 
 int CTVFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
@@ -313,7 +309,6 @@ BOOL CTVFrame::OnCopyData(CWnd *pWnd, COPYDATASTRUCT *pcd) {
 }
 
 void  CTVFrame::SaveWndPos() {
-#ifndef _WIN32_WCE
     WINDOWPLACEMENT   pl;
     memset(&pl, 0, sizeof(pl));
     pl.length = sizeof(pl);
@@ -321,7 +316,6 @@ void  CTVFrame::SaveWndPos() {
     if (pl.showCmd != SW_MAXIMIZE && pl.showCmd != SW_SHOWMAXIMIZED)
         pl.showCmd = SW_SHOWNORMAL;
     memcpy(&m_wndpos, &pl, sizeof(m_wndpos));
-#endif
 }
 
 bool  CTVFrame::InitView() {
@@ -451,13 +445,8 @@ static void GetTbPopupPoint(CToolBarCtrl& tb, UINT cmd, int& x, int& y, int& ali
     tb.GetItemRect(tb.CommandToIndex(cmd), &rc);
     tb.ClientToScreen(&rc);
     x = rc.left;
-#if POCKETPC
-    y = rc.top;
-    align = TPM_BOTTOMALIGN;
-#else
     y = rc.bottom;
     align = TPM_TOPALIGN;
-#endif
 }
 
 void CTVFrame::OnUpdateMainTools(CCmdUI* pCmdUI) {
@@ -519,10 +508,8 @@ void CTVFrame::OnSize(UINT nType, int cx, int cy) {
 void CTVFrame::OnMove(int x, int y) {
     CFrameWnd::OnMove(x, y);
 
-#ifndef _WIN32_WCE
     if (!m_in_fullscreen)
         GetWindowRect(&m_normsize);
-#endif
     SaveWndPos();
 }
 

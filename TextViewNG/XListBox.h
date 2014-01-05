@@ -42,9 +42,9 @@ void	XLB_SetImageList(HWND hWnd, HIMAGELIST hIml, bool shared = false);
 struct XLB_Handle;
 struct XLB_Handle *XLB_GetHandle(HWND hWnd);
 bool	XLB_AppendItem(struct XLB_Handle *handle,
-	const TCHAR *text1, const TCHAR *text2,
-	int icon, int level,
-	LONG user_data);
+    const TCHAR *text1, const TCHAR *text2,
+    int icon, int level,
+    LONG user_data);
 void	XLB_DeleteItem(HWND hWnd, int item);
 void	XLB_SetItemText1(HWND hWnd, int item, const TCHAR *text);
 LONG    XLB_GetData(HWND hWnd, int item);

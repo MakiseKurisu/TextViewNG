@@ -44,33 +44,33 @@
 class PDBFile : public RFile
 {
 public:
-	PDBFile(const CString& fn);
+    PDBFile(const CString& fn);
 
-	// generic file operations
-	virtual DWORD	  size() { return m_length; }
-	virtual DWORD	  read(void *buf);
-	virtual void	  seek(DWORD pos);
+    // generic file operations
+    virtual DWORD	  size() { return m_length; }
+    virtual DWORD	  read(void *buf);
+    virtual void	  seek(DWORD pos);
 
-	// compression
-	virtual CString CompressionInfo();
+    // compression
+    virtual CString CompressionInfo();
 
-	// check if this is a pdb file
-	static bool	  IsPDB(RFile *fp);
+    // check if this is a pdb file
+    static bool	  IsPDB(RFile *fp);
 protected:
-	DWORD		  m_length;
-	DWORD		  m_ptr;
-	DWORD		  m_rsz;
-	bool		  m_comp;
-	struct Rec {
-		DWORD   usize;
-		DWORD   uoff;
-		DWORD   off;
-		DWORD   csize;
-	};
-	Buffer<Rec>	  m_blocks;
+    DWORD		  m_length;
+    DWORD		  m_ptr;
+    DWORD		  m_rsz;
+    bool		  m_comp;
+    struct Rec {
+        DWORD   usize;
+        DWORD   uoff;
+        DWORD   off;
+        DWORD   csize;
+    };
+    Buffer<Rec>	  m_blocks;
 
-	static bool	  CheckPDB(RFile *fp, struct PDBHdr&, struct PDBRec0&);
-	int		  findblock(DWORD uoff);
+    static bool	  CheckPDB(RFile *fp, struct PDBHdr&, struct PDBRec0&);
+    int		  findblock(DWORD uoff);
 };
 
 #endif // !defined(AFX_PDBFILE_H__777AC4E9_AB31_44B8_9A41_80B433927455__INCLUDED_)

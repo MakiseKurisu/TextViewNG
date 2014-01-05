@@ -43,46 +43,46 @@
 
 class CProgressDlg : public CDialog, public TextParser::Meter
 {
-	// Construction
+    // Construction
 public:
-	CProgressDlg(const CString& msg, CWnd* pParent = NULL);   // standard constructor
+    CProgressDlg(const CString& msg, CWnd* pParent = NULL);   // standard constructor
 
-	virtual void	SetMax(DWORD max);
-	virtual void	SetCur(DWORD cur);
+    virtual void	SetMax(DWORD max);
+    virtual void	SetCur(DWORD cur);
 
-	// Dialog Data
-	//{{AFX_DATA(CProgressDlg)
-	enum { IDD = IDD_PROGRESS };
-	// NOTE: the ClassWizard will add data members here
-	//}}AFX_DATA
+    // Dialog Data
+    //{{AFX_DATA(CProgressDlg)
+    enum { IDD = IDD_PROGRESS };
+    // NOTE: the ClassWizard will add data members here
+    //}}AFX_DATA
 
 
-	// Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CProgressDlg)
+    // Overrides
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CProgressDlg)
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    //}}AFX_VIRTUAL
 
-	// Implementation
+    // Implementation
 protected:
-	enum { MAXSAMP = 128 };
-	CString	  m_msg;
-	DWORD		  m_last;
-	DWORD		  m_starttime;
-	DWORD		  m_samples[2 * MAXSAMP];
-	DWORD		  m_tail;
-	DWORD		  m_nsamp;
-	DWORD		  m_curbytes;
-	DWORD		  m_lastbytes;
-	DWORD		  m_lastupdate;
-	bool		  m_visible;
-	// Generated message map functions
-	//{{AFX_MSG(CProgressDlg)
-	virtual BOOL OnInitDialog();
-	//}}AFX_MSG
-	afx_msg void OnSettingChange(UINT uFlags, LPCTSTR lpszSection);
-	DECLARE_MESSAGE_MAP()
+    enum { MAXSAMP = 128 };
+    CString	  m_msg;
+    DWORD		  m_last;
+    DWORD		  m_starttime;
+    DWORD		  m_samples[2 * MAXSAMP];
+    DWORD		  m_tail;
+    DWORD		  m_nsamp;
+    DWORD		  m_curbytes;
+    DWORD		  m_lastbytes;
+    DWORD		  m_lastupdate;
+    bool		  m_visible;
+    // Generated message map functions
+    //{{AFX_MSG(CProgressDlg)
+    virtual BOOL OnInitDialog();
+    //}}AFX_MSG
+    afx_msg void OnSettingChange(UINT uFlags, LPCTSTR lpszSection);
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

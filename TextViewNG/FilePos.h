@@ -33,26 +33,26 @@
 #define FILEPOS_H
 
 struct FilePos {
-	int	  para;
-	int	  off;
-	int	  docid;
+    int	  para;
+    int	  off;
+    int	  docid;
 
-	FilePos() : para(0), off(0), docid(0) { }
-	FilePos(int p, int o, int did) : para(p), off(o), docid(did) { }
-	FilePos(const FilePos& p) : para(p.para), off(p.off), docid(p.docid) { }
-	FilePos& operator=(const FilePos& p) { para = p.para; off = p.off; docid = p.docid; return *this; }
-	bool operator==(int p) const { return para == p && off == 0 && docid == 0; }
-	bool operator!=(int p) const { return !operator==(p); }
-	bool operator==(const FilePos& p) const { return para == p.para && off == p.off && docid == p.docid; }
-	bool operator!=(const FilePos& p) const { return !operator==(p); }
-	bool operator < (const FilePos& p) const {
-		return docid < p.docid || (docid == p.docid &&
-			(para < p.para || (para == p.para && off < p.off)));
-	}
-	bool operator > (const FilePos& p) const { return !operator < (p) && !operator==(p); }
-	bool operator<=(const FilePos& p) const { return operator < (p) || operator==(p); }
-	bool operator>=(const FilePos& p) const { return !operator < (p); }
-	FilePos operator+(int i) { return FilePos(para, off + i, docid); }
+    FilePos() : para(0), off(0), docid(0) { }
+    FilePos(int p, int o, int did) : para(p), off(o), docid(did) { }
+    FilePos(const FilePos& p) : para(p.para), off(p.off), docid(p.docid) { }
+    FilePos& operator=(const FilePos& p) { para = p.para; off = p.off; docid = p.docid; return *this; }
+    bool operator==(int p) const { return para == p && off == 0 && docid == 0; }
+    bool operator!=(int p) const { return !operator==(p); }
+    bool operator==(const FilePos& p) const { return para == p.para && off == p.off && docid == p.docid; }
+    bool operator!=(const FilePos& p) const { return !operator==(p); }
+    bool operator < (const FilePos& p) const {
+        return docid < p.docid || (docid == p.docid &&
+            (para < p.para || (para == p.para && off < p.off)));
+    }
+    bool operator >(const FilePos& p) const { return !operator < (p) && !operator==(p); }
+    bool operator<=(const FilePos& p) const { return operator < (p) || operator==(p); }
+    bool operator>=(const FilePos& p) const { return !operator < (p); }
+    FilePos operator+(int i) { return FilePos(para, off + i, docid); }
 };
 
 #endif

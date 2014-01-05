@@ -40,7 +40,7 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
-static char THIS_FILE [] = __FILE__;
+static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
@@ -48,35 +48,35 @@ static char THIS_FILE [] = __FILE__;
 
 
 CMiscOptDlg::CMiscOptDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CMiscOptDlg::IDD, pParent)
+: CDialog(CMiscOptDlg::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CMiscOptDlg)
-	m_fcsize = 0;
-	m_fbsize = 0;
-	m_allowmulti = 0;
-	m_rotb = 0;
-	m_lastfiles = 0;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CMiscOptDlg)
+    m_fcsize = 0;
+    m_fbsize = 0;
+    m_allowmulti = 0;
+    m_rotb = 0;
+    m_lastfiles = 0;
+    //}}AFX_DATA_INIT
 }
 
 
 void CMiscOptDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CMiscOptDlg)
-	DDX_Text(pDX, IDC_FCSIZE, m_fcsize);
-	DDX_Text(pDX, IDC_FBSIZE, m_fbsize);
-	DDX_Check(pDX, IDC_ALLOWMULTI, m_allowmulti);
-	DDX_Check(pDX, IDC_ROTB, m_rotb);
-	DDX_Text(pDX, IDC_LASTFILES, m_lastfiles);
-	DDX_Check(pDX, IDC_REPLIMIT, m_autorepeatlimit);
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CMiscOptDlg)
+    DDX_Text(pDX, IDC_FCSIZE, m_fcsize);
+    DDX_Text(pDX, IDC_FBSIZE, m_fbsize);
+    DDX_Check(pDX, IDC_ALLOWMULTI, m_allowmulti);
+    DDX_Check(pDX, IDC_ROTB, m_rotb);
+    DDX_Text(pDX, IDC_LASTFILES, m_lastfiles);
+    DDX_Check(pDX, IDC_REPLIMIT, m_autorepeatlimit);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CMiscOptDlg, CDialog)
-	//{{AFX_MSG_MAP(CMiscOptDlg)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CMiscOptDlg)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -84,12 +84,10 @@ END_MESSAGE_MAP()
 
 BOOL CMiscOptDlg::OnInitDialog()
 {
-	CDialog::OnInitDialog();
-#if POCKETPC
-	((CCeCommandBar *) m_pWndEmptyCB)->LoadToolBar(cIDR_DIALOG);
-#endif
-	SendDlgItemMessage(IDC_FCSIZESPIN, UDM_SETRANGE32, 2, 32);
-	SendDlgItemMessage(IDC_FBSIZESPIN, UDM_SETRANGE32, 8, 512);
-	SendDlgItemMessage(IDC_LASTFSPIN, UDM_SETRANGE32, 16, 1024);
-	return TRUE;
+    CDialog::OnInitDialog();
+
+    SendDlgItemMessage(IDC_FCSIZESPIN, UDM_SETRANGE32, 2, 32);
+    SendDlgItemMessage(IDC_FBSIZESPIN, UDM_SETRANGE32, 8, 512);
+    SendDlgItemMessage(IDC_LASTFSPIN, UDM_SETRANGE32, 16, 1024);
+    return TRUE;
 }

@@ -46,7 +46,7 @@
 
 #ifdef _DEBUG
 #undef THIS_FILE
-static char THIS_FILE [] = __FILE__;
+static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif
 
@@ -136,7 +136,6 @@ TextFile      *TextFile::Open(const CString& filename) {
     bool		  zip = false;
     RFile		  *rf = NULL;
 
-#if !defined(_WIN32_WCE)
     CString   FILENAME;
     // normalize filename
     TCHAR   buffer[MAX_PATH], *filepart;
@@ -145,13 +144,6 @@ TextFile      *TextFile::Open(const CString& filename) {
         FILENAME = buffer;
     else
         FILENAME = filename;
-#else
-#define FILENAME filename
-    if (filename == _T("NUL")) {
-        rf = new DummyRFile();
-        goto ok;
-    }
-#endif
 
     for (;;) {
         fp = new RFile(cur);

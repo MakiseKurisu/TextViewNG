@@ -112,7 +112,7 @@
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>TextViewNG;zlib;libjpeg;libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>TextViewNG;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>
@@ -124,6 +124,7 @@
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <CompileAs>Default</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -132,7 +133,7 @@
       <AdditionalIncludeDirectories>TextViewNG;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>unicows.lib;kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;msimg32.lib;imm32.lib;msxml6.lib;uxtheme.lib;windowscodecs.lib;advapi32.lib;comctl32.lib;comdlg32.lib;shell32.lib;shlwapi.lib;winspool.lib;uuid.lib;ole32.lib;oleaut32.lib;oleacc.lib;uafxcw.lib;atls.lib;libcmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;advapi32.lib;shell32.lib;shlwapi.lib;comctl32.lib;comdlg32.lib;uxtheme.lib;msimg32.lib;windowscodecs.lib;msxml6.lib;winspool.lib;imm32.lib;ole32.lib;oleaut32.lib;oleacc.lib;uuid.lib;unicows.lib;uafxcw.lib;atls.lib;libcmt.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
@@ -141,15 +142,6 @@
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
-    <CustomBuildStep>
-      <Command>
-      </Command>
-      <Outputs>
-      </Outputs>
-      <Message>Performing Custom Build Step</Message>
-      <Inputs>
-      </Inputs>
-    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Midl>
@@ -164,7 +156,7 @@
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>TextViewNG;zlib;libjpeg;libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>TextViewNG;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>
@@ -176,6 +168,7 @@
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <CompileAs>Default</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -184,7 +177,7 @@
       <AdditionalIncludeDirectories>TextViewNG;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>mfc110.lib;afxnmcd.lib;msxml6.lib;Winmm.lib;OleDlg.lib;windowscodecs.lib;Propsys.lib;Dwmapi.lib;kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;msimg32.lib;imm32.lib;uxtheme.lib;advapi32.lib;comctl32.lib;comdlg32.lib;shell32.lib;shlwapi.lib;winspool.lib;uuid.lib;ole32.lib;oleaut32.lib;oleacc.lib;uafxcw.lib;atls.lib;libcmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;advapi32.lib;shell32.lib;shlwapi.lib;propsys.lib;comctl32.lib;comdlg32.lib;uxtheme.lib;dwmapi.lib;msimg32.lib;windowscodecs.lib;winmm.lib;msxml6.lib;winspool.lib;imm32.lib;ole32.lib;oledlg.lib;oleaut32.lib;oleacc.lib;uuid.lib;uafxcw.lib;atls.lib;libcmt.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
@@ -214,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>TextViewNG;zlib;libjpeg;libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>TextViewNG;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -230,6 +223,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CompileAs>Default</CompileAs>
       <EnablePREfast>false</EnablePREfast>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -238,7 +232,7 @@
       <AdditionalIncludeDirectories>TextViewNG;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>unicows.lib;kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;msimg32.lib;imm32.lib;msxml6.lib;uxtheme.lib;windowscodecs.lib;advapi32.lib;comctl32.lib;comdlg32.lib;shell32.lib;shlwapi.lib;winspool.lib;uuid.lib;ole32.lib;oleaut32.lib;oleacc.lib;uafxcwd.lib;atls.lib;libcmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;advapi32.lib;shell32.lib;shlwapi.lib;comctl32.lib;comdlg32.lib;uxtheme.lib;msimg32.lib;windowscodecs.lib;msxml6.lib;winspool.lib;imm32.lib;ole32.lib;oleaut32.lib;oleacc.lib;uuid.lib;unicows.lib;uafxcwd.lib;atls.lib;libcmtd.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
@@ -260,7 +254,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>TextViewNG;zlib;libjpeg;libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>TextViewNG;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -276,6 +270,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CompileAs>Default</CompileAs>
       <EnablePREfast>false</EnablePREfast>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -284,7 +279,7 @@
       <AdditionalIncludeDirectories>TextViewNG;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;msimg32.lib;imm32.lib;msxml6.lib;uxtheme.lib;windowscodecs.lib;advapi32.lib;comctl32.lib;comdlg32.lib;shell32.lib;shlwapi.lib;winspool.lib;uuid.lib;ole32.lib;oleaut32.lib;oleacc.lib;uafxcw.lib;atls.lib;libcmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;advapi32.lib;shell32.lib;shlwapi.lib;propsys.lib;comctl32.lib;comdlg32.lib;uxtheme.lib;dwmapi.lib;msimg32.lib;windowscodecs.lib;winmm.lib;msxml6.lib;winspool.lib;imm32.lib;ole32.lib;oledlg.lib;oleaut32.lib;oleacc.lib;uuid.lib;uafxcwd.lib;atls.lib;libcmtd.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
@@ -303,10 +298,11 @@
     </CustomBuildStep>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="buildnum.h" />
+    <ClInclude Include="Resource\newres.h" />
     <ClInclude Include="TextViewNG\Attr.h" />
     <ClInclude Include="TextViewNG\Bookmarks.h" />
     <ClInclude Include="TextViewNG\BufFile.h" />
+    <ClInclude Include="TextViewNG\buildnum.h" />
     <ClInclude Include="TextViewNG\Colors.h" />
     <ClInclude Include="TextViewNG\ColorSelector.h" />
     <ClInclude Include="TextViewNG\config.h" />
@@ -320,7 +316,6 @@
     <ClInclude Include="TextViewNG\InputBox.h" />
     <ClInclude Include="TextViewNG\Keys.h" />
     <ClInclude Include="TextViewNG\MiscOptDlg.h" />
-    <ClInclude Include="TextViewNG\newres.h" />
     <ClInclude Include="TextViewNG\OptionsDialog.h" />
     <ClInclude Include="TextViewNG\PDBFile.h" />
     <ClInclude Include="TextViewNG\ProgressDlg.h" />
@@ -386,10 +381,10 @@
     <Image Include="Resource\tree.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="Resource\TextViewNG.manifest" />
+    <ResourceCompile Include="Resource\TextViewNG.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resource\TextViewNG.rc" />
+    <Manifest Include="Resource\TextViewNG.manifest" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

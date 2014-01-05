@@ -43,7 +43,7 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
-static char THIS_FILE [] = __FILE__;
+static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ static char THIS_FILE [] = __FILE__;
 
 
 COptionsDialog::COptionsDialog(CWnd* pParent /*=NULL*/)
-    : CDialog(COptionsDialog::IDD, pParent)
+: CDialog(COptionsDialog::IDD, pParent)
 {
     //{{AFX_DATA_INIT(COptionsDialog)
     m_bold = FALSE;
@@ -193,7 +193,7 @@ static int CALLBACK EnumFontFamProc(
     _In_    LPARAM lParam
     )
 {
-    LRESULT ret = ::SendMessage((HWND) lParam, CB_ADDSTRING, 0, (LPARAM) lpelf->elfLogFont.lfFaceName);
+    LRESULT ret = ::SendMessage((HWND)lParam, CB_ADDSTRING, 0, (LPARAM)lpelf->elfLogFont.lfFaceName);
     ASSERT(ret != CB_ERR && ret != CB_ERRSPACE);
     return TRUE;
 }
@@ -204,26 +204,26 @@ BOOL COptionsDialog::OnInitDialog()
     CClientDC dc(this);
     HWND hCB;
     GetDlgItem(IDC_FACE, &hCB);
-    EnumFontFamilies(dc.m_hAttribDC, NULL, (FONTENUMPROC) EnumFontFamProc, (LPARAM) hCB);
+    EnumFontFamilies(dc.m_hAttribDC, NULL, (FONTENUMPROC)EnumFontFamProc, (LPARAM)hCB);
 
     // add angles and columns
     for (int angle = 0; angle < 360; angle += 90)
     {
         CString tmp;
         tmp.Format(_T("%d\xb0"), angle);
-        SendDlgItemMessage(IDC_ROTATE, CB_ADDSTRING, 0, (LPARAM) (LPCTSTR) tmp);
+        SendDlgItemMessage(IDC_ROTATE, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)tmp);
     }
     for (int column = 1; column < 5; ++column)
     {
         CString tmp;
         tmp.Format(_T("%d"), column);
-        SendDlgItemMessage(IDC_COLUMNS, CB_ADDSTRING, 0, (LPARAM) (LPCTSTR) tmp);
+        SendDlgItemMessage(IDC_COLUMNS, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)tmp);
     }
 
-    SendDlgItemMessage(IDC_CLEARTYPE, CB_ADDSTRING, 0, (LPARAM) _T("None"));
-    SendDlgItemMessage(IDC_CLEARTYPE, CB_ADDSTRING, 0, (LPARAM) _T("ClearType"));
-    SendDlgItemMessage(IDC_CLEARTYPE, CB_ADDSTRING, 0, (LPARAM) _T("Natural"));
-    SendDlgItemMessage(IDC_CLEARTYPE, CB_ADDSTRING, 0, (LPARAM) _T("Standard"));
+    SendDlgItemMessage(IDC_CLEARTYPE, CB_ADDSTRING, 0, (LPARAM)_T("None"));
+    SendDlgItemMessage(IDC_CLEARTYPE, CB_ADDSTRING, 0, (LPARAM)_T("ClearType"));
+    SendDlgItemMessage(IDC_CLEARTYPE, CB_ADDSTRING, 0, (LPARAM)_T("Natural"));
+    SendDlgItemMessage(IDC_CLEARTYPE, CB_ADDSTRING, 0, (LPARAM)_T("Standard"));
 
     // resize the input window
     RECT	  rface, rsize, rspin;
