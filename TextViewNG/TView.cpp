@@ -1867,7 +1867,7 @@ void CTView::HandleMouseDown(CPoint point)
 
 void CTView::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
-    HandleMouseDown(point);
+    m_Mouse.trackmouse = true;
     /*
     FilePos pos;
 
