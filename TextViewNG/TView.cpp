@@ -1867,12 +1867,15 @@ void CTView::HandleMouseDown(CPoint point)
 
 void CTView::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
+    HandleMouseDown(point);
+    /*
     FilePos pos;
 
     System2Window(point, m_Window.cli);
 
     if (point.y < m_Window.rheight - m_Window.progress_height)
         CTVApp::QueueCmd(ID_FULLSCREEN);
+    */
 }
 
 void CTView::MoveAbs(FilePos pos)
@@ -3218,8 +3221,6 @@ void CTView::HideBookmarkPopup()
 
 BOOL CTView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 {
-    // just pretend it's up/down
-    zDelta *= 5;
     if (zDelta > 0)
     {
         while (zDelta > 0)
