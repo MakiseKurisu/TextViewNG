@@ -104,134 +104,6 @@ static void Unicode_cp_convert(struct CodePage *cp, const char *mbs, int mblen, 
     //If we use lstrlen, we will lost the last wchar in the file since lstrlen(xxx,xxx,length + 0x0000)
 }
 
-static int UTF_cp_length(struct CodePage *cp, const char *mbs, int mblen)
-{
-    const unsigned char *mb = (const unsigned char *) mbs;
-    int len = 0;
-
-    while (mblen > 0)
-    {
-        unsigned char c = *mb++;
-        --mblen;
-        if (c < 0x80)
-        {
-            // ascii
-            ++len;
-        }
-        else if (c < 0xe0)
-        {
-            // 2-byte seq
-            if (mblen == 0) // invalid
-                break;
-            if ((mb[0] & 0x80) == 0x80)
-            {
-                ++len;
-                ++mb;
-                --mblen;
-            }
-        }
-        else if (*mb < 0xf0)
-        {
-            if (mblen <= 1) // invalid
-                break;
-            if ((mb[0] & 0xc0) == 0x80 && (mb[1] & 0xc0) == 0x80)
-            {
-                ++len;
-                mb += 2;
-                mblen -= 2;
-            }
-        }
-        else if (*mb < 0xf4)
-        {
-            if (mblen <= 2) // invalid
-                break;
-            if ((mb[0] & 0xc0) == 0x80 && (mb[1] & 0xc0) == 0x80 && (mb[2] & 0xc0) == 0x80)
-            {
-                ++len;
-                mb += 3;
-                mblen -= 3;
-            }
-        }
-        else if (*mb == 0xf4)
-        {
-            if (mblen <= 2) // invalid
-                break;
-            if ((mb[0] & 0xf0) == 0x80 && (mb[1] & 0xc0) == 0x80 && (mb[2] & 0xc0) == 0x80)
-            {
-                ++len;
-                mb += 3;
-                mblen -= 3;
-            }
-        }
-    }
-    return len;
-}
-
-static void UTF_cp_convert(struct CodePage *cp, const char *mbs, int mblen,
-    wchar_t *wcs, int wclen)
-{
-    const unsigned char *mb = (const unsigned char *) mbs;
-    wchar_t *wce = wcs + wclen;
-
-    while (mblen > 0 && wcs < wce)
-    {
-        unsigned char c = *mb++;
-        --mblen;
-        if (c < 0x80)
-        {
-            // ascii
-            *wcs++ = c;
-        }
-        else if (c < 0xe0)
-        {
-            // 2-byte seq
-            if (mblen == 0) // invalid
-                break;
-            if ((mb[0] & 0x80) == 0x80)
-            {
-                *wcs++ = ((wchar_t) (c & 0x1f) << 6) | (*mb & 0x3f);
-                ++mb;
-                --mblen;
-            }
-        }
-        else if (*mb < 0xf0)
-        {
-            if (mblen <= 1) // invalid
-                break;
-            if ((mb[0] & 0xc0) == 0x80 && (mb[1] & 0xc0) == 0x80)
-            {
-                *wcs++ = ((wchar_t) (c & 0x0f) << 12) | ((wchar_t) (mb[0] & 0x3f) << 6) | (mb[1] & 0x3f);
-                mb += 2;
-                mblen -= 2;
-            }
-        }
-        else if (*mb < 0xf4)
-        {
-            if (mblen <= 2) // invalid
-                break;
-            if ((mb[0] & 0xc0) == 0x80 && (mb[1] & 0xc0) == 0x80 && (mb[2] & 0xc0) == 0x80)
-            {
-                *wcs++ = ((wchar_t) (c & 0x7) << 18) | ((wchar_t) (mb[0] & 0x3f) << 12) |
-                    ((wchar_t) (mb[1] & 0x3f) << 6) | (mb[2] & 0x3f);
-                mb += 3;
-                mblen -= 3;
-            }
-        }
-        else if (*mb == 0xf4)
-        {
-            if (mblen <= 2) // invalid
-                break;
-            if ((mb[0] & 0xf0) == 0x80 && (mb[1] & 0xc0) == 0x80 && (mb[2] & 0xc0) == 0x80)
-            {
-                *wcs++ = ((wchar_t) (c & 0x7) << 18) | ((wchar_t) (mb[0] & 0x3f) << 12) |
-                    ((wchar_t) (mb[1] & 0x3f) << 6) | (mb[2] & 0x3f);
-                mb += 3;
-                mblen -= 3;
-            }
-        }
-    }
-}
-
 static struct CodePage *codepages;
 static int curcp, maxcp;
 static int default_cp;
@@ -722,15 +594,7 @@ InitUnicode::InitUnicode()
             }
         }
     }
-    /*
-    bool need_utf8=Unicode::GetIntCodePage(CP_UTF8)<0;
-    if (need_utf8)
-    {
-    int cp=add_codepage(_T("UTF-8"),CP_UTF8);
-    codepages[cp].length=UTF_cp_length;
-    codepages[cp].convert=UTF_cp_convert;
-    }
-    */
+
     bool need_utf16 = Unicode::GetIntCodePage(CP_UTF16) < 0;
     if (need_utf16)
     {
@@ -738,15 +602,15 @@ InitUnicode::InitUnicode()
         codepages[cp].length = Unicode_cp_length;
         codepages[cp].convert = Unicode_cp_convert;
     }
-
     if (mask || need_utf16)
     {
         qsort(codepages, curcp, sizeof(struct CodePage), enc_cmp);
     }
-    // default_cp=Unicode::GetIntCodePage(GetACP());
-    // if (default_cp == -1)
+
+    default_cp = Unicode::GetIntCodePage(GetACP());
+    if (default_cp == -1)
     {
-        default_cp = Unicode::GetIntCodePage(1251); // XXX hardcoded
+        default_cp = Unicode::GetIntCodePage(CP_1252); // XXX hardcoded
     }
 }
 
@@ -825,48 +689,6 @@ static UINT detect_encoding(const unsigned char *mbs, unsigned mblen)
     {
         return GetACP();
     }
-    /*
-    //Seriously, we need some really encode detecting code instead of GUESS
-    //If you can't, just return the default code page and assume our users perfer to read their native language
-    unsigned i,j;
-    int enc=0;
-    int sv,msv=0;
-    int hist[NUMLET*NUMLET];
-    unsigned int prev;
-    unsigned char *lettermap;
-
-    for (i=0;i<NUM_BUILTIN_ENCODINGS;++i)
-    {
-    memset(hist,0,sizeof(int)*NUMLET*NUMLET);
-    lettermap=builtin_encodings[i].distmap;
-    for (j=prev=0;j<mblen;++j)
-    {
-    unsigned int next=lettermap[mbs[j]];
-    if (next && prev)
-    {
-    ++hist[prev*NUMLET+next];
-    }
-    prev=next;
-    }
-    for (j=sv=0;j<NUMLET*NUMLET;++j)
-    {
-    sv+=hist[j]*russian_distrib[j];
-    }
-    if (sv>msv)
-    {
-    enc=i;
-    msv=sv;
-    }
-    }
-    if (msv<5) // no cyrillic letters found
-    {
-    return CP_1252;
-    }
-    else
-    {
-    return builtin_encodings[enc].cp;
-    }
-    */
 }
 
 int Unicode::DetectCodePage(const char *mbs, int mblen)
@@ -881,7 +703,7 @@ UINT Unicode::GetMSCodePage(int cp)
 {
     if (cp >= 0 && cp < curcp)
         return codepages[cp].codepage;
-    return 1251; // XXX hardcoded
+    return CP_1252; // XXX hardcoded
 }
 
 int Unicode::FindCodePage(const TCHAR *name)
