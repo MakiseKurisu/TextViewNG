@@ -67,6 +67,9 @@ public:
     void TDrawLine(HDC dc, const RECT& cli, int x1, int y1, int x2, int y2);
     void TDrawLine(HDC dc, const RECT& cli, const RECT& rc);
 
+    void TDrawRectangle(HDC dc, const RECT& cli, int x1, int y1, int x2, int y2);
+    void TDrawRectangle(HDC dc, const RECT& cli, const RECT& rc);
+
     // warning, this will transform the coordinates in place!
     void TDrawPolyLine(HDC dc, const RECT& cli, POINT *pt, int npt);
 

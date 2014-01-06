@@ -67,15 +67,12 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-#ifndef CSIDL_STARTMENU
-#define CSIDL_STARTMENU 0x000b
-#endif
-
 #define DO_CLIP 0
-#define PROGRESS_M 3
-#define PROGRESS_A 11
-#define PROGRESS_C 10
-#define PROGRESS_F 6
+#define PROGRESS_DPI 72
+#define PROGRESS_MARGIN 4
+#define PROGRESS_ARROW_WIDTH 10
+#define PROGRESS_CLICK_HEIGHT 20
+#define PROGRESS_FONT_SIZE 10
 #define FRAME_SIZE 3
 
 // colors
@@ -351,7 +348,7 @@ void CTView::Init()
     StartWindowPDTimer();
     // initialize progress bar height
     CFDC dc(m_hWnd);
-    dc.SelectFontAbs(MulDiv(PROGRESS_F, GetDeviceCaps(dc.DC(), LOGPIXELSY), 72), CFDC::FORCENORMALWEIGHT | CFDC::FORCETAHOMA, true);
+    dc.SelectFontAbs(MulDiv(PROGRESS_FONT_SIZE, GetDeviceCaps(dc.DC(), LOGPIXELSY), PROGRESS_DPI), CFDC::FORCENORMALWEIGHT | CFDC::FORCETAHOMA, true);
     int dummy;
     dc.GetFontSize(m_Window.progress_height, dummy);
     m_Window.progress_height -= 2; // XXX no inter-line spacing
@@ -755,7 +752,7 @@ bool CTView::UpdateWindowPD()
 void CTView::StartWindowPDTimer()
 {
     if (m_Window.showprogress() && (m_Window.pb.battery || m_Window.pb.time))
-        m_Window.pd_timer = SetTimer(TM_PD, 2000, NULL);
+        m_Window.pd_timer = SetTimer(TM_PD, 1000, NULL);
     else
     {
         KillTimer(m_Window.pd_timer);
@@ -779,7 +776,7 @@ void CTView::PaintProgressBar(CFDC& dc, const RECT& rc, const RECT& cli)
 {
     RECT col;
     wchar_t buf[128];
-    int fonthdpi = MulDiv(PROGRESS_F, GetDeviceCaps(dc.DC(), LOGPIXELSY), 72);
+    int fonthdpi = MulDiv(PROGRESS_FONT_SIZE, GetDeviceCaps(dc.DC(), LOGPIXELSY), PROGRESS_DPI);
     dc.SelectFontAbs(fonthdpi, CFDC::FORCENORMALWEIGHT | CFDC::FORCETAHOMA);
     ::SetBkMode(dc.DC(), OPAQUE);
 
@@ -861,41 +858,43 @@ void CTView::PaintProgressBar(CFDC& dc, const RECT& rc, const RECT& cli)
         RECT rc2 = rc;
         rc2.top += 1 + (m_Window.progress_height - 5) / 2;
 
-        int bw = rc2.right - rc2.left - 2 * PROGRESS_M - 2 * PROGRESS_A - m_Window.pb_width;
+        int bw = rc2.right - rc2.left - 2 * PROGRESS_MARGIN - 2 * PROGRESS_ARROW_WIDTH - m_Window.pb_width;
         int pos = m_Window.pd.top ? MulDiv(bw, m_Window.pd.cc, m_Window.pd.top) : bw;
-        col.left = rc2.left + PROGRESS_M + PROGRESS_A; col.top = rc2.top + 1;
-        col.right = col.left + pos; col.bottom = col.top;
+        col.left = rc2.left + PROGRESS_MARGIN + PROGRESS_ARROW_WIDTH; col.top = rc2.top + 1;
+        col.right = col.left + pos; col.bottom = col.top + 2;
         dc.SetColor(C_GAUGE);
-        TDrawLine(dc.DC(), m_Window.cli, col);
-        col.top += 2;
-        col.bottom = col.top;
-        TDrawLine(dc.DC(), m_Window.cli, col);
+        TDrawRectangle(dc.DC(), m_Window.cli, col);
+
         // draw a thin black line
-        col.left = rc2.left + PROGRESS_M; col.top = col.bottom = rc2.top + 2;
-        col.right = rc2.right - PROGRESS_M - m_Window.pb_width;
+        col.left = rc2.left + PROGRESS_MARGIN; col.top = col.bottom = rc2.top + 2;
+        col.right = rc2.right - PROGRESS_MARGIN - m_Window.pb_width;
         dc.SetColor(C_TOCL0); // XXX
         TDrawLine(dc.DC(), m_Window.cli, col);
+
         // draw arrows
         col.top = rc2.top + 1;
         col.bottom = col.top + 3;
-        col.left = col.right = rc2.left + PROGRESS_M + 1;
+        col.left = col.right = rc2.left + PROGRESS_MARGIN + 1;
         TDrawLine(dc.DC(), m_Window.cli, col);
-        col.left = col.right = rc2.left + PROGRESS_M + 4;
+        col.left = col.right = rc2.left + PROGRESS_MARGIN + 4;
         TDrawLine(dc.DC(), m_Window.cli, col);
-        col.left = col.right = rc2.right - PROGRESS_M - m_Window.pb_width - 5;
+
+        col.left = col.right = rc2.right - PROGRESS_MARGIN - m_Window.pb_width - 5;
         TDrawLine(dc.DC(), m_Window.cli, col);
-        col.left = col.right = rc2.right - PROGRESS_M - m_Window.pb_width - 2;
+        col.left = col.right = rc2.right - PROGRESS_MARGIN - m_Window.pb_width - 2;
         TDrawLine(dc.DC(), m_Window.cli, col);
+
         col.top = rc2.top;
         col.bottom = col.top + 5;
-        col.left = col.right = rc2.left + PROGRESS_M + 2;
+        col.left = col.right = rc2.left + PROGRESS_MARGIN + 2;
         TDrawLine(dc.DC(), m_Window.cli, col);
-        col.left = col.right = rc2.left + PROGRESS_M + 5;
+        col.left = col.right = rc2.left + PROGRESS_MARGIN + 5;
         TDrawLine(dc.DC(), m_Window.cli, col);
-        col.left = col.right = rc2.right - PROGRESS_M - m_Window.pb_width - 6;
+        col.left = col.right = rc2.right - PROGRESS_MARGIN - m_Window.pb_width - 6;
         TDrawLine(dc.DC(), m_Window.cli, col);
-        col.left = col.right = rc2.right - PROGRESS_M - m_Window.pb_width - 3;
+        col.left = col.right = rc2.right - PROGRESS_MARGIN - m_Window.pb_width - 3;
         TDrawLine(dc.DC(), m_Window.cli, col);
+        
         // draw chapter ticks
         if (m_Window.pd.top)
         {
@@ -927,7 +926,7 @@ void CTView::PaintProgressBar(CFDC& dc, const RECT& rc, const RECT& cli)
                     }
                     else if (!doch)
                         continue;
-                    col.left = col.right = rc2.left + PROGRESS_M + PROGRESS_A + MulDiv(bw,
+                    col.left = col.right = rc2.left + PROGRESS_MARGIN + PROGRESS_ARROW_WIDTH + MulDiv(bw,
                         m_textfile->AbsPos(bm.Ref(ii)), m_Window.pd.top);
                     dc.SetColor(color);
                     TDrawLine(dc.DC(), m_Window.cli, col);
@@ -1781,27 +1780,27 @@ void CTView::HandleMouseDown(CPoint point)
     System2Window(pt, m_Window.cli);
 
     // check if we are in a progress bar
-    if (pt.y >= m_Window.rheight - PROGRESS_C && pt.y < m_Window.rheight)
+    if (pt.y >= m_Window.rheight - PROGRESS_CLICK_HEIGHT && pt.y < m_Window.rheight)
     {
-        if (pt.x < PROGRESS_M + PROGRESS_A)
+        if (pt.x < PROGRESS_MARGIN + PROGRESS_ARROW_WIDTH)
         {
             // prev section
             OnPrevSection();
         }
-        else if (pt.x >= m_Window.rwidth - PROGRESS_M - PROGRESS_A - m_Window.pb_width &&
+        else if (pt.x >= m_Window.rwidth - PROGRESS_MARGIN - PROGRESS_ARROW_WIDTH - m_Window.pb_width &&
             pt.x < m_Window.rwidth - m_Window.pb_width)
         {
             // next section
             OnNextSection();
         }
-        else if (pt.x < m_Window.rwidth - PROGRESS_M - PROGRESS_A - m_Window.pb_width)
+        else if (pt.x < m_Window.rwidth - PROGRESS_MARGIN - PROGRESS_ARROW_WIDTH - m_Window.pb_width)
         {
             // move absolute
             PushPos();
             int charpos = MulDiv(
                 m_textfile->GetTotalLength(m_formatter->Top().docid),
-                pt.x - PROGRESS_M - PROGRESS_A,
-                m_Window.rwidth - 2 * PROGRESS_M - 2 * PROGRESS_A - m_Window.pb_width
+                pt.x - PROGRESS_MARGIN - PROGRESS_ARROW_WIDTH,
+                m_Window.rwidth - 2 * PROGRESS_MARGIN - 2 * PROGRESS_ARROW_WIDTH - m_Window.pb_width
                 );
             int para = m_textfile->LookupParagraph(m_formatter->DocId(), charpos);
             EnsureVisible(
@@ -1861,7 +1860,7 @@ void CTView::HandleMouseDown(CPoint point)
     }
 
     // didn't have an action yet, interpret as movement
-    if (pt.y < (m_Window.rheight - PROGRESS_C) / 2)
+    if (pt.y < (m_Window.rheight - PROGRESS_CLICK_HEIGHT) / 2)
         Move(mBack, mPage);
     else
         Move(mFwd, mPage);

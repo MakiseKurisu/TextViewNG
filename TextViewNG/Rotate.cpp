@@ -206,12 +206,23 @@ void CRotate::TDrawLine(HDC dc, const RECT& cli, int x1, int y1, int x2, int y2)
 
 void CRotate::TDrawLine(HDC dc, const RECT& cli, const RECT& rc)
 {
+    TDrawLine(dc, cli, rc.left, rc.top, rc.right, rc.bottom);
+}
+
+void CRotate::TDrawRectangle(HDC dc, const RECT& cli, int x1, int y1, int x2, int y2)
+{
+    // If a PS_NULL pen is used, the dimensions of the rectangle are 1 pixel less in height and 1 pixel less in width.
     POINT pt[2];
-    pt[0].x = rc.left; pt[0].y = rc.top;
-    pt[1].x = rc.right; pt[1].y = rc.bottom;
+    pt[0].x = x1; pt[0].y = y1;
+    pt[1].x = x2 + 1; pt[1].y = y2 + 1;
     Window2System(pt[0], cli);
     Window2System(pt[1], cli);
-    Polyline(dc, pt, 2);
+    Rectangle(dc, pt[0].x, pt[0].y, pt[1].x, pt[1].y);
+}
+
+void CRotate::TDrawRectangle(HDC dc, const RECT& cli, const RECT& rc)
+{
+    TDrawRectangle(dc, cli, rc.left, rc.top, rc.right, rc.bottom);
 }
 
 void CRotate::TDrawPolyLine(HDC dc, const RECT& cli, POINT *pt, int npt)
