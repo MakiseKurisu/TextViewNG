@@ -71,8 +71,19 @@ public:
     void InitWindowPos(int nCmdShow);
 
 
-protected: // control bar embedded members
+protected: 
 
+    // windows docking
+    struct xx_Docking
+    {
+        bool bLeft;
+        bool bRight;
+        bool bTop;
+        bool bBottom;
+        CPoint pPoint;
+    } m_Docking;
+
+    // control bar embedded members
     CToolBar m_wndCommandBar;
     CMenu *m_mainmenu;
 
@@ -114,6 +125,8 @@ protected: // control bar embedded members
     afx_msg void OnInitMenuPopup(CMenu* pPopupMenu, UINT nIndex, BOOL bSysMenu);
     afx_msg void OnSize(UINT nType, int cx, int cy);
     afx_msg void OnMove(int x, int y);
+    afx_msg void OnNcMouseMove(UINT nHitTest, CPoint point);
+    afx_msg void OnMoving(UINT fwSide, LPRECT pRect);
     afx_msg BOOL OnEraseBkgnd(CDC* pDC);
     //}}AFX_MSG
     afx_msg void OnRecentFile(UINT cmd);

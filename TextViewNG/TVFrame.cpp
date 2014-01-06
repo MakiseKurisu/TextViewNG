@@ -82,6 +82,8 @@ BEGIN_MESSAGE_MAP(CTVFrame, CFrameWnd)
     ON_WM_INITMENUPOPUP()
     ON_WM_SIZE()
     ON_WM_MOVE()
+    ON_WM_NCMOUSEMOVE()
+    ON_WM_MOVING()
     ON_WM_ERASEBKGND()
     //}}AFX_MSG_MAP
     ON_COMMAND_RANGE(RECENT_BASE, RECENT_BASE + RECENT_FILES, OnRecentFile)
@@ -103,6 +105,13 @@ m_okstate(false)
     m_buttoncount = 0;
     m_mainmenu = NULL;
     memset(&m_wndpos, 0, sizeof(m_wndpos));
+
+    m_Docking.bLeft = false;
+    m_Docking.bRight = false;
+    m_Docking.bTop = false;
+    m_Docking.bBottom = false;
+    m_Docking.pPoint.x = 0;
+    m_Docking.pPoint.y = 0;
 }
 
 CTVFrame::~CTVFrame()
@@ -552,6 +561,137 @@ void CTVFrame::OnMove(int x, int y)
     if (!m_in_fullscreen)
         GetWindowRect(&m_normsize);
     SaveWndPos();
+}
+
+void CTVFrame::OnNcMouseMove(UINT nHitTest, CPoint point)
+{
+    if (m_Docking.bLeft || m_Docking.bRight)
+    {
+        m_Docking.pPoint.x = point.x;
+    }
+    if (m_Docking.bTop || m_Docking.bBottom)
+    {
+        m_Docking.pPoint.y = point.y;
+    }
+
+    CFrameWnd::OnNcMouseMove(nHitTest, point);
+}
+
+void CTVFrame::OnMoving(UINT fwSide, LPRECT pRect)
+{
+    const int DOCK_WIDTH = 30;
+    CRect rectScreen;
+    ::SystemParametersInfo(SPI_GETWORKAREA, 0, &rectScreen, 0);
+    POINT curPnt;
+    ::GetCursorPos(&curPnt);
+
+    if (m_Docking.bRight)
+    {
+        if (curPnt.x < m_Docking.pPoint.x - DOCK_WIDTH / 2)
+        {
+            pRect->left = rectScreen.right - (pRect->right - pRect->left) - DOCK_WIDTH;
+            pRect->right = rectScreen.right - DOCK_WIDTH;
+            if (pRect->left < 0 && m_Docking.bLeft)
+            {
+                pRect->right = pRect->right - pRect->left;
+                pRect->left = 0;
+            }
+            m_Docking.bRight = false;
+        }
+        else
+        {
+            pRect->left = rectScreen.right - (pRect->right - pRect->left);
+            pRect->right = rectScreen.right;
+        }
+    }
+    else if (m_Docking.bLeft)
+    {
+        if (curPnt.x > m_Docking.pPoint.x + DOCK_WIDTH / 2)
+        {
+            pRect->right = rectScreen.left + (pRect->right - pRect->left) + DOCK_WIDTH;
+            pRect->left = rectScreen.left + DOCK_WIDTH;
+            if (pRect->right < 0 && m_Docking.bRight)
+            {
+                pRect->left = pRect->left - pRect->right;
+                pRect->right = 0;
+            }
+            m_Docking.bLeft = false;
+        }
+        else
+        {
+            pRect->right = rectScreen.left + (pRect->right - pRect->left);
+            pRect->left = rectScreen.left;
+        }
+    }
+    else if (!m_Docking.bRight && pRect->right > rectScreen.right - DOCK_WIDTH)
+    {
+        pRect->left = rectScreen.right - (pRect->right - pRect->left);
+        pRect->right = rectScreen.right;
+        m_Docking.bRight = true;
+        m_Docking.pPoint = curPnt;
+    }
+    else if (!m_Docking.bLeft && pRect->left < rectScreen.left + DOCK_WIDTH)
+    {
+        pRect->right = rectScreen.left + (pRect->right - pRect->left);
+        pRect->left = rectScreen.left;
+        m_Docking.bLeft = true;
+        m_Docking.pPoint = curPnt;
+    }
+
+    if (m_Docking.bBottom)
+    {
+        if (curPnt.y < m_Docking.pPoint.y - DOCK_WIDTH / 2)
+        {
+            pRect->top = rectScreen.bottom - (pRect->bottom - pRect->top) - DOCK_WIDTH;
+            pRect->bottom = rectScreen.bottom - DOCK_WIDTH;
+            if (pRect->top < 0 && m_Docking.bTop)
+            {
+                pRect->bottom = pRect->bottom - pRect->top;
+                pRect->top = 0;
+            }
+            m_Docking.bBottom = false;
+        }
+        else
+        {
+            pRect->top = rectScreen.bottom - (pRect->bottom - pRect->top);
+            pRect->bottom = rectScreen.bottom;
+        }
+    }
+    else if (m_Docking.bTop)
+    {
+        if (curPnt.y > m_Docking.pPoint.y + DOCK_WIDTH / 2)
+        {
+            pRect->bottom = rectScreen.top + (pRect->bottom - pRect->top) + DOCK_WIDTH;
+            pRect->top = rectScreen.top + DOCK_WIDTH;
+            if (pRect->bottom < 0 && m_Docking.bBottom)
+            {
+                pRect->top = pRect->top - pRect->bottom;
+                pRect->bottom = 0;
+            }
+            m_Docking.bTop = false;
+        }
+        else
+        {
+            pRect->bottom = rectScreen.top + (pRect->bottom - pRect->top);
+            pRect->top = rectScreen.top;
+        }
+    }
+    else if (!m_Docking.bBottom && pRect->bottom > rectScreen.bottom - DOCK_WIDTH)
+    {
+        pRect->top = rectScreen.bottom - (pRect->bottom - pRect->top);
+        pRect->bottom = rectScreen.bottom;
+        m_Docking.bBottom = true;
+        m_Docking.pPoint = curPnt;
+    }
+    else if (!m_Docking.bTop && pRect->top < rectScreen.top + DOCK_WIDTH)
+    {
+        pRect->bottom = rectScreen.top + (pRect->bottom - pRect->top);
+        pRect->top = rectScreen.top;
+        m_Docking.bTop = true;
+        m_Docking.pPoint = curPnt;
+    }
+
+    CFrameWnd::OnMoving(fwSide, pRect);
 }
 
 LRESULT CTVFrame::OnOpenFile(WPARAM wParam, LPARAM lParam)

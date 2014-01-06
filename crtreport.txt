@@ -1,11 +1,2 @@
 f:\dd\vctools\vc7libs\ship\atlmfc\src\mfc\dlgcore.cpp(136) : AppMsg - Warning: calling DestroyWindow in CDialog::~CDialog --
 f:\dd\vctools\vc7libs\ship\atlmfc\src\mfc\dlgcore.cpp(137) : AppMsg - 	OnDestroy or PostNcDestroy in derived class will not be called.
-f:\dd\vctools\vc7libs\ship\atlmfc\src\mfc\dlgcore.cpp(136) : AppMsg - Warning: calling DestroyWindow in CDialog::~CDialog --
-f:\dd\vctools\vc7libs\ship\atlmfc\src\mfc\dlgcore.cpp(137) : AppMsg - 	OnDestroy or PostNcDestroy in derived class will not be called.
-f:\dd\vctools\vc7libs\ship\atlmfc\src\mfc\dlgcore.cpp(136) : AppMsg - Warning: calling DestroyWindow in CDialog::~CDialog --
-f:\dd\vctools\vc7libs\ship\atlmfc\src\mfc\dlgcore.cpp(137) : AppMsg - 	OnDestroy or PostNcDestroy in derived class will not be called.
-Detected memory leaks!
-Dumping objects ->
-{74} normal block at 0x003C23D0, 1792 bytes long.
- Data: < S_  S_  T_ %   > C0 53 5F 01 F4 53 5F 01 04 54 5F 01 25 00 00 00 
-Object dump complete.

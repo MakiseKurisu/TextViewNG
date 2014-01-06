@@ -79,7 +79,7 @@ bool GetUserInput(const CString& prompt, const CString& title,
     CString& str, CWnd *parent)
 {
     InputBox box(prompt, title, parent);
-    box.m_str = str;;
+    box.m_str = str;
     if (box.DoModal() == IDOK)
     {
         str = box.m_str;
