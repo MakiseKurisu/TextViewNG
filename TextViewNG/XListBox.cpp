@@ -40,12 +40,11 @@
 
 #define DEFAULT_FONT_SIZE 11
 #define UICON_PAD 1
-#define COLOR0 RGB(0,0,0)
-#define COLOR1 RGB(255,255,255)
-#define COLOR2 RGB(251,242,233)
-#define COLOR3 RGB(128,128,128)
-#define COLOR4 RGB(255,255,255)
-#define COLOR5 RGB(16,32,255)
+#define COLOR_BLACK RGB(0,0,0)
+#define COLOR_LIGHT_BLUE RGB(166,218,255)
+#define COLOR_GRAY RGB(128,128,128)
+#define COLOR_WHITE RGB(255,255,255)
+#define COLOR_BLUE RGB(0,0,255)
 
 #define INDENT_PER_LEVEL 5
 
@@ -261,15 +260,24 @@ static void XLB_PaintItem(XLB *x, int item, int vitem, HDC hDC, RECT& rc)
     // set text and bg colors
     COLORREF text1_color, text2_color, bk_color;
     if (item == x->selection)
-        text1_color = text2_color = COLOR4;
+    {
+        text1_color = COLOR_WHITE;
+        text2_color = COLOR_WHITE;
+        bk_color = COLOR_BLUE;
+    }
     else
     {
-        text1_color = COLOR0;
-        text2_color = COLOR3;
+        text1_color = COLOR_BLACK;
+        text2_color = COLOR_GRAY;
+        if (vitem & 1)
+        {
+            bk_color = COLOR_WHITE;
+        }
+        else
+        {
+            bk_color = COLOR_LIGHT_BLUE;
+        }
     }
-    bk_color =
-        item == x->selection ? COLOR5 :
-        vitem & 1 ? COLOR1 : COLOR2;
     ::SetBkColor(hDC, bk_color);
 
     // calculate indentation and paint it
@@ -471,7 +479,7 @@ static void XLB_PaintAll(XLB *x, HDC hDC)
         else
         {
             // draw a blank rectangle
-            ::SetBkColor(hDC, COLOR1);
+            ::SetBkColor(hDC, COLOR_WHITE);
             ::ExtTextOut(hDC, cli.left, cli.top, ETO_OPAQUE, &cli, NULL, 0, NULL);
         }
     }

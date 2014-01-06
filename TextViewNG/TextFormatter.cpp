@@ -511,7 +511,9 @@ bool TextFormatter::FormatBack(CFDC& dc, FilePos start, FilePos prev_top)
                     tmp.RemoveAt(j, tmp.GetSize() - j);
             }
             else
+            {
                 tmp.RemoveAt(0, j + 1);
+            }
         }
         // save lines
         m_lines.InsertAt(0, &tmp);

@@ -89,7 +89,7 @@ ColorItem g_colors[] = {
     { _T("Highlight 6"), RGB(0, 192, 0) },
     { _T("Highlight 7"), RGB(128, 128, 128) },
     { _T("Background"), RGB(255, 255, 255) },
-    { _T("Highlighted Background"), RGB(16, 192, 255) },
+    { _T("Highlighted Background"), RGB(166, 218, 255) },
     { _T("Gauge"), RGB(150, 150, 150) },
     { _T("Section Tick"), RGB(0, 0, 0) },
     { _T("Bookmark Tick"), RGB(255, 0, 0) },
@@ -1297,8 +1297,9 @@ void CTView::Move(int dir, int amount)
     Line l;
     CFDC fdc(m_hWnd);
     if (dir == mBack)
-        switch (amount)
     {
+        switch (amount)
+        {
         case mLine:
             m_formatter->FormatBack(fdc, m_formatter->GetLine(
                 m_formatter->Length() - 1).pos, m_formatter->Top());
@@ -1311,6 +1312,7 @@ void CTView::Move(int dir, int amount)
         case mPage:
             m_formatter->FormatBack(fdc, m_formatter->Top(), FilePos());
             break;
+        }
     }
     else
     {
