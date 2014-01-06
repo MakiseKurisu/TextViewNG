@@ -42,20 +42,21 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 BEGIN_MESSAGE_MAP(DummyView, CWnd)
- //{{AFX_MSG_MAP(DummyView)
- ON_WM_PAINT()
- ON_WM_ERASEBKGND()
- //}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(DummyView)
+    ON_WM_PAINT()
+    ON_WM_ERASEBKGND()
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-void DummyView::OnPaint() {
- CPaintDC dc(this);
+void DummyView::OnPaint()
+{
+    CPaintDC dc(this);
 }
 
 BOOL DummyView::OnEraseBkgnd(CDC* pDC)
 {
- RECT rc;
- GetClientRect(&rc);
- pDC->FillSolidRect(&rc, RGB(255, 255, 255));
- return TRUE;
+    RECT rc;
+    GetClientRect(&rc);
+    pDC->FillSolidRect(&rc, RGB(255, 255, 255));
+    return TRUE;
 }

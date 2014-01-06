@@ -44,37 +44,40 @@
 
 class CStylesDlg : public CDialog
 {
- // Construction
+    // Construction
 public:
- CStylesDlg(CWnd* pParent = NULL); // standard constructor
- bool SaveChanges();
+    CStylesDlg(CWnd* pParent = NULL); // standard constructor
+    bool SaveChanges();
 
- // Dialog Data
- //{{AFX_DATA(CStylesDlg)
- enum { IDD = IDD_STYLES };
- // NOTE: the ClassWizard will add data members here
- //}}AFX_DATA
+    // Dialog Data
+    //{{AFX_DATA(CStylesDlg)
+    enum
+    {
+        IDD = IDD_STYLES
+    };
+    // NOTE: the ClassWizard will add data members here
+    //}}AFX_DATA
 
 
- // Overrides
- // ClassWizard generated virtual function overrides
- //{{AFX_VIRTUAL(CStylesDlg)
+    // Overrides
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CStylesDlg)
 protected:
- virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV support
- //}}AFX_VIRTUAL
+    virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV support
+    //}}AFX_VIRTUAL
 
- // Implementation
+    // Implementation
 protected:
- void SetValues(int idx);
- void GetValues();
- int m_cur;
+    void SetValues(int idx);
+    void GetValues();
+    int m_cur;
 
- // Generated message map functions
- //{{AFX_MSG(CStylesDlg)
- virtual BOOL OnInitDialog();
- afx_msg void OnSelchangeElements();
- //}}AFX_MSG
- DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CStylesDlg)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnSelchangeElements();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

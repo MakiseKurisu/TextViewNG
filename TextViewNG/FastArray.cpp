@@ -41,40 +41,46 @@
 FastArrayImp::FastArrayImp(unsigned item_size, HANDLE heap, bool dofree) :
 m_item_size(item_size), m_heap(heap), m_dofree(dofree)
 {
- m_chunks = (char**)HeapAlloc(m_heap, HEAP_NO_SERIALIZE | HEAP_ZERO_MEMORY, sizeof(char*)*START_CHUNKS);
- if (!m_chunks)
- AfxThrowMemoryException();
- m_chunks[0] = (char*)HeapAlloc(m_heap, HEAP_NO_SERIALIZE, m_item_size*CHUNK_ITEMS);
- if (!m_chunks[0]) {
- if (m_dofree)
- HeapFree(m_heap, HEAP_NO_SERIALIZE, (void*)m_chunks);
- AfxThrowMemoryException();
- }
- m_nchunks = START_CHUNKS;
- m_curchunk = m_chunkptr = 0;
+    m_chunks = (char**) HeapAlloc(m_heap, HEAP_NO_SERIALIZE | HEAP_ZERO_MEMORY, sizeof(char*) *START_CHUNKS);
+    if (!m_chunks)
+        AfxThrowMemoryException();
+    m_chunks[0] = (char*) HeapAlloc(m_heap, HEAP_NO_SERIALIZE, m_item_size*CHUNK_ITEMS);
+    if (!m_chunks[0])
+    {
+        if (m_dofree)
+            HeapFree(m_heap, HEAP_NO_SERIALIZE, (void*) m_chunks);
+        AfxThrowMemoryException();
+    }
+    m_nchunks = START_CHUNKS;
+    m_curchunk = m_chunkptr = 0;
 }
 
-FastArrayImp::~FastArrayImp() {
- if (m_dofree) {
- for (unsigned i = 0; i < m_nchunks; ++i)
- if (m_chunks[i])
- HeapFree(m_heap, HEAP_NO_SERIALIZE, (void*)m_chunks[i]);
- HeapFree(m_heap, HEAP_NO_SERIALIZE, (void*)m_chunks);
- }
+FastArrayImp::~FastArrayImp()
+{
+    if (m_dofree)
+    {
+        for (unsigned i = 0; i < m_nchunks; ++i)
+            if (m_chunks[i])
+                HeapFree(m_heap, HEAP_NO_SERIALIZE, (void*) m_chunks[i]);
+        HeapFree(m_heap, HEAP_NO_SERIALIZE, (void*) m_chunks);
+    }
 }
 
-void *FastArrayImp::SlowGet() {
- if (++m_curchunk >= m_nchunks) {
- m_nchunks += CHUNKS_INC;
- m_chunks = (char**)HeapReAlloc(m_heap, HEAP_NO_SERIALIZE | HEAP_ZERO_MEMORY, (void*)m_chunks, sizeof(char*)*m_nchunks);
- if (!m_chunks)
- AfxThrowMemoryException();
- }
- if (!m_chunks[m_curchunk]) {
- m_chunks[m_curchunk] = (char*)HeapAlloc(m_heap, HEAP_NO_SERIALIZE, m_item_size*CHUNK_ITEMS);
- if (!m_chunks[m_curchunk])
- AfxThrowMemoryException();
- }
- m_chunkptr = 1;
- return (void*)m_chunks[m_curchunk];
+void *FastArrayImp::SlowGet()
+{
+    if (++m_curchunk >= m_nchunks)
+    {
+        m_nchunks += CHUNKS_INC;
+        m_chunks = (char**) HeapReAlloc(m_heap, HEAP_NO_SERIALIZE | HEAP_ZERO_MEMORY, (void*) m_chunks, sizeof(char*) *m_nchunks);
+        if (!m_chunks)
+            AfxThrowMemoryException();
+    }
+    if (!m_chunks[m_curchunk])
+    {
+        m_chunks[m_curchunk] = (char*) HeapAlloc(m_heap, HEAP_NO_SERIALIZE, m_item_size*CHUNK_ITEMS);
+        if (!m_chunks[m_curchunk])
+            AfxThrowMemoryException();
+    }
+    m_chunkptr = 1;
+    return (void*) m_chunks[m_curchunk];
 }

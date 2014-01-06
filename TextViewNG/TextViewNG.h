@@ -57,40 +57,44 @@ class CImageList;
 class CTVApp : public CWinApp
 {
 public:
- static CImageList *ImageList();
- static void QueueCmd(UINT cmd);
- static UINT TopQueuedCmd();
- static CString GetStr(const TCHAR *name, const TCHAR *def = NULL) {
- return AfxGetApp()->GetProfileString(_T("Parameters"), name, def);
- }
- static int GetInt(const TCHAR *name, int def = 0) {
- return AfxGetApp()->GetProfileInt(_T("Parameters"), name, def);
- }
- static void SetStr(const TCHAR *name, const TCHAR *val) {
- AfxGetApp()->WriteProfileString(_T("Parameters"), name, val);
- }
- static void SetInt(const TCHAR *name, int val) {
- AfxGetApp()->WriteProfileInt(_T("Parameters"), name, val);
- }
- static void Barf(const TCHAR *format, ...);
- CTVApp();
+    static CImageList *ImageList();
+    static void QueueCmd(UINT cmd);
+    static UINT TopQueuedCmd();
+    static CString GetStr(const TCHAR *name, const TCHAR *def = NULL)
+    {
+        return AfxGetApp()->GetProfileString(_T("Parameters"), name, def);
+    }
+    static int GetInt(const TCHAR *name, int def = 0)
+    {
+        return AfxGetApp()->GetProfileInt(_T("Parameters"), name, def);
+    }
+    static void SetStr(const TCHAR *name, const TCHAR *val)
+    {
+        AfxGetApp()->WriteProfileString(_T("Parameters"), name, val);
+    }
+    static void SetInt(const TCHAR *name, int val)
+    {
+        AfxGetApp()->WriteProfileInt(_T("Parameters"), name, val);
+    }
+    static void Barf(const TCHAR *format, ...);
+    CTVApp();
 
- // Overrides
- // ClassWizard generated virtual function overrides
- //{{AFX_VIRTUAL(CTVApp)
+    // Overrides
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CTVApp)
 public:
- virtual BOOL InitInstance();
- virtual BOOL OnIdle(LONG lCount);
- //}}AFX_VIRTUAL
+    virtual BOOL InitInstance();
+    virtual BOOL OnIdle(LONG lCount);
+    //}}AFX_VIRTUAL
 
- // Implementation
+    // Implementation
 
- //{{AFX_MSG(CTVApp)
- //}}AFX_MSG
- DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(CTVApp)
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 protected:
- CUIntArray m_cmdqueue;
- auto_ptr<CImageList> m_imagelist;
+    CUIntArray m_cmdqueue;
+    auto_ptr<CImageList> m_imagelist;
 };
 
 

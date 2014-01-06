@@ -32,10 +32,11 @@
 #ifndef COLORS_H
 #define COLORS_H
 
-struct ColorItem {
- const TCHAR *name;
- COLORREF value;
- COLORREF tempval;
+struct ColorItem
+{
+    const TCHAR *name;
+    COLORREF value;
+    COLORREF tempval;
 };
 
 extern ColorItem g_colors[];

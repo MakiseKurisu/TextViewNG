@@ -42,15 +42,19 @@
 class DummyView : public CWnd
 {
 public:
- DummyView() { }
- virtual ~DummyView() { }
+    DummyView()
+    {
+    }
+    virtual ~DummyView()
+    {
+    }
 
 protected:
- //{{AFX_MSG(DummyView)
- afx_msg void OnPaint();
- afx_msg BOOL OnEraseBkgnd(CDC* pDC);
- //}}AFX_MSG
- DECLARE_MESSAGE_MAP()
+    //{{AFX_MSG(DummyView)
+    afx_msg void OnPaint();
+    afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 /////////////////////////////////////////////////////////////////////////////

@@ -40,42 +40,48 @@
 class RFile
 {
 public:
- static int BSZ, BMASK; // block size, must be a power of two
+    static int BSZ, BMASK; // block size, must be a power of two
 
- RFile(const CString& filename) : m_fh(INVALID_HANDLE_VALUE),
- m_fn(filename), m_didreopen(false), m_diderror(false),
- m_ptr(0) { }
- virtual ~RFile() {
- if (m_fh != INVALID_HANDLE_VALUE)
- CloseHandle(m_fh);
- }
+    RFile(const CString& filename) : m_fh(INVALID_HANDLE_VALUE),
+        m_fn(filename), m_didreopen(false), m_diderror(false),
+        m_ptr(0)
+    {
+    }
+    virtual ~RFile()
+    {
+        if (m_fh != INVALID_HANDLE_VALUE)
+            CloseHandle(m_fh);
+    }
 
- // generic file operations
- virtual DWORD size();
- virtual DWORD read(void *buf);
- virtual void seek(DWORD pos);
+    // generic file operations
+    virtual DWORD size();
+    virtual DWORD read(void *buf);
+    virtual void seek(DWORD pos);
 
- // compression
- virtual CString CompressionInfo() { return _T("None"); }
+    // compression
+    virtual CString CompressionInfo()
+    {
+        return _T("None");
+    }
 
- // buffer size setting
- static void InitBufSize();
+    // buffer size setting
+    static void InitBufSize();
 
- // RFile helpers
- bool Reopen();
- void ShowError();
- DWORD read2(void *buf, DWORD size);
+    // RFile helpers
+    bool Reopen();
+    void ShowError();
+    DWORD read2(void *buf, DWORD size);
 
 protected:
- HANDLE m_fh;
- CString m_fn;
- DWORD m_ptr;
+    HANDLE m_fh;
+    CString m_fn;
+    DWORD m_ptr;
 
- bool m_didreopen;
- bool m_diderror;
+    bool m_didreopen;
+    bool m_diderror;
 
- void seek2(DWORD where, DWORD how);
- DWORD pos();
+    void seek2(DWORD where, DWORD how);
+    DWORD pos();
 };
 
 // I/O error messages

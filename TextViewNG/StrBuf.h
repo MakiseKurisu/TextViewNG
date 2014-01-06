@@ -32,34 +32,40 @@
 #ifndef STRBUF_H
 #define STRBUF_H
 
-class StrBuf {
- enum {
- MAX_WASTE = 256,
- BLOCKSADD = 64
- };
- struct Block {
- wchar_t *data;
- int cur;
- int max;
- };
- Block *m_blocks;
- int m_cblk;
- int m_numblk;
- HANDLE m_heap;
- int m_blocksize;
- bool m_freemem;
+class StrBuf
+{
+    enum
+    {
+        MAX_WASTE = 256,
+        BLOCKSADD = 64
+    };
+    struct Block
+    {
+        wchar_t *data;
+        int cur;
+        int max;
+    };
+    Block *m_blocks;
+    int m_cblk;
+    int m_numblk;
+    HANDLE m_heap;
+    int m_blocksize;
+    bool m_freemem;
 public:
- StrBuf(HANDLE heap, bool release_mem = false, int bsz = 4096) : m_blocks(0),
- m_cblk(-1), m_numblk(0), m_heap(heap), m_blocksize(bsz),
- m_freemem(release_mem) { }
- ~StrBuf();
- wchar_t *Get(int char_length);
- wchar_t *Append(const wchar_t *str, int char_length) {
- wchar_t *space = Get(char_length);
- memcpy(space, str, char_length*sizeof(wchar_t));
- return space;
- }
- void RemoveAll();
+    StrBuf(HANDLE heap, bool release_mem = false, int bsz = 4096) : m_blocks(0),
+        m_cblk(-1), m_numblk(0), m_heap(heap), m_blocksize(bsz),
+        m_freemem(release_mem)
+    {
+    }
+    ~StrBuf();
+    wchar_t *Get(int char_length);
+    wchar_t *Append(const wchar_t *str, int char_length)
+    {
+        wchar_t *space = Get(char_length);
+        memcpy(space, str, char_length*sizeof(wchar_t));
+        return space;
+    }
+    void RemoveAll();
 };
 
 #endif

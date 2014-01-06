@@ -56,113 +56,119 @@ static char THIS_FILE[] = __FILE__;
 CStylesDlg::CStylesDlg(CWnd* pParent /*=NULL*/)
 : CDialog(CStylesDlg::IDD, pParent), m_cur(-1)
 {
- //m_fmt.Append(XMLParser::GetXMLStyles());
- //{{AFX_DATA_INIT(CStylesDlg)
- // NOTE: the ClassWizard will add member initialization here
- //}}AFX_DATA_INIT
+    //m_fmt.Append(XMLParser::GetXMLStyles());
+    //{{AFX_DATA_INIT(CStylesDlg)
+    // NOTE: the ClassWizard will add member initialization here
+    //}}AFX_DATA_INIT
 }
 
 
 void CStylesDlg::DoDataExchange(CDataExchange* pDX)
 {
- CDialog::DoDataExchange(pDX);
- if (pDX->m_bSaveAndValidate)
- GetValues();
- //{{AFX_DATA_MAP(CStylesDlg)
- // NOTE: the ClassWizard will add DDX and DDV calls here
- //}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    if (pDX->m_bSaveAndValidate)
+        GetValues();
+    //{{AFX_DATA_MAP(CStylesDlg)
+    // NOTE: the ClassWizard will add DDX and DDV calls here
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CStylesDlg, CDialog)
- //{{AFX_MSG_MAP(CStylesDlg)
- ON_CBN_SELCHANGE(IDC_ELEMENTS, OnSelchangeElements)
- //}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CStylesDlg)
+    ON_CBN_SELCHANGE(IDC_ELEMENTS, OnSelchangeElements)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CStylesDlg message handlers
 
 static const TCHAR *g_onoff[] = {
- _T("Off"),
- _T("On"),
- _T("Inherit"),
- 0
+    _T("Off"),
+    _T("On"),
+    _T("Inherit"),
+    0
 };
 
 static const TCHAR *g_colors[] = {
- _T("Normal"),
- _T("HL 1"),
- _T("HL 2"),
- _T("HL 3"),
- _T("HL 4"),
- _T("HL 5"),
- _T("HL 6"),
- _T("HL 7"),
- _T("Inherit")
+    _T("Normal"),
+    _T("HL 1"),
+    _T("HL 2"),
+    _T("HL 3"),
+    _T("HL 4"),
+    _T("HL 5"),
+    _T("HL 6"),
+    _T("HL 7"),
+    _T("Inherit")
 };
 
-static struct {
- BYTE fmt;
- const TCHAR *name;
+static struct
+{
+    BYTE fmt;
+    const TCHAR *name;
 } g_align[] = {
- { 0, _T("Default") },
- //{ Paragraph::right, _T("Right") },
- //{ Paragraph::center, _T("Center") },
- //{ Paragraph::justify, _T("Justified") },
- { 0, _T("Inherit") },
- { 0, 0 }
+    { 0, _T("Default") },
+    //{ Paragraph::right, _T("Right") },
+    //{ Paragraph::center, _T("Center") },
+    //{ Paragraph::justify, _T("Justified") },
+    { 0, _T("Inherit") },
+    { 0, 0 }
 };
 
 BOOL CStylesDlg::OnInitDialog()
 {
- CDialog::OnInitDialog();
+    CDialog::OnInitDialog();
 
- // fill in comboboxes
- int i;
- for (i = MINFSIZE; i <= MAXFSIZE; ++i) {
- CString tmp;
- tmp.Format(_T("%+d"), i);
- SendDlgItemMessage(IDC_FONT, CB_ADDSTRING, 0, (LPARAM)(const TCHAR *)tmp);
- }
- SendDlgItemMessage(IDC_FONT, CB_ADDSTRING, 0, (LPARAM)_T("Inherit"));
- for (i = 0; g_onoff[i]; ++i) {
- SendDlgItemMessage(IDC_FBOLD, CB_ADDSTRING, 0, (LPARAM)g_onoff[i]);
- SendDlgItemMessage(IDC_FITALIC, CB_ADDSTRING, 0, (LPARAM)g_onoff[i]);
- SendDlgItemMessage(IDC_FUNDERLINE, CB_ADDSTRING, 0, (LPARAM)g_onoff[i]);
- }
- for (i = 0; g_colors[i]; ++i)
- SendDlgItemMessage(IDC_COLOR, CB_ADDSTRING, 0, (LPARAM)g_colors[i]);
- for (i = 0; g_align[i].name; ++i)
- SendDlgItemMessage(IDC_ALIGN, CB_ADDSTRING, 0, (LPARAM)g_align[i].name);
- /*
- for (i=0;i<m_fmt.GetSize();++i)
- if (m_fmt[i].name.GetLength()>0 && m_fmt[i].flags&XMLParser::ElemFmt::FMT) {
- LRESULT idx=SendDlgItemMessage(IDC_ELEMENTS,CB_ADDSTRING,0,(LPARAM)(const TCHAR *)m_fmt[i].name);
- if (idx!=CB_ERR)
- SendDlgItemMessage(IDC_ELEMENTS,CB_SETITEMDATA,idx,i);
- }
- */
- SendDlgItemMessage(IDC_ELEMENTS, CB_SETCURSEL);
- SendDlgItemMessage(IDC_LISPIN, UDM_SETRANGE32, (WPARAM)-100, 100);
- SendDlgItemMessage(IDC_RISPIN, UDM_SETRANGE32, (WPARAM)-100, 100);
- SendDlgItemMessage(IDC_FIRSTSPIN, UDM_SETRANGE32, (WPARAM)-100, 100);
- SetValues(0);
- return TRUE;
+    // fill in comboboxes
+    int i;
+    for (i = MINFSIZE; i <= MAXFSIZE; ++i)
+    {
+        CString tmp;
+        tmp.Format(_T("%+d"), i);
+        SendDlgItemMessage(IDC_FONT, CB_ADDSTRING, 0, (LPARAM) (const TCHAR *) tmp);
+    }
+    SendDlgItemMessage(IDC_FONT, CB_ADDSTRING, 0, (LPARAM) _T("Inherit"));
+    for (i = 0; g_onoff[i]; ++i)
+    {
+        SendDlgItemMessage(IDC_FBOLD, CB_ADDSTRING, 0, (LPARAM) g_onoff[i]);
+        SendDlgItemMessage(IDC_FITALIC, CB_ADDSTRING, 0, (LPARAM) g_onoff[i]);
+        SendDlgItemMessage(IDC_FUNDERLINE, CB_ADDSTRING, 0, (LPARAM) g_onoff[i]);
+    }
+    for (i = 0; g_colors[i]; ++i)
+        SendDlgItemMessage(IDC_COLOR, CB_ADDSTRING, 0, (LPARAM) g_colors[i]);
+    for (i = 0; g_align[i].name; ++i)
+        SendDlgItemMessage(IDC_ALIGN, CB_ADDSTRING, 0, (LPARAM) g_align[i].name);
+    /*
+    for (i=0;i<m_fmt.GetSize();++i)
+    if (m_fmt[i].name.GetLength()>0 && m_fmt[i].flags&XMLParser::ElemFmt::FMT) {
+    LRESULT idx=SendDlgItemMessage(IDC_ELEMENTS,CB_ADDSTRING,0,(LPARAM)(const TCHAR *)m_fmt[i].name);
+    if (idx!=CB_ERR)
+    SendDlgItemMessage(IDC_ELEMENTS,CB_SETITEMDATA,idx,i);
+    }
+    */
+    SendDlgItemMessage(IDC_ELEMENTS, CB_SETCURSEL);
+    SendDlgItemMessage(IDC_LISPIN, UDM_SETRANGE32, (WPARAM) -100, 100);
+    SendDlgItemMessage(IDC_RISPIN, UDM_SETRANGE32, (WPARAM) -100, 100);
+    SendDlgItemMessage(IDC_FIRSTSPIN, UDM_SETRANGE32, (WPARAM) -100, 100);
+    SetValues(0);
+    return TRUE;
 }
 
 void CStylesDlg::OnSelchangeElements()
 {
- GetValues();
- SetValues(SendDlgItemMessage(IDC_ELEMENTS, CB_GETCURSEL));
+    GetValues();
+    SetValues(SendDlgItemMessage(IDC_ELEMENTS, CB_GETCURSEL));
 }
 
-void CStylesDlg::GetValues() {
+void CStylesDlg::GetValues()
+{
 }
 
-void CStylesDlg::SetValues(int idx) {
+void CStylesDlg::SetValues(int idx)
+{
 }
 
-bool CStylesDlg::SaveChanges() {
- return true;
+bool CStylesDlg::SaveChanges()
+{
+    return true;
 }

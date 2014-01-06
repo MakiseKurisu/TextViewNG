@@ -41,38 +41,41 @@
 
 class CMiscOptDlg : public CDialog
 {
- // Construction
+    // Construction
 public:
- CMiscOptDlg(CWnd* pParent = NULL); // standard constructor
+    CMiscOptDlg(CWnd* pParent = NULL); // standard constructor
 
- // Dialog Data
- //{{AFX_DATA(CMiscOptDlg)
- enum { IDD = IDD_MISCOPT };
- int m_fcsize;
- int m_fbsize;
- int m_allowmulti;
- int m_rotb;
- int m_savetofiles;
- int m_lastfiles;
- int m_autorepeatlimit;
- //}}AFX_DATA
+    // Dialog Data
+    //{{AFX_DATA(CMiscOptDlg)
+    enum
+    {
+        IDD = IDD_MISCOPT
+    };
+    int m_fcsize;
+    int m_fbsize;
+    int m_allowmulti;
+    int m_rotb;
+    int m_savetofiles;
+    int m_lastfiles;
+    int m_autorepeatlimit;
+    //}}AFX_DATA
 
 
- // Overrides
- // ClassWizard generated virtual function overrides
- //{{AFX_VIRTUAL(CMiscOptDlg)
+    // Overrides
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CMiscOptDlg)
 protected:
- virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV support
- //}}AFX_VIRTUAL
+    virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV support
+    //}}AFX_VIRTUAL
 
- // Implementation
+    // Implementation
 protected:
 
- // Generated message map functions
- //{{AFX_MSG(CMiscOptDlg)
- virtual BOOL OnInitDialog();
- //}}AFX_MSG
- DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CMiscOptDlg)
+    virtual BOOL OnInitDialog();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}
