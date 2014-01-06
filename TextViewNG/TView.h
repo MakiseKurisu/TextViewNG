@@ -237,9 +237,6 @@ protected:
         }
     } m_UI;
 
-    // global update timer
-    UINT m_timer;
-
     // current bookmarks popup window
     struct xx_BP : public IGetLine
     {

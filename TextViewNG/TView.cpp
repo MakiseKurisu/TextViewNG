@@ -103,8 +103,7 @@ int g_color_profile;
 
 enum
 {
-    TM_SAVEINFO = 1,
-    TM_USERTEXT,
+    TM_USERTEXT = 1,
     TM_AS,
     TM_PD,
 };
@@ -349,7 +348,6 @@ void CTView::Init()
     GetClientRect(&m_Window.cli);
     CalcSizes();
     Keys::SetWindow(m_hWnd);
-    m_timer = SetTimer(TM_SAVEINFO, DEF_SAVEINTERVAL, 0);
     StartWindowPDTimer();
     // initialize progress bar height
     CFDC dc(m_hWnd);
@@ -422,7 +420,6 @@ BEGIN_MESSAGE_MAP(CTView, CWnd)
     ON_COMMAND(ID_EDIT_COPY, OnEditCopy)
     ON_UPDATE_COMMAND_UI(ID_EDIT_COPY, OnUpdateEditCopy)
     ON_COMMAND(ID_ROTATE, OnRotate)
-    ON_WM_TIMER()
     ON_COMMAND(ID_NEXTCH, OnNextSection)
     ON_COMMAND(ID_PREVCH, OnPrevSection)
     ON_COMMAND(ID_NEXTBM, OnNextBm)
@@ -1316,8 +1313,9 @@ void CTView::Move(int dir, int amount)
             break;
     }
     else
-        switch (amount)
     {
+        switch (amount)
+        {
         case mLine:
             m_formatter->FormatFwd(fdc, m_formatter->GetLine(1).pos);
             break;
@@ -1329,10 +1327,13 @@ void CTView::Move(int dir, int amount)
         case mPage:
             m_formatter->FormatFwdAdj(fdc);
             break;
+        }
     }
     QueueRepaint();
 
     m_BP.bmkidx = -1;
+
+    SaveInfo();
 }
 
 BOOL CTView::OnEraseBkgnd(CDC* pDC)
@@ -2089,7 +2090,6 @@ void CTView::OnUpdateKeys(CCmdUI* pCmdUI)
 void CTView::OnDestroy()
 {
     Keys::SetWindow(0);
-    KillTimer(m_timer);
     KillTimer(m_UI.timer);
     KillTimer(m_AS.timer);
     KillTimer(m_Window.pd_timer);
@@ -2789,9 +2789,6 @@ void CTView::OnTimer(UINT nIDEvent)
 {
     switch (nIDEvent)
     {
-    case TM_SAVEINFO:
-        SaveInfo();
-        break;
     case TM_USERTEXT:
         HideText();
         break;
