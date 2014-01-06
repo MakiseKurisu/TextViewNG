@@ -338,12 +338,13 @@ void CTVFrame::OnDropFiles(HDROP hDropInfo)
 {
     if (::DragQueryFile(hDropInfo, (UINT) -1, NULL, 0))
     {
-        UINT cch = DragQueryFile(hDropInfo, 0, NULL, 0) + 1;
+        UINT cch = ::DragQueryFile(hDropInfo, 0, NULL, 0) + 1;
         LPTSTR lpszFile = (LPTSTR) malloc(cch * sizeof(lpszFile[0]));
-        DragQueryFile(hDropInfo, 0, lpszFile, cch);
+        ::DragQueryFile(hDropInfo, 0, lpszFile, cch);
         CString szFile(lpszFile);
         TryOpenFile(szFile);
         free(lpszFile);
+        ::DragFinish(hDropInfo);
     }
 }
 
