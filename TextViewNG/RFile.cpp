@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxwin.h>
 
@@ -41,7 +41,7 @@ int RFile::BSZ = 16384;
 int RFile::BMASK = ~16383;
 
 void  RFile::InitBufSize() {
-    int	rfbs = CTVApp::GetInt(_T("FileBufSize"), 16384);
+    int rfbs = CTVApp::GetInt(_T("FileBufSize"), 16384);
     if (rfbs < 8192)
         rfbs = 8192;
     if (rfbs > 1048576)
@@ -53,15 +53,15 @@ void  RFile::InitBufSize() {
     BMASK = ~(fbs - 1);
 }
 
-CString	FileExceptionInfo(const CString& filename, DWORD dwErr) {
+CString FileExceptionInfo(const CString& filename, DWORD dwErr) {
     CString ret;
-    TCHAR	  *buf = ret.GetBuffer(1024);
+    TCHAR   *buf = ret.GetBuffer(1024);
     FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, dwErr, LANG_USER_DEFAULT, buf, 1024, NULL);
     ret.ReleaseBuffer();
     return filename + _T(": ") + ret;
 }
 
-CString	FileName(const CString& file) {
+CString FileName(const CString& file) {
     return file.Right(file.GetLength() - max(file.ReverseFind(_T('/')),
         file.ReverseFind(_T('\\'))) - 1);
 }
@@ -72,7 +72,7 @@ void RFile::ShowError() {
 
     m_diderror = true;
 
-    DWORD	dwErr = GetLastError();
+    DWORD dwErr = GetLastError();
 
     AfxMessageBox(FileExceptionInfo(m_fn, dwErr), MB_ICONERROR | MB_OK, 0);
 }
@@ -118,7 +118,7 @@ DWORD RFile::size() {
 }
 DWORD RFile::read(void *buf) { return read2(buf, BSZ); }
 DWORD RFile::read2(void *buf, DWORD size) {
-    DWORD	rd = 0;
+    DWORD rd = 0;
 
     if (!ReadFile(m_fh, buf, size, &rd, NULL)) {
         if (GetLastError() == 1617) {

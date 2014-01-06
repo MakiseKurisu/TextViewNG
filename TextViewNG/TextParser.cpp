@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxtempl.h>
 #include <afxcmn.h>
@@ -48,44 +48,44 @@ struct Para {
     // paragraph reference
     DWORD     off; // offset into file
     DWORD     start; // start of parsed para
-    DWORD	    rlen; // raw length
+    DWORD     rlen; // raw length
 };
 
-typedef FastArray<Para>	PArray;
+typedef FastArray<Para> PArray;
 
 struct SimpleFormat {
-    const TCHAR		*name;
-    DWORD			mask, cmp;
+    const TCHAR  *name;
+    DWORD   mask, cmp;
 };
 
-#define	MAXPLEN	4096
+#define MAXPLEN 4096
 
 // soft hyphen
-#define	SHY		0x00AD
+#define SHY  0x00AD
 
 // Moshkov's formatting
-#define	STARTBOLD	20
-#define	ENDBOLD		21
+#define STARTBOLD 20
+#define ENDBOLD  21
 
 // formats list
-static SimpleFormat	g_simple_formats[] = {
+static SimpleFormat g_simple_formats[] = {
     { _T("Line per paragraph"), 0xff, 0x0a },
     { _T("Indented first line"), 0xffff, 0x0a20 },
     { _T("MAC Line per paragraph"), 0xff, 0x0d },
     { _T("MAC Indented first line"), 0xffff, 0x0d20 }
 };
-#define	NUM_SIMPLE_FORMATS  (sizeof(g_simple_formats)/sizeof(g_simple_formats[0]))
+#define NUM_SIMPLE_FORMATS  (sizeof(g_simple_formats)/sizeof(g_simple_formats[0]))
 
-static const TCHAR	*g_ext_formats[] = {
+static const TCHAR *g_ext_formats[] = {
     //  _T("XML"),
     _T("PNG"),
     _T("JPEG")
 };
-#define	NUM_EXT_FORMATS  (sizeof(g_ext_formats)/sizeof(g_ext_formats[0]))
+#define NUM_EXT_FORMATS  (sizeof(g_ext_formats)/sizeof(g_ext_formats[0]))
 
-//#define	XML_FORMAT  (NUM_SIMPLE_FORMATS)
-#define	PNG_FORMAT  (NUM_SIMPLE_FORMATS)
-#define	JPEG_FORMAT  (NUM_SIMPLE_FORMATS+1)
+//#define XML_FORMAT  (NUM_SIMPLE_FORMATS)
+#define PNG_FORMAT  (NUM_SIMPLE_FORMATS)
+#define JPEG_FORMAT  (NUM_SIMPLE_FORMATS+1)
 
 TextParser::~TextParser() {
     if (m_heap)
@@ -94,12 +94,12 @@ TextParser::~TextParser() {
 
 class SimpleTextParser : public TextParser {
 protected:
-    PArray		m_pp; // paragraph list
-    SimpleFormat		*m_sf;
+    PArray  m_pp; // paragraph list
+    SimpleFormat  *m_sf;
 
-    void	    GenericFileParse(CBufFile *fp, PArray& pp, DWORD mask, DWORD cmp);
-    void	    GenericFileParseA(CBufFile *fp, PArray& pp, DWORD mask, DWORD cmp);
-    void	    GenericFileParseW(CBufFile *fp, PArray& pp, DWORD mask, DWORD cmp);
+    void     GenericFileParse(CBufFile *fp, PArray& pp, DWORD mask, DWORD cmp);
+    void     GenericFileParseA(CBufFile *fp, PArray& pp, DWORD mask, DWORD cmp);
+    void     GenericFileParseW(CBufFile *fp, PArray& pp, DWORD mask, DWORD cmp);
     Paragraph GenericBufParse(CBufFile *fp, const Para& p, int len);
 public:
     SimpleTextParser(Meter *m, CBufFile *fp, HANDLE heap, int format, int encoding, Bookmarks *bmk) :
@@ -124,28 +124,28 @@ public:
     }
 
     // paragraphs
-    virtual int		Length(int docid) { return m_pp.GetSize() - 1; } // in paragraphs
-    virtual Paragraph	GetParagraph(int docid, int para) {
+    virtual int  Length(int docid) { return m_pp.GetSize() - 1; } // in paragraphs
+    virtual Paragraph GetParagraph(int docid, int para) {
         if (para >= 0 && para < m_pp.GetSize() - 1)
             return GenericBufParse(m_fp, m_pp[para], m_pp[para + 1].start - m_pp[para].start);
         return Paragraph();
     }
-    virtual int		GetPLength(int docid, int para) {
+    virtual int  GetPLength(int docid, int para) {
         if (para < 0 || para >= m_pp.GetSize() - 1)
             return 0;
         return m_pp[para + 1].start - m_pp[para].start;
     }
-    virtual int		GetPStart(int docid, int para) {
+    virtual int  GetPStart(int docid, int para) {
         if (para < 0)
             return 0;
         if (para >= m_pp.GetSize() - 1)
             return m_pp[m_pp.GetSize() - 1].start;
         return m_pp[para].start;
     }
-    virtual int		GetTotalLength(int docid) {
+    virtual int  GetTotalLength(int docid) {
         return m_pp[m_pp.GetSize() - 1].start;
     }
-    virtual int		LookupParagraph(int docid, int charpos);
+    virtual int  LookupParagraph(int docid, int charpos);
 };
 
 int   SimpleTextParser::LookupParagraph(int docid, int charpos) {
@@ -153,9 +153,9 @@ int   SimpleTextParser::LookupParagraph(int docid, int charpos) {
         return 0;
     if (charpos == (int)m_pp[m_pp.GetSize() - 1].start)
         return m_pp.GetSize() - 1;
-    int	i = 0, j = m_pp.GetSize() - 1;
+    int i = 0, j = m_pp.GetSize() - 1;
     while (i <= j) {
-        int	  m = (i + j) >> 1;
+        int   m = (i + j) >> 1;
         if (charpos < (int)m_pp[m].start)
             j = m - 1;
         else if (charpos >= (int)m_pp[m + 1].start)
@@ -166,8 +166,8 @@ int   SimpleTextParser::LookupParagraph(int docid, int charpos) {
     return 0;
 }
 
-#define	RSPACE(x)   ((x)<=32)
-#define	SPACE(x)    (RSPACE(x) || (x)==SHY || (x)==0xFEFF)
+#define RSPACE(x)   ((x)<=32)
+#define SPACE(x)    (RSPACE(x) || (x)==SHY || (x)==0xFEFF)
 
 static void Addpara(int enc, PArray& pp, Buffer<char>& b, int& parsed_start, int len, DWORD start)
 {
@@ -202,7 +202,7 @@ static void Addpara(int enc, PArray& pp, Buffer<char>& b, int& parsed_start, int
         }
     }
 
-    Para	p;
+    Para p;
     p.start = parsed_start;
     p.rlen = len;
     p.off = start;
@@ -212,13 +212,13 @@ static void Addpara(int enc, PArray& pp, Buffer<char>& b, int& parsed_start, int
 
 void   SimpleTextParser::GenericFileParseW(CBufFile *fp, PArray& pp, DWORD mask, DWORD cmp)
 {
-    int				ch = 0;
-    int				ch2 = 0;
-    DWORD			hist = 0;
-    Buffer<char>	b(MAXPLEN);
-    int				rlen = 0;
-    DWORD			start = fp->pos();
-    int				parsed_start = 0;
+    int    ch = 0;
+    int    ch2 = 0;
+    DWORD   hist = 0;
+    Buffer<char> b(MAXPLEN);
+    int    rlen = 0;
+    DWORD   start = fp->pos();
+    int    parsed_start = 0;
     for (;;)
     {
         ch = fp->ch();
@@ -251,7 +251,7 @@ void   SimpleTextParser::GenericFileParseW(CBufFile *fp, PArray& pp, DWORD mask,
         }
     }
 
-    Para	p;
+    Para p;
     p.off = 0;
     p.rlen = 0;
     p.start = parsed_start;
@@ -260,12 +260,12 @@ void   SimpleTextParser::GenericFileParseW(CBufFile *fp, PArray& pp, DWORD mask,
 
 void   SimpleTextParser::GenericFileParseA(CBufFile *fp, PArray& pp, DWORD mask, DWORD cmp)
 {
-    int				ch = 0;
-    DWORD			hist = 0;
-    Buffer<char>	b(MAXPLEN);
-    int				rlen = 0;
-    DWORD			start = fp->pos();
-    int				parsed_start = 0;
+    int    ch = 0;
+    DWORD   hist = 0;
+    Buffer<char> b(MAXPLEN);
+    int    rlen = 0;
+    DWORD   start = fp->pos();
+    int    parsed_start = 0;
     for (;;)
     {
         ch = fp->ch();
@@ -294,7 +294,7 @@ void   SimpleTextParser::GenericFileParseA(CBufFile *fp, PArray& pp, DWORD mask,
         }
     }
 
-    Para	p;
+    Para p;
     p.off = 0;
     p.rlen = 0;
     p.start = parsed_start;
@@ -320,20 +320,20 @@ Paragraph  SimpleTextParser::GenericBufParse(CBufFile *fp, const Para& p, int le
         return Paragraph();
 
     // read entire buffer
-    Buffer<char>	  mbbuf(p.rlen);
+    Buffer<char>   mbbuf(p.rlen);
     fp->seek(p.off);
-    int		  nread = fp->read(mbbuf, p.rlen);
+    int    nread = fp->read(mbbuf, p.rlen);
     ASSERT(nread == (int)p.rlen);
     // convert to unicode here
-    int		  wclen = Unicode::WCLength(m_encoding, mbbuf, nread);
+    int    wclen = Unicode::WCLength(m_encoding, mbbuf, nread);
     Buffer<wchar_t> wcbuf(wclen);
     Unicode::ToWC(m_encoding, mbbuf, nread, wcbuf, wclen);
     // strip whitespace and soft hyphens
-    Paragraph	  ret(len);
-    wchar_t	  *bp = ret.str;
-    Attr		  fmt;
-    int		  count = 0;
-    int		  i;
+    Paragraph   ret(len);
+    wchar_t   *bp = ret.str;
+    Attr    fmt;
+    int    count = 0;
+    int    i;
 
     ret.cflags.Zero();
     fmt.wa = 0;
@@ -366,10 +366,10 @@ Paragraph  SimpleTextParser::GenericBufParse(CBufFile *fp, const Para& p, int le
 }
 
 // XXX depends on the order of records in g_simple_formats
-int		TextParser::DetectFormat(CBufFile *fp) {
-    int		lines, ws, chars, check = _T('\n'), base = 0;
-    Buffer<BYTE>	buf(2048);
-    int		nb;
+int  TextParser::DetectFormat(CBufFile *fp) {
+    int  lines, ws, chars, check = _T('\n'), base = 0;
+    Buffer<BYTE> buf(2048);
+    int  nb;
 
     fp->seek(0);
     nb = fp->read(buf, 2048);
@@ -415,11 +415,11 @@ done:
     return base;
 }
 
-int		TextParser::GetNumFormats() {
+int  TextParser::GetNumFormats() {
     return NUM_SIMPLE_FORMATS + 1;
 }
 
-const TCHAR	*TextParser::GetFormatName(int format) {
+const TCHAR *TextParser::GetFormatName(int format) {
     if (format < 0 || format >= NUM_SIMPLE_FORMATS + NUM_EXT_FORMATS)
         return _T("Invalid format ID");
     if (format >= NUM_SIMPLE_FORMATS)
@@ -427,7 +427,7 @@ const TCHAR	*TextParser::GetFormatName(int format) {
     return g_simple_formats[format].name;
 }
 
-TextParser	*TextParser::Create(Meter *m, CBufFile *fp, int format, int encoding, Bookmarks *bmk) {
+TextParser *TextParser::Create(Meter *m, CBufFile *fp, int format, int encoding, Bookmarks *bmk) {
     if (format < 0)
         return NULL;
     HANDLE    heap;
@@ -440,7 +440,7 @@ TextParser	*TextParser::Create(Meter *m, CBufFile *fp, int format, int encoding,
         {
         case PNG_FORMAT:
         case JPEG_FORMAT:
-        default:	//format<NUM_SIMPLE_FORMATS
+        default: //format<NUM_SIMPLE_FORMATS
             fp->seek(0);
             return new SimpleTextParser(m, fp, heap, format, encoding, bmk);
         }
@@ -464,23 +464,23 @@ static BYTE   vlist[0x92] = {
     0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, // 0x450-0x45f
 };
 
-#define isLetter(ch)	((ch)>=0x0401 && (ch)<=0x0491)
-#define isVowel(ch)	(vlist[(ch)-0x400]==1)
-#define isHardSign(ch)	(vlist[(ch)-0x400]==2) 
-#define isSoftSign(ch)	(vlist[(ch)-0x400]==3)
-#define isConsonant(ch)	(vlist[(ch)-0x400]==0)
+#define isLetter(ch) ((ch)>=0x0401 && (ch)<=0x0491)
+#define isVowel(ch) (vlist[(ch)-0x400]==1)
+#define isHardSign(ch) (vlist[(ch)-0x400]==2) 
+#define isSoftSign(ch) (vlist[(ch)-0x400]==3)
+#define isConsonant(ch) (vlist[(ch)-0x400]==0)
 
 void  Paragraph::Hyphenate() {
     if (flags&hypdone)
         return;
     flags |= hypdone;
 
-    DWORD		len = str.size();
+    DWORD  len = str.size();
     if (!len)
         return;
-    const wchar_t	*s = str;
-    Attr		*a = cflags;
-    DWORD		start, end, i, j;
+    const wchar_t *s = str;
+    Attr  *a = cflags;
+    DWORD  start, end, i, j;
 
     for (start = 0; start < len;) {
         // find start of word

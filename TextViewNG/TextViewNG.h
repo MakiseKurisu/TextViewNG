@@ -37,14 +37,14 @@
 #endif // _MSC_VER >= 1000
 
 // common image list
-#define	IM_BLANK  0
-#define	IM_BMK	  1
-#define	IM_TEXT	  2
-#define	IM_DIR	  3
-#define	IM_ZIP	  4
-#define	IM_FILE	  5
+#define IM_BLANK  0
+#define IM_BMK   1
+#define IM_TEXT   2
+#define IM_DIR   3
+#define IM_ZIP   4
+#define IM_FILE   5
 #define IM_CNODE  6
-#define	IM_CLEAF  7
+#define IM_CLEAF  7
 #define IM_IMAGE  8
 
 /////////////////////////////////////////////////////////////////////////////
@@ -63,16 +63,16 @@ public:
     static CString  GetStr(const TCHAR *name, const TCHAR *def = NULL) {
         return AfxGetApp()->GetProfileString(_T("Parameters"), name, def);
     }
-    static int	  GetInt(const TCHAR *name, int def = 0) {
+    static int   GetInt(const TCHAR *name, int def = 0) {
         return AfxGetApp()->GetProfileInt(_T("Parameters"), name, def);
     }
-    static void	  SetStr(const TCHAR *name, const TCHAR *val) {
+    static void   SetStr(const TCHAR *name, const TCHAR *val) {
         AfxGetApp()->WriteProfileString(_T("Parameters"), name, val);
     }
-    static void	  SetInt(const TCHAR *name, int val) {
+    static void   SetInt(const TCHAR *name, int val) {
         AfxGetApp()->WriteProfileInt(_T("Parameters"), name, val);
     }
-    static void	  Barf(const TCHAR *format, ...);
+    static void   Barf(const TCHAR *format, ...);
     CTVApp();
 
     // Overrides
@@ -89,8 +89,8 @@ public:
     //}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 protected:
-    CUIntArray	      m_cmdqueue;
-    auto_ptr<CImageList>	m_imagelist;
+    CUIntArray       m_cmdqueue;
+    auto_ptr<CImageList> m_imagelist;
 };
 
 

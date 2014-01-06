@@ -48,13 +48,13 @@ public:
     // Dialog Data
     //{{AFX_DATA(CMiscOptDlg)
     enum { IDD = IDD_MISCOPT };
-    int	    m_fcsize;
-    int	    m_fbsize;
-    int	    m_allowmulti;
-    int	    m_rotb;
-    int	    m_savetofiles;
-    int	    m_lastfiles;
-    int	    m_autorepeatlimit;
+    int     m_fcsize;
+    int     m_fbsize;
+    int     m_allowmulti;
+    int     m_rotb;
+    int     m_savetofiles;
+    int     m_lastfiles;
+    int     m_autorepeatlimit;
     //}}AFX_DATA
 
 

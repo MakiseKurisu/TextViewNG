@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxwin.h>
 #include <afxcmn.h>
@@ -38,78 +38,78 @@
 #include "config.h"
 #include "XListBox.h"
 
-#define	DEFAULT_FONT_SIZE     11
-#define	UICON_PAD	      1
-#define	COLOR0		      RGB(0,0,0)
-#define	COLOR1		      RGB(255,255,255)
-#define	COLOR2		      RGB(251,242,233)
-#define	COLOR3		      RGB(128,128,128)
-#define	COLOR4		      RGB(255,255,255)
-#define	COLOR5		      RGB(16,32,255)
+#define DEFAULT_FONT_SIZE     11
+#define UICON_PAD       1
+#define COLOR0        RGB(0,0,0)
+#define COLOR1        RGB(255,255,255)
+#define COLOR2        RGB(251,242,233)
+#define COLOR3        RGB(128,128,128)
+#define COLOR4        RGB(255,255,255)
+#define COLOR5        RGB(16,32,255)
 
-#define	INDENT_PER_LEVEL      5
+#define INDENT_PER_LEVEL      5
 
 // string compare
-#define	CmpI(s1,s2) \
+#define CmpI(s1,s2) \
     (::CompareString(LOCALE_USER_DEFAULT, NORM_IGNORECASE, \
     (s1), -1, (s2), -1) - 2)
 
 struct XLBItem {
-    TCHAR	  *text1;
-    TCHAR	  *text2;
-    int	  icon_index;
-    int	  level;
-    int	  flags;
+    TCHAR   *text1;
+    TCHAR   *text2;
+    int   icon_index;
+    int   level;
+    int   flags;
     LONG    user_data;
 };
 
-#define	XIF_COLLAPSED	1
+#define XIF_COLLAPSED 1
 
 struct XLB {
-    HWND		  hWnd;
+    HWND    hWnd;
 
-    int		  num_items;
-    int		  max_items;
-    XLBItem	  *items;
+    int    num_items;
+    int    max_items;
+    XLBItem   *items;
 
-    int		  visible_items;
-    XLBItem	  **vitems;
+    int    visible_items;
+    XLBItem   **vitems;
 
-    int		  selection; // selection is I
-    int		  top_offset;
-    int		  scroll_page;
+    int    selection; // selection is I
+    int    top_offset;
+    int    scroll_page;
 
-    int		  item_height;
-    int		  line_height;
+    int    item_height;
+    int    line_height;
 
-    HIMAGELIST	  icons;
-    bool		  icons_shared;
+    HIMAGELIST   icons;
+    bool    icons_shared;
 
-    HFONT		  font;
-    int		  dots_width;
+    HFONT    font;
+    int    dots_width;
 
-    HIMAGELIST	  tree_icons;
+    HIMAGELIST   tree_icons;
 
-    int		  flags;
+    int    flags;
 
-    XLB_GetText	  gtf;
-    void		  *gtdata;
+    XLB_GetText   gtf;
+    void    *gtdata;
 
-    int		  uicon_w;
-    int		  ticon_w;
+    int    uicon_w;
+    int    ticon_w;
 };
 
-#define	XLF_TREE  1
+#define XLF_TREE  1
 
 static bool   XLB_GrowList(XLB *x) {
-    int	incr = x->num_items;
+    int incr = x->num_items;
 
     if (incr < 16)
         incr = 16;
     if (incr > 4096)
         incr = 4096;
 
-    int	newsize = x->num_items + incr;
+    int newsize = x->num_items + incr;
 
     XLBItem   *newitems = (XLBItem*)realloc(x->items, newsize*sizeof(XLBItem));
     if (newitems == NULL)
@@ -133,8 +133,8 @@ static void  XLB_UpdateVisibleItems(XLB *x) {
     XLBItem *jj = ii + x->num_items;
     XLBItem **kk = x->vitems;
 
-    int	  level = 0;
-    int	  flags = 0;
+    int   level = 0;
+    int   flags = 0;
 
     while (ii<jj) {
         if (ii->level > level)
@@ -163,13 +163,13 @@ static int  XLB_GetIFromV(XLB *x, int v) {
 }
 
 static int  XLB_GetVFromI(XLB *x, int i) {
-    int	    top = x->visible_items - 1;
-    int	    bottom = 0;
+    int     top = x->visible_items - 1;
+    int     bottom = 0;
     XLBItem   *ii = &x->items[i];
     XLBItem   **kk = x->vitems;
 
     while (bottom <= top) {
-        int	  middle = (bottom + top) >> 1;
+        int   middle = (bottom + top) >> 1;
 
         if (kk[middle] == ii)
             return middle;
@@ -186,7 +186,7 @@ static int  XLB_GetVFromI(XLB *x, int i) {
 static int  XLB_GetParent(XLB *x, int i) {
     XLBItem   *jj = x->items;
     XLBItem   *ii = jj + i;
-    int	    level = ii->level;
+    int     level = ii->level;
 
     while (ii-- > jj)
         if (ii->level < level)
@@ -198,7 +198,7 @@ static int  XLB_GetParent(XLB *x, int i) {
 static void XLB_UpdateScrollbar(XLB *x);
 
 static void XLB_Restore(XLB *x, int item) {
-    bool	changed = false;
+    bool changed = false;
 
     for (;;) {
         item = XLB_GetParent(x, item);
@@ -220,15 +220,15 @@ static bool XLB_HasChildren(XLB *x, int item) {
     return item < x->num_items - 1 && x->items[item + 1].level > x->items[item].level;
 }
 
-#define	SPC(x)	((x)==_T(' ') || (x)==_T('\t') || (x)==_T('\r') || (x)==_T('\n'))
+#define SPC(x) ((x)==_T(' ') || (x)==_T('\t') || (x)==_T('\r') || (x)==_T('\n'))
 
 static void XLB_PaintItem(XLB *x, int item, int vitem, HDC hDC, RECT& rc) {
     // cache an item pointer
     XLBItem   *ii = &x->items[item];
 
     // query text1 and text2 if they are NULL
-    const TCHAR	  *text1 = ii->text1;
-    const TCHAR	  *text2 = ii->text2;
+    const TCHAR   *text1 = ii->text1;
+    const TCHAR   *text2 = ii->text2;
 
     if (text1 == NULL && x->gtf) {
         CString t(x->gtf(x->gtdata, 0, item, ii->user_data));
@@ -254,7 +254,7 @@ static void XLB_PaintItem(XLB *x, int item, int vitem, HDC hDC, RECT& rc) {
     ::SetBkColor(hDC, bk_color);
 
     // calculate indentation and paint it
-    int	    indent = ii->level*INDENT_PER_LEVEL;
+    int     indent = ii->level*INDENT_PER_LEVEL;
     if (indent > (rc.right - rc.left) / 2)
         indent = (rc.right - rc.left) / 2;
 
@@ -274,7 +274,7 @@ static void XLB_PaintItem(XLB *x, int item, int vitem, HDC hDC, RECT& rc) {
         ::ExtTextOut(hDC, rci.left, rci.top, ETO_OPAQUE, &rci, NULL, 0, NULL);
 
     // top and bottom text rectangles
-    RECT	    rt, rb;
+    RECT     rt, rb;
     rt = rc;
     rt.bottom = rt.top + x->line_height;
     rt.left += indent;
@@ -324,7 +324,7 @@ static void XLB_PaintItem(XLB *x, int item, int vitem, HDC hDC, RECT& rc) {
 
     // paint text2
     if (text2) {
-        int	  tl = _tcslen(text2);
+        int   tl = _tcslen(text2);
 
         // get text2 width
         SIZE    sz;
@@ -350,15 +350,15 @@ static void XLB_PaintItem(XLB *x, int item, int vitem, HDC hDC, RECT& rc) {
         ::ExtTextOut(hDC, rci.left + 3, rci.top, ETO_OPAQUE | ETO_CLIPPED, &rci, text2, tl, NULL);
     }
 
-    int	tl = text1 ? _tcslen(text1) : 0;
+    int tl = text1 ? _tcslen(text1) : 0;
 
     // get size of top part
-    SIZE	sz;
-    int	top_len = 0;
+    SIZE sz;
+    int top_len = 0;
     ::GetTextExtentExPoint(hDC, text1, tl, rt.right - rt.left, &top_len, NULL, &sz);
 
     // do some simple word wrapping
-    int	i;
+    int i;
     for (i = 0; i < top_len; ++i)
         if (text1[i] == _T('\n') || text1[i] == _T('\r'))
             break;
@@ -418,11 +418,11 @@ static void XLB_PaintAll(XLB *x, HDC hDC) {
         obj = ::SelectObject(hDC, x->font);
 
     // get client rect
-    RECT	cli;
+    RECT cli;
     ::GetClientRect(x->hWnd, &cli);
 
     // get update rect
-    RECT	dirty;
+    RECT dirty;
     if (!::GetUpdateRect(x->hWnd, &dirty, FALSE))
         dirty = cli;
 
@@ -433,8 +433,8 @@ static void XLB_PaintAll(XLB *x, HDC hDC) {
     dirty.right -= cli.left;
 
     // repaint all items from top to bottom
-    int	top = (x->top_offset + dirty.top) / x->item_height;
-    int	bottom = (x->top_offset + dirty.bottom - 1) / x->item_height;
+    int top = (x->top_offset + dirty.top) / x->item_height;
+    int bottom = (x->top_offset + dirty.bottom - 1) / x->item_height;
     cli.top += top*x->item_height - x->top_offset;
     for (int i = top; i <= bottom; ++i, cli.top += x->item_height) {
         cli.bottom = cli.top + x->item_height;
@@ -466,10 +466,10 @@ static void   XLB_InitFont(XLB *x, HDC hDC) {
 
     x->font = ::CreateFontIndirect(&lf);
 
-    TEXTMETRIC	tm;
-    HGDIOBJ	obj = ::SelectObject(hDC, x->font);
+    TEXTMETRIC tm;
+    HGDIOBJ obj = ::SelectObject(hDC, x->font);
     ::GetTextMetrics(hDC, &tm);
-    SIZE		sz;
+    SIZE  sz;
     ::GetTextExtentPoint(hDC, _T("..."), 3, &sz);
     ::SelectObject(hDC, obj);
 
@@ -478,8 +478,8 @@ static void   XLB_InitFont(XLB *x, HDC hDC) {
     x->dots_width = sz.cx;
 }
 
-static void	XLB_ScrollTo(XLB *x, int top) {
-    int	delta = x->top_offset - top;
+static void XLB_ScrollTo(XLB *x, int top) {
+    int delta = x->top_offset - top;
 
     x->top_offset = top;
 
@@ -488,8 +488,8 @@ static void	XLB_ScrollTo(XLB *x, int top) {
     ::ScrollWindowEx(x->hWnd, 0, delta, NULL, NULL, NULL, NULL, SW_INVALIDATE);
 }
 
-static void	XLB_EnsureVisible2(XLB *x, int item) {
-    int	v = XLB_GetVFromI(x, item);
+static void XLB_EnsureVisible2(XLB *x, int item) {
+    int v = XLB_GetVFromI(x, item);
 
     int   cvis = x->scroll_page / x->item_height; // completely visible items
     if (cvis == 0)
@@ -511,9 +511,9 @@ static void	XLB_EnsureVisible2(XLB *x, int item) {
 static LRESULT CALLBACK XLB_WndProc(HWND hWnd, UINT uMsg,
     WPARAM wParam, LPARAM lParam)
 {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
-    int	i, j;
-    HDC	hDC;
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
+    int i, j;
+    HDC hDC;
 
     switch (uMsg) {
     case WM_CREATE:
@@ -702,7 +702,7 @@ static LRESULT CALLBACK XLB_WndProc(HWND hWnd, UINT uMsg,
     case WM_MOUSEWHEEL: {
         UINT    lines = 3;
         ::SystemParametersInfo(SPI_GETWHEELSCROLLLINES, 0, &lines, 0);
-        int	    scrl = (short)HIWORD(wParam) * (int)lines * x->item_height;
+        int     scrl = (short)HIWORD(wParam) * (int)lines * x->item_height;
         scrl /= WHEEL_DELTA;
         j = x->visible_items*x->item_height - x->scroll_page;
         i = max(min(x->top_offset - scrl, j), 0);
@@ -719,7 +719,7 @@ static LRESULT CALLBACK XLB_WndProc(HWND hWnd, UINT uMsg,
 }
 
 void  XLB_SetImageList(HWND hWnd, HIMAGELIST hIml, bool shared) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
     if (!x)
         return;
 
@@ -730,7 +730,7 @@ void  XLB_SetImageList(HWND hWnd, HIMAGELIST hIml, bool shared) {
     x->icons_shared = shared;
 
     if (hIml) {
-        int	    dummy;
+        int     dummy;
         ::ImageList_GetIconSize(hIml, &x->uicon_w, &dummy);
         x->uicon_w += UICON_PAD * 2;
     }
@@ -739,7 +739,7 @@ void  XLB_SetImageList(HWND hWnd, HIMAGELIST hIml, bool shared) {
 }
 
 void  XLB_UpdateScrollbar(XLB *x) {
-    RECT	  rc;
+    RECT   rc;
     ::GetClientRect(x->hWnd, &rc);
 
     x->scroll_page = rc.bottom - rc.top;
@@ -769,7 +769,7 @@ bool  XLB_AppendItem(struct XLB_Handle *handle,
     int icon, int level,
     LONG user_data)
 {
-    XLB	*x = (XLB*)handle;
+    XLB *x = (XLB*)handle;
 
     if (!x)
         return false;
@@ -805,8 +805,8 @@ bool  XLB_AppendItem(struct XLB_Handle *handle,
     return true;
 }
 
-int	XLB_GetSelection(HWND hWnd) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+int XLB_GetSelection(HWND hWnd) {
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x)
         return -1;
@@ -814,7 +814,7 @@ int	XLB_GetSelection(HWND hWnd) {
     return x->selection;
 }
 
-static void	XLB_GetItemRect(XLB *x, int item, RECT& r) {
+static void XLB_GetItemRect(XLB *x, int item, RECT& r) {
     memset(&r, 0, sizeof(r));
 
     if (item < 0 || item >= x->num_items)
@@ -832,15 +832,15 @@ static void	XLB_GetItemRect(XLB *x, int item, RECT& r) {
     r.bottom = r.top + x->item_height;
 }
 
-static void	XLB_InvalidateItem(XLB *x, int item) {
-    RECT	  ri;
+static void XLB_InvalidateItem(XLB *x, int item) {
+    RECT   ri;
 
     XLB_GetItemRect(x, item, ri);
     ::InvalidateRect(x->hWnd, &ri, FALSE);
 }
 
-void	XLB_SetSelection(HWND hWnd, int sel) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+void XLB_SetSelection(HWND hWnd, int sel) {
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x || sel < 0 || sel >= x->num_items || sel == x->selection)
         return;
@@ -858,8 +858,8 @@ void	XLB_SetSelection(HWND hWnd, int sel) {
     x->selection = sel;
 }
 
-int	XLB_GetItemCount(HWND hWnd) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+int XLB_GetItemCount(HWND hWnd) {
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x)
         return 0;
@@ -868,7 +868,7 @@ int	XLB_GetItemCount(HWND hWnd) {
 }
 
 LONG XLB_GetData(HWND hWnd, int item) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x || item < 0 || item >= x->num_items)
         return 0;
@@ -876,13 +876,13 @@ LONG XLB_GetData(HWND hWnd, int item) {
     return x->items[item].user_data;
 }
 
-void	XLB_EnsureVisible(HWND hWnd, int item, bool middle) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+void XLB_EnsureVisible(HWND hWnd, int item, bool middle) {
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x || item < 0 || item >= x->num_items)
         return;
 
-    int	v = XLB_GetVFromI(x, item);
+    int v = XLB_GetVFromI(x, item);
 
     if (v < 0) {
         // item is not currently visble
@@ -897,7 +897,7 @@ void	XLB_EnsureVisible(HWND hWnd, int item, bool middle) {
 
     if (middle) {
         // scroll the view so the item is in the middle
-        int	  new_offset = (v - cvis / 2)*x->item_height;
+        int   new_offset = (v - cvis / 2)*x->item_height;
         if (new_offset + x->scroll_page > x->visible_items*x->item_height)
             new_offset = x->visible_items*x->item_height - x->scroll_page;
         if (new_offset < 0)
@@ -918,8 +918,8 @@ void	XLB_EnsureVisible(HWND hWnd, int item, bool middle) {
 }
 
 // TODO: avoid unneeded redraws
-void	XLB_DeleteItem(HWND hWnd, int item) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+void XLB_DeleteItem(HWND hWnd, int item) {
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x || item < 0 || item >= x->num_items)
         return;
@@ -941,8 +941,8 @@ void	XLB_DeleteItem(HWND hWnd, int item) {
     XLB_UpdateScrollbar(x);
 }
 
-void	XLB_SetItemText1(HWND hWnd, int item, const TCHAR *text) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+void XLB_SetItemText1(HWND hWnd, int item, const TCHAR *text) {
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x || item < 0 || item >= x->num_items)
         return;
@@ -953,8 +953,8 @@ void	XLB_SetItemText1(HWND hWnd, int item, const TCHAR *text) {
     XLB_InvalidateItem(x, item);
 }
 
-void	XLB_DeleteAllItems(HWND hWnd) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+void XLB_DeleteAllItems(HWND hWnd) {
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x)
         return;
@@ -973,7 +973,7 @@ void	XLB_DeleteAllItems(HWND hWnd) {
 }
 
 void  XLB_UpdateState(HWND hWnd) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x)
         return;
@@ -983,7 +983,7 @@ void  XLB_UpdateState(HWND hWnd) {
 }
 
 void  XLB_CollapseLevel(HWND hWnd, int level) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x)
         return;
@@ -1017,8 +1017,8 @@ static int  compare_items(const void *v1, const void *v2) {
     int   i = i1->user_data - i2->user_data;
     if (i != 0)
         return i;
-    bool	e1 = !i1->text1 || !*i1->text1;
-    bool	e2 = !i2->text1 || !*i2->text1;
+    bool e1 = !i1->text1 || !*i1->text1;
+    bool e2 = !i2->text1 || !*i2->text1;
     if (e1)
         return e2 ? 0 : -1;
     if (e2)
@@ -1026,8 +1026,8 @@ static int  compare_items(const void *v1, const void *v2) {
     return CmpI(i1->text1, i2->text1);
 }
 
-void	XLB_SortItems(HWND hWnd) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+void XLB_SortItems(HWND hWnd) {
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x)
         return;
@@ -1036,7 +1036,7 @@ void	XLB_SortItems(HWND hWnd) {
 }
 
 const TCHAR *XLB_GetItemText1(HWND hWnd, int item) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x || item < 0 || item >= x->num_items)
         return NULL;
@@ -1044,8 +1044,8 @@ const TCHAR *XLB_GetItemText1(HWND hWnd, int item) {
     return x->items[item].text1;
 }
 
-void	XLB_SetGTFunc(HWND hWnd, XLB_GetText fn, void *ugtdata) {
-    XLB	*x = (XLB*) ::GetWindowLong(hWnd, 0);
+void XLB_SetGTFunc(HWND hWnd, XLB_GetText fn, void *ugtdata) {
+    XLB *x = (XLB*) ::GetWindowLong(hWnd, 0);
 
     if (!x)
         return;

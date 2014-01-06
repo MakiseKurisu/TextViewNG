@@ -52,18 +52,18 @@ struct Attr {
 
         };
 
-        WORD	  wa;
+        WORD   wa;
     };
-    WORD	fontattr() { return wa & 0x5c0; }
-    WORD	fontflags() { return wa & 0x3ff; }
+    WORD fontattr() { return wa & 0x5c0; }
+    WORD fontflags() { return wa & 0x3ff; }
     enum {
         BOLD = 0x40,
         ITALIC = 0x80,
         UNDERLINE = 0x400,
         XFONT = 0x100
     };
-    bool	operator==(Attr other) { return wa == other.wa; }
-    bool	operator!=(Attr other) { return wa != other.wa; }
+    bool operator==(Attr other) { return wa == other.wa; }
+    bool operator!=(Attr other) { return wa != other.wa; }
 };
 
 #endif

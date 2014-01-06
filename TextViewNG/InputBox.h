@@ -52,7 +52,7 @@ public:
     // Dialog Data
     //{{AFX_DATA(InputBox)
     enum { IDD = IDD_FIND };
-    CString	m_str;
+    CString m_str;
     //}}AFX_DATA
 
 
@@ -65,7 +65,7 @@ protected:
 
     // Implementation
 protected:
-    CString		m_prompt, m_title;
+    CString  m_prompt, m_title;
     // Generated message map functions
     //{{AFX_MSG(InputBox)
     virtual BOOL OnInitDialog();
@@ -74,7 +74,7 @@ protected:
     DECLARE_MESSAGE_MAP()
 };
 
-bool	GetUserInput(const CString& prompt, const CString& title,
+bool GetUserInput(const CString& prompt, const CString& title,
     CString& def, CWnd *parent);
 
 /////////////////////////////////////////////////////////////////////////////
@@ -122,7 +122,7 @@ public:
     //{{AFX_DATA(CFindDlg)
     enum { IDD = IDD_FINDDLG };
     CString   m_text;
-    BOOL	    m_matchcase;
+    BOOL     m_matchcase;
     BOOL      m_fromcurpos;
     //}}AFX_DATA
 

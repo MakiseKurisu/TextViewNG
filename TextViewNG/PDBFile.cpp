@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxwin.h>
 
@@ -41,43 +41,43 @@
 
 // pdb header
 struct PDBHdr {
-    char	  name[32];
-    WORD	  attr;
-    WORD	  ver;
-    DWORD	  ctime;
-    DWORD	  mtime;
-    DWORD	  btime;
-    DWORD	  mnum;
-    DWORD	  appinfoid;
-    DWORD	  aortinfoid;
-    char	  type[4];
-    char	  creator[4];
-    DWORD	  idseed;
-    DWORD	  nextreclist;
-    WORD	  numrec;
+    char   name[32];
+    WORD   attr;
+    WORD   ver;
+    DWORD   ctime;
+    DWORD   mtime;
+    DWORD   btime;
+    DWORD   mnum;
+    DWORD   appinfoid;
+    DWORD   aortinfoid;
+    char   type[4];
+    char   creator[4];
+    DWORD   idseed;
+    DWORD   nextreclist;
+    WORD   numrec;
 };
-#define	PDBHDRSIZE  78
+#define PDBHDRSIZE  78
 
 // record 0
 struct PDBRec0 {
-    WORD	  ver;
-    WORD	  res1;
-    DWORD	  usize;
-    WORD	  nrec;
-    WORD	  rsize;
-    DWORD	  res2;
+    WORD   ver;
+    WORD   res1;
+    DWORD   usize;
+    WORD   nrec;
+    WORD   rsize;
+    DWORD   res2;
 };
-#define	PDBR0SIZE 16
+#define PDBR0SIZE 16
 
 static DWORD  dword(const DWORD& dw) {
     // convert from BE
-    BYTE	*b = (BYTE*)&dw;
+    BYTE *b = (BYTE*)&dw;
     return ((DWORD)b[0] << 24) | ((DWORD)b[1] << 16) | ((DWORD)b[2] << 8) | b[3];
 }
 
 static WORD   word(const WORD& w) {
     // convert from BE
-    BYTE	*b = (BYTE*)&w;
+    BYTE *b = (BYTE*)&w;
     return ((WORD)b[0] << 8) | b[1];
 }
 
@@ -89,7 +89,7 @@ bool  PDBFile::CheckPDB(RFile *fp, PDBHdr& hdr, PDBRec0& r0) {
         return false;
     if (memcmp(hdr.type, "TEXt", 4) || memcmp(hdr.creator, "REAd", 4))
         return false;
-    DWORD	  off0;
+    DWORD   off0;
     if (fp->RFile::read2(&off0, 4) != 4)
         return false;
     fp->RFile::seek(dword(off0));
@@ -100,8 +100,8 @@ bool  PDBFile::CheckPDB(RFile *fp, PDBHdr& hdr, PDBRec0& r0) {
     return true;
 }
 
-static DWORD	scan_size(BYTE *src, DWORD len) {
-    DWORD	  ulen = 0;
+static DWORD scan_size(BYTE *src, DWORD len) {
+    DWORD   ulen = 0;
 
     while (len--) {
         if (*src >= 1 && *src <= 8) {
@@ -160,7 +160,7 @@ RFile(fn), m_length(0), m_ptr(0)
         if (m_comp) {
             // compressed
             Buffer<BYTE>  tmp(m_rsz);
-            DWORD	    uoff = 0;
+            DWORD     uoff = 0;
             for (int i = 0; i < m_blocks.size(); ++i) {
                 RFile::seek(m_blocks[i].off);
                 if (RFile::read2(tmp, m_blocks[i].csize) != m_blocks[i].csize)
@@ -187,11 +187,11 @@ fail:
     CTVApp::Barf(_T("Invalid or unsupported PDB file"));
 }
 
-static DWORD	pdb_decompress(BYTE *source, DWORD srclen, BYTE *dest, DWORD destlen)
+static DWORD pdb_decompress(BYTE *source, DWORD srclen, BYTE *dest, DWORD destlen)
 {
-    BYTE	    *se = source + srclen;
-    BYTE	    *de = dest + destlen;
-    BYTE	    *dd = dest;
+    BYTE     *se = source + srclen;
+    BYTE     *de = dest + destlen;
+    BYTE     *dd = dest;
 
     while (source < se && dest < de) {
         DWORD c = *source++;
@@ -241,9 +241,9 @@ DWORD PDBFile::read(void *buf) {
             goto found;
     return 0;
 found:
-    Buffer<BYTE>	  tmp(m_rsz), tmp2(m_rsz);
-    BYTE		  *p = (BYTE*)buf;
-    DWORD		  n = BSZ;
+    Buffer<BYTE>   tmp(m_rsz), tmp2(m_rsz);
+    BYTE    *p = (BYTE*)buf;
+    DWORD    n = BSZ;
     while (i < m_blocks.size() && n>0) {
         RFile::seek(m_blocks[i].off);
         if (m_comp) {

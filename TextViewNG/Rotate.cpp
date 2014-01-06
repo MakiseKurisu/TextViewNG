@@ -30,7 +30,7 @@
 */
 
 #pragma warning(disable:4100)
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxwin.h>
 #include "Rotate.h"
@@ -40,7 +40,7 @@ static void Transform_R_0(RECT& r, const RECT& cli) {
 }
 
 static void Transform_R_90(RECT& r, const RECT& cli) {
-    int	  tmp = r.left;
+    int   tmp = r.left;
     r.left = r.top;
     r.top = cli.bottom - r.right;
     r.right = r.bottom;
@@ -48,7 +48,7 @@ static void Transform_R_90(RECT& r, const RECT& cli) {
 }
 
 static void Transform_R_180(RECT& r, const RECT& cli) {
-    int	tmp = r.left;
+    int tmp = r.left;
     r.left = cli.right - r.right;
     r.right = cli.right - tmp;
     tmp = r.top;
@@ -57,7 +57,7 @@ static void Transform_R_180(RECT& r, const RECT& cli) {
 }
 
 static void Transform_R_270(RECT& r, const RECT& cli) {
-    int	tmp = r.left;
+    int tmp = r.left;
     r.left = cli.right - r.bottom;
     r.bottom = r.right;
     r.right = cli.right - r.top;
@@ -90,7 +90,7 @@ static void R_Transform_P_0(POINT& pt, const RECT& cli) {
 }
 
 static void R_Transform_P_90(POINT& pt, const RECT& cli) {
-    int	tmp = pt.x;
+    int tmp = pt.x;
     pt.x = cli.bottom - pt.y;
     pt.y = tmp;
 }
@@ -101,7 +101,7 @@ static void R_Transform_P_180(POINT& pt, const RECT& cli) {
 }
 
 static void R_Transform_P_270(POINT& pt, const RECT& cli) {
-    int	tmp = pt.x;
+    int tmp = pt.x;
     pt.x = pt.y;
     pt.y = cli.right - tmp;
 }
@@ -133,7 +133,7 @@ void  CRotate::SetRotAngle(int angle) {
 }
 
 void CRotate::System2Window(RECT& rc, const RECT& cli) {
-    POINT	p1, p2;
+    POINT p1, p2;
     p1.x = rc.left; p1.y = rc.top;
     p2.x = rc.right; p2.y = rc.bottom;
     System2Window(p1, cli);
@@ -159,8 +159,8 @@ void CRotate::System2Window(RECT& rc, const RECT& cli) {
 void CRotate::TDrawText(HDC dc, int x, int y, const RECT& cli, const RECT& r,
     const wchar_t *p, int lp, const int *dx, int flags)
 {
-    RECT	  tmp = r;
-    POINT	  pt;
+    RECT   tmp = r;
+    POINT   pt;
     pt.x = x;
     pt.y = y;
     Window2System(tmp, cli);
@@ -175,7 +175,7 @@ void CRotate::TDrawText(HDC dc, int x, int y, const RECT& cli, const RECT& r,
 }
 
 void  CRotate::TDrawLine(HDC dc, const RECT& cli, int x1, int y1, int x2, int y2) {
-    POINT	pt[2];
+    POINT pt[2];
     pt[0].x = x1; pt[0].y = y1;
     pt[1].x = x2; pt[1].y = y2;
     Window2System(pt[0], cli);
@@ -184,7 +184,7 @@ void  CRotate::TDrawLine(HDC dc, const RECT& cli, int x1, int y1, int x2, int y2
 }
 
 void  CRotate::TDrawLine(HDC dc, const RECT& cli, const RECT& rc) {
-    POINT	pt[2];
+    POINT pt[2];
     pt[0].x = rc.left; pt[0].y = rc.top;
     pt[1].x = rc.right; pt[1].y = rc.bottom;
     Window2System(pt[0], cli);
@@ -202,7 +202,7 @@ void  CRotate::TDrawPolyLine(HDC dc, const RECT& cli, POINT *pt, int npt) {
 void  CRotate::TDrawBitmap(HDC dc, HBITMAP hBmp, int x, int y, int sh,
     const RECT& cli, int bmw, int bmh, int bmy)
 {
-    int	  u, v, z, t, rw, rh;
+    int   u, v, z, t, rw, rh;
     switch (m_angle) {
     case 2700:
         u = bmh - bmy - sh;

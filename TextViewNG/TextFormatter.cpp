@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxwin.h>
 #include <afxtempl.h>
@@ -48,11 +48,11 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 #ifndef MAXINT
-#define	MAXINT	0x7fffffff
+#define MAXINT 0x7fffffff
 #endif
 
-#define	FBIG_ADD	  4
-#define FSMALL_ADD	  -1
+#define FBIG_ADD   4
+#define FSMALL_ADD   -1
 
 TextFormatter::TextFormatter(TextFile *tf) :
 m_tf(tf),
@@ -70,14 +70,14 @@ m_angle(0)
 void  TextFormatter::GetTextExtent(CFDC& dc, Paragraph& line, int off,
     int width, int& nch, int *dx, int& lh, int& lb)
 {
-    const wchar_t	  *sp = line.str;
-    Attr	  *att = line.cflags + off;
-    int	  len = nch - off;
-    int	  xoff = 0;
+    const wchar_t   *sp = line.str;
+    Attr   *att = line.cflags + off;
+    int   len = nch - off;
+    int   xoff = 0;
     sp += off;
     nch = 0;
     while (len > 0 && width > 0) {
-        int	  i;
+        int   i;
         int   n = 0;
         SIZE  sz = { 0, 0 };
         Attr  curatt = att[0];
@@ -105,7 +105,7 @@ void  TextFormatter::GetTextExtent(CFDC& dc, Paragraph& line, int off,
         else {
             for (i = 1; i < len && att[i].fontflags() == curatt.fontflags(); ++i);
             dc.SelectFont(curatt.fsize, curatt.fontattr(), true);
-            int	  fh, fa;
+            int   fh, fa;
             dc.GetFontSize(fh, fa);
             if (lh < fh) {
                 lh = fh;
@@ -129,7 +129,7 @@ void  TextFormatter::GetTextExtent(CFDC& dc, Paragraph& line, int off,
     }
 }
 
-void	CopyAttr(Attr *dest, const Attr *src, DWORD len) {
+void CopyAttr(Attr *dest, const Attr *src, DWORD len) {
     while (len--)
         (*dest++ = *src++).hyphen = false;
 }
@@ -147,18 +147,18 @@ static void AdjustIndent(int& width, int& indent, int li, int ri, int fi, int lp
 }
 
 // split image into strips
-int	    TextFormatter::WrapImage(CFDC& dc, Paragraph& pp,
+int     TextFormatter::WrapImage(CFDC& dc, Paragraph& pp,
     FilePos& pos, LineArray& la,
     int top, int maxh)
 {
-    Image	  img;
+    Image   img;
 #if 0
-    int	  curwidth = m_width;
-    int	  ispace = 0;
+    int   curwidth = m_width;
+    int   ispace = 0;
     AdjustIndent(curwidth, ispace, pp.lindent, pp.rindent, 0, dc.GetLPX());
 #else
-    int	  curwidth = m_total_width;
-    int	  ispace = -m_margin;
+    int   curwidth = m_total_width;
+    int   ispace = -m_margin;
 #endif
     if (pp.links.size() <= 0 ||
         !m_tf->GetImage(pp.links[0].target, dc.DC(), curwidth, m_height, m_angle, img))
@@ -172,18 +172,18 @@ int	    TextFormatter::WrapImage(CFDC& dc, Paragraph& pp,
         return -1;
 #endif
     // calc strips, min strip height is 16
-    int	  striph = (img.height + pp.str.size() - 1) / pp.str.size();
+    int   striph = (img.height + pp.str.size() - 1) / pp.str.size();
     if (striph < 16)
         striph = 16;
     if (striph > img.height)
         striph = img.height;
     // number of visible strips
-    int	  vstrips = (img.height + striph - 1) / striph;
-    int	  topstrip = vstrips;
+    int   vstrips = (img.height + striph - 1) / striph;
+    int   topstrip = vstrips;
     if (topstrip > pp.len)
         topstrip = pp.len;
     // all lines are the same
-    Line	  line(L" ", 1, false);
+    Line   line(L" ", 1, false);
     line.attr[0].wa = 0;
     line.dx[0] = 0;
     line.ispace = ispace + (curwidth - img.width) / 2;
@@ -194,10 +194,10 @@ int	    TextFormatter::WrapImage(CFDC& dc, Paragraph& pp,
     line.base = curwidth;
     line.imageheight = m_height;
     // take care of the strip offset
-    int	  stripnum = pos.off;
-    int	  yoffset = stripnum*striph;
+    int   stripnum = pos.off;
+    int   yoffset = stripnum*striph;
     // add visible strips as lines
-    int	  toth = 0;
+    int   toth = 0;
     // add visible strips
     while (stripnum < topstrip) {
         line.yoffset = yoffset;
@@ -233,7 +233,7 @@ int	    TextFormatter::WrapImage(CFDC& dc, Paragraph& pp,
 
 
 // the formatter's core, wraps the line and justifies it if needed
-int	    TextFormatter::WrapLine(CFDC& dc, Paragraph& pp,
+int     TextFormatter::WrapLine(CFDC& dc, Paragraph& pp,
     FilePos& pos, LineArray& la,
     int top, int maxh)
 {
@@ -244,7 +244,7 @@ int	    TextFormatter::WrapLine(CFDC& dc, Paragraph& pp,
         return WrapImage(dc, pp, pos, la, top, maxh);
     if (pp.len == 0 || (pp.len == 1 && pp.str[0] == L' ')) {
         dc.SelectFont(0, 0);
-        int	  fh, fa;
+        int   fh, fa;
         dc.GetFontSize(fh, fa);
         if (fh > maxh)
             return -1;
@@ -259,21 +259,21 @@ int	    TextFormatter::WrapLine(CFDC& dc, Paragraph& pp,
     }
     if (m_hyphenate)
         pp.Hyphenate();
-    const wchar_t	    *str = pp.str;
-    int		    len = pp.len;
-    Buffer<int>	    dx(len + 1);
-    int		    toth = 0;
+    const wchar_t     *str = pp.str;
+    int      len = pp.len;
+    Buffer<int>     dx(len + 1);
+    int      toth = 0;
     while (toth < maxh && pos.off < len) {
         // 1. get text size
-        int	      nch = len;
-        int	      curwidth = m_width;
-        int	      ispace = 0;
+        int       nch = len;
+        int       curwidth = m_width;
+        int       ispace = 0;
         if (pos.off == 0 && (pp.flags&(Paragraph::center | Paragraph::right)) == 0)
             AdjustIndent(curwidth, ispace, pp.lindent, pp.rindent, pp.findent, dc.GetLPX());
         else
             AdjustIndent(curwidth, ispace, pp.lindent, pp.rindent, 0, dc.GetLPX());
         dx[0] = 0;
-        int	lh = 1, lbase = 1;
+        int lh = 1, lbase = 1;
         GetTextExtent(dc, pp, pos.off, curwidth, nch, dx + 1, lh, lbase);
         if (toth + lh > maxh)
             return -1;
@@ -390,7 +390,7 @@ int	    TextFormatter::WrapLine(CFDC& dc, Paragraph& pp,
     return toth;
 }
 
-bool	    TextFormatter::FormatFwd(CFDC& dc, FilePos start) {
+bool     TextFormatter::FormatFwd(CFDC& dc, FilePos start) {
     AdjustPos(start); // just to be safe
     if (start.para >= m_tf->Length(start.docid))
         return false; // at eof
@@ -432,7 +432,7 @@ bool	    TextFormatter::FormatFwd(CFDC& dc, FilePos start) {
     return true;
 }
 
-bool	    TextFormatter::FormatBack(CFDC& dc, FilePos start, FilePos prev_top) {
+bool     TextFormatter::FormatBack(CFDC& dc, FilePos start, FilePos prev_top) {
     AdjustPos(start, true);
     if (start.para == 0 && start.off == 0)
         return false; // at the top
@@ -441,7 +441,7 @@ bool	    TextFormatter::FormatBack(CFDC& dc, FilePos start, FilePos prev_top) {
     for (int page = m_pages - 1; page >= 0; --page) {
         LineArray   tmp;
         FilePos     pos = start;
-        int	      h = 0;
+        int       h = 0;
         // while there are still paragrahs before
         while (h < m_height && (pos.para>0 || pos.off > 0)) {
             // format entire paragraph
@@ -495,7 +495,7 @@ bool	    TextFormatter::FormatBack(CFDC& dc, FilePos start, FilePos prev_top) {
     return true;
 }
 
-void	    TextFormatter::AdjustPos(FilePos& p, bool back) {
+void     TextFormatter::AdjustPos(FilePos& p, bool back) {
     if (back) {
         if (p.para > 0) {
             if (p.para >= m_tf->Length(p.docid)) {
@@ -520,7 +520,7 @@ void	    TextFormatter::AdjustPos(FilePos& p, bool back) {
     }
 }
 
-void	    TextFormatter::SetSize(int width, int margin, int height, int pages,
+void     TextFormatter::SetSize(int width, int margin, int height, int pages,
     int angle)
 {
     if (height < 1)
@@ -576,7 +576,7 @@ void TextFormatter::Highlight() {
         return;
 
     FilePos   hls(m_hlstart);
-    int	    hll = m_hllen;
+    int     hll = m_hllen;
     for (int i = 0; i < m_lines.GetSize(); ++i)
         if (hls.para == m_lines[i].pos.para) {
             int beg, len;
@@ -618,8 +618,8 @@ bool TextFormatter::SetHighlight(FilePos pos, int len) {
 }
 
 void  Line::CheckStyle() {
-    Attr	*p = attr;
-    Attr	*e = p + attr.size();
+    Attr *p = attr;
+    Attr *e = p + attr.size();
     while (p < e)
         if ((*p++).wa) {
             flags &= ~defstyle;
@@ -631,7 +631,7 @@ void  Line::CheckStyle() {
 int TextFormatter::Distance(const FilePos& a, const FilePos& b)
 {
     FilePos start(a), end(b);
-    bool	  sign = false;
+    bool   sign = false;
     if (a > b) {
         start = b;
         end = a;
@@ -659,7 +659,7 @@ int TextFormatter::Distance(const FilePos& a, const FilePos& b)
     if (end.off > m_tf->GetPLength(end.docid, end.para))
         end.off = m_tf->GetPLength(end.docid, end.para);
     // calc distance now
-    int	dist;
+    int dist;
     if (start.para == end.para)
         dist = end.off - start.off;
     else {
@@ -695,24 +695,24 @@ void  TextFormatter::FormatPlainText(CFDC& dc,
 {
     lines.RemoveAll();
 
-    int	  save_width = m_width;
-    bool	  save_justified = m_justified;
+    int   save_width = m_width;
+    bool   save_justified = m_justified;
     m_width = width;
     m_justified = false;
 
-    const wchar_t	  *top = text + len;
+    const wchar_t   *top = text + len;
 
-    Attr	  attr;
+    Attr   attr;
     attr.wa = 0;
     attr.fsize = fontsize;
 
-    int	curh = 0;
+    int curh = 0;
 
     while (text < top && curh < height) {
         const wchar_t   *p_end = text;
         while (p_end < top && *p_end != '\r' && *p_end != '\n')
             ++p_end;
-        Paragraph	    p(p_end - text);
+        Paragraph     p(p_end - text);
         memcpy(p.str, text, (p_end - text)*sizeof(wchar_t));
         for (int i = 0; i < p.cflags.size(); ++i)
             p.cflags[i].wa = attr.wa;
@@ -736,10 +736,10 @@ void  TextFormatter::FormatPlainText(CFDC& dc,
     m_justified = save_justified;
 
     // deduct ispace
-    int	min_ispace = -1, max_width = 0;
+    int min_ispace = -1, max_width = 0;
     for (int i = 0; i < lines.GetSize(); ++i) {
-        const Line&	  ll = lines[i];
-        int	  w = 0;
+        const Line&   ll = lines[i];
+        int   w = 0;
         for (int j = 0; j < ll.dx.size(); ++j)
             w += ll.dx[j];
         w += ll.ispace;

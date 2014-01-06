@@ -70,17 +70,17 @@ template<class T>
 class Buffer
 {
     struct Buf {
-        int	    m_refs;
-        //T	    *m_data;
+        int     m_refs;
+        //T     *m_data;
     };
-    T	    *m_data;
-    Buf	    *buf() const { return ((Buf*)m_data) - 1; }
-    int	    m_size;
-    void	    grab() const {
+    T     *m_data;
+    Buf     *buf() const { return ((Buf*)m_data) - 1; }
+    int     m_size;
+    void     grab() const {
         if (m_data)
             ++buf()->m_refs;
     }
-    void	    release() {
+    void     release() {
         if (m_data) {
             if (--buf()->m_refs == 0)
                 delete[] buf();

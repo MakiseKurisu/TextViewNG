@@ -30,19 +30,19 @@
 */
 
 #ifndef XSCANF_H
-#define	XSCANF_H
+#define XSCANF_H
 
 #include <stdarg.h>
 
 class Scan {
 public:
     enum {
-        NOMATCH = 1,	// literal character didnt match
-        FORMAT = 2,	// invalid field contents
+        NOMATCH = 1, // literal character didnt match
+        FORMAT = 2, // invalid field contents
     };
-    static int	vxscanf(const wchar_t *str, int len, const wchar_t *format,
+    static int vxscanf(const wchar_t *str, int len, const wchar_t *format,
         int *chars, int *fields, va_list args);
-    static int	xscanf(const wchar_t *str, int len, const wchar_t *format,
+    static int xscanf(const wchar_t *str, int len, const wchar_t *format,
         int *chars, int *fields, ...);
 };
 

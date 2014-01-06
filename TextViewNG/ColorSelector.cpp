@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxext.h>
 
@@ -44,7 +44,7 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-#define	GAMMA_BASE  10000
+#define GAMMA_BASE  10000
 
 /////////////////////////////////////////////////////////////////////////////
 // CColorSelector dialog
@@ -99,7 +99,7 @@ void CColorSelector::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 
     nPos &= 0xffff;
 
-    int	page = (info.nMax - info.nMin + 1) / 15;
+    int page = (info.nMax - info.nMin + 1) / 15;
 
     // Determine the new position of scroll box.
     switch (nSBCode)
@@ -149,16 +149,16 @@ void CColorSelector::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
     if (nSBCode != SB_THUMBTRACK)
         pScrollBar->SetScrollPos(info.nPos);
 
-    int	id = pScrollBar->GetDlgCtrlID();
+    int id = pScrollBar->GetDlgCtrlID();
     if (id == IDC_GAMMA) {
         CString   tmp;
         tmp.Format(_T("%1.2f"), (info.nPos + GAMMA_BASE) / 10000.0);
         SetDlgItemText(IDC_TXTGAMMA, tmp);
     }
     else {
-        int	r = ((CScrollBar*)GetDlgItem(IDC_RED))->GetScrollPos();
-        int	g = ((CScrollBar*)GetDlgItem(IDC_GREEN))->GetScrollPos();
-        int	b = ((CScrollBar*)GetDlgItem(IDC_BLUE))->GetScrollPos();
+        int r = ((CScrollBar*)GetDlgItem(IDC_RED))->GetScrollPos();
+        int g = ((CScrollBar*)GetDlgItem(IDC_GREEN))->GetScrollPos();
+        int b = ((CScrollBar*)GetDlgItem(IDC_BLUE))->GetScrollPos();
         switch (id) {
         case IDC_RED:
             r = info.nPos;
@@ -223,7 +223,7 @@ BOOL CColorSelector::OnInitDialog()
     return TRUE;
 }
 
-bool	myChooseColors(ColorItem *colors, int *gamma, CWnd *parent) {
+bool myChooseColors(ColorItem *colors, int *gamma, CWnd *parent) {
     CColorSelector    dlg(colors, parent);
     // fill in temporary values
     for (int i = 0; colors[i].name; ++i)

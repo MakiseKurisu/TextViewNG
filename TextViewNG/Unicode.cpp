@@ -30,7 +30,7 @@
 */
 
 #pragma warning(disable:4100)
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afx.h>
 
@@ -38,18 +38,18 @@
 #include "Unicode.h"
 
 // string compare
-#define	CmpI(s1,s2) \
+#define CmpI(s1,s2) \
     (::CompareString(LOCALE_USER_DEFAULT, NORM_IGNORECASE, \
     (s1), -1, (s2), -1) - 2)
 
 struct CodePage {
-    const TCHAR	*name;
-    const TCHAR	*alias1, *alias2;
-    UINT		codepage;
+    const TCHAR *name;
+    const TCHAR *alias1, *alias2;
+    UINT  codepage;
     int(*length)(struct CodePage *cp, const char *mbs, int mblen);
     void(*convert)(struct CodePage *cp, const char *mbs, int mblen,
         wchar_t *wcs, int wclen);
-    const wchar_t	*table;
+    const wchar_t *table;
 };
 
 static int    CE_cp_length(struct CodePage *cp, const char *mbs, int mblen) {
@@ -102,7 +102,7 @@ static void   Unicode_cp_convert(struct CodePage *cp, const char *mbs, int mblen
 
 static int    UTF_cp_length(struct CodePage *cp, const char *mbs, int mblen) {
     const unsigned char *mb = (const unsigned char *)mbs;
-    int		      len = 0;
+    int        len = 0;
 
     while (mblen > 0) {
         unsigned char c = *mb++;
@@ -156,7 +156,7 @@ static void   UTF_cp_convert(struct CodePage *cp, const char *mbs, int mblen,
     wchar_t *wcs, int wclen)
 {
     const unsigned char *mb = (const unsigned char *)mbs;
-    wchar_t	      *wce = wcs + wclen;
+    wchar_t       *wce = wcs + wclen;
 
     while (mblen > 0 && wcs < wce) {
         unsigned char c = *mb++;
@@ -207,9 +207,9 @@ static void   UTF_cp_convert(struct CodePage *cp, const char *mbs, int mblen,
     }
 }
 
-static struct CodePage	  *codepages;
-static int		  curcp, maxcp;
-static int		  default_cp;
+static struct CodePage   *codepages;
+static int    curcp, maxcp;
+static int    default_cp;
 
 static int    add_codepage(const TCHAR *name, UINT cp, const TCHAR *alias1 = NULL,
     const TCHAR *alias2 = NULL)
@@ -231,7 +231,7 @@ static int    add_codepage(const TCHAR *name, UINT cp, const TCHAR *alias1 = NUL
 }
 
 struct {
-    UINT	      cp;
+    UINT       cp;
     const TCHAR *name;
     const TCHAR *alias1, *alias2;
 } ms_codepages[] = {
@@ -289,14 +289,14 @@ struct {
     { 65000, _T("UTF-7") },
     { 65001, _T("UTF-8") },
 };
-#define	NUM_MSCP    (sizeof(ms_codepages)/sizeof(ms_codepages[0]))
+#define NUM_MSCP    (sizeof(ms_codepages)/sizeof(ms_codepages[0]))
 
 static int  get_mscp_num(UINT cp)
 {
-    int	  i = 0, j = NUM_MSCP - 1;
+    int   i = 0, j = NUM_MSCP - 1;
     while (i <= j)
     {
-        int	  m = (i + j) >> 1;
+        int   m = (i + j) >> 1;
         if (cp < ms_codepages[m].cp)
         {
             j = m - 1;
@@ -314,9 +314,9 @@ static int  get_mscp_num(UINT cp)
 }
 
 static struct {
-    BYTE	  distmap[256];
+    BYTE   distmap[256];
     wchar_t unimap[256];
-    UINT	  cp;
+    UINT   cp;
 } builtin_encodings[] = {
     { {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -580,7 +580,7 @@ static struct {
                         0x00f8, 0x00f9, 0x00fa, 0x00fb, 0x00fc, 0x00fd, 0x00fe, 0x00ff,
                     }, 1252 },
 };
-#define	NUM_BUILTIN_ENCODINGS (sizeof(builtin_encodings)/sizeof(builtin_encodings[0]))
+#define NUM_BUILTIN_ENCODINGS (sizeof(builtin_encodings)/sizeof(builtin_encodings[0]))
 
 #define NUMLET 33
 static unsigned short russian_distrib[NUMLET*NUMLET] = {
@@ -648,8 +648,8 @@ BOOL CALLBACK EnumCodePagesProc(LPTSTR name) {
 }
 
 static int    _cdecl enc_cmp(const void *v1, const void *v2) {
-    const struct CodePage	*cp1 = (const struct CodePage *)v1;
-    const struct CodePage	*cp2 = (const struct CodePage *)v2;
+    const struct CodePage *cp1 = (const struct CodePage *)v1;
+    const struct CodePage *cp2 = (const struct CodePage *)v2;
     return cp1->codepage<cp2->codepage ? -1 : cp1->codepage>cp2->codepage ? 1 : 0;
 }
 
@@ -695,7 +695,7 @@ InitUnicode::InitUnicode()
     bool need_utf8=Unicode::GetIntCodePage(CP_UTF8)<0;
     if (need_utf8)
     {
-    int	cp=add_codepage(_T("UTF-8"),CP_UTF8);
+    int cp=add_codepage(_T("UTF-8"),CP_UTF8);
     codepages[cp].length=UTF_cp_length;
     codepages[cp].convert=UTF_cp_convert;
     }
@@ -703,7 +703,7 @@ InitUnicode::InitUnicode()
     bool need_utf16 = Unicode::GetIntCodePage(CP_UTF16) < 0;
     if (need_utf16)
     {
-        int	cp = add_codepage(_T("UTF-16"), CP_UTF16);
+        int cp = add_codepage(_T("UTF-16"), CP_UTF16);
         codepages[cp].length = Unicode_cp_length;
         codepages[cp].convert = Unicode_cp_convert;
     }
@@ -712,8 +712,8 @@ InitUnicode::InitUnicode()
     {
         qsort(codepages, curcp, sizeof(struct CodePage), enc_cmp);
     }
-    //	default_cp=Unicode::GetIntCodePage(GetACP());
-    //	if (default_cp == -1)
+    // default_cp=Unicode::GetIntCodePage(GetACP());
+    // if (default_cp == -1)
     {
         default_cp = Unicode::GetIntCodePage(1251); // XXX hardcoded
     }
@@ -763,10 +763,10 @@ int   Unicode::GetCodePage(int num)
 }
 
 int   Unicode::GetIntCodePage(UINT mscp) {
-    int	i = 0, j = curcp;
+    int i = 0, j = curcp;
 
     while (i <= j) {
-        int	  m = (i + j) >> 1;
+        int   m = (i + j) >> 1;
         if (mscp < codepages[m].codepage)
             j = m - 1;
         else if (mscp > codepages[m].codepage)
@@ -794,12 +794,12 @@ static UINT   detect_encoding(const unsigned char *mbs, unsigned mblen)
     /*
     //Seriously, we need some really encode detecting code instead of GUESS
     //If you can't, just return the default code page and assume our users perfer to read their native language
-    unsigned	i,j;
-    int		enc=0;
-    int		sv,msv=0;
-    int		hist[NUMLET*NUMLET];
-    unsigned int	prev;
-    unsigned char	*lettermap;
+    unsigned i,j;
+    int  enc=0;
+    int  sv,msv=0;
+    int  hist[NUMLET*NUMLET];
+    unsigned int prev;
+    unsigned char *lettermap;
 
     for (i=0;i<NUM_BUILTIN_ENCODINGS;++i)
     {
@@ -836,8 +836,8 @@ static UINT   detect_encoding(const unsigned char *mbs, unsigned mblen)
 }
 
 int   Unicode::DetectCodePage(const char *mbs, int mblen) {
-    UINT	  cp = detect_encoding((const unsigned char *)mbs, mblen);
-    int	  lcp = GetIntCodePage(cp);
+    UINT   cp = detect_encoding((const unsigned char *)mbs, mblen);
+    int   lcp = GetIntCodePage(cp);
 
     return lcp < 0 ? GetIntCodePage(CP_1252) : lcp; // 1252 should always be present
 }
@@ -867,55 +867,55 @@ const wchar_t *Unicode::GetTable(int cp) {
     return NULL;
 }
 
-int	Unicode::MBLength(const wchar_t *wcstr, int wclen) {
+int Unicode::MBLength(const wchar_t *wcstr, int wclen) {
     return WideCharToMultiByte(CP_ACP, 0, wcstr, wclen, NULL, 0, NULL, NULL);
 }
 
-void	Unicode::ToMB(const wchar_t *wcstr, int wclen, char *mbstr, int mblen) {
+void Unicode::ToMB(const wchar_t *wcstr, int wclen, char *mbstr, int mblen) {
     WideCharToMultiByte(CP_ACP, 0, wcstr, wclen, mbstr, mblen, NULL, NULL);
 }
 
-Buffer<wchar_t>	  Unicode::ToWCbuf(int codepage, const char *mbstr, int mblen) {
-    int	len = WCLength(codepage, mbstr, mblen);
+Buffer<wchar_t>   Unicode::ToWCbuf(int codepage, const char *mbstr, int mblen) {
+    int len = WCLength(codepage, mbstr, mblen);
     Buffer<wchar_t> ret(len);
     ToWC(codepage, mbstr, mblen, ret, len);
     return ret;
 }
 
-Buffer<char>	  Unicode::ToMBbuf(const wchar_t *wcstr, int wclen) {
-    int	len = MBLength(wcstr, wclen);
-    Buffer<char>	ret(len);
+Buffer<char>   Unicode::ToMBbuf(const wchar_t *wcstr, int wclen) {
+    int len = MBLength(wcstr, wclen);
+    Buffer<char> ret(len);
     ToMB(wcstr, wclen, ret, len);
     return ret;
 }
 
-CString		  Unicode::ToCS(const wchar_t *wcstr, int wclen) {
+CString    Unicode::ToCS(const wchar_t *wcstr, int wclen) {
     return CString(wcstr, wclen);
 }
 
-Buffer<wchar_t>	  Unicode::ToWCbuf(const CString& str) {
+Buffer<wchar_t>   Unicode::ToWCbuf(const CString& str) {
     return Buffer<wchar_t>(str, str.GetLength());
 }
 
 // cstrings are implicitly nul terminated, so we can just up the size
-Buffer<wchar_t>	  Unicode::ToWCbufZ(const CString& str) {
+Buffer<wchar_t>   Unicode::ToWCbufZ(const CString& str) {
     return Buffer<wchar_t>(str, str.GetLength() + 1);
 }
 
-const wchar_t	  *Unicode::GetCodePageNameW(int num) {
+const wchar_t   *Unicode::GetCodePageNameW(int num) {
     return GetCodePageName(num);
 }
 
 Buffer<wchar_t> Unicode::Lower(const Buffer<wchar_t>& str) {
-    int	  rlen = LCMapString(LOCALE_USER_DEFAULT, LCMAP_LOWERCASE, str, str.size(), NULL, 0);
+    int   rlen = LCMapString(LOCALE_USER_DEFAULT, LCMAP_LOWERCASE, str, str.size(), NULL, 0);
     Buffer<wchar_t>   ret(rlen);
     LCMapString(LOCALE_USER_DEFAULT, LCMAP_LOWERCASE, str, str.size(), ret, ret.size());
     return ret;
 }
 
 Buffer<char>   Unicode::SortKey(LCID lcid, const wchar_t *str, int len) {
-    int	rlen = LCMapString(lcid, LCMAP_SORTKEY | NORM_IGNORECASE, str, len, NULL, 0);
-    Buffer<char>	ret(rlen);
+    int rlen = LCMapString(lcid, LCMAP_SORTKEY | NORM_IGNORECASE, str, len, NULL, 0);
+    Buffer<char> ret(rlen);
     LCMapString(lcid, LCMAP_SORTKEY | NORM_IGNORECASE, str, len, (wchar_t*)(char*)ret, rlen);
     if (rlen > 0) // don't include terminating 0
         ret.setsize(rlen - 1);
@@ -924,10 +924,10 @@ Buffer<char>   Unicode::SortKey(LCID lcid, const wchar_t *str, int len) {
 
 Buffer<char>  Unicode::ToUtf8(const CString& cs) {
     // determine length
-    int		utflen;
-    const wchar_t	*cp = cs;
-    int		i;
-    int		max = cs.GetLength();
+    int  utflen;
+    const wchar_t *cp = cs;
+    int  i;
+    int  max = cs.GetLength();
 
     for (i = utflen = 0; i < max; ++i) {
         DWORD c;
@@ -948,8 +948,8 @@ Buffer<char>  Unicode::ToUtf8(const CString& cs) {
             utflen += 4;
     }
 
-    Buffer<char>	ret(utflen);
-    char		*dp = ret;
+    Buffer<char> ret(utflen);
+    char  *dp = ret;
 
     for (i = 0; i < max; ++i) {
         DWORD c;

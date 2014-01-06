@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afx.h>
 
@@ -61,7 +61,7 @@ int CBufFile::nextbuf_ch()
 }
 
 int CBufFile::read(void *buf, int count) {
-    BYTE	  *bp = (BYTE*)buf;
+    BYTE   *bp = (BYTE*)buf;
     while (count > 0) {
         // fill in our buffer
         if (m_ptr >= m_cur->len)
@@ -70,7 +70,7 @@ int CBufFile::read(void *buf, int count) {
         if (m_ptr >= m_cur->len)
             break;
         // copy whatever is left in our buffer
-        int	  nb = m_cur->len - m_ptr;
+        int   nb = m_cur->len - m_ptr;
         if (nb > count)
             nb = count;
         memcpy(bp, m_cur->buf + m_ptr, nb);

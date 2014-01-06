@@ -37,24 +37,24 @@ public:
     CRotate() : m_hCompatDC(NULL) { SetRotAngle(0); }
     ~CRotate() { if (m_hCompatDC) ::DeleteDC(m_hCompatDC); }
 
-    void	Window2System(POINT& pt, const RECT& cli) { m_tp(pt, cli); }
-    void	Window2System(RECT& rc, const RECT& cli) { m_tr(rc, cli); }
-    void	System2Window(POINT& pt, const RECT& cli) { m_rtp(pt, cli); }
-    void	System2Window(RECT& rc, const RECT& cli);
+    void Window2System(POINT& pt, const RECT& cli) { m_tp(pt, cli); }
+    void Window2System(RECT& rc, const RECT& cli) { m_tr(rc, cli); }
+    void System2Window(POINT& pt, const RECT& cli) { m_rtp(pt, cli); }
+    void System2Window(RECT& rc, const RECT& cli);
 
-    void	SetRotAngle(int angle);
+    void SetRotAngle(int angle);
 
     // drawing services
     void  TDrawText(HDC dc, int x, int y, const RECT& cli, const RECT& r,
         const wchar_t *p, int lp, const int *dx, int flags = ETO_OPAQUE);
 
-    void	TDrawLine(HDC dc, const RECT& cli, int x1, int y1, int x2, int y2);
-    void	TDrawLine(HDC dc, const RECT& cli, const RECT& rc);
+    void TDrawLine(HDC dc, const RECT& cli, int x1, int y1, int x2, int y2);
+    void TDrawLine(HDC dc, const RECT& cli, const RECT& rc);
 
     // warning, this will transform the coordinates in place!
-    void	TDrawPolyLine(HDC dc, const RECT& cli, POINT *pt, int npt);
+    void TDrawPolyLine(HDC dc, const RECT& cli, POINT *pt, int npt);
 
-    void	TDrawBitmap(HDC dc, HBITMAP hBmp, int x, int y, int sh,
+    void TDrawBitmap(HDC dc, HBITMAP hBmp, int x, int y, int sh,
         const RECT& cli, int bmw, int bmh, int bmy);
 
 private:
@@ -62,11 +62,11 @@ private:
     typedef void(*TransformRectType)(RECT& rc, const RECT& cli);
     typedef void(*TransformPointType)(POINT& pt, const RECT& cli);
 
-    TransformRectType	m_tr;
-    TransformPointType	m_tp;
-    TransformPointType	m_rtp;
-    int			m_angle;
-    HDC			m_hCompatDC;
+    TransformRectType m_tr;
+    TransformPointType m_tp;
+    TransformPointType m_rtp;
+    int   m_angle;
+    HDC   m_hCompatDC;
 };
 
 #endif

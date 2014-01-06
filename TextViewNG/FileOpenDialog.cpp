@@ -30,7 +30,7 @@
 */
 
 #pragma warning(disable:4100)
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxcmn.h>
 
@@ -48,14 +48,14 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-#define	T_UP	0
-#define	T_DIR	1
-#define	T_FILE	2
+#define T_UP 0
+#define T_DIR 1
+#define T_FILE 2
 
 // string compare
-#define	CmpI(s1,s2) (::CompareString(LOCALE_INVARIANT, NORM_IGNORECASE, (s1), -1, (s2), -1) - 2)
+#define CmpI(s1,s2) (::CompareString(LOCALE_INVARIANT, NORM_IGNORECASE, (s1), -1, (s2), -1) - 2)
 
-CString	GetFileName(CString *filepath, CWnd *parent)
+CString GetFileName(CString *filepath, CWnd *parent)
 {
     CFileOpenDialog   dlg(parent);
 
@@ -117,11 +117,11 @@ BOOL CFileOpenDialog::OnInitDialog()
 {
     CDialog::OnInitDialog();
 
-    HWND	    hList = ::GetDlgItem(m_hWnd, IDC_FILELIST);
+    HWND     hList = ::GetDlgItem(m_hWnd, IDC_FILELIST);
     XLB_SetImageList(hList, CTVApp::ImageList()->GetSafeHandle(), true);
 
     // fill in the dialog
-    DWORD	attr = GetFileAttributes(m_path);
+    DWORD attr = GetFileAttributes(m_path);
     if (attr&FILE_ATTRIBUTE_DIRECTORY)
         FindFiles();
     else
@@ -130,7 +130,7 @@ BOOL CFileOpenDialog::OnInitDialog()
 }
 
 static int  get_file_icon(const TCHAR *name, bool inzip = false) {
-    int	l = _tcslen(name);
+    int l = _tcslen(name);
     if (l <= 4)
         return IM_FILE;
     if (!CmpI(name + l - 4, _T(".txt")) || !CmpI(name + l - 4, _T(".xml")) || !CmpI(name + l - 4, _T(".dic")))
@@ -170,14 +170,14 @@ void CFileOpenDialog::FindFiles(bool showall)
     SetDlgItemText(IDC_FILEPATH, tmppath);
 
     // fetch our control
-    HWND	      hList = ::GetDlgItem(m_hWnd, IDC_FILELIST);
+    HWND       hList = ::GetDlgItem(m_hWnd, IDC_FILELIST);
     // delete all files
     XLB_DeleteAllItems(hList);
 
     XLB_Handle  *handle = XLB_GetHandle(hList);
 
     LARGE_INTEGER   ui;
-    CString	  tmp;
+    CString   tmp;
 
     // have to handle fucking disk drives
     if (m_path.GetLength() == 0 || (m_path.GetLength() == 1 && m_path[0] == _T('\\')))
@@ -210,8 +210,8 @@ void CFileOpenDialog::FindFiles(bool showall)
 
         // now try to find files
         WIN32_FIND_DATA fd;
-        HANDLE	    fh;
-        bool	    run;
+        HANDLE     fh;
+        bool     run;
 
         fh = FindFirstFile(pat, &fd);
         run = fh != INVALID_HANDLE_VALUE;
@@ -251,7 +251,7 @@ LRESULT CFileOpenDialog::OnXClick(WPARAM wParam, LPARAM lParam)
 }
 
 void CFileOpenDialog::ActivateItem(HWND list, int item) {
-    int		type = XLB_GetData(list, item);
+    int  type = XLB_GetData(list, item);
 
     if (type == T_DIR || type == T_UP) {
         // change dir
@@ -301,7 +301,7 @@ void CFileOpenDialog::ActivateItem(HWND list, int item) {
 void CFileOpenDialog::OnSize(UINT nType, int cx, int cy)
 {
     CDialog::OnSize(nType, cx, cy);
-    RECT	  r, rc;
+    RECT   r, rc;
     GetClientRect(&r);
     rc = r;
     rc.bottom = rc.top + HIWORD(GetDialogBaseUnits()) + 5;
@@ -319,15 +319,15 @@ void CFileOpenDialog::OnSize(UINT nType, int cx, int cy)
 }
 
 void CFileOpenDialog::OnOK() {
-    HWND	  list = ::GetDlgItem(m_hWnd, IDC_FILELIST);
-    int	  item = XLB_GetSelection(list);
+    HWND   list = ::GetDlgItem(m_hWnd, IDC_FILELIST);
+    int   item = XLB_GetSelection(list);
     if (item >= 0)
         ActivateItem(list, item);
 }
 
 void CFileOpenDialog::OpenItem(const CString &path) {
     // looks like a zip file
-    CFile	      *fp = new CFile;
+    CFile       *fp = new CFile;
     CFileException  ex;
     if (!fp->Open(path, CFile::modeRead | CFile::shareDenyWrite, &ex)) {
         MessageBox(_T("Can't open zip file"), _T("Error"), MB_OK | MB_ICONERROR);

@@ -30,7 +30,7 @@
 */
 
 #pragma warning(disable:4100)
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxcmn.h>
 #include <stdarg.h>
@@ -58,10 +58,10 @@ extern "C" CLSID const CLSID_DOMDocument60 = { 0x88D96A05, 0xF192, 0x11D4, 0xA6,
 static char THIS_FILE[] = __FILE__;
 #endif
 
-#define	IPCCLASS  _T("TextViewNGIPC")
-#define	IPCLEN	  (sizeof(IPCCLASS)/sizeof(TCHAR))
+#define IPCCLASS  _T("TextViewNGIPC")
+#define IPCLEN   (sizeof(IPCCLASS)/sizeof(TCHAR))
 
-#define	REGNAME	_T("TextViewNG")
+#define REGNAME _T("TextViewNG")
 
 /////////////////////////////////////////////////////////////////////////////
 // CTVApp
@@ -114,7 +114,7 @@ BOOL CTVApp::InitInstance()
     wc.lpszClassName = IPCCLASS;
     wc.lpfnWndProc = DefWindowProc;
     RegisterClass(&wc);
-    TCHAR	szExeName[MAX_PATH] = { '\0' };
+    TCHAR szExeName[MAX_PATH] = { '\0' };
     ::GetModuleFileName(NULL, szExeName, MAX_PATH);
     CreateWindow(IPCCLASS, szExeName, WS_POPUP, 0, 0, 1, 1, pFrame->m_hWnd, NULL, wc.hInstance, NULL);
 
@@ -124,13 +124,13 @@ BOOL CTVApp::InitInstance()
 }
 
 void CTVApp::Barf(const TCHAR *format, ...) {
-    TCHAR	    buffer[2048];
+    TCHAR     buffer[2048];
     va_list   ap;
 
     va_start(ap, format);
     _vsntprintf_s(buffer, sizeof(buffer) / sizeof(buffer[0]), _TRUNCATE, format, ap);
     va_end(ap);
-    CWnd	  *wnd = AfxGetMainWnd();
+    CWnd   *wnd = AfxGetMainWnd();
     if (wnd)
         wnd->MessageBox(buffer, _T("Error"), MB_OK | MB_ICONERROR);
     else
@@ -169,20 +169,20 @@ CImageList* CTVApp::ImageList() {
 static bool  FindOtherWindow(CWinThread* pThread, LPCTSTR cmdline) {
     // WinCE: Only one application instance can be run
     HANDLE  hMuTex;
-    TCHAR	szTempName[MAX_PATH] = { '\0' }, szExeName[MAX_PATH] = { '\0' };
-    int	  i, iValue;
+    TCHAR szTempName[MAX_PATH] = { '\0' }, szExeName[MAX_PATH] = { '\0' };
+    int   i, iValue;
 
     iValue = ::GetModuleFileName(NULL, szExeName, MAX_PATH);
-    HKEY	hKey;
+    HKEY hKey;
     CString kname(_T("Software\\") REGNAME _T("\\"));
-    TCHAR	  *exp = szExeName + iValue;
+    TCHAR   *exp = szExeName + iValue;
     while (exp > szExeName && exp[-1] != _T('/') && exp[-1] != _T('\\'))
         --exp;
     kname += exp;
     if (kname.Right(4).CompareNoCase(_T(".exe")) == 0)
         kname = kname.Left(kname.GetLength() - 4);
     kname += _T("\\Parameters");
-    bool	allow = false;
+    bool allow = false;
     if (::RegOpenKeyEx(HKEY_CURRENT_USER, kname, 0, HR_REG_PERM, &hKey) == ERROR_SUCCESS) {
         DWORD   type;
         DWORD   val = 0;
@@ -212,7 +212,7 @@ static bool  FindOtherWindow(CWinThread* pThread, LPCTSTR cmdline) {
             if (hFrame)
             {
                 if (cmdline && cmdline[0]) {
-                    COPYDATASTRUCT	  cd;
+                    COPYDATASTRUCT   cd;
                     cd.dwData = 0;
                     // force the filename to unicode
                     cd.cbData = wcslen(cmdline)*sizeof(wchar_t);
@@ -230,10 +230,10 @@ static bool  FindOtherWindow(CWinThread* pThread, LPCTSTR cmdline) {
 int AFXAPI AfxWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
 #if defined(_DEBUG) && defined(_CRT_WARN)
-    int	dbgflag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+    int dbgflag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
     dbgflag |= _CRTDBG_ALLOC_MEM_DF | _CRTDBG_DELAY_FREE_MEM_DF | _CRTDBG_LEAK_CHECK_DF;
     _CrtSetDbgFlag(dbgflag);
-    HANDLE	  hReport = CreateFile(_T("crtreport.txt"), GENERIC_READ | GENERIC_WRITE,
+    HANDLE   hReport = CreateFile(_T("crtreport.txt"), GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_READ, NULL, CREATE_ALWAYS, 0, NULL);
     _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
     _CrtSetReportFile(_CRT_WARN, hReport);

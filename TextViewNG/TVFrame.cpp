@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxcmn.h>
 #include <afxtempl.h>
@@ -57,9 +57,9 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-#define	MSG_OPEN_FILE (WM_APP+1)
+#define MSG_OPEN_FILE (WM_APP+1)
 
-#define	MAXTTSIZE     128
+#define MAXTTSIZE     128
 
 /////////////////////////////////////////////////////////////////////////////
 // CTVFrame
@@ -135,7 +135,7 @@ int CTVFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
     GetWindowRect(&m_normsize);
 
     m_recent = CreatePopupMenu();
-    CMenu	*main = new CMenu;
+    CMenu *main = new CMenu;
     if (main) {
         main->LoadMenu(IDR_MAINFRAME);
         CMenu   *sub = main->GetSubMenu(0);
@@ -149,7 +149,7 @@ int CTVFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 }
 
 void  CTVFrame::InitWindowPos(int nCmdShow) {
-    UINT	  sz;
+    UINT   sz;
     LPBYTE  buffer = NULL;
     if (AfxGetApp()->GetProfileBinary(_T("Parameters"), _T("WindowPos"), &buffer, &sz) &&
         sz == sizeof(m_wndpos) && buffer)
@@ -258,7 +258,7 @@ void CTVFrame::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 bool  CTVFrame::TryOpenFile(CString& filename) {
     if (filename.GetLength() > 0) {
         // selected some file
-        TextFile	*tf = TextFile::Open(filename);
+        TextFile *tf = TextFile::Open(filename);
         if (tf == NULL && filename.GetLength() > 2 && filename[0] == _T('"') &&
             filename[filename.GetLength() - 1] == _T('"'))
         {
@@ -322,7 +322,7 @@ bool  CTVFrame::InitView() {
     bool dictmode = false;
     // initialize xml parser
     //XMLParser::LoadStyles();
-    bool	triednoquote = false;
+    bool triednoquote = false;
     CString filename(AfxGetApp()->m_lpCmdLine);
     if (filename == _T("-d")) // show dictionary
     {
@@ -371,7 +371,7 @@ bool  CTVFrame::InitView() {
         }
     }
     // replace a dummy view with a real one
-    HWND	  wnd = m_wndView->Detach();
+    HWND   wnd = m_wndView->Detach();
     CTView  *tv = new CTView;
     tv->Attach(wnd);
     tv->Init();
@@ -389,7 +389,7 @@ void CTVFrame::OnInitView() {
 }
 
 void  CTVFrame::UpdateRecentFiles(CMenu *menu) {
-    FILETIME	tm;
+    FILETIME tm;
     m_recentlist.RemoveAll();
     Bookmarks::get_recent_files(m_recentlist, RECENT_FILES, tm);
     if (tm.dwLowDateTime != m_toptime.dwLowDateTime || tm.dwHighDateTime != m_toptime.dwHighDateTime) {
@@ -424,7 +424,7 @@ void  CTVFrame::OnUpdateRecentFile(CCmdUI *pCmdUI) {
 
 void  CTVFrame::OnRecentFile(UINT cmd) {
     if (cmd - RECENT_BASE < (UINT)m_recentlist.GetSize()) {
-        TextFile	*tf = TextFile::Open(m_recentlist[cmd - RECENT_BASE]);
+        TextFile *tf = TextFile::Open(m_recentlist[cmd - RECENT_BASE]);
         if (tf) {
             if (m_realview) {
                 auto_ptr<TextFile> text(tf);
@@ -462,7 +462,7 @@ BOOL CTVFrame::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult) {
 
     if (tn->hdr.code == TBN_BEGINDRAG) {
         // abuse the notification to show a popup menu
-        int	    sm = -1;
+        int     sm = -1;
         switch (tn->iItem) {
         case ID_MAIN_TOOLS:
             sm = 0;
@@ -529,8 +529,8 @@ BOOL CTVFrame::OnEraseBkgnd(CDC* pDC) {
 /////////////////////////////////////////////////////
 // some hires support
 static int   getDPI() {
-    HDC	hDC = CreateDC(_T("DISPLAY"), NULL, NULL, NULL);
-    int	dpi = GetDeviceCaps(hDC, LOGPIXELSY);
+    HDC hDC = CreateDC(_T("DISPLAY"), NULL, NULL, NULL);
+    int dpi = GetDeviceCaps(hDC, LOGPIXELSY);
     DeleteDC(hDC);
     return dpi;
 }

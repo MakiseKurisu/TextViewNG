@@ -30,7 +30,7 @@
 */
 
 #pragma warning(disable:4100)
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxext.h>
 
@@ -226,7 +226,7 @@ BOOL COptionsDialog::OnInitDialog()
     SendDlgItemMessage(IDC_CLEARTYPE, CB_ADDSTRING, 0, (LPARAM)_T("Standard"));
 
     // resize the input window
-    RECT	  rface, rsize, rspin;
+    RECT   rface, rsize, rspin;
     GetDlgItem(IDC_FACE)->GetWindowRect(&rface);
     GetDlgItem(IDC_FONTSIZE)->GetWindowRect(&rsize);
     GetDlgItem(IDC_SIZESPIN)->GetWindowRect(&rspin);

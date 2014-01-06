@@ -63,7 +63,7 @@ private:
         FilePos   ref;
         FilePos   text_ref;
         DWORD     flags;
-        int	      level;
+        int       level;
         CString   *tmp;
     };
 public:
@@ -71,62 +71,62 @@ public:
     ~Bookmarks();
 
     // access
-    int	GetSize() { return m_bmk.GetSize(); }
-    int	Level(int idx) { return m_bmk[idx].level; }
-    int	Flags(int idx) { return m_bmk[idx].flags; }
+    int GetSize() { return m_bmk.GetSize(); }
+    int Level(int idx) { return m_bmk[idx].level; }
+    int Flags(int idx) { return m_bmk[idx].flags; }
     FilePos Ref(int idx) { return m_bmk[idx].ref; }
     CString Text(int idx, TextFile *parser);
 
     // modification
-    int	Add(const CString& text, FilePos pos) { return AddImp(0, 0, 0, &text, pos, BMK, -1); }
-    int	AddTocEnt(int para_start, int para_count, int docid, FilePos pos, int level) {
+    int Add(const CString& text, FilePos pos) { return AddImp(0, 0, 0, &text, pos, BMK, -1); }
+    int AddTocEnt(int para_start, int para_count, int docid, FilePos pos, int level) {
         return AddImp(para_start, para_count, docid, NULL, pos, 0, level);
     }
-    void	Remove(int index);
-    void	Change(int index, const CString& text);
-    int	Commit(int cidx);
-    void	Rollback();
+    void Remove(int index);
+    void Change(int index, const CString& text);
+    int Commit(int cidx);
+    void Rollback();
 
-    int	UserBookmarks();
+    int UserBookmarks();
 
-    int	Encoding() { return m_encoding; }
-    int	Format() { return m_format; }
+    int Encoding() { return m_encoding; }
+    int Format() { return m_format; }
     FilePos StartPos() { return m_startpos; }
-    void	SetFormat(int fmt) { if (m_format != fmt) m_changed = true; m_format = fmt; }
-    void	SetEncoding(int enc) { if (m_encoding != enc) m_changed = true; m_encoding = enc; }
-    void	SetStartPos(FilePos p) { if (p != m_startpos) m_changed = true; m_startpos = p; }
-    int	BFind(FilePos p, int type);
-    bool	BookmarksInRange(FilePos start, FilePos end);
-    bool	BookmarkFind(FilePos& start, FilePos end);
+    void SetFormat(int fmt) { if (m_format != fmt) m_changed = true; m_format = fmt; }
+    void SetEncoding(int enc) { if (m_encoding != enc) m_changed = true; m_encoding = enc; }
+    void SetStartPos(FilePos p) { if (p != m_startpos) m_changed = true; m_startpos = p; }
+    int BFind(FilePos p, int type);
+    bool BookmarksInRange(FilePos start, FilePos end);
+    bool BookmarkFind(FilePos& start, FilePos end);
 
-    void	SaveToRegistry();
-    void	LoadFromRegistry();
-    static void	CleanupRegistry(int max_count);
-    bool	SaveInfo();
+    void SaveToRegistry();
+    void LoadFromRegistry();
+    static void CleanupRegistry(int max_count);
+    bool SaveInfo();
 
     static CString  find_last_file();
-    static void	  get_recent_files(CStringArray& fl, int num, FILETIME& toptime);
+    static void   get_recent_files(CStringArray& fl, int num, FILETIME& toptime);
 
-    void	NormalizeLevels();
-    int	NumTopMarks() { return m_topbmk; }
-    int	NumBookmarks() { return m_ubmk; }
+    void NormalizeLevels();
+    int NumTopMarks() { return m_topbmk; }
+    int NumBookmarks() { return m_ubmk; }
 
     // export/import
-    static bool	  ExportAllBookmarks(const CString& destfile);
+    static bool   ExportAllBookmarks(const CString& destfile);
 
 private:
     CArray<BE, BE&>  m_bmk;
-    int		  m_format;
-    int		  m_encoding;
-    FilePos	  m_startpos;
-    CString	  m_filename;
-    CString	  m_shortname;
-    bool		  m_changed;
-    int		  m_topbmk;
-    int		  m_ubmk;
+    int    m_format;
+    int    m_encoding;
+    FilePos   m_startpos;
+    CString   m_filename;
+    CString   m_shortname;
+    bool    m_changed;
+    int    m_topbmk;
+    int    m_ubmk;
 
-    void		  Check(int index) { ASSERT(index >= 0 && index < m_bmk.GetSize()); }
-    int		  AddImp(int para_start, int para_count, int docid,
+    void    Check(int index) { ASSERT(index >= 0 && index < m_bmk.GetSize()); }
+    int    AddImp(int para_start, int para_count, int docid,
         const CString *text,
         FilePos pos, DWORD flags, int level);
 };

@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxwin.h>
 #include <afxtempl.h>
@@ -74,14 +74,14 @@ void TextFile::SaveBookmarks(FilePos cur) {
         m_bookmarks.SaveToRegistry();
 }
 
-void	      TextFile::SetFormatEncodingImp(int format, int enc, Bookmarks *bmk) {
+void       TextFile::SetFormatEncodingImp(int format, int enc, Bookmarks *bmk) {
     TextParser  *np = NULL;
-    CProgressDlg	  dlg(Name(), AfxGetMainWnd());
+    CProgressDlg   dlg(Name(), AfxGetMainWnd());
 
     dlg.SetMax(m_fp->size());
     if (format < 0) {
         m_fp->seek(0);
-        int	    nf = TextParser::DetectFormat(m_fp.get());
+        int     nf = TextParser::DetectFormat(m_fp.get());
         np = TextParser::Create(&dlg, m_fp.get(), nf, enc, bmk);
     }
     else {
@@ -100,9 +100,9 @@ void	      TextFile::SetFormatEncodingImp(int format, int enc, Bookmarks *bmk) {
     m_bookmarks.SetEncoding(m_enc);
 }
 
-void	      TextFile::Reparse() {
+void       TextFile::Reparse() {
     TextParser  *np = NULL;
-    CProgressDlg	  dlg(Name(), AfxGetMainWnd());
+    CProgressDlg   dlg(Name(), AfxGetMainWnd());
 
     dlg.SetMax(m_fp->size());
     int fmt = m_format < 0 ? m_tp->GetFormat() : m_format;
@@ -125,21 +125,21 @@ public:
     DummyRFile() : RFile(CString()) { }
 
     // generic file operations
-    virtual DWORD	  size() { return 0; }
-    virtual DWORD	  read(void *buf) { return 0; }
-    virtual void	  seek(DWORD pos) { }
+    virtual DWORD   size() { return 0; }
+    virtual DWORD   read(void *buf) { return 0; }
+    virtual void   seek(DWORD pos) { }
 };
 
 TextFile      *TextFile::Open(const CString& filename) {
     auto_ptr<RFile> fp;
-    CString	  cur(filename);
-    bool		  zip = false;
-    RFile		  *rf = NULL;
+    CString   cur(filename);
+    bool    zip = false;
+    RFile    *rf = NULL;
 
     CString   FILENAME;
     // normalize filename
     TCHAR   buffer[MAX_PATH], *filepart;
-    DWORD	  nc = GetFullPathName(cur, sizeof(buffer) / sizeof(TCHAR), buffer, &filepart);
+    DWORD   nc = GetFullPathName(cur, sizeof(buffer) / sizeof(TCHAR), buffer, &filepart);
     if (nc > 0 && nc < sizeof(buffer) / sizeof(TCHAR))
         FILENAME = buffer;
     else

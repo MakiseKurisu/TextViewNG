@@ -36,15 +36,15 @@
 #include <ctype.h>
 #include "xscanf.h"
 
-#define	MAXARGS	  8
+#define MAXARGS   8
 
 static int    Integer(const wchar_t **str, const wchar_t *end, int *val,
     int *argv, int argc)
 {
-    const wchar_t	  *p = *str;
-    int		  iv = 0;
-    int		  sign = 0;
-    bool		  range = true;
+    const wchar_t   *p = *str;
+    int    iv = 0;
+    int    sign = 0;
+    bool    range = true;
 
     if (argc > 1 && argv[0] >= argv[1])
         range = false;
@@ -79,7 +79,7 @@ static int    Integer(const wchar_t **str, const wchar_t *end, int *val,
 static int    String(const wchar_t **str, const wchar_t *end, void *dstr,
     bool alloc, int delim, int *argv, int argc)
 {
-    const wchar_t	  *p = *str;
+    const wchar_t   *p = *str;
 
     // find end of string
     if (delim == L' ') {
@@ -90,7 +90,7 @@ static int    String(const wchar_t **str, const wchar_t *end, void *dstr,
         while (p < end && *p != delim)
             ++p;
     }
-    int	    length = p - *str;
+    int     length = p - *str;
     wchar_t   *dest = (wchar_t*)dstr;
     // allocate storage if needed
     if (alloc) {
@@ -104,18 +104,18 @@ static int    String(const wchar_t **str, const wchar_t *end, void *dstr,
     return 0;
 }
 
-int	Scan::vxscanf(const wchar_t *str, int len, const wchar_t *format,
+int Scan::vxscanf(const wchar_t *str, int len, const wchar_t *format,
     int *chars, int *fields, va_list args)
 {
-    const wchar_t	  *startstr = str;
-    const wchar_t	  *endstr = str + len;
+    const wchar_t   *startstr = str;
+    const wchar_t   *endstr = str + len;
 
-    int		  fieldnum = 0;
-    int		  error = 0;
+    int    fieldnum = 0;
+    int    error = 0;
 
-    int		  fmt_args[MAXARGS];
-    int		  num_fmt_args, cur_fmt_arg, seen_arg_char, arg_sign;
-    wchar_t	  fmt_char;
+    int    fmt_args[MAXARGS];
+    int    num_fmt_args, cur_fmt_arg, seen_arg_char, arg_sign;
+    wchar_t   fmt_char;
 
     while (*format && str < endstr)
         switch (*format) {
@@ -211,12 +211,12 @@ format_error:
     goto out;
 }
 
-int	Scan::xscanf(const wchar_t *str, int len, const wchar_t *format,
+int Scan::xscanf(const wchar_t *str, int len, const wchar_t *format,
     int *chars, int *fields, ...)
 {
     va_list   ap;
     va_start(ap, fields);
-    int	ret = vxscanf(str, len, format, chars, fields, ap);
+    int ret = vxscanf(str, len, format, chars, fields, ap);
     va_end(ap);
     return ret;
 }

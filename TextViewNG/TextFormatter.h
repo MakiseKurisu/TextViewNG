@@ -41,17 +41,17 @@
 
 struct Line {
     Buffer<wchar_t> str;
-    Buffer<Attr>	attr;
-    Buffer<int>	dx;
-    FilePos	pos;
-    DWORD		flags;
-    int		ispace;
-    int		height;
-    int		base;
-    int		real_len; // not including last '-'
-    const wchar_t	*href; // only valid for images
-    int		yoffset; // vertical offset in image
-    int		imageheight;
+    Buffer<Attr> attr;
+    Buffer<int> dx;
+    FilePos pos;
+    DWORD  flags;
+    int  ispace;
+    int  height;
+    int  base;
+    int  real_len; // not including last '-'
+    const wchar_t *href; // only valid for images
+    int  yoffset; // vertical offset in image
+    int  imageheight;
     enum {
         first = 1,
         last = 2,
@@ -106,60 +106,60 @@ class TextFormatter
     FilePos     m_top;
     FilePos     m_bot;
     TextFile    *m_tf;
-    int	      m_width;
-    int	      m_total_width;
-    int	      m_margin;
-    int	      m_height;
-    int	      m_pages;
+    int       m_width;
+    int       m_total_width;
+    int       m_margin;
+    int       m_height;
+    int       m_pages;
     CUIntArray  m_pagelen;
     LineArray   m_lines;
-    bool	      m_justified;
-    bool	      m_hyphenate;
+    bool       m_justified;
+    bool       m_hyphenate;
     FilePos     m_hlstart;
-    int	      m_hllen;
-    int	      m_angle;
+    int       m_hllen;
+    int       m_angle;
 
-    Line	      m_junk;
+    Line       m_junk;
 
-    void	      GetTextExtent(CFDC& dc, Paragraph& line, int off, int width, int& nch, int *dx, int& lh, int& lbase);
+    void       GetTextExtent(CFDC& dc, Paragraph& line, int off, int width, int& nch, int *dx, int& lh, int& lbase);
 
-    int	      WrapLine(CFDC& dc, Paragraph& line, FilePos& pos, LineArray& la,
+    int       WrapLine(CFDC& dc, Paragraph& line, FilePos& pos, LineArray& la,
         int top, int maxl);
-    int	      WrapImage(CFDC& dc, Paragraph& line, FilePos& pos, LineArray& la,
+    int       WrapImage(CFDC& dc, Paragraph& line, FilePos& pos, LineArray& la,
         int top, int maxl);
-    void	      Highlight();
+    void       Highlight();
 public:
     TextFormatter(TextFile *tf);
     ~TextFormatter() { }
     const Line& GetLine(int num) { return m_lines[num]; }
-    bool	      FormatFwd(CFDC& dc) { return FormatFwd(dc, m_bot); }
-    bool	      FormatFwd(CFDC& dc, FilePos start);
-    bool	      FormatFwdAdj(CFDC& dc);
-    bool	      FormatBack(CFDC& dc) { return FormatBack(dc, m_top, FilePos()); }
-    bool	      FormatBack(CFDC& dc, FilePos start, FilePos prev_top);
-    void	      FormatPlainText(CFDC& dc,
+    bool       FormatFwd(CFDC& dc) { return FormatFwd(dc, m_bot); }
+    bool       FormatFwd(CFDC& dc, FilePos start);
+    bool       FormatFwdAdj(CFDC& dc);
+    bool       FormatBack(CFDC& dc) { return FormatBack(dc, m_top, FilePos()); }
+    bool       FormatBack(CFDC& dc, FilePos start, FilePos prev_top);
+    void       FormatPlainText(CFDC& dc,
         int& width, int& height,
         int fontsize,
         const wchar_t *text, int len,
         LineArray& lines);
-    bool	      EnsureVisible(CFDC& dc, FilePos pos);
-    void	      AdjustPos(FilePos& p, bool back = false);
-    void	      SetJustified(bool j = false) { m_justified = j; }
-    void	      SetHyphenate(bool h = false) { m_hyphenate = h; }
-    void	      SetSize(int width, int margin, int height, int pages, int angle);
+    bool       EnsureVisible(CFDC& dc, FilePos pos);
+    void       AdjustPos(FilePos& p, bool back = false);
+    void       SetJustified(bool j = false) { m_justified = j; }
+    void       SetHyphenate(bool h = false) { m_hyphenate = h; }
+    void       SetSize(int width, int margin, int height, int pages, int angle);
     FilePos     Top() { return m_top; }
     FilePos     Bottom() { return m_bot; }
     FilePos     Eof() { return FilePos(m_tf->Length(m_top.docid), 0, m_top.docid); }
     FilePos     Sof() { return FilePos(0, 0, m_top.docid); }
-    int	      DocId() { return m_top.docid; }
-    bool	      AtEof();
-    bool	      AtTop();
-    void	      SetTop(FilePos pos);
-    void	      Reformat(CFDC& dc) { FormatFwd(dc, m_top); }
-    bool	      SetHighlight(FilePos pos, int len);
-    int	      Length() { return m_lines.GetSize() - 1; } // number of formatted lines
-    int	      PageLength(int i) { return i >= 0 && i < m_pagelen.GetSize() ? m_pagelen[i] : 0; }
-    int	      Distance(const FilePos& a, const FilePos& b);
+    int       DocId() { return m_top.docid; }
+    bool       AtEof();
+    bool       AtTop();
+    void       SetTop(FilePos pos);
+    void       Reformat(CFDC& dc) { FormatFwd(dc, m_top); }
+    bool       SetHighlight(FilePos pos, int len);
+    int       Length() { return m_lines.GetSize() - 1; } // number of formatted lines
+    int       PageLength(int i) { return i >= 0 && i < m_pagelen.GetSize() ? m_pagelen[i] : 0; }
+    int       Distance(const FilePos& a, const FilePos& b);
 };
 
 #endif // !defined(AFX_TEXTFORMATTER_H__F50D0A58_8D9D_4FD7_B2B5_747AD7ADE317__INCLUDED_)

@@ -39,15 +39,15 @@ class StrBuf {
     };
     struct Block {
         wchar_t   *data;
-        int	      cur;
-        int	      max;
+        int       cur;
+        int       max;
     };
-    Block	      *m_blocks;
-    int	      m_cblk;
-    int	      m_numblk;
+    Block       *m_blocks;
+    int       m_cblk;
+    int       m_numblk;
     HANDLE      m_heap;
-    int	      m_blocksize;
-    bool	      m_freemem;
+    int       m_blocksize;
+    bool       m_freemem;
 public:
     StrBuf(HANDLE heap, bool release_mem = false, int bsz = 4096) : m_blocks(0),
         m_cblk(-1), m_numblk(0), m_heap(heap), m_blocksize(bsz),
@@ -59,7 +59,7 @@ public:
         memcpy(space, str, char_length*sizeof(wchar_t));
         return space;
     }
-    void	    RemoveAll();
+    void     RemoveAll();
 };
 
 #endif

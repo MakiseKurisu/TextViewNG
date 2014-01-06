@@ -48,7 +48,7 @@ public:
     enum {
         NO_ITEM = -1000000, // less than that number of subdocuments
     };
-    int	m_index;
+    int m_index;
 
     // Dialog Data
     //{{AFX_DATA(CContentsDlg)

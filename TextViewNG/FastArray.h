@@ -34,32 +34,32 @@
 
 class FastArrayImp {
 protected:
-    HANDLE	m_heap;
-    unsigned	m_item_size;
-    char		**m_chunks;
-    unsigned	m_nchunks;
+    HANDLE m_heap;
+    unsigned m_item_size;
+    char  **m_chunks;
+    unsigned m_nchunks;
     enum {
         CHUNK_BITS = 10,    // 1<<10 items per chunk
         CHUNK_ITEMS = 1 << CHUNK_BITS,
         CHUNK_MASK = CHUNK_ITEMS - 1
     };
-    unsigned	m_curchunk;
-    unsigned	m_chunkptr;
-    bool		m_dofree;
+    unsigned m_curchunk;
+    unsigned m_chunkptr;
+    bool  m_dofree;
 
     FastArrayImp(unsigned item_size, HANDLE heap, bool dofree);
     ~FastArrayImp();
-    void		*Get() {
+    void  *Get() {
         if (m_chunkptr < CHUNK_ITEMS)
             return m_chunks[m_curchunk] + m_item_size*m_chunkptr++;
         return SlowGet();
     }
-    int		Size() { return (m_curchunk << CHUNK_BITS) + m_chunkptr; }
-    void		*Item(unsigned ii) {
+    int  Size() { return (m_curchunk << CHUNK_BITS) + m_chunkptr; }
+    void  *Item(unsigned ii) {
         return m_chunks[ii >> CHUNK_BITS] + m_item_size*(ii&CHUNK_MASK);
     }
-    void		*SlowGet();
-    void		RemoveAll() { m_chunkptr = m_curchunk = 0; }
+    void  *SlowGet();
+    void  RemoveAll() { m_chunkptr = m_curchunk = 0; }
 };
 
 // WARNING: this is intended for use with structures _without_ constructors and
@@ -69,12 +69,12 @@ class FastArray : public FastArrayImp {
 public:
     FastArray(HANDLE heap, bool dofree = false) : FastArrayImp(sizeof(T), heap, dofree) { }
 
-    T		*Get() { return (T*)FastArrayImp::Get(); }
-    T&		operator [](int ii) { return *(T*)FastArrayImp::Item(ii); }
-    int		GetSize() { return Size(); }
-    void		Add(T& tt) { memcpy(Get(), &tt, sizeof(T)); }
+    T  *Get() { return (T*)FastArrayImp::Get(); }
+    T&  operator [](int ii) { return *(T*)FastArrayImp::Item(ii); }
+    int  GetSize() { return Size(); }
+    void  Add(T& tt) { memcpy(Get(), &tt, sizeof(T)); }
     // does _not_ release memory
-    void		RemoveAll() { FastArrayImp::RemoveAll(); }
+    void  RemoveAll() { FastArrayImp::RemoveAll(); }
 };
 
 #endif

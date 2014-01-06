@@ -5,9 +5,9 @@
 
 #include <commctrl.h>
 // for MenuBar
-#define I_IMAGENONE		(-2)
-#define NOMENU			0xFFFF
-#define IDS_SHNEW		1
+#define I_IMAGENONE  (-2)
+#define NOMENU   0xFFFF
+#define IDS_SHNEW  1
 #define IDM_SHAREDNEW        10
 #define IDM_SHAREDNEWDEFAULT 11
 

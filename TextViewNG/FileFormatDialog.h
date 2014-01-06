@@ -51,9 +51,9 @@ public:
     // Dialog Data
     //{{AFX_DATA(CFileFormatDialog)
     enum { IDD = IDD_FILEFORMAT };
-    int		m_encoding;
-    int		m_format;
-    int		m_defencoding;
+    int  m_encoding;
+    int  m_format;
+    int  m_defencoding;
     //}}AFX_DATA
 
 

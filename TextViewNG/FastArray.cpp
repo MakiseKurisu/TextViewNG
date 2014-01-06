@@ -29,14 +29,14 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afx.h>
 
 #include "FastArray.h"
 
-#define	START_CHUNKS	16
-#define	CHUNKS_INC	16
+#define START_CHUNKS 16
+#define CHUNKS_INC 16
 
 FastArrayImp::FastArrayImp(unsigned item_size, HANDLE heap, bool dofree) :
 m_item_size(item_size), m_heap(heap), m_dofree(dofree)
@@ -63,7 +63,7 @@ FastArrayImp::~FastArrayImp() {
     }
 }
 
-void	*FastArrayImp::SlowGet() {
+void *FastArrayImp::SlowGet() {
     if (++m_curchunk >= m_nchunks) {
         m_nchunks += CHUNKS_INC;
         m_chunks = (char**)HeapReAlloc(m_heap, HEAP_NO_SERIALIZE | HEAP_ZERO_MEMORY, (void*)m_chunks, sizeof(char*)*m_nchunks);

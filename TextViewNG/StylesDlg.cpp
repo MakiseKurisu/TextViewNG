@@ -30,7 +30,7 @@
 */
 
 #pragma warning(disable:4100)
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxext.h>
 #include <afxtempl.h>
@@ -46,8 +46,8 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-#define	MINFSIZE    -5
-#define	MAXFSIZE    +10
+#define MINFSIZE    -5
+#define MAXFSIZE    +10
 
 /////////////////////////////////////////////////////////////////////////////
 // CStylesDlg dialog
@@ -103,9 +103,9 @@ static const TCHAR  *g_colors[] = {
 };
 
 static struct {
-    BYTE	  fmt;
+    BYTE   fmt;
     const TCHAR *name;
-}		    g_align[] = {
+}      g_align[] = {
     { 0, _T("Default") },
     //{ Paragraph::right, _T("Right") },
     //{ Paragraph::center, _T("Center") },
@@ -119,7 +119,7 @@ BOOL CStylesDlg::OnInitDialog()
     CDialog::OnInitDialog();
 
     // fill in comboboxes
-    int	i;
+    int i;
     for (i = MINFSIZE; i <= MAXFSIZE; ++i) {
         CString tmp;
         tmp.Format(_T("%+d"), i);

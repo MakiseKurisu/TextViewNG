@@ -29,70 +29,70 @@
 *
 */
 
-#ifndef	UNICODE_H
-#define	UNICODE_H
+#ifndef UNICODE_H
+#define UNICODE_H
 
-#ifndef	CP_UTF8
+#ifndef CP_UTF8
 #define CP_UTF8 65001
 #endif
 
-#ifndef	CP_UTF16
+#ifndef CP_UTF16
 #define CP_UTF16 1200
 #endif
 
 #ifndef CP_1252
-#define	CP_1252 1252
+#define CP_1252 1252
 #endif
 
 class Unicode {
 public:
     // conversion to unicode
-    static int				WCLength(int codepage, const char *mbstr, int mblen);
-    static void				ToWC(int codepage, const char *mbstr, int mblen, wchar_t *wcstr, int wclen);
+    static int    WCLength(int codepage, const char *mbstr, int mblen);
+    static void    ToWC(int codepage, const char *mbstr, int mblen, wchar_t *wcstr, int wclen);
 
     // conversion to system default codepage
-    static int				MBLength(const wchar_t *wcstr, int wclen);
-    static void				ToMB(const wchar_t *wcstr, int wclen, char *mbstr, int mblen);
+    static int    MBLength(const wchar_t *wcstr, int wclen);
+    static void    ToMB(const wchar_t *wcstr, int wclen, char *mbstr, int mblen);
 
     // utf8
-    static Buffer<char>		ToUtf8(const CString& cs);
+    static Buffer<char>  ToUtf8(const CString& cs);
 
     // convenience functions
-    static Buffer<wchar_t>	ToWCbuf(int codepage, const char *mbstr, int mblen);
-    static Buffer<char>		ToMBbuf(const wchar_t *wcstr, int wclen);
+    static Buffer<wchar_t> ToWCbuf(int codepage, const char *mbstr, int mblen);
+    static Buffer<char>  ToMBbuf(const wchar_t *wcstr, int wclen);
 
     // MFC interface
-    static CString			ToCS(const wchar_t *wcstr, int wclen);
-    static CString			ToCS(const Buffer<wchar_t>& wcbuf) {
+    static CString   ToCS(const wchar_t *wcstr, int wclen);
+    static CString   ToCS(const Buffer<wchar_t>& wcbuf) {
         return ToCS(wcbuf, wcbuf.size());
     }
-    static CString			ToCS(int codepage, const char *mbstr, int mblen) {
+    static CString   ToCS(int codepage, const char *mbstr, int mblen) {
         return ToCS(ToWCbuf(codepage, mbstr, mblen));
     }
 
-    static Buffer<wchar_t>	ToWCbuf(const CString& str);
-    static Buffer<wchar_t>	ToWCbufZ(const CString& str);
+    static Buffer<wchar_t> ToWCbuf(const CString& str);
+    static Buffer<wchar_t> ToWCbufZ(const CString& str);
 
     // codepages support
-    static int				GetNumCodePages();
-    static const TCHAR		*GetCodePageName(int num);
-    static const wchar_t	*GetCodePageNameW(int num);
-    static int				GetCodePage(int num);
-    static int				GetIntCodePage(UINT mscp);
-    static UINT				GetMSCodePage(int cp);
-    static int				FindCodePage(const TCHAR *name);
-    static int				DefaultCodePage();
-    static const wchar_t	*GetTable(int cp); // only for builtin encodings
+    static int    GetNumCodePages();
+    static const TCHAR  *GetCodePageName(int num);
+    static const wchar_t *GetCodePageNameW(int num);
+    static int    GetCodePage(int num);
+    static int    GetIntCodePage(UINT mscp);
+    static UINT    GetMSCodePage(int cp);
+    static int    FindCodePage(const TCHAR *name);
+    static int    DefaultCodePage();
+    static const wchar_t *GetTable(int cp); // only for builtin encodings
 
     // codepage detection
-    static int				DetectCodePage(const char *mbstr, int mblen);
+    static int    DetectCodePage(const char *mbstr, int mblen);
 
     // case conversion
-    static Buffer<wchar_t>	Lower(const Buffer<wchar_t>& str);
+    static Buffer<wchar_t> Lower(const Buffer<wchar_t>& str);
 
     // sortkey generation
-    static Buffer<char>		SortKey(LCID lcid, const wchar_t *str, int len);
-    static Buffer<char>		SortKey(LCID lcid, const wchar_t *str) {
+    static Buffer<char>  SortKey(LCID lcid, const wchar_t *str, int len);
+    static Buffer<char>  SortKey(LCID lcid, const wchar_t *str) {
         return SortKey(lcid, str, wcslen(str));
     }
 };

@@ -58,12 +58,12 @@ protected:
     // Implementation
 public:
     virtual ~CTView();
-    void	  Init();
+    void   Init();
 
     // painting aid
     struct IGetLine {
-        virtual int		  Length() = 0;
-        virtual const Line&	  At(int pos) = 0;
+        virtual int    Length() = 0;
+        virtual const Line&   At(int pos) = 0;
     };
 
 protected:
@@ -78,36 +78,36 @@ protected:
 
     // text appearence (font, margins)
     struct xx_TextDisp {
-        int		    fontsize;
-        bool	    bold;
-        int		    cleartype;
-        CString	    fontface;
-        int		    margin_width;
-        bool	    justify;
-        bool	    hyphenate;
-        int		    angle;
+        int      fontsize;
+        bool     bold;
+        int      cleartype;
+        CString     fontface;
+        int      margin_width;
+        bool     justify;
+        bool     hyphenate;
+        int      angle;
 
         xx_TextDisp() { LoadSettings(); }
-        void	    SetFont(const CString& face, bool pbold, int size, int pct);
-        void	    SaveSettings();
-        void	    LoadSettings();
-        void	    SetDefFont();
+        void     SetFont(const CString& face, bool pbold, int size, int pct);
+        void     SaveSettings();
+        void     LoadSettings();
+        void     SetDefFont();
     } m_TextDisp;
 
     // window size, transforms
     struct xx_Window {
-        int		    width;
-        int		    height;
-        int		    rwidth;
-        int		    rheight;
-        int		    columns;
-        RECT	    cli;
-        int		    progress_height;
-        bool	    showprog;
-        bool	    progoverride;
-        bool	    rotbuttons;
-        bool	    autorepeatlimit;
-        DWORD	    lastkeypress;
+        int      width;
+        int      height;
+        int      rwidth;
+        int      rheight;
+        int      columns;
+        RECT     cli;
+        int      progress_height;
+        bool     showprog;
+        bool     progoverride;
+        bool     rotbuttons;
+        bool     autorepeatlimit;
+        DWORD     lastkeypress;
 
         union {
             struct {
@@ -129,23 +129,23 @@ protected:
             int  top, cc;
             CString title;
         } pd;
-        int		    pb_width;
-        UINT	    pd_timer;
+        int      pb_width;
+        UINT     pd_timer;
 
         xx_Window() : width(1), progress_height(0), pb_width(0), pd_timer(0), rwidth(1), progoverride(true) { LoadSettings(); }
-        void	    LoadSettings();
-        void	    SaveSettings();
-        bool	    showprogress() { return showprog && progoverride; }
+        void     LoadSettings();
+        void     SaveSettings();
+        bool     showprogress() { return showprog && progoverride; }
     } m_Window;
 
-    bool		UpdateWindowPD();
-    void		UpdateProgressBar();
-    void		StartWindowPDTimer();
+    bool  UpdateWindowPD();
+    void  UpdateProgressBar();
+    void  StartWindowPDTimer();
 
     // history list
     struct xx_History {
         CList<FilePos, FilePos&> pstack;
-        POSITION		    stacktop;
+        POSITION      stacktop;
 
         xx_History() : stacktop(NULL) { }
 
@@ -153,17 +153,17 @@ protected:
     } m_History;
 
     struct xx_Selection {
-        FilePos	    start;
-        int		    len;
+        FilePos     start;
+        int      len;
 
         xx_Selection() : len(0) { }
     } m_Sel;
 
     // text searching
     struct xx_Search {
-        FilePos	    matchpos;
+        FilePos     matchpos;
         Buffer<wchar_t> searchstr;
-        bool	    matchcase;
+        bool     matchcase;
         bool            fromcurpos;
 
         xx_Search() : matchcase(false), fromcurpos(true) { }
@@ -171,9 +171,9 @@ protected:
 
     // mouse handler info
     struct xx_Mouse {
-        CPoint	    start, last, end;
-        bool	    trackmouse;
-        bool	    dmove;
+        CPoint     start, last, end;
+        bool     trackmouse;
+        bool     dmove;
 
         xx_Mouse() {
             start.x = start.y = end.x = end.y = 0;
@@ -184,48 +184,48 @@ protected:
     // dictionary state
     struct xx_Dict {
         Buffer<wchar_t> lastdictlookup;
-        bool	    okstate;
-        CString	    curdict;
-        auto_ptr<TextParser>	curdictparser;
+        bool     okstate;
+        CString     curdict;
+        auto_ptr<TextParser> curdictparser;
 
         xx_Dict() : okstate(false) { }
     } m_Dict;
 
     // text input popup window state
     struct xx_UI {
-        CString	    inp;
-        bool	    visible;
-        UINT	    timer;
-        RECT	    rc;
+        CString     inp;
+        bool     visible;
+        UINT     timer;
+        RECT     rc;
 
         xx_UI() : visible(false), timer(0) { }
     } m_UI;
 
     // global update timer
-    UINT		  m_timer;
+    UINT    m_timer;
 
     // current bookmarks popup window
     struct xx_BP : public IGetLine {
-        LineArray	    lines;
-        RECT	    rc;
+        LineArray     lines;
+        RECT     rc;
         Buffer<wchar_t> text;
-        bool	    visible;
-        int		    bmkidx;
+        bool     visible;
+        int      bmkidx;
 
         xx_BP() : visible(false), bmkidx(-1) { }
 
-        int		    Length() { return lines.GetSize(); }
-        const Line&	    At(int i) { return lines[i]; }
+        int      Length() { return lines.GetSize(); }
+        const Line&     At(int i) { return lines[i]; }
     } m_BP;
 
     // autoscroll
     struct xx_AS {
         // currently shown and underlined line
-        int		    column;
-        int		    line;
-        int		    delay; // per-line delay in microseconds
-        UINT	    timer;
-        FilePos	    top_pos;
+        int      column;
+        int      line;
+        int      delay; // per-line delay in microseconds
+        UINT     timer;
+        FilePos     top_pos;
 
         xx_AS() : column(-1), line(-1), timer(0) { LoadSettings(); }
         void  LoadSettings();
@@ -234,73 +234,73 @@ protected:
 
     // main formatter and text file
     auto_ptr<TextFormatter> m_formatter;
-    auto_ptr<TextFile>	  m_textfile;
+    auto_ptr<TextFile>   m_textfile;
 
-    void		  PaintColumn(CFDC& dc, const RECT& update,
+    void    PaintColumn(CFDC& dc, const RECT& update,
         const RECT& rc, const RECT& cli,
         IGetLine *lines, int margin, bool chkbmk);
-    void		  PaintUserInput(CFDC& dc, const RECT& rc, const RECT& cli,
+    void    PaintUserInput(CFDC& dc, const RECT& rc, const RECT& cli,
         const Buffer<wchar_t>& text);
-    void		  PaintProgressBar(CFDC& dc, const RECT& rc, const RECT& cli);
-    void		  PaintBookmarkPopup(CFDC& dc, const RECT& rc, const RECT& cli);
-    void		  PaintLine(CFDC& dc, const RECT& cli, RECT& line, int margin, const Line& l);
-    void		  PaintSingleLine(int column, int line, COLORREF underline);
-    void		  PaintSbItem(CFDC& dc, const wchar_t *text, int len,
+    void    PaintProgressBar(CFDC& dc, const RECT& rc, const RECT& cli);
+    void    PaintBookmarkPopup(CFDC& dc, const RECT& rc, const RECT& cli);
+    void    PaintLine(CFDC& dc, const RECT& cli, RECT& line, int margin, const Line& l);
+    void    PaintSingleLine(int column, int line, COLORREF underline);
+    void    PaintSbItem(CFDC& dc, const wchar_t *text, int len,
         const RECT& rc, const RECT& cli, int& pb_width);
-    void		  RedrawProgressBar();
+    void    RedrawProgressBar();
 
-    void		  Move(int dir, int amount);
-    void		  PushPos();
-    void		  MoveAbs(FilePos pos);
-    void		  EnsureVisible(FilePos pos);
-    void		  MovePercent(int p);
-    void		  DoFind();
-    void		  CalcSizes();
-    void		  HandleMouseDown(CPoint point);
-    void		  TrackMouse();
-    void		  DisplaySelectionMenu(CPoint point);
-    FilePos	  CurFilePos();
+    void    Move(int dir, int amount);
+    void    PushPos();
+    void    MoveAbs(FilePos pos);
+    void    EnsureVisible(FilePos pos);
+    void    MovePercent(int p);
+    void    DoFind();
+    void    CalcSizes();
+    void    HandleMouseDown(CPoint point);
+    void    TrackMouse();
+    void    DisplaySelectionMenu(CPoint point);
+    FilePos   CurFilePos();
 
 
-    void		  ComplexLine(CFDC& dc, const RECT& cli, RECT& line,
+    void    ComplexLine(CFDC& dc, const RECT& cli, RECT& line,
         int x, const Line& l);
-    void		  HighlightBookmarks(CFDC& dc, const RECT& cli, int left,
+    void    HighlightBookmarks(CFDC& dc, const RECT& cli, int left,
         int y, int margin, const Line& l,
         FilePos bmkstart, FilePos bmkend);
 
-    void		  InvalidateRect(const RECT& rc);
+    void    InvalidateRect(const RECT& rc);
 
-    bool		  LookupAddr(const POINT& pt, FilePos& p);
-    bool		  LookupPoint(FilePos p, POINT& pt);
-    void		  CalcSelection(FilePos& p, int& len);
-    bool		  GetSelText(Buffer<wchar_t>& str);
-    void		  SaveInfo();
+    bool    LookupAddr(const POINT& pt, FilePos& p);
+    bool    LookupPoint(FilePos p, POINT& pt);
+    void    CalcSelection(FilePos& p, int& len);
+    bool    GetSelText(Buffer<wchar_t>& str);
+    void    SaveInfo();
 
-    void		  ShowText();
-    void		  HideText();
+    void    ShowText();
+    void    HideText();
 
-    void		  DisplayBookmarkPopup(const POINT& spot, const Buffer<wchar_t>& text);
-    void		  DisplayBookmarkPopup(int index);
-    void		  FormatBookmarkPopup(CFDC& dc, const POINT& spot);
-    void		  HideBookmarkPopup();
+    void    DisplayBookmarkPopup(const POINT& spot, const Buffer<wchar_t>& text);
+    void    DisplayBookmarkPopup(int index);
+    void    FormatBookmarkPopup(CFDC& dc, const POINT& spot);
+    void    HideBookmarkPopup();
 
-    void		  QueueRepaint() { m_BP.visible = false; Invalidate(FALSE); }
-    void		  QueueRepaint(const RECT& rc);
-    void		  SetSelection(const FilePos& p, int len);
-    int		  GetSelParagraphCount();
+    void    QueueRepaint() { m_BP.visible = false; Invalidate(FALSE); }
+    void    QueueRepaint(const RECT& rc);
+    void    SetSelection(const FilePos& p, int len);
+    int    GetSelParagraphCount();
 
-    void		  Advance(FilePos& p, int len);
-    void		  InvalidateRange(const FilePos& p1, const FilePos& p2);
+    void    Advance(FilePos& p, int len);
+    void    InvalidateRange(const FilePos& p1, const FilePos& p2);
 
-    static void	  CopyToClipboard(const wchar_t *text, int length, HWND hWnd);
+    static void   CopyToClipboard(const wchar_t *text, int length, HWND hWnd);
 
-    bool		  CanAddUIChar(TCHAR ch);
+    bool    CanAddUIChar(TCHAR ch);
 
-    COLORREF	  v_C_BG();
+    COLORREF   v_C_BG();
 
     // autoscroll support
-    void		  StepAS();
-    void		  RestartASTimer();
+    void    StepAS();
+    void    RestartASTimer();
 
     //{{AFX_MSG(CTView)
     afx_msg void OnPaint();

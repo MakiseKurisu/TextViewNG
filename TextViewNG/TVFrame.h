@@ -67,38 +67,38 @@ public:
     virtual void Dump(CDumpContext& dc) const;
 #endif
 
-    bool		  InitView();
-    void		  InitWindowPos(int nCmdShow);
+    bool    InitView();
+    void    InitWindowPos(int nCmdShow);
 
 
 protected:  // control bar embedded members
 
-    CToolBar		m_wndCommandBar;
-    CMenu			*m_mainmenu;
+    CToolBar  m_wndCommandBar;
+    CMenu   *m_mainmenu;
 
-    auto_ptr<CWnd>	m_wndView;
-    bool			m_realview;
-    FILETIME		m_toptime;
-    CStringArray		m_recentlist;
+    auto_ptr<CWnd> m_wndView;
+    bool   m_realview;
+    FILETIME  m_toptime;
+    CStringArray  m_recentlist;
 
-    TCHAR			**m_tooltips;
-    int			m_buttoncount;
-    RECT			m_normsize;
-    bool			m_okstate;
+    TCHAR   **m_tooltips;
+    int   m_buttoncount;
+    RECT   m_normsize;
+    bool   m_okstate;
 
-    HMENU			m_recent;
-    HMENU			m_colors;
-    int			m_in_fullscreen;
-    bool			m_fullscreen;
+    HMENU   m_recent;
+    HMENU   m_colors;
+    int   m_in_fullscreen;
+    bool   m_fullscreen;
 
-    WINDOWPLACEMENT	m_wndpos;
+    WINDOWPLACEMENT m_wndpos;
 
-    void			SaveWndPos();
+    void   SaveWndPos();
 
-    void			DoFullScreen(bool fs);
-    void			UpdateRecentFiles(CMenu *menu);
-    void			UpdateColors(CMenu *menu);
-    bool			TryOpenFile(CString& filename);
+    void   DoFullScreen(bool fs);
+    void   UpdateRecentFiles(CMenu *menu);
+    void   UpdateColors(CMenu *menu);
+    bool   TryOpenFile(CString& filename);
     //{{AFX_MSG(CTVFrame)
     afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
     afx_msg void OnSetFocus(CWnd *pOldWnd);

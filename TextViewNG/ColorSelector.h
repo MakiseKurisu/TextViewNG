@@ -52,7 +52,7 @@ public:
     //{{AFX_DATA(CColorSelector)
     enum { IDD = IDD_COLORSEL };
     // NOTE: the ClassWizard will add data members here
-    int	m_gamma;
+    int m_gamma;
     //}}AFX_DATA
 
 
@@ -65,7 +65,7 @@ protected:
 
     // Implementation
 protected:
-    int	    m_index;
+    int     m_index;
     ColorItem *m_colors;
 
     // Generated message map functions
@@ -78,7 +78,7 @@ protected:
     DECLARE_MESSAGE_MAP()
 };
 
-bool	myChooseColors(ColorItem *colors, int *gamma, CWnd *parent = NULL);
+bool myChooseColors(ColorItem *colors, int *gamma, CWnd *parent = NULL);
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

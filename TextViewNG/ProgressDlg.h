@@ -47,8 +47,8 @@ class CProgressDlg : public CDialog, public TextParser::Meter
 public:
     CProgressDlg(const CString& msg, CWnd* pParent = NULL);   // standard constructor
 
-    virtual void	SetMax(DWORD max);
-    virtual void	SetCur(DWORD cur);
+    virtual void SetMax(DWORD max);
+    virtual void SetCur(DWORD cur);
 
     // Dialog Data
     //{{AFX_DATA(CProgressDlg)
@@ -67,16 +67,16 @@ protected:
     // Implementation
 protected:
     enum { MAXSAMP = 128 };
-    CString	  m_msg;
-    DWORD		  m_last;
-    DWORD		  m_starttime;
-    DWORD		  m_samples[2 * MAXSAMP];
-    DWORD		  m_tail;
-    DWORD		  m_nsamp;
-    DWORD		  m_curbytes;
-    DWORD		  m_lastbytes;
-    DWORD		  m_lastupdate;
-    bool		  m_visible;
+    CString   m_msg;
+    DWORD    m_last;
+    DWORD    m_starttime;
+    DWORD    m_samples[2 * MAXSAMP];
+    DWORD    m_tail;
+    DWORD    m_nsamp;
+    DWORD    m_curbytes;
+    DWORD    m_lastbytes;
+    DWORD    m_lastupdate;
+    bool    m_visible;
     // Generated message map functions
     //{{AFX_MSG(CProgressDlg)
     virtual BOOL OnInitDialog();

@@ -51,35 +51,35 @@ public:
     }
 
     // generic file operations
-    virtual DWORD	  size();
-    virtual DWORD	  read(void *buf);
-    virtual void	  seek(DWORD pos);
+    virtual DWORD   size();
+    virtual DWORD   read(void *buf);
+    virtual void   seek(DWORD pos);
 
     // compression
     virtual CString CompressionInfo() { return _T("None"); }
 
     // buffer size setting
-    static void	  InitBufSize();
+    static void   InitBufSize();
 
     // RFile helpers
-    bool		  Reopen();
-    void		  ShowError();
-    DWORD		  read2(void *buf, DWORD size);
+    bool    Reopen();
+    void    ShowError();
+    DWORD    read2(void *buf, DWORD size);
 
 protected:
-    HANDLE	  m_fh;
-    CString	  m_fn;
-    DWORD		  m_ptr;
+    HANDLE   m_fh;
+    CString   m_fn;
+    DWORD    m_ptr;
 
-    bool		  m_didreopen;
-    bool		  m_diderror;
+    bool    m_didreopen;
+    bool    m_diderror;
 
-    void		  seek2(DWORD where, DWORD how);
-    DWORD		  pos();
+    void    seek2(DWORD where, DWORD how);
+    DWORD    pos();
 };
 
 // I/O error messages
-CString	FileExceptionInfo(const CString& filename, DWORD dwError);
+CString FileExceptionInfo(const CString& filename, DWORD dwError);
 CString FileName(const CString& file);
 
 #endif // !defined(AFX_RFILE_H__3965961A_8172_4D80_990B_CC46A6EE9D62__INCLUDED_)

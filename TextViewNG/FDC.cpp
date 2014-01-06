@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afx.h>
 
@@ -49,43 +49,43 @@ static char THIS_FILE[] = __FILE__;
 ///////////////////////////////////////////////////////////////////////////////
 // Font cache
 struct Font {
-    HFONT	  m_font;
-    int	  m_size;
-    int	  m_refcount;
-    int	  m_height;
-    int	  m_ascent;
-    int	  m_angle;
-    int	  m_hwidth;
+    HFONT   m_font;
+    int   m_size;
+    int   m_refcount;
+    int   m_height;
+    int   m_ascent;
+    int   m_angle;
+    int   m_hwidth;
     unsigned m_flags;
-    bool	  m_ok;
+    bool   m_ok;
 
     Font() : m_font(NULL), m_height(-1), m_ascent(-1), m_ok(false),
         m_angle(0), m_hwidth(-1) { }
     ~Font() { DeleteObject(m_font); }
-    void	  Grab() { ++m_refcount; }
-    void	  Release() { if (--m_refcount == 0) delete this; }
+    void   Grab() { ++m_refcount; }
+    void   Release() { if (--m_refcount == 0) delete this; }
 };
 
 struct FontCache {
     CPtrArray m_lru;
-    int	    m_cachemax; // max number of entries in cache
+    int     m_cachemax; // max number of entries in cache
     CString   m_face;
-    int	    m_basesize;
-    bool	    m_defbold;
-    int	    m_cleartype;
-    int	    m_angle;
+    int     m_basesize;
+    bool     m_defbold;
+    int     m_cleartype;
+    int     m_angle;
 
     FontCache();
     ~FontCache() { RemoveAll(); }
 
-    Font	    *AllocFont();
-    void	    RemoveAll();
-    void	    Release(Font *f);
-    void	    SetDefault(const TCHAR *f, int bs, bool b, int ct, int an);
-    Font	    *FindOrAlloc(int size, unsigned flags, int an);
+    Font     *AllocFont();
+    void     RemoveAll();
+    void     Release(Font *f);
+    void     SetDefault(const TCHAR *f, int bs, bool b, int ct, int an);
+    Font     *FindOrAlloc(int size, unsigned flags, int an);
 };
 
-#define	FNT(i)	  ((Font*)(m_lru[(i)]))
+#define FNT(i)   ((Font*)(m_lru[(i)]))
 
 static FontCache g_fcache;
 
@@ -95,7 +95,7 @@ m_basesize(12), m_defbold(false), m_cleartype(0), m_angle(0)
 {
 }
 
-void	FontCache::RemoveAll() {
+void FontCache::RemoveAll() {
     for (int i = 0; i < m_lru.GetSize(); ++i) {
         FNT(i)->m_ok = false;
         FNT(i)->Release();
@@ -103,7 +103,7 @@ void	FontCache::RemoveAll() {
     m_lru.RemoveAll();
 }
 
-Font	*FontCache::AllocFont() {
+Font *FontCache::AllocFont() {
     if (m_lru.GetSize() < m_cachemax || FNT(0)->m_refcount>1) {
         // allocate new
         Font    *f = new Font;
@@ -112,7 +112,7 @@ Font	*FontCache::AllocFont() {
         return f;
     }
     // reuse
-    Font	  *f = FNT(0);
+    Font   *f = FNT(0);
     m_lru.RemoveAt(0);
     m_lru.Add(f);
     DeleteObject(f->m_font);
@@ -132,8 +132,8 @@ void  FontCache::SetDefault(const TCHAR *f, int bs, bool b, int ct, int an) {
 }
 
 Font  *FontCache::FindOrAlloc(int size, unsigned flags, int an) {
-    int	i;
-    Font	*f;
+    int i;
+    Font *f;
     for (i = 0; i < m_lru.GetSize(); ++i) {
         f = FNT(i);
         if (f->m_size == size && f->m_flags == flags && f->m_angle == an) {
@@ -187,7 +187,7 @@ Font  *FontCache::FindOrAlloc(int size, unsigned flags, int an) {
 }
 
 void  FontCache::Release(Font *f) {
-    int	i;
+    int i;
     for (i = 0; i < m_lru.GetSize(); ++i)
         if (FNT(i) == f) {
             if (f->m_refcount > 1) {
@@ -213,7 +213,7 @@ void  CFDC::SetDefaultFont(const TCHAR *face, int basesize, bool bold,
 }
 
 void  CFDC::SelectFontAbs(int size, unsigned flags, bool zesc) {
-    Font	*f = (Font*)m_hFont;
+    Font *f = (Font*)m_hFont;
     if (g_fcache.m_defbold && !(flags&FORCENORMALWEIGHT))
         flags |= Attr::BOLD;
     int ang = zesc ? 0 : g_fcache.m_angle;
@@ -261,9 +261,9 @@ CFDC::~CFDC() {
 }
 
 void  CFDC::GetFontSize(int& height, int& ascent) {
-    Font	*f = (Font*)m_hFont;
+    Font *f = (Font*)m_hFont;
     if (!f || f->m_height < 0) {
-        TEXTMETRIC	tm;
+        TEXTMETRIC tm;
         GetTextMetrics(m_hDC, &tm);
         height = tm.tmAscent + tm.tmDescent + tm.tmExternalLeading;
         ascent = tm.tmAscent;
@@ -279,7 +279,7 @@ void  CFDC::GetFontSize(int& height, int& ascent) {
 }
 
 int  CFDC::GetHypWidth() {
-    Font	*f = (Font*)m_hFont;
+    Font *f = (Font*)m_hFont;
     if (!f || f->m_hwidth < 0) {
         SIZE    sz;
         ::GetTextExtentPoint32(m_hDC, _T("-"), 1, &sz);

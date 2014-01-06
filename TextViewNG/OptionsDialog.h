@@ -56,10 +56,10 @@ public:
     CString m_face;
     int     m_size;
     BOOL    m_justify;
-    int	    m_margins;
+    int     m_margins;
     BOOL    m_hyphenate;
-    int	    m_angle;
-    int	    m_columns;
+    int     m_angle;
+    int     m_columns;
     //}}AFX_DATA
 
 

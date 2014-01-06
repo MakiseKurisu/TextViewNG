@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afx.h>
 
@@ -62,7 +62,7 @@ WMap::~WMap() {
 //   tmp=2^n
 //   tmp|=1
 //   x*tmp
-unsigned int	WMap::Hash(const wchar_t *data) {
+unsigned int WMap::Hash(const wchar_t *data) {
     unsigned int hash;
     if (!*data) // shortcut
         return 0;
@@ -79,9 +79,9 @@ unsigned int	WMap::Hash(const wchar_t *data) {
 }
 
 WMap::HE  *WMap::RealLookup(const wchar_t *key, bool add, bool copykey) {
-    UINT	  hash = Hash(key);
-    UINT	  bucket = hash&m_curmask;
-    HE	  *he;
+    UINT   hash = Hash(key);
+    UINT   bucket = hash&m_curmask;
+    HE   *he;
 
     for (he = m_array[bucket]; he; he = he->next)
         if (!wcscmp(key, he->key))
@@ -98,8 +98,8 @@ WMap::HE  *WMap::RealLookup(const wchar_t *key, bool add, bool copykey) {
     return he;
 }
 
-bool	WMap::Lookup(const wchar_t *key, void*& value) {
-    HE	*he = RealLookup(key, false, false);
+bool WMap::Lookup(const wchar_t *key, void*& value) {
+    HE *he = RealLookup(key, false, false);
     if (he) {
         value = he->value;
         return true;
@@ -107,20 +107,20 @@ bool	WMap::Lookup(const wchar_t *key, void*& value) {
     return false;
 }
 
-void	WMap::RemoveAll() {
+void WMap::RemoveAll() {
     m_hepool.RemoveAll();
     m_strbuf.RemoveAll();
     m_numkeys = 0;
 }
 
-void	WMap::Extend() {
-    int	newsize = m_cursize << 1;
-    HE	**na = (HE**)HeapReAlloc(m_heap, HEAP_NO_SERIALIZE, m_array, newsize*sizeof(HE*));
+void WMap::Extend() {
+    int newsize = m_cursize << 1;
+    HE **na = (HE**)HeapReAlloc(m_heap, HEAP_NO_SERIALIZE, m_array, newsize*sizeof(HE*));
     if (!na)
         AfxThrowMemoryException();
     memset(na + m_cursize, 0, m_cursize*sizeof(HE**));
     for (int i = 0; i < m_cursize; ++i) {
-        HE	  **prev = &na[i], *cur = na[i];
+        HE   **prev = &na[i], *cur = na[i];
         while (cur) {
             if (cur->hash & m_cursize) {
                 *prev = cur->next;

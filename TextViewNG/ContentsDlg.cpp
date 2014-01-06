@@ -30,7 +30,7 @@
 */
 
 #pragma warning(disable:4100)
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxcmn.h>
 #include <afxtempl.h>
@@ -96,11 +96,11 @@ BOOL CContentsDlg::OnInitDialog()
 {
     CDialog::OnInitDialog();
 
-    HWND	     hXLB = ::GetDlgItem(m_hWnd, IDC_CONTENTS);
-    RECT	  r;
+    HWND      hXLB = ::GetDlgItem(m_hWnd, IDC_CONTENTS);
+    RECT   r;
     GetClientRect(&r);
 
-    RECT	  rwin;
+    RECT   rwin;
     ::GetWindowRect(hXLB, &rwin);
     r.bottom = r.top + (rwin.bottom - rwin.top);
 
@@ -110,17 +110,17 @@ BOOL CContentsDlg::OnInitDialog()
     XLB_SetGTFunc(hXLB, GetText, this);
 
     // insert items
-    bool	    havesubdocs = m_tp->GetSubDocCount() > 1;
-    int	    curlevel = havesubdocs ? -1 : 0; // -1 means Document-level
-    int	    curpos = m_toc.BFind(m_cur, Bookmarks::SPREVCH);
-    bool	    docmatch = curpos < m_toc.GetSize() && m_toc.Ref(curpos).docid == m_cur.docid;
-    int	    docid = -1;
+    bool     havesubdocs = m_tp->GetSubDocCount() > 1;
+    int     curlevel = havesubdocs ? -1 : 0; // -1 means Document-level
+    int     curpos = m_toc.BFind(m_cur, Bookmarks::SPREVCH);
+    bool     docmatch = curpos < m_toc.GetSize() && m_toc.Ref(curpos).docid == m_cur.docid;
+    int     docid = -1;
     if (!docmatch)
         curpos = -1;
 
     XLB_Handle  *handle = XLB_GetHandle(hXLB);
 
-    int	  prev = 0;
+    int   prev = 0;
     for (int i = 0; i < m_toc.GetSize(); ++i) {
         if (havesubdocs && docid < m_toc.Ref(i).docid) // create a new entry under root!
             do {
@@ -128,7 +128,7 @@ BOOL CContentsDlg::OnInitDialog()
                 curlevel = -1;
                 XLB_AppendItem(handle, NULL, NULL, IM_CNODE, 0, -docid - 1);
             } while (docid < m_toc.Ref(i).docid);
-        int	      lev = m_toc.Level(i);
+        int       lev = m_toc.Level(i);
         if (lev < 0) {
             if (prev >= 0)
                 ++curlevel;
@@ -154,7 +154,7 @@ BOOL CContentsDlg::OnInitDialog()
 
 CString  CContentsDlg::GetText(void *ugtdata, int num, int item, LONG data)
 {
-    CContentsDlg	*dlg = (CContentsDlg*)ugtdata;
+    CContentsDlg *dlg = (CContentsDlg*)ugtdata;
 
     if (num == 0)
         return data >= 0 ?
@@ -173,11 +173,11 @@ CString  CContentsDlg::GetText(void *ugtdata, int num, int item, LONG data)
 }
 
 void CContentsDlg::OnOK() {
-    HWND	    hXLB = ::GetDlgItem(m_hWnd, IDC_CONTENTS);
+    HWND     hXLB = ::GetDlgItem(m_hWnd, IDC_CONTENTS);
 
     m_index = NO_ITEM;
 
-    int	    sel = XLB_GetSelection(hXLB);
+    int     sel = XLB_GetSelection(hXLB);
     if (sel >= 0)
         m_index = XLB_GetData(hXLB, sel);
 
@@ -189,14 +189,14 @@ void CContentsDlg::OnCancel() {
     EndDialog(IDCANCEL);
 }
 
-LRESULT	CContentsDlg::OnXContextMenu(WPARAM wParam, LPARAM lParam) {
-    HWND	    hXLB = ::GetDlgItem(m_hWnd, IDC_CONTENTS);
+LRESULT CContentsDlg::OnXContextMenu(WPARAM wParam, LPARAM lParam) {
+    HWND     hXLB = ::GetDlgItem(m_hWnd, IDC_CONTENTS);
 
-    int	    sel = XLB_GetSelection(hXLB);
+    int     sel = XLB_GetSelection(hXLB);
     if (sel < 0)
         return 0;
 
-    int	    idx = XLB_GetData(hXLB, sel);
+    int     idx = XLB_GetData(hXLB, sel);
     if (idx < 0 || !(m_toc.Flags(idx)&Bookmarks::BMK))
         return 0;
 
@@ -214,23 +214,23 @@ LRESULT	CContentsDlg::OnXContextMenu(WPARAM wParam, LPARAM lParam) {
     return 0;
 }
 
-LRESULT	CContentsDlg::OnXDblClick(WPARAM wParam, LPARAM lParam) {
+LRESULT CContentsDlg::OnXDblClick(WPARAM wParam, LPARAM lParam) {
     OnOK();
     return 0;
 }
 
 void  CContentsDlg::OnEdit() {
-    HWND	    hXLB = ::GetDlgItem(m_hWnd, IDC_CONTENTS);
+    HWND     hXLB = ::GetDlgItem(m_hWnd, IDC_CONTENTS);
 
-    int	    sel = XLB_GetSelection(hXLB);
+    int     sel = XLB_GetSelection(hXLB);
     if (sel < 0)
         return;
 
-    int	    idx = XLB_GetData(hXLB, sel);
+    int     idx = XLB_GetData(hXLB, sel);
     if (idx < 0 || idx >= m_toc.GetSize() || !(m_toc.Flags(idx)&Bookmarks::BMK))
         return;
 
-    CAddBmDialog	  dlg(this);
+    CAddBmDialog   dlg(this);
     dlg.m_text = m_toc.Text(idx, m_tp);
     if (dlg.DoModal() == IDOK && dlg.m_text != m_toc.Text(idx, m_tp)) {
         m_toc.Change(idx, dlg.m_text);
@@ -239,13 +239,13 @@ void  CContentsDlg::OnEdit() {
 }
 
 void  CContentsDlg::OnDelete() {
-    HWND	    hXLB = ::GetDlgItem(m_hWnd, IDC_CONTENTS);
+    HWND     hXLB = ::GetDlgItem(m_hWnd, IDC_CONTENTS);
 
-    int	    sel = XLB_GetSelection(hXLB);
+    int     sel = XLB_GetSelection(hXLB);
     if (sel < 0)
         return;
 
-    int	    idx = XLB_GetData(hXLB, sel);
+    int     idx = XLB_GetData(hXLB, sel);
     if (idx >= 0 && idx < m_toc.GetSize() && m_toc.Flags(idx)&Bookmarks::BMK &&
         MessageBox(_T("Delete this bookmark?"), _T("Confirm"), MB_YESNO) == IDYES)
     {

@@ -30,7 +30,7 @@
 */
 
 #pragma warning(disable:4100)
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxext.h>
 
@@ -38,27 +38,27 @@
 #include "resource.h"
 #include "config.h"
 
-#define	BUTTON_W_CH   7
-#define	BUTTON_SPACE  5
-#define	MARGIN	      3
+#define BUTTON_W_CH   7
+#define BUTTON_SPACE  5
+#define MARGIN       3
 
-#define	LABEL_BASE    1000
-#define	LABEL_MAX     1999
-#define	BUTTON_BASE   2000
-#define	BUTTON_MAX    2999
-#define	ACTION_BASE   3000
-#define	ACTION_MAX    3999
-#define	KEY_BASE      4000
-#define	KEY_MAX	      4999
+#define LABEL_BASE    1000
+#define LABEL_MAX     1999
+#define BUTTON_BASE   2000
+#define BUTTON_MAX    2999
+#define ACTION_BASE   3000
+#define ACTION_MAX    3999
+#define KEY_BASE      4000
+#define KEY_MAX       4999
 
-#define	MINHK	      0xc0
-#define	MAXHK	      0xcf
+#define MINHK       0xc0
+#define MAXHK       0xcf
 
 // keys
 static struct {
     const TCHAR   *name;
-    UINT		cmd;
-    UINT		vk1, vk2, vk3;
+    UINT  cmd;
+    UINT  vk1, vk2, vk3;
 } g_actions[] = {
     { _T("Line forward"), ID_LINE_DOWN },
     { _T("Line backward"), ID_LINE_UP },
@@ -88,10 +88,10 @@ static struct {
     { _T("Open file"), ID_FILE_OPEN },
     { _T("Next color profile"), ID_NEXT_PROFILE },
 };
-#define	NUMACTIONS    (sizeof(g_actions)/sizeof(g_actions[0]))
+#define NUMACTIONS    (sizeof(g_actions)/sizeof(g_actions[0]))
 
 static struct {
-    UINT	      vk;
+    UINT       vk;
     const TCHAR *name;
 } g_keys[] = {
     { VK_LEFT, _T("Left") },
@@ -120,9 +120,9 @@ static struct {
     { VK_F12, _T("F12") },
     { 0x86, _T("Action") },
 };
-#define	NUMKEYS	(sizeof(g_keys)/sizeof(g_keys[0]))
+#define NUMKEYS (sizeof(g_keys)/sizeof(g_keys[0]))
 
-#define	MAXVK	256
+#define MAXVK 256
 
 BOOL(*g_UnregisterFunc1)(UINT one, UINT two);
 
@@ -151,7 +151,7 @@ static const TCHAR  *GetKeyName(UINT vk) {
     for (int i = 0; i < NUMKEYS; ++i)
         if (g_keys[i].vk == vk)
             return g_keys[i].name;
-    static TCHAR	  buf[32];
+    static TCHAR   buf[32];
     if (vk >= MINHK && vk < MAXHK)
         _stprintf_s(buf, 32, _T("App %u"), vk - MINHK);
     else
@@ -159,7 +159,7 @@ static const TCHAR  *GetKeyName(UINT vk) {
     return buf;
 }
 
-static CString	GetKeyNames(int i) {
+static CString GetKeyNames(int i) {
     CString rv;
 
     if (g_actions[i].vk1 != 0)
@@ -218,7 +218,7 @@ static void AddKey(int i, UINT vk) {
     }
 }
 
-static HWND	g_keyowner;
+static HWND g_keyowner;
 
 void Keys::InitKeys() {
     for (int i = 0; i < NUMACTIONS; ++i) {
@@ -278,12 +278,12 @@ void Keys::SetWindow(HWND hWnd) {
 }
 
 bool  Keys::TranslateKey(UINT vk, UINT& cmd, int angle) {
-    UINT	cc = LookupKey(vk);
+    UINT cc = LookupKey(vk);
     if (!cc)
         return false;
     cmd = cc;
     if (angle) {
-        int	  idx;
+        int   idx;
         switch (vk) {
         case VK_LEFT:
             idx = 0;
@@ -359,12 +359,12 @@ protected:
 
     // Implementation
 protected:
-    void	  SetButtons(int i) {
+    void   SetButtons(int i) {
         ::EnableWindow(::GetDlgItem(m_hWnd, IDCLEAR), HaveKeys(i));
         ::EnableWindow(::GetDlgItem(m_hWnd, IDASSIGN), HaveSlots(i));
     }
 
-    void	  SetText(int i) {
+    void   SetText(int i) {
         LVITEM    ii;
 
         ii.mask = LVIF_TEXT;
@@ -407,14 +407,14 @@ BOOL CKeysDlg::OnInitDialog()
     ::EnableWindow(::GetDlgItem(m_hWnd, IDASSIGN), FALSE);
     ::EnableWindow(::GetDlgItem(m_hWnd, IDCLEAR), FALSE);
 
-    CWnd	  *lv = GetDlgItem(IDC_COMMANDS);
+    CWnd   *lv = GetDlgItem(IDC_COMMANDS);
 
     lv->SendMessage(LVM_SETEXTENDEDLISTVIEWSTYLE, LVS_EX_FULLROWSELECT, LVS_EX_FULLROWSELECT);
 
-    RECT	  rcLV;
+    RECT   rcLV;
     lv->GetClientRect(&rcLV);
 
-    int	  vw = rcLV.right - rcLV.left - GetSystemMetrics(SM_CXVSCROLL);
+    int   vw = rcLV.right - rcLV.left - GetSystemMetrics(SM_CXVSCROLL);
 
     LVCOLUMN   col;
     memset(&col, 0, sizeof(col));
@@ -459,9 +459,9 @@ class CKeyGrabDlg : public CDialog
 public:
     CKeyGrabDlg(CWnd* pParent = NULL);   // standard constructor
 
-    UINT	      m_vk[16];
+    UINT       m_vk[16];
 
-    void	Record(UINT vk) {
+    void Record(UINT vk) {
         SetTimer(1, 50, NULL);
         for (int i = 0; i < sizeof(m_vk) / sizeof(m_vk[0]); ++i)
             if (m_vk[i] == 0) {
@@ -470,7 +470,7 @@ public:
             }
     }
 
-    UINT	Get() {
+    UINT Get() {
         UINT    vk = 0;
         for (int i = 0; i < sizeof(m_vk) / sizeof(m_vk[0]); ++i)
             if (LOWORD(m_vk[i]) && (vk == 0 || LOWORD(m_vk[i]) < vk))
@@ -543,7 +543,7 @@ void CKeyGrabDlg::OnTimer(UINT nIDEvent)
 BOOL CKeyGrabDlg::OnInitDialog() {
     CDialog::OnInitDialog();
 
-    RECT	rcC;
+    RECT rcC;
     GetClientRect(&rcC);
 
     HWND hWnd = ::CreateWindow(_T("Static"), _T("Press any key..."), WS_VISIBLE | WS_CHILD | SS_CENTER,
@@ -594,7 +594,7 @@ LRESULT CKeyGrabDlg::OnApp(WPARAM wp, LPARAM lp) {
 LRESULT CALLBACK CKeyGrabDlg::GrabKeyProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     WNDPROC wp = (WNDPROC)GetWindowLong(hWnd, GWL_USERDATA);
 
-    HWND	  mWnd = hWnd;
+    HWND   mWnd = hWnd;
 
     if (::GetDlgCtrlID(hWnd) == 47793)
         mWnd = ::GetParent(hWnd);

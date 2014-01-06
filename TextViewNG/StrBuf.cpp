@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afx.h>
 #include "StrBuf.h"
@@ -48,7 +48,7 @@ void  StrBuf::RemoveAll() {
     m_cblk = -1;
 }
 
-wchar_t	    *StrBuf::Get(int char_length) {
+wchar_t     *StrBuf::Get(int char_length) {
     if (m_numblk == 0 || m_blocks[m_cblk].cur + char_length > m_blocks[m_cblk].max) {
         // shrink the block if too much is wasted
         if (m_numblk != 0 && m_blocks[m_cblk].cur + MAX_WASTE < m_blocks[m_cblk].max &&

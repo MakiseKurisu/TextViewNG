@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxwin.h>
 #include <afxext.h>
@@ -75,7 +75,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // InputBox message handlers
 
-bool	GetUserInput(const CString& prompt, const CString& title,
+bool GetUserInput(const CString& prompt, const CString& title,
     CString& str, CWnd *parent)
 {
     InputBox    box(prompt, title, parent);
@@ -128,9 +128,9 @@ END_MESSAGE_MAP()
 void CAddBmDialog::OnSize(UINT nType, int cx, int cy)
 {
     CDialog::OnSize(nType, cx, cy);
-    RECT	rc;
+    RECT rc;
     GetClientRect(&rc);
-    HWND	  hWnd;
+    HWND   hWnd;
     GetDlgItem(IDC_BMKEDIT, &hWnd);
     if (hWnd)
         ::SetWindowPos(hWnd, NULL, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, SWP_NOZORDER | SWP_NOACTIVATE);

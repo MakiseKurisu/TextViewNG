@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxwin.h>
 #include <afxtempl.h>
@@ -53,11 +53,11 @@ struct Goodch3 {
 };
 
 template<class T>
-static CString	param_escape(const CString& str) {
-    int	  rlen;
-    int	  i;
+static CString param_escape(const CString& str) {
+    int   rlen;
+    int   i;
     CString ret;
-    TCHAR	  *cp;
+    TCHAR   *cp;
 
     for (i = rlen = 0; i < str.GetLength(); ++i)
         if (T::isgoodch(str[i]))
@@ -76,16 +76,16 @@ static CString	param_escape(const CString& str) {
         return ret;
 }
 
-#define	escape(x)   param_escape<Goodch>(x)
-#define	escape2(x)  param_escape<Goodch2>(x)
-#define	escape3(x)  param_escape<Goodch3>(x)
+#define escape(x)   param_escape<Goodch>(x)
+#define escape2(x)  param_escape<Goodch2>(x)
+#define escape3(x)  param_escape<Goodch3>(x)
 
-static CString	unescape(const CString& str) {
-    int	  rlen;
-    int	  i, j;
+static CString unescape(const CString& str) {
+    int   rlen;
+    int   i, j;
     TCHAR   n;
     CString ret;
-    TCHAR	  *cp;
+    TCHAR   *cp;
 
     for (i = rlen = 0; i < str.GetLength(); ++i) {
         if (str[i] == _T('%')) {
@@ -124,11 +124,11 @@ Bookmarks::Bookmarks(const CString& filename) : m_filename(filename),
 m_shortname(filename), m_changed(true), m_topbmk(0), m_ubmk(0)
 {
     // extract filename
-    int	last = max(m_shortname.ReverseFind(_T('\\')), m_shortname.ReverseFind(_T('/')));
+    int last = max(m_shortname.ReverseFind(_T('\\')), m_shortname.ReverseFind(_T('/')));
     m_shortname.Delete(0, last + 1);
     // find info in registry
     CString info = AfxGetApp()->GetProfileString(_T("Bookmarks"), escape2(m_shortname));
-    DWORD	dummy;
+    DWORD dummy;
     if (!info.GetLength() || _stscanf_s(info, _T("%d,%d,%u,%u"), &m_format, &m_encoding, &dummy, &dummy) != 4)
     {
         m_format = -1;
@@ -141,7 +141,7 @@ Bookmarks::~Bookmarks() {
     SaveInfo();
 }
 
-CString	Bookmarks::Text(int idx, TextFile *parser) {
+CString Bookmarks::Text(int idx, TextFile *parser) {
     if (m_bmk[idx].flags & BMK) {
         // return changed text if possible
         if (m_bmk[idx].flags & BMCHG && m_bmk[idx].tmp)
@@ -155,8 +155,8 @@ CString	Bookmarks::Text(int idx, TextFile *parser) {
         return CString();
     // ok, here we extract the bookmark from the file
     CString ret;
-    int	  ps = p.para;
-    int	  pe = p.para + p.off;
+    int   ps = p.para;
+    int   pe = p.para + p.off;
     while (ps < pe) {
         if (p.para != ps)
             ret += _T(" ");
@@ -170,7 +170,7 @@ int  Bookmarks::AddImp(int para_start, int para_count, int docid, const CString 
     FilePos pos, DWORD flags, int level)
 {
     m_changed = true;
-    BE	be;
+    BE be;
     if (text)
         be.text = *text;
     be.ref = pos;
@@ -243,19 +243,19 @@ void  Bookmarks::Rollback() {
 void  Bookmarks::SaveToRegistry() {
     if (m_shortname == _T("NUL"))
         return;
-    HKEY	  hBmk = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
+    HKEY   hBmk = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
     if (!hBmk)
         return;
     CString sect(escape2(m_shortname));
     RegDeleteKey(hBmk, sect);
-    HKEY	res;
-    DWORD	disp;
+    HKEY res;
+    DWORD disp;
     CString name, value;
     if (RegCreateKeyEx(hBmk, sect, 0, REG_NONE, 0, HR_REG_PERM, NULL, &res, &disp) == ERROR_SUCCESS) {
         value.Format(_T("%d,%d,%d"), m_startpos.para, m_startpos.off, m_startpos.docid);
         RegSetValueEx(res, NULL, 0, REG_SZ, (LPBYTE)(const TCHAR *)value,
             (value.GetLength() + 1)*sizeof(TCHAR));
-        int	n = 0;
+        int n = 0;
         for (int i = 0; i < m_bmk.GetSize(); ++i) {
             if (!(m_bmk[i].flags&BMK))
                 continue;
@@ -275,11 +275,11 @@ bool  Bookmarks::SaveInfo() {
     if (m_changed) {
         if (m_shortname == _T("NUL"))
             return false;
-        SYSTEMTIME	tm;
-        FILETIME	ftm = { 0, 0 };
+        SYSTEMTIME tm;
+        FILETIME ftm = { 0, 0 };
         GetLocalTime(&tm);
         SystemTimeToFileTime(&tm, &ftm);
-        CString	info;
+        CString info;
         info.Format(_T("%d,%d,%u,%u,%s"), m_format, m_encoding, ftm.dwLowDateTime, ftm.dwHighDateTime, (LPCTSTR)m_filename);
         AfxGetApp()->WriteProfileString(_T("Bookmarks"), escape2(m_shortname), info);
         m_changed = false;
@@ -289,17 +289,17 @@ bool  Bookmarks::SaveInfo() {
 }
 
 void  Bookmarks::LoadFromRegistry() {
-    HKEY	  hBmk = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
+    HKEY   hBmk = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
     if (!hBmk)
         return;
     CString sect(escape2(m_shortname));
-    HKEY	res;
+    HKEY res;
     CString name, value;
     if (RegOpenKeyEx(hBmk, sect, 0, HR_REG_PERM, &res) == ERROR_SUCCESS) {
         TCHAR     buf[4096];
         DWORD     type, len = sizeof(buf);
         if (RegQueryValueEx(res, NULL, 0, &type, (LPBYTE)buf, &len) == ERROR_SUCCESS && type == REG_SZ) {
-            FilePos	pp;
+            FilePos pp;
             if (_stscanf_s(buf, _T("%d,%d,%d"), &pp.para, &pp.off, &pp.docid) >= 2)
                 SetStartPos(pp);
         }
@@ -307,9 +307,9 @@ void  Bookmarks::LoadFromRegistry() {
             name.Format(_T("%d"), i);
             len = sizeof(buf);
             if (RegQueryValueEx(res, name, 0, &type, (LPBYTE)buf, &len) == ERROR_SUCCESS && type == REG_SZ) {
-                FilePos	pp;
-                int		size_cp = sizeof(buf) / sizeof(TCHAR);
-                TCHAR	*cp = value.GetBuffer(size_cp);
+                FilePos pp;
+                int  size_cp = sizeof(buf) / sizeof(TCHAR);
+                TCHAR *cp = value.GetBuffer(size_cp);
                 if (_stscanf_s(buf, _T("%d,%d,%d,%[^\001]"), &pp.para, &pp.off, &pp.docid, cp, size_cp == 4 || _stscanf_s(buf, _T("%d,%d,%[^\001]"), &pp.para, &pp.off, cp, size_cp) == 3))
                 {
                     value.ReleaseBuffer();
@@ -326,8 +326,8 @@ void  Bookmarks::LoadFromRegistry() {
     RegCloseKey(hBmk);
 }
 
-CString	Bookmarks::find_last_file() {
-    HKEY	    hKey = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
+CString Bookmarks::find_last_file() {
+    HKEY     hKey = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
     if (!hKey)
         return CString();
     CString   filename, tmp;
@@ -343,7 +343,7 @@ CString	Bookmarks::find_last_file() {
             break;
         if (type != REG_SZ)
             continue;
-        int	    dummy;
+        int     dummy;
         TCHAR   *cp = tmp.GetBuffer(valuelen);
         FILETIME  tm;
         if (_stscanf_s(value, _T("%d,%d,%u,%u,%[^\001]"), &dummy, &dummy, &tm.dwLowDateTime, &tm.dwHighDateTime, cp, valuelen) != 5) {
@@ -363,13 +363,13 @@ CString	Bookmarks::find_last_file() {
 }
 
 struct Item {
-    TCHAR	      *name;
+    TCHAR       *name;
     FILETIME    time;
 };
 
 static int __cdecl itemcmp(const void *v1, const void *v2) {
-    const Item	*i1 = (const Item *)v1;
-    const Item	*i2 = (const Item *)v2;
+    const Item *i1 = (const Item *)v1;
+    const Item *i2 = (const Item *)v2;
 
     if (i1->time.dwHighDateTime < i2->time.dwHighDateTime)
         return 1;
@@ -383,11 +383,11 @@ static int __cdecl itemcmp(const void *v1, const void *v2) {
 }
 
 void Bookmarks::CleanupRegistry(int max_count) {
-    HKEY	    hKey = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
+    HKEY     hKey = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
     if (!hKey)
         return;
     CArray<Item, Item&>  ilist;
-    Item		      ii;
+    Item        ii;
     for (DWORD index = 0;; ++index) {
         TCHAR   name[1024];
         DWORD   namelen = sizeof(name) / sizeof(TCHAR);
@@ -398,7 +398,7 @@ void Bookmarks::CleanupRegistry(int max_count) {
             break;
         if (type != REG_SZ)
             continue;
-        int	    dummy;
+        int     dummy;
         if (_stscanf_s(value, _T("%d,%d,%u,%u,"), &dummy, &dummy, &ii.time.dwLowDateTime, &ii.time.dwHighDateTime) != 4)
             continue;
         ii.name = _tcsdup(name);
@@ -418,12 +418,12 @@ void Bookmarks::CleanupRegistry(int max_count) {
 }
 
 void Bookmarks::get_recent_files(CStringArray& fl, int num, FILETIME& toptime) {
-    HKEY	    hKey = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
+    HKEY     hKey = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
     if (!hKey)
         return;
     CArray<Item, Item&>  ilist;
-    Item		      ii;
-    CString	      tmp;
+    Item        ii;
+    CString       tmp;
     for (DWORD index = 0;; ++index) {
         TCHAR   name[1024];
         DWORD   namelen = sizeof(name) / sizeof(TCHAR);
@@ -434,7 +434,7 @@ void Bookmarks::get_recent_files(CStringArray& fl, int num, FILETIME& toptime) {
             break;
         if (type != REG_SZ)
             continue;
-        int	    dummy;
+        int     dummy;
         TCHAR   *cp = tmp.GetBuffer(valuelen);
         if (_stscanf_s(value, _T("%d,%d,%u,%u,%[^\001]"), &dummy, &dummy, &ii.time.dwLowDateTime, &ii.time.dwHighDateTime, cp, valuelen) != 5)
         {
@@ -457,9 +457,9 @@ void Bookmarks::get_recent_files(CStringArray& fl, int num, FILETIME& toptime) {
 }
 
 int   Bookmarks::BFind(FilePos p, int type) {
-    int	low = 0, high = m_bmk.GetSize() - 1;
+    int low = 0, high = m_bmk.GetSize() - 1;
     while (low <= high) {
-        int	mid = (low + high) >> 1;
+        int mid = (low + high) >> 1;
         if (p < m_bmk[mid].ref)
             high = mid - 1;
         else if (m_bmk[mid].ref < p)
@@ -516,7 +516,7 @@ int   Bookmarks::BFind(FilePos p, int type) {
 }
 
 int   Bookmarks::UserBookmarks() {
-    int	  n = 0;
+    int   n = 0;
     for (int i = 0; i < m_bmk.GetSize(); ++i)
         if (m_bmk[i].flags&BMK)
             ++n;
@@ -524,7 +524,7 @@ int   Bookmarks::UserBookmarks() {
 }
 
 void  Bookmarks::NormalizeLevels() {
-    int	minlevel = -1;
+    int minlevel = -1;
     for (int ii = 0; ii < m_bmk.GetSize(); ++ii) {
         if (m_bmk[ii].flags&BMK)
             continue;
@@ -547,7 +547,7 @@ bool  Bookmarks::BookmarksInRange(FilePos start, FilePos end) {
     if (!m_ubmk) // shortcut when there are no user bookmarks
         return false;
     // ok, have to do some searching
-    int	ptr = BFind(start, SNEXTANY);
+    int ptr = BFind(start, SNEXTANY);
     if (ptr >= m_bmk.GetSize())
         return false;
     while (m_bmk[ptr].ref < end) {
@@ -562,7 +562,7 @@ bool  Bookmarks::BookmarkFind(FilePos& start, FilePos end) {
     if (!m_ubmk) // shortcut when there are no user bookmarks
         return false;
     // ok, have to do some searching
-    int	ptr = BFind(start, SNEXTANY);
+    int ptr = BFind(start, SNEXTANY);
     while (ptr < m_bmk.GetSize() && m_bmk[ptr].ref < end) {
         if (m_bmk[ptr].flags&BMK) {
             start = m_bmk[ptr].ref;
@@ -574,8 +574,8 @@ bool  Bookmarks::BookmarkFind(FilePos& start, FilePos end) {
 }
 
 static void  utf8write(HANDLE hFile, const CString& str) {
-    Buffer<char>	utf8(Unicode::ToUtf8(str));
-    DWORD		nw;
+    Buffer<char> utf8(Unicode::ToUtf8(str));
+    DWORD  nw;
 
     // XXX no error checking
     WriteFile(hFile, utf8, utf8.size(), &nw, NULL);
@@ -588,14 +588,14 @@ bool  Bookmarks::ExportAllBookmarks(const CString& destfile) {
         return false;
 
     // open registry entry
-    HKEY	  hBmk = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
+    HKEY   hBmk = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
     if (hBmk == NULL) {
         ::CloseHandle(hFile);
         return false;
     }
 
     // write utf-8 BOM
-    DWORD	nw;
+    DWORD nw;
     ::WriteFile(hFile, "\xef\xbb\xbf", 3, &nw, NULL);
 
     // enumerate files

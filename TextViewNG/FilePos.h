@@ -33,9 +33,9 @@
 #define FILEPOS_H
 
 struct FilePos {
-    int	  para;
-    int	  off;
-    int	  docid;
+    int   para;
+    int   off;
+    int   docid;
 
     FilePos() : para(0), off(0), docid(0) { }
     FilePos(int p, int o, int did) : para(p), off(o), docid(did) { }

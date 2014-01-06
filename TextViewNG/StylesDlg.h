@@ -67,7 +67,7 @@ protected:
 protected:
     void SetValues(int idx);
     void GetValues();
-    int				 m_cur;
+    int     m_cur;
 
     // Generated message map functions
     //{{AFX_MSG(CStylesDlg)

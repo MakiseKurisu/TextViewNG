@@ -36,7 +36,7 @@ protected:
     Buffer<Block> m_blocks;
     DWORD m_length, m_ptr;
 
-    static bool	CheckTCR(RFile *fp);
+    static bool CheckTCR(RFile *fp);
 };
 
 #endif

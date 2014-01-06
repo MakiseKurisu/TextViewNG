@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxwin.h>
 #include <afxtempl.h>
@@ -46,7 +46,7 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-#define	SHOWDELAY 700
+#define SHOWDELAY 700
 #define MINUPDATE 500
 
 /////////////////////////////////////////////////////////////////////////////
@@ -75,12 +75,12 @@ void CProgressDlg::DoDataExchange(CDataExchange* pDX)
     //}}AFX_DATA_MAP
 }
 
-void	CProgressDlg::SetMax(DWORD max) {
+void CProgressDlg::SetMax(DWORD max) {
     SendDlgItemMessage(IDC_PROGRESS, PBM_SETRANGE32, 0, max);
     m_starttime = GetTickCount();
 }
 
-void	CProgressDlg::SetCur(DWORD cur) {
+void CProgressDlg::SetCur(DWORD cur) {
     if (cur > m_last) {
         m_last = (cur + 65535)&~65535;
         SendDlgItemMessage(IDC_PROGRESS, PBM_SETPOS, cur);
@@ -133,7 +133,7 @@ END_MESSAGE_MAP()
 BOOL CProgressDlg::OnInitDialog() {
     CDialog::OnInitDialog();
 
-    CString	  msg;
+    CString   msg;
     msg.Format(_T("Loading %s..."), (LPCTSTR)m_msg);
     SetWindowText(msg);
 

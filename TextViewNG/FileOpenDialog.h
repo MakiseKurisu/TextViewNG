@@ -81,7 +81,7 @@ protected:
     DECLARE_MESSAGE_MAP()
 };
 
-CString	  GetFileName(CString *startpath, CWnd *parent = NULL);
+CString   GetFileName(CString *startpath, CWnd *parent = NULL);
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

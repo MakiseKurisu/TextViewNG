@@ -38,13 +38,13 @@
 
 class CFDC
 {
-    HDC		m_hDC;
-    void		*m_hFont;
-    HGDIOBJ	m_hOrigFont, m_hOrigPen;
-    HWND		m_hWnd;
-    PAINTSTRUCT	*m_ps;
-    COLORREF	m_fg, m_bg, m_pfg;
-    int		m_lpx;
+    HDC  m_hDC;
+    void  *m_hFont;
+    HGDIOBJ m_hOrigFont, m_hOrigPen;
+    HWND  m_hWnd;
+    PAINTSTRUCT *m_ps;
+    COLORREF m_fg, m_bg, m_pfg;
+    int  m_lpx;
 public:
     enum {
         FORCENORMALWEIGHT = 0x10000,
@@ -53,16 +53,16 @@ public:
     CFDC(HWND hWnd, PAINTSTRUCT *ps = NULL);
     ~CFDC();
 
-    void	  SelectFont(int size, unsigned flags, bool zesc = false);
-    void	  SelectFontAbs(int size, unsigned flags, bool zesc = false);
-    HDC	  DC() { return m_hDC; }
-    void	  GetFontSize(int& height, int& ascent);
-    void	  SetBkColor(COLORREF c) { if (c != m_bg) ::SetBkColor(m_hDC, m_bg = c); }
-    void	  SetTextColor(COLORREF c) { if (c != m_fg) ::SetTextColor(m_hDC, m_fg = c); }
-    void	  SetColor(COLORREF c);
-    int	  GetLPX();
-    int	  GetHypWidth();
-    void	  GetTextExtent(const wchar_t *str, int len, int width, int& nch, int *dx, SIZE& sz);
+    void   SelectFont(int size, unsigned flags, bool zesc = false);
+    void   SelectFontAbs(int size, unsigned flags, bool zesc = false);
+    HDC   DC() { return m_hDC; }
+    void   GetFontSize(int& height, int& ascent);
+    void   SetBkColor(COLORREF c) { if (c != m_bg) ::SetBkColor(m_hDC, m_bg = c); }
+    void   SetTextColor(COLORREF c) { if (c != m_fg) ::SetTextColor(m_hDC, m_fg = c); }
+    void   SetColor(COLORREF c);
+    int   GetLPX();
+    int   GetHypWidth();
+    void   GetTextExtent(const wchar_t *str, int len, int width, int& nch, int *dx, SIZE& sz);
 
     static void SetDefaultFont(const TCHAR *face, int basesize, bool bold,
         int cleartype, int angle);

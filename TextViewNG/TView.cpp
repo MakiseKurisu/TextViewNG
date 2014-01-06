@@ -29,7 +29,7 @@
 *
 */
 
-#define _WIN32_WINNT	_WIN32_WINNT_MAXVER
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
 
 #include <afxcmn.h>
 #include <afxtempl.h>
@@ -68,15 +68,15 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 #ifndef CSIDL_STARTMENU
-#define CSIDL_STARTMENU	0x000b
+#define CSIDL_STARTMENU 0x000b
 #endif
 
-#define	DO_CLIP		  0
-#define	PROGRESS_M	  3
-#define	PROGRESS_A	  11
-#define	PROGRESS_C	  10
-#define	PROGRESS_F	  6
-#define	FRAME_SIZE	  3
+#define DO_CLIP    0
+#define PROGRESS_M   3
+#define PROGRESS_A   11
+#define PROGRESS_C   10
+#define PROGRESS_F   6
+#define FRAME_SIZE   3
 
 // colors
 ColorItem    g_colors[] = {
@@ -99,7 +99,7 @@ ColorItem    g_colors[] = {
     { NULL }
 };
 
-int	    g_color_profile;
+int     g_color_profile;
 
 enum {
     TM_SAVEINFO = 1,
@@ -165,21 +165,21 @@ void  LoadColors() {
 }
 
 bool  NextColorProfile() {
-    HKEY	hKey = AfxGetApp()->GetSectionKey(_T("Colors"));
+    HKEY hKey = AfxGetApp()->GetSectionKey(_T("Colors"));
     if (hKey == NULL)
         return false;
 
-    int	  next_id = 0;
-    bool	  found = false;
+    int   next_id = 0;
+    bool   found = false;
 
-    TCHAR	name[16];
+    TCHAR name[16];
     for (DWORD idx = 0;; ++idx) {
         DWORD   namesize = sizeof(name) / sizeof(name[0]);
         DWORD   type;
         if (RegEnumValue(hKey, idx, name, &namesize, 0, &type, NULL, NULL) != ERROR_SUCCESS)
             break;
 
-        int	    id;
+        int     id;
         if (_stscanf_s(name, _T("%d"), &id) != 1)
             continue;
 
@@ -210,25 +210,25 @@ bool  NextColorProfile() {
 }
 
 void  AddColorProfileNames(void *vmenu, int startpos) {
-    CMenu	*menu = (CMenu *)vmenu;
+    CMenu *menu = (CMenu *)vmenu;
 
     menu->InsertMenu(startpos, MF_BYPOSITION | MF_STRING, COLORS_BASE, _T("Default"));
     if (0 == g_color_profile)
         menu->CheckMenuRadioItem(startpos, startpos, startpos, MF_BYPOSITION);
     ++startpos;
 
-    HKEY	hKey = AfxGetApp()->GetSectionKey(_T("Colors"));
+    HKEY hKey = AfxGetApp()->GetSectionKey(_T("Colors"));
     if (hKey == NULL)
         return;
 
-    TCHAR	name[16];
+    TCHAR name[16];
     for (DWORD idx = 0;; ++idx) {
         DWORD   namesize = sizeof(name) / sizeof(name[0]);
         DWORD   type;
         if (RegEnumValue(hKey, idx, name, &namesize, 0, &type, NULL, NULL) != ERROR_SUCCESS)
             break;
 
-        int	    id;
+        int     id;
         if (_stscanf_s(name, _T("%d"), &id) != 1)
             continue;
 
@@ -326,7 +326,7 @@ void  CTView::Init() {
     m_timer = SetTimer(TM_SAVEINFO, DEF_SAVEINTERVAL, 0);
     StartWindowPDTimer();
     // initialize progress bar height
-    CFDC	dc(m_hWnd);
+    CFDC dc(m_hWnd);
     dc.SelectFontAbs(MulDiv(PROGRESS_F, GetDeviceCaps(dc.DC(), LOGPIXELSY), 72), CFDC::FORCENORMALWEIGHT | CFDC::FORCETAHOMA, true);
     int dummy;
     dc.GetFontSize(m_Window.progress_height, dummy);
@@ -461,17 +461,17 @@ BOOL CTView::PreCreateWindow(CREATESTRUCT& cs)
 
 struct FormatterGetLine : public CTView::IGetLine {
     TextFormatter   *m_tf;
-    int		  m_page;
-    int		  m_off;
-    int		  m_len;
+    int    m_page;
+    int    m_off;
+    int    m_len;
 
     FormatterGetLine(TextFormatter *tf, int page) : m_tf(tf), m_page(page), m_off(0) {
         for (int i = 0; i < page; ++i)
             m_off += tf->PageLength(i);
         m_len = tf->PageLength(page);
     }
-    int		  Length() { return m_len; }
-    const Line&	  At(int i) { return m_tf->GetLine(m_off + i); }
+    int    Length() { return m_len; }
+    const Line&   At(int i) { return m_tf->GetLine(m_off + i); }
 };
 
 static inline bool Overlap(const RECT& r1, const RECT& r2) {
@@ -485,7 +485,7 @@ static inline bool Overlap(const RECT& r1, const RECT& r2) {
 
 void CTView::OnPaint()
 {
-    RECT	    update_rect;
+    RECT     update_rect;
     if (!GetUpdateRect(&update_rect))
         return;
     System2Window(update_rect, m_Window.cli);
@@ -498,8 +498,8 @@ void CTView::OnPaint()
             m_formatter->Top(), m_formatter->Bottom()))
             checkbmk = true;
         // draw stuff
-        CFDC	    fdc(m_hWnd, &ps);
-        RECT	    col;
+        CFDC     fdc(m_hWnd, &ps);
+        RECT     col;
         col.left = col.top = 0;
         col.right = m_Window.width;
         col.bottom = m_Window.rheight;
@@ -507,7 +507,7 @@ void CTView::OnPaint()
             col.bottom -= m_Window.progress_height;
         for (int column = 0; column < m_Window.columns; ++column) {
             if (Overlap(col, update_rect)) {
-                FormatterGetLine	  gl(m_formatter.get(), column);
+                FormatterGetLine   gl(m_formatter.get(), column);
                 PaintColumn(fdc, update_rect, col, m_Window.cli,
                     &gl, m_TextDisp.margin_width, checkbmk);
             }
@@ -533,8 +533,8 @@ void  CTView::RedrawProgressBar() {
     if (!m_Window.showprogress())
         return;
 
-    CFDC	fdc(m_hWnd);
-    RECT	col;
+    CFDC fdc(m_hWnd);
+    RECT col;
     col.left = 0; col.top = m_Window.rheight - m_Window.progress_height;
     col.right = m_Window.rwidth; col.bottom = m_Window.rheight;
     UpdateWindowPD();
@@ -548,9 +548,9 @@ void CTView::PaintSingleLine(int column, int line, COLORREF underline) {
     if (line < 0 || line >= m_formatter->PageLength(column))
         return;
 
-    FormatterGetLine	  gl(m_formatter.get(), column);
+    FormatterGetLine   gl(m_formatter.get(), column);
 
-    RECT	  line_rect;
+    RECT   line_rect;
 
     line_rect.left = m_Window.width*column;
     line_rect.right = line_rect.left + m_Window.width;
@@ -560,18 +560,18 @@ void CTView::PaintSingleLine(int column, int line, COLORREF underline) {
     for (int i = 0; i < line; ++i)
         line_rect.top += gl.At(i).height;
 
-    const Line&	line_data = gl.At(line);
+    const Line& line_data = gl.At(line);
 
     line_rect.bottom = line_rect.top + line_data.height;
 
-    RECT	  cli;
+    RECT   cli;
     GetClientRect(&cli);
 
-    CFDC	  dc(m_hWnd);
+    CFDC   dc(m_hWnd);
     dc.SetTextColor(C_NORM);
     dc.SetBkColor(v_C_BG());
 
-    RECT	  tmp = line_rect;
+    RECT   tmp = line_rect;
     PaintLine(dc, cli, tmp, m_TextDisp.margin_width, line_data);
 
     dc.SetColor(C_TOCBM);
@@ -606,9 +606,9 @@ void CTView::PaintSbItem(CFDC& dc, const wchar_t *text, int len, const RECT& rc,
     if (len < 0)
         len = wcslen(text);
 
-    RECT	      ii;
-    SIZE	      sz;
-    int	      nch = 0;
+    RECT       ii;
+    SIZE       sz;
+    int       nch = 0;
 
     dc.GetTextExtent(text, len, rc.right - rc.left, nch, NULL, sz);
     if (pb_width > 0)
@@ -622,11 +622,11 @@ void CTView::PaintSbItem(CFDC& dc, const wchar_t *text, int len, const RECT& rc,
 }
 
 bool CTView::UpdateWindowPD() {
-    bool	  upd = false;
+    bool   upd = false;
 
     // calculate current position
-    int	  top = m_textfile->GetTotalLength(m_formatter->DocId());
-    int	  cur = m_formatter->DocId() < 0 ? m_textfile->GetPStart(m_formatter->DocId(), m_formatter->Top().para) :
+    int   top = m_textfile->GetTotalLength(m_formatter->DocId());
+    int   cur = m_formatter->DocId() < 0 ? m_textfile->GetPStart(m_formatter->DocId(), m_formatter->Top().para) :
         m_textfile->AbsPos(m_formatter->Bottom());
     m_Window.pd.cc = cur;
     if (m_formatter->DocId() >= 0)
@@ -671,7 +671,7 @@ bool CTView::UpdateWindowPD() {
         m_Window.pd.as = cur;
     }
 
-    SYSTEMTIME	stm;
+    SYSTEMTIME stm;
     ::GetLocalTime(&stm);
     cur = (stm.wHour << 8) | stm.wMinute;
     if (cur != m_Window.pd.tm) {
@@ -680,8 +680,8 @@ bool CTView::UpdateWindowPD() {
         m_Window.pd.tm = cur;
     }
 
-    SYSTEM_POWER_STATUS	    pws;
-    BOOL		    ok = GetSystemPowerStatus(&pws);
+    SYSTEM_POWER_STATUS     pws;
+    BOOL      ok = GetSystemPowerStatus(&pws);
     if (ok && pws.BatteryLifePercent >= 0 && pws.BatteryLifePercent <= 100) {
         if (pws.ACLineStatus == 1)
             cur = 101;
@@ -711,8 +711,8 @@ void CTView::StartWindowPDTimer() {
 
 void CTView::UpdateProgressBar() {
     if (UpdateWindowPD()) {
-        CFDC	fdc(m_hWnd);
-        RECT	col;
+        CFDC fdc(m_hWnd);
+        RECT col;
         col.left = 0; col.top = m_Window.rheight - m_Window.progress_height;
         col.right = m_Window.rwidth; col.bottom = m_Window.rheight;
         PaintProgressBar(fdc, col, m_Window.cli);
@@ -720,9 +720,9 @@ void CTView::UpdateProgressBar() {
 }
 
 void CTView::PaintProgressBar(CFDC& dc, const RECT& rc, const RECT& cli) {
-    RECT	      col;
+    RECT       col;
     wchar_t     buf[128];
-    int	      fonthdpi = MulDiv(PROGRESS_F, GetDeviceCaps(dc.DC(), LOGPIXELSY), 72);
+    int       fonthdpi = MulDiv(PROGRESS_F, GetDeviceCaps(dc.DC(), LOGPIXELSY), 72);
     dc.SelectFontAbs(fonthdpi, CFDC::FORCENORMALWEIGHT | CFDC::FORCETAHOMA);
     ::SetBkMode(dc.DC(), OPAQUE);
 
@@ -770,7 +770,7 @@ void CTView::PaintProgressBar(CFDC& dc, const RECT& rc, const RECT& cli) {
         rc2.left += 3; // XXX padding
         rc2.right -= m_Window.pb_width + 2; // XXX padding
         SIZE    sz;
-        int	    nch = 0;
+        int     nch = 0;
         CString tmp(m_Window.pd.title);
         dc.SelectFontAbs(fonthdpi, CFDC::FORCENORMALWEIGHT | CFDC::FORCETAHOMA, true);
         dc.GetTextExtent(tmp, tmp.GetLength(), rc2.right - rc2.left, nch, NULL, sz);
@@ -795,8 +795,8 @@ void CTView::PaintProgressBar(CFDC& dc, const RECT& rc, const RECT& cli) {
         RECT  rc2 = rc;
         rc2.top += 1 + (m_Window.progress_height - 5) / 2;
 
-        int	  bw = rc2.right - rc2.left - 2 * PROGRESS_M - 2 * PROGRESS_A - m_Window.pb_width;
-        int	  pos = m_Window.pd.top ? MulDiv(bw, m_Window.pd.cc, m_Window.pd.top) : bw;
+        int   bw = rc2.right - rc2.left - 2 * PROGRESS_M - 2 * PROGRESS_A - m_Window.pb_width;
+        int   pos = m_Window.pd.top ? MulDiv(bw, m_Window.pd.cc, m_Window.pd.top) : bw;
         col.left = rc2.left + PROGRESS_M + PROGRESS_A; col.top = rc2.top + 1;
         col.right = col.left + pos; col.bottom = col.top;
         dc.SetColor(C_GAUGE);
@@ -840,7 +840,7 @@ void CTView::PaintProgressBar(CFDC& dc, const RECT& rc, const RECT& cli) {
                 for (int ii = 0; ii < bm.GetSize(); ++ii) {
                     if (bm.Ref(ii).docid != m_formatter->DocId())
                         continue;
-                    COLORREF	  color = C_TOCL0;
+                    COLORREF   color = C_TOCL0;
                     col.top = rc2.top;
                     col.bottom = col.top + 5;
                     if (bm.Flags(ii)&Bookmarks::BMK) {
@@ -869,7 +869,7 @@ void CTView::PaintProgressBar(CFDC& dc, const RECT& rc, const RECT& cli) {
 void CTView::PaintBookmarkPopup(CFDC& dc, const RECT& rc, const RECT& cli) {
     // bascially it's a rectangle+paintcolumn
     // draw frame first
-    POINT	  pt[5];
+    POINT   pt[5];
     pt[0].x = rc.left; pt[0].y = rc.top;
     pt[1].x = rc.right - 1; pt[1].y = rc.top;
     pt[2].x = rc.right - 1; pt[2].y = rc.bottom - 1;
@@ -878,7 +878,7 @@ void CTView::PaintBookmarkPopup(CFDC& dc, const RECT& rc, const RECT& cli) {
     dc.SetColor(C_NORM);
     TDrawPolyLine(dc.DC(), cli, pt, 5);
     // shrink rc a bit to avoid overwriting frame
-    RECT	  nrc = rc;
+    RECT   nrc = rc;
     nrc.left++; nrc.right--;
     nrc.top++; nrc.bottom--;
     PaintColumn(dc, nrc, nrc, cli, &m_BP, FRAME_SIZE - 1, false);
@@ -895,7 +895,7 @@ void CTView::OnSize(UINT nType, int cx, int cy) {
 void CTView::PaintLine(CFDC& dc, const RECT& cli, RECT& line,
     int margin, const Line& l)
 {
-    int	  x = margin + l.ispace;
+    int   x = margin + l.ispace;
     if (l.flags&Line::image) {
         Image img;
         if (m_textfile->GetImage(l.href, dc.DC(), l.base, l.imageheight,
@@ -918,7 +918,7 @@ void CTView::PaintLine(CFDC& dc, const RECT& cli, RECT& line,
             TDrawText(dc.DC(), line.left, line.top, cli, line, NULL, 0, NULL);
     }
     else if (l.flags&Line::defstyle) {
-        int	  fh, fa; // fontheight,fontascent
+        int   fh, fa; // fontheight,fontascent
 
         dc.SelectFont(0, 0);
         dc.GetFontSize(fh, fa);
@@ -934,8 +934,8 @@ void  CTView::HighlightBookmarks(CFDC& dc, const RECT& cli, int left,
     int margin, int y, const Line& l,
     FilePos bmkstart, FilePos bmkend)
 {
-    RECT	    r;
-    int	    j, nc;
+    RECT     r;
+    int     j, nc;
 
     while (m_textfile->bmk().BookmarkFind(bmkstart, bmkend)) {
         r.top = y;
@@ -957,19 +957,19 @@ void CTView::PaintColumn(CFDC &dc, const RECT& update,
     const RECT& col, const RECT& cli, IGetLine *gl,
     int margin, bool chkbmk)
 {
-    RECT	  line;
+    RECT   line;
     dc.SetTextColor(C_NORM);
     dc.SetBkColor(v_C_BG());
 
     line.top = col.top;
 
-    int	i;
-    int	pl = gl->Length();
+    int i;
+    int pl = gl->Length();
 
     for (i = 0; i < pl; ++i, line.top = line.bottom) {
         line.left = col.left;
         line.right = col.right;
-        const Line&	l = gl->At(i);
+        const Line& l = gl->At(i);
         line.bottom = line.top + l.height;
         if (!Overlap(line, update))
             continue;
@@ -984,9 +984,9 @@ void CTView::PaintColumn(CFDC &dc, const RECT& update,
         FilePos bmkstart, bmkend;
         bmkend = gl->At(0).pos;
         dc.SetColor(C_TOCBM);
-        int	    y = col.top;
+        int     y = col.top;
         for (i = 0; i < pl; ++i) {
-            const Line&	l = gl->At(i);
+            const Line& l = gl->At(i);
             bmkstart = bmkend;
             bmkend = gl->At(i + 1).pos;
             HighlightBookmarks(dc, cli, col.left, margin, y, l, bmkstart, bmkend);
@@ -1002,7 +1002,7 @@ Generic line structure:
 |                 +  LM  +       text                 + RM +            +
 +-----------------+------+----------------------------+----+------------+
 |                                        +---
-|					      this is the
+|           this is the
 |                                         currently
 |                                         painted coulmn
 +--------------------------------------------
@@ -1022,12 +1022,12 @@ TDrawText call in the PaintColumn main loop.
 void  CTView::ComplexLine(CFDC& dc, const RECT& cli, RECT& line,
     int x, const Line& l)
 {
-    int		  flags = ETO_OPAQUE;
-    int		  len = l.str.size();
-    int		  off = 0;
-    int		  fh, fa;
-    int		  x0 = line.left;
-    int		  width = line.right - line.left;
+    int    flags = ETO_OPAQUE;
+    int    len = l.str.size();
+    int    off = 0;
+    int    fh, fa;
+    int    x0 = line.left;
+    int    width = line.right - line.left;
     // check if the backgound is the same
     for (int i = 0; i < len; ++i)
         if (l.attr[i].hibg)
@@ -1040,7 +1040,7 @@ normal_draw:
     while (len > 0) {
         line.right = x0 + x;
         Attr      attr = l.attr[off];
-        int	      run = 0;
+        int       run = 0;
         if (attr.img) {
             line.right += l.dx[off];
             run = 1;
@@ -1070,9 +1070,9 @@ normal_draw:
             // slow, but we were adding the feature later, and
             // the code wasn't designed for this in the first
             // place
-            Paragraph	p(m_textfile->GetParagraph(l.pos.docid, l.pos.para));
-            int	idx = l.str[off];
-            Image	img;
+            Paragraph p(m_textfile->GetParagraph(l.pos.docid, l.pos.para));
+            int idx = l.str[off];
+            Image img;
             if (idx >= 0 && idx < p.links.size() &&
                 m_textfile->GetImage(p.links[idx].target, dc.DC(),
                 l.dx[off],
@@ -1123,12 +1123,12 @@ void CTView::CalcSizes()
         m_Window.width = 1;
     if (m_Window.height == 0)
         m_Window.height = 1;
-    CFDC	fdc(m_hWnd);
+    CFDC fdc(m_hWnd);
     // calculate userinput window position
     fdc.SelectFont(3, 0);
-    int	  height, ascent;
+    int   height, ascent;
     fdc.GetFontSize(height, ascent);
-    int	  uwidth = m_Window.rwidth;
+    int   uwidth = m_Window.rwidth;
     if (uwidth > MAXUSERINPUTWIDTH)
         uwidth = MAXUSERINPUTWIDTH;
     m_UI.rc.left = (m_Window.rwidth - uwidth) / 2;
@@ -1145,10 +1145,10 @@ void CTView::CalcSizes()
 
 void CTView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-    UINT	cmd;
+    UINT cmd;
 
     // Check for key chatter and ignore event
-    DWORD	now = ::GetTickCount();
+    DWORD now = ::GetTickCount();
     if (m_Window.autorepeatlimit && now - m_Window.lastkeypress < REPEAT_THRESHOLD)
         return;
     m_Window.lastkeypress = now;
@@ -1184,8 +1184,8 @@ void CTView::Move(int dir, int amount)
         if (m_formatter->AtEof())
             return;
     }
-    Line	    l;
-    CFDC	    fdc(m_hWnd);
+    Line     l;
+    CFDC     fdc(m_hWnd);
     if (dir == mBack)
         switch (amount) {
         case mLine:
@@ -1228,21 +1228,21 @@ BOOL CTView::OnEraseBkgnd(CDC* pDC)
 class CAboutDialog : public CDialog {
 public:
     CAboutDialog(UINT id, CWnd *parent = NULL) : CDialog(id, parent) { }
-    virtual BOOL	OnInitDialog();
-    virtual BOOL	OnCommand(WPARAM, LPARAM);
+    virtual BOOL OnInitDialog();
+    virtual BOOL OnCommand(WPARAM, LPARAM);
     CString   m_info;
-    bool	    m_finfo;
+    bool     m_finfo;
 };
 
 #include "buildnum.h"
 
-#define FILE_INFO_FORMAT	\
+#define FILE_INFO_FORMAT \
     _T("File: %s\r\nSize: %d byte(s), %d paragraph(s)\r\n\r\nFormat: %s\r\nEncoding: %s\r\nCompression: %s\r\n\r\nPosition: %d:%d")
 
-#define ABOUT_FORMAT1		\
+#define ABOUT_FORMAT1  \
     _T("This program is based on Haali Reader 2.0b264\r\n\tCopyright (C) 2001-2007 Mike Matsnev.\r\n")
 
-#define ABOUT_FORMAT2		\
+#define ABOUT_FORMAT2  \
     _T("TextViewNG v2.0b%d %s\r\nCopyright (C)\t2001-2007 Mike Matsnev@haali.su\r\n\t\t2012-2014 MakiseKurisu@Github")
 
 BOOL CAboutDialog::OnInitDialog() {
@@ -1272,9 +1272,9 @@ BOOL CAboutDialog::OnCommand(WPARAM wParam, LPARAM lParam) {
 
 void CTView::OnAppAbout()
 {
-    CAboutDialog	  dlg(IDD_ABOUTBOX, this);
-    CString	  fmt, enc;
-    FilePos	  p = CurFilePos();
+    CAboutDialog   dlg(IDD_ABOUTBOX, this);
+    CString   fmt, enc;
+    FilePos   p = CurFilePos();
 
     if (m_textfile->GetFormat() < 0) {
         // auto
@@ -1371,7 +1371,7 @@ void CTView::OnFileformat()
             CTVApp::SetInt(_T("DefEncoding"), fmt.m_defencoding - 1);
         m_textfile->SetFormatEncoding(fmt.m_format - 1, fmt.m_encoding - 1);
         m_formatter->SetTop(FilePos());
-        CFDC	  fdc(m_hWnd);
+        CFDC   fdc(m_hWnd);
         m_formatter->Reformat(fdc);
         QueueRepaint();
         m_Search.matchpos = m_formatter->Eof();
@@ -1390,27 +1390,27 @@ void  CTView::PushPos() {
         m_History.pstack.RemoveHead();
 }
 
-static CString	GetNextFile(const CString& filename, bool fNext) {
-    CString	    path(filename);
-    int		    p1 = path.ReverseFind(_T('\\'));
-    int		    p2 = path.ReverseFind(_T('/'));
+static CString GetNextFile(const CString& filename, bool fNext) {
+    CString     path(filename);
+    int      p1 = path.ReverseFind(_T('\\'));
+    int      p2 = path.ReverseFind(_T('/'));
     p1 = max(p1, p2) + 1;
     path.Delete(p1, path.GetLength() - p1);
     path += _T("*");
 
-    CString	    file(filename);
+    CString     file(filename);
     file.Delete(0, p1);
 
-    CString	    prev, first;
+    CString     prev, first;
     WIN32_FIND_DATA   fd;
-    HANDLE	    hFind = ::FindFirstFile(path, &fd);
-    BOOL		    fFind = hFind != INVALID_HANDLE_VALUE;
+    HANDLE     hFind = ::FindFirstFile(path, &fd);
+    BOOL      fFind = hFind != INVALID_HANDLE_VALUE;
 
     for (; fFind; fFind = ::FindNextFile(hFind, &fd)) {
         if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
             continue;
 
-        const TCHAR	  *ext = fd.cFileName + _tcslen(fd.cFileName);
+        const TCHAR   *ext = fd.cFileName + _tcslen(fd.cFileName);
         while (ext > fd.cFileName && ext[-1] != _T('.'))
             --ext;
         if (_tcsicmp(ext, _T("jpg")) && _tcsicmp(ext, _T("png")) &&
@@ -1492,8 +1492,8 @@ void CTView::OnBack() {
 }
 
 void  CTView::OnNextSection() {
-    Bookmarks&	bm = m_textfile->bmk();
-    FilePos	cur = m_formatter->Bottom();
+    Bookmarks& bm = m_textfile->bmk();
+    FilePos cur = m_formatter->Bottom();
     if (cur < m_formatter->Eof()) {
         int   index = bm.BFind(cur, Bookmarks::SNEXTCH);
         if (index < bm.GetSize()) {
@@ -1508,8 +1508,8 @@ void  CTView::OnNextSection() {
 }
 
 void  CTView::OnPrevSection() {
-    Bookmarks&	bm = m_textfile->bmk();
-    FilePos	cur = m_formatter->Top();
+    Bookmarks& bm = m_textfile->bmk();
+    FilePos cur = m_formatter->Top();
     if (cur > FilePos()) {
         int   index = bm.BFind(cur, Bookmarks::SPREVCH);
         if (index < bm.GetSize()) {
@@ -1527,7 +1527,7 @@ void  CTView::OnPrevSection() {
 }
 
 void  CTView::DisplayBookmarkPopup(int index) {
-    Bookmarks&	bm = m_textfile->bmk();
+    Bookmarks& bm = m_textfile->bmk();
 
     if (bm.Flags(index) & Bookmarks::BMK) {
         POINT pt;
@@ -1539,8 +1539,8 @@ void  CTView::DisplayBookmarkPopup(int index) {
 }
 
 void  CTView::OnNextBm() {
-    Bookmarks&	bm = m_textfile->bmk();
-    int		index;
+    Bookmarks& bm = m_textfile->bmk();
+    int  index;
 
     if (m_BP.bmkidx >= 0 && m_BP.bmkidx < bm.GetSize() - 1) {
         index = m_BP.bmkidx + 1;
@@ -1549,7 +1549,7 @@ void  CTView::OnNextBm() {
         if (m_formatter->AtEof())
             return;
 
-        FilePos	cur = m_formatter->Bottom();
+        FilePos cur = m_formatter->Bottom();
         index = bm.BFind(cur, Bookmarks::SNEXTANY);
         if (index >= bm.GetSize())
             return;
@@ -1568,9 +1568,9 @@ void  CTView::OnNextBm() {
 }
 
 void  CTView::OnPrevBm() {
-    Bookmarks&	bm = m_textfile->bmk();
+    Bookmarks& bm = m_textfile->bmk();
 
-    int		index;
+    int  index;
 
     if (m_BP.bmkidx > 0 && m_BP.bmkidx < bm.GetSize()) {
         index = m_BP.bmkidx - 1;
@@ -1579,7 +1579,7 @@ void  CTView::OnPrevBm() {
         if (m_formatter->AtTop())
             return;
 
-        FilePos	cur = m_formatter->Top();
+        FilePos cur = m_formatter->Top();
         index = bm.BFind(cur, Bookmarks::SPREVANY);
         if (index >= bm.GetSize())
             return;
@@ -1603,7 +1603,7 @@ void CTView::HandleMouseDown(CPoint point) {
         return;
     }
 
-    POINT	    pt;
+    POINT     pt;
     FilePos   pos;
 
     pt.x = point.x;
@@ -1651,9 +1651,9 @@ void CTView::HandleMouseDown(CPoint point) {
 
     if (LookupAddr(pt, pos)) {
         // check if there is a bookmark nearby
-        int	    bmk = m_textfile->bmk().BFind(pos, Bookmarks::SPREVBMK);
+        int     bmk = m_textfile->bmk().BFind(pos, Bookmarks::SPREVBMK);
         if (bmk >= 0) {
-            FilePos	bp(m_textfile->bmk().Ref(bmk));
+            FilePos bp(m_textfile->bmk().Ref(bmk));
             if (bp.docid == pos.docid && bp.para == pos.para && bp.off >= pos.off - 2) {
                 DisplayBookmarkPopup(pt, Unicode::ToWCbuf(m_textfile->bmk().Text(bmk, m_textfile.get())));
                 return;
@@ -1700,13 +1700,13 @@ void CTView::OnLButtonDblClk(UINT nFlags, CPoint point) {
 }
 
 void CTView::MoveAbs(FilePos pos) {
-    CFDC		fdc(m_hWnd);
+    CFDC  fdc(m_hWnd);
     m_formatter->FormatFwd(fdc, pos);
     QueueRepaint();
 }
 
 void CTView::EnsureVisible(FilePos pos) {
-    CFDC		fdc(m_hWnd);
+    CFDC  fdc(m_hWnd);
     if (m_formatter->EnsureVisible(fdc, pos))
         QueueRepaint();
 }
@@ -1749,10 +1749,10 @@ void CTView::OnUpdateFindnext(CCmdUI* pCmdUI) {
 }
 
 static Buffer<int>  kmptable(const Buffer<wchar_t>& s) {
-    Buffer<int>	b(s.size() + 1);
+    Buffer<int> b(s.size() + 1);
 
     if (s.size() > 0) {
-        int		i, j;
+        int  i, j;
 
         i = 0;
         j = b[0] = -1;
@@ -1770,10 +1770,10 @@ static Buffer<int>  kmptable(const Buffer<wchar_t>& s) {
     return b;
 }
 
-static int	  kmpfind(const wchar_t *s, int len, int off, const wchar_t *pat,
+static int   kmpfind(const wchar_t *s, int len, int off, const wchar_t *pat,
     int patlen, int *tab)
 {
-    int	  i = 0, j = off;
+    int   i = 0, j = off;
     while (j<len) {
         while (i>-1 && pat[i] != s[j])
             i = tab[i];
@@ -1788,13 +1788,13 @@ static int	  kmpfind(const wchar_t *s, int len, int off, const wchar_t *pat,
 void CTView::DoFind() {
     if (m_Search.matchpos.para < m_textfile->Length(m_Search.matchpos.docid)) {
         CWaitCursor wait;
-        Buffer<int>	tab(kmptable(m_Search.matchcase ? m_Search.searchstr :
+        Buffer<int> tab(kmptable(m_Search.matchcase ? m_Search.searchstr :
             Unicode::Lower(m_Search.searchstr)));
         while (m_Search.matchpos.para < m_textfile->Length(m_Search.matchpos.docid)) {
-            Paragraph	      para(m_textfile->GetParagraph(m_Search.matchpos.docid,
+            Paragraph       para(m_textfile->GetParagraph(m_Search.matchpos.docid,
                 m_Search.matchpos.para));
             Buffer<wchar_t> text(m_Search.matchcase ? para.str : Unicode::Lower(para.str));
-            int	      pp = kmpfind(text, text.size(),
+            int       pp = kmpfind(text, text.size(),
                 m_Search.matchpos.off, m_Search.searchstr, m_Search.searchstr.size(), tab);
             if (pp >= 0) {
                 m_Search.matchpos.off = pp;
@@ -1823,7 +1823,7 @@ void CTView::OnUpdateColors(CCmdUI* pCmdUI) {
 }
 
 void CTView::OnColors() {
-    int	gamma = CTVApp::GetInt(_T("Gamma"), DEF_GAMMA);
+    int gamma = CTVApp::GetInt(_T("Gamma"), DEF_GAMMA);
     if (myChooseColors(g_colors, &gamma, this)) {
         SaveColors();
         CTVApp::SetInt(_T("Gamma"), gamma);
@@ -1833,8 +1833,8 @@ void CTView::OnColors() {
 }
 
 void CTView::OnAddBmk() {
-    CAddBmDialog	  dlg(this);
-    FilePos	  pos(CurFilePos());
+    CAddBmDialog   dlg(this);
+    FilePos   pos(CurFilePos());
     Buffer<wchar_t> sel;
     if (m_Sel.start.docid == pos.docid && GetSelText(sel))
         pos = m_Sel.start;
@@ -1894,20 +1894,20 @@ void CTView::OnDestroy()
 }
 
 LRESULT CTView::OnHotkey(WPARAM wp, LPARAM lp) {
-    UINT	cmd;
+    UINT cmd;
     if (Keys::TranslateKey(wp, cmd))
         CTVApp::QueueCmd(cmd);
     return 0;
 }
 
 void CTView::OnStyles() {
-    CStylesDlg	dlg(this);
+    CStylesDlg dlg(this);
 
     if (dlg.DoModal() == IDOK) {
         if (dlg.SaveChanges()) {
             //XMLParser::SaveStyles();
             m_textfile->Reparse();
-            CFDC	  fdc(m_hWnd);
+            CFDC   fdc(m_hWnd);
             m_formatter->Reformat(fdc);
             QueueRepaint();
         }
@@ -1919,7 +1919,7 @@ void CTView::OnUpdateStyles(CCmdUI* pCmdUI) {
 }
 
 bool CTView::LookupAddr(const POINT& vp, FilePos& p) {
-    int	  column = vp.x / m_Window.width;
+    int   column = vp.x / m_Window.width;
     if (column < 0 || column >= m_Window.columns) {
         if (column < 0)
             p = m_formatter->Top();
@@ -1927,11 +1927,11 @@ bool CTView::LookupAddr(const POINT& vp, FilePos& p) {
             p = m_formatter->Bottom();
         return false;
     }
-    int	  off = 0;
+    int   off = 0;
     for (int col = 0; col < column; ++col)
         off += m_formatter->PageLength(col);
-    int	  line = 0;
-    int	  cury = 0;
+    int   line = 0;
+    int   cury = 0;
     if (vp.y < 0) {
         if (m_formatter->PageLength(column)>0)
             p = m_formatter->GetLine(off).pos;
@@ -1940,7 +1940,7 @@ bool CTView::LookupAddr(const POINT& vp, FilePos& p) {
         return false;
     }
     for (; line < m_formatter->PageLength(column); ++line) {
-        const Line&	l = m_formatter->GetLine(off + line);
+        const Line& l = m_formatter->GetLine(off + line);
         if (vp.y >= cury && vp.y < cury + l.height) {
             // found line
             if (l.flags&Line::image) {
@@ -1987,8 +1987,8 @@ bool  CTView::LookupPoint(FilePos p, POINT& pt) {
     for (int column = 0, max = 0, i = 0, x = 0; column < m_Window.columns; ++column, x += m_Window.width) {
         max += m_formatter->PageLength(column);
         for (int y = 0; i < max; ++i) {
-            const Line&	l1 = m_formatter->GetLine(i);
-            const Line&	l2 = m_formatter->GetLine(i + 1);
+            const Line& l1 = m_formatter->GetLine(i);
+            const Line& l2 = m_formatter->GetLine(i + 1);
             if (p >= l1.pos && p < l2.pos) {
                 x += l1.ispace + m_TextDisp.margin_width;
                 int dist = p.off - l1.pos.off;
@@ -2039,21 +2039,21 @@ class CCustomMenu : public CWnd, public CRotate
 public:
     CCustomMenu() { }
 
-    void	  AppendMenu(const CString& title, UINT id) {
+    void   AppendMenu(const CString& title, UINT id) {
         m_title.Add(title);
         m_id.Add(id);
     }
 
-    UINT	  TrackPopupMenu(CWnd *parent, int reqx, int reqy, int angle);
+    UINT   TrackPopupMenu(CWnd *parent, int reqx, int reqy, int angle);
 
 protected:
     enum { FSZ = 13, PAD = 2, BORDER = 1 };
 
-    CStringArray	  m_title;
-    CUIntArray	  m_id;
-    int		  m_selection, m_fh, m_fa, m_w, m_h;
+    CStringArray   m_title;
+    CUIntArray   m_id;
+    int    m_selection, m_fh, m_fa, m_w, m_h;
 
-    void	MenuSelect() {
+    void MenuSelect() {
 #if 0
         PlaySound(_T("hwandsw"), NULL, SND_ASYNC | SND_NODEFAULT); // XXX hack
 #endif
@@ -2083,7 +2083,7 @@ BEGIN_MESSAGE_MAP(CCustomMenu, CWnd)
 END_MESSAGE_MAP()
 
 void  CCustomMenu::OnMouseMove(UINT nFlags, CPoint point) {
-    RECT	cli;
+    RECT cli;
     GetClientRect(&cli);
     System2Window(point, cli);
     int sel = -1;
@@ -2096,7 +2096,7 @@ void  CCustomMenu::OnMouseMove(UINT nFlags, CPoint point) {
 }
 
 void  CCustomMenu::OnLButtonDown(UINT nFlags, CPoint point) {
-    RECT	cli;
+    RECT cli;
     GetClientRect(&cli);
     System2Window(point, cli);
     if (point.x < BORDER || point.x >= m_w - BORDER || point.y < BORDER || point.y >= m_h - BORDER)
@@ -2108,7 +2108,7 @@ void  CCustomMenu::OnLButtonDown(UINT nFlags, CPoint point) {
 }
 
 void  CCustomMenu::OnLButtonUp(UINT nFlags, CPoint point) {
-    RECT	cli;
+    RECT cli;
     GetClientRect(&cli);
     System2Window(point, cli);
     if (point.x >= BORDER && point.x < m_w - BORDER && point.y >= BORDER && point.y < m_h - BORDER) {
@@ -2160,8 +2160,8 @@ void  CCustomMenu::OnPaint() {
 
     PAINTSTRUCT ps;
     {
-        CFDC	    fdc(m_hWnd, &ps);
-        RECT	    rc, cli;
+        CFDC     fdc(m_hWnd, &ps);
+        RECT     rc, cli;
 
         GetClientRect(&cli);
         rc.left = BORDER; rc.right = m_w - BORDER;
@@ -2202,7 +2202,7 @@ UINT  CCustomMenu::TrackPopupMenu(CWnd *parent, int reqx, int reqy, int angle) {
     m_w = 0;
     {
         // borrow parent's DC
-        CFDC	  dc(parent->m_hWnd);
+        CFDC   dc(parent->m_hWnd);
 
         dc.SelectFontAbs((FSZ*GetDeviceCaps(dc.DC(), LOGPIXELSY)) / 96, CFDC::FORCENORMALWEIGHT | CFDC::FORCETAHOMA, true);
 
@@ -2222,16 +2222,16 @@ UINT  CCustomMenu::TrackPopupMenu(CWnd *parent, int reqx, int reqy, int angle) {
     m_w += PAD * 2 + BORDER * 2;
     m_h += BORDER * 2;
 
-    int	sw = m_w, sh = m_h;
+    int sw = m_w, sh = m_h;
 
     if (angle == 900 || angle == 2700)
         sw = m_h, sh = m_w;
 
-    RECT	rc;
+    RECT rc;
     parent->GetClientRect(&rc);
 
-    int	mw = ((rc.right - rc.left) * 7) >> 3;
-    int	mh = ((rc.bottom - rc.top) * 7) >> 3;
+    int mw = ((rc.right - rc.left) * 7) >> 3;
+    int mh = ((rc.bottom - rc.top) * 7) >> 3;
 
     if (sw > mw)
         sw = mw;
@@ -2244,7 +2244,7 @@ UINT  CCustomMenu::TrackPopupMenu(CWnd *parent, int reqx, int reqy, int angle) {
         m_w = sw, m_h = sh;
 
     // align window's top left corner with requested point
-    int	tlx, tly;
+    int tlx, tly;
 
     switch (angle) {
     case 900: tlx = reqx; tly = reqy - sh; break;
@@ -2268,7 +2268,7 @@ UINT  CCustomMenu::TrackPopupMenu(CWnd *parent, int reqx, int reqy, int angle) {
     // initialize
     m_selection = -1;
 
-    HWND	hFocus = ::GetFocus();
+    HWND hFocus = ::GetFocus();
 
     // create&show window
     Create(NULL, NULL, WS_CHILD, rc, parent, 0);
@@ -2359,7 +2359,7 @@ void CTView::OnMiscopt() {
         if (dlg.m_fbsize > 1024)
             dlg.m_fbsize = 1024;
         dlg.m_fbsize <<= 10;
-        int	  fbs = 8192;
+        int   fbs = 8192;
         while ((fbs << 1) <= dlg.m_fbsize)
             fbs <<= 1;
         if (fbs != CTVApp::GetInt(_T("FileBufSize"), DEF_FBUF))
@@ -2414,13 +2414,13 @@ void CTView::OnUpdateEditCopy(CCmdUI* pCmdUI) {
 
 void CTView::CalcSelection(FilePos& p, int& len) {
     FilePos   start, end;
-    POINT	    a, b;
+    POINT     a, b;
     a = m_Mouse.start; b = m_Mouse.end;
     System2Window(a, m_Window.cli);
     System2Window(b, m_Window.cli);
     LookupAddr(a, start);
     LookupAddr(b, end);
-    int	    dist = m_formatter->Distance(start, end);
+    int     dist = m_formatter->Distance(start, end);
     if (dist < 0) {
         p = end;
         len = -dist;
@@ -2445,14 +2445,14 @@ void CTView::OnRotate() {
 int   CTView::GetSelParagraphCount() {
     if (m_Sel.len == 0)
         return 0;
-    int	  len = m_Sel.len;
-    int	  pcount = 0;
+    int   len = m_Sel.len;
+    int   pcount = 0;
     FilePos p(m_Sel.start);
     FilePos eof(p);
     eof.para = m_textfile->Length(p.docid);
     eof.off = 0;
     while (len > 0 && p < eof) {
-        int	  plen = m_textfile->GetPLength(p.docid, p.para) - p.off;
+        int   plen = m_textfile->GetPLength(p.docid, p.para) - p.off;
         if (plen < 0)
             plen = 0;
         if (plen > len)
@@ -2473,13 +2473,13 @@ bool  CTView::GetSelText(Buffer<wchar_t>& str) {
     FilePos eof(p);
     eof.para = m_textfile->Length(p.docid);
     eof.off = 0;
-    int	  pl = GetSelParagraphCount();
-    int	  len = m_Sel.len;
+    int   pl = GetSelParagraphCount();
+    int   len = m_Sel.len;
 
     Buffer<wchar_t>   tmp(len + 2 * pl);
-    wchar_t	      *bp = tmp;
+    wchar_t       *bp = tmp;
     Paragraph pp(m_textfile->GetParagraph(p.docid, p.para));
-    int	  ll = pp.str.size() - p.off;
+    int   ll = pp.str.size() - p.off;
     if (ll < 0)
         ll = 0;
     if (ll > len)
@@ -2533,7 +2533,7 @@ void  CTView::MovePercent(int p) {
 }
 
 static int ParsePosSpec(const CString& s, int& v1, int& v2) {
-    int	i;
+    int i;
 
     v1 = v2 = 0;
 
@@ -2569,11 +2569,11 @@ end:
 }
 
 bool CTView::CanAddUIChar(TCHAR ch) {
-    CFDC	dc(m_hWnd);
+    CFDC dc(m_hWnd);
     dc.SelectFont(USERINPUTSIZE, USERINPUTFLAGS);
     m_UI.inp += ch;
-    int	nch = m_UI.inp.GetLength();
-    SIZE	sz;
+    int nch = m_UI.inp.GetLength();
+    SIZE sz;
     dc.GetTextExtent(m_UI.inp, nch, m_UI.rc.right - m_UI.rc.left, nch, NULL, sz);
     m_UI.inp.Delete(m_UI.inp.GetLength() - 1);
     return nch > m_UI.inp.GetLength() && sz.cx < m_UI.rc.right - m_UI.rc.left;
@@ -2643,7 +2643,7 @@ void CTView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
         case 0: // not a valid spec at all, try lookup
             if (m_formatter->DocId() < 0) {
                 // inside dictionary
-                Buffer<wchar_t>	  tmp(Unicode::ToWCbufZ(m_UI.inp));
+                Buffer<wchar_t>   tmp(Unicode::ToWCbufZ(m_UI.inp));
                 if (m_textfile->LookupDict(tmp, p)) {
                     MoveAbs(p);
                     m_Dict.lastdictlookup = tmp;
@@ -2657,11 +2657,11 @@ void CTView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
         HideText();
 }
 
-FilePos	  CTView::CurFilePos() {
+FilePos   CTView::CurFilePos() {
     FilePos   p = m_formatter->Top();
     if (p.docid == -1) {
         // skip dictionary positions
-        POSITION	sp = m_History.stacktop;
+        POSITION sp = m_History.stacktop;
         if (sp)
             m_History.pstack.GetPrev(sp);
         else
@@ -2708,7 +2708,7 @@ void  CTView::ShowText() {
         QueueRepaint(m_UI.rc);
     else {
         // otherwise repaint directly
-        CFDC	fdc(m_hWnd);
+        CFDC fdc(m_hWnd);
         PaintUserInput(fdc, m_UI.rc, m_Window.cli, Unicode::ToWCbuf(m_UI.inp));
     }
 }
@@ -2735,7 +2735,7 @@ void  CTView::OnOK() {
                 p = m_History.pstack.GetTailPosition();
             else
                 m_History.pstack.GetPrev(p);
-            FilePos	np(m_History.pstack.GetAt(p));
+            FilePos np(m_History.pstack.GetAt(p));
             m_History.pstack.SetAt(p, cur);
             cur = np;
         }
@@ -2781,7 +2781,7 @@ void  CTView::DisplayBookmarkPopup(const POINT& spot, const Buffer<wchar_t>& tex
     if (m_BP.visible) // repaint if we already have a bookmark
         InvalidateRect(m_BP.rc);
     m_BP.text = text;
-    CFDC	dc(m_hWnd);
+    CFDC dc(m_hWnd);
     FormatBookmarkPopup(dc, spot);
     m_BP.visible = true;
     PaintBookmarkPopup(dc, m_BP.rc, m_Window.cli);
@@ -2809,12 +2809,12 @@ void  CTView::InvalidateRange(const FilePos& x, const FilePos& y) {
     int column = 0;
     int line = 0;
     while (line < nlines) {
-        int	  col_last = line + m_formatter->PageLength(column);
-        int	  ystart = -1, yend = 0;
-        int	  cury = 0;
+        int   col_last = line + m_formatter->PageLength(column);
+        int   ystart = -1, yend = 0;
+        int   cury = 0;
         while (line < col_last) {
             const Line&   ll = m_formatter->GetLine(line);
-            FilePos	    le(ll.pos);
+            FilePos     le(ll.pos);
             le.off += ll.real_len;
             if (x < le && ll.pos < y) {
                 // in range
@@ -2840,9 +2840,9 @@ void  CTView::InvalidateRange(const FilePos& x, const FilePos& y) {
 void  CTView::SetSelection(const FilePos& p, int len) {
     if (p != m_Sel.start || len != m_Sel.len) {
         if (m_formatter->SetHighlight(p, len)) {
-            FilePos	e(p);
+            FilePos e(p);
             Advance(e, len);
-            FilePos	ce(m_Sel.start);
+            FilePos ce(m_Sel.start);
             Advance(ce, m_Sel.len);
             if (e <= m_Sel.start || ce <= p) {
                 // do not intersect, invalidate both
@@ -2915,7 +2915,7 @@ void  CTView::StartAS() {
 
     if (m_AS.column < 0 || m_AS.line < 0 || m_AS.top_pos != m_formatter->Top()) {
         // try to start near the end of page
-        int	  tc = m_formatter->Length() - 5;
+        int   tc = m_formatter->Length() - 5;
         if (tc < 0)
             tc = 0;
         m_AS.column = 0;
@@ -3135,9 +3135,9 @@ void CTView::OnUpdateExportBmk(CCmdUI* pCmdUI) {
     pCmdUI->Enable();
 }
 void CTView::OnExportBmk() {
-    CString	filename;
+    CString filename;
 
-    OPENFILENAME	ofn;
+    OPENFILENAME ofn;
 
     memset(&ofn, 0, sizeof(ofn));
     ofn.lStructSize = sizeof(ofn);
@@ -3165,7 +3165,7 @@ void CTView::OnNewColorProfile() {
         SaveColors();
 
         // allocate new profile id and switch to it
-        int	    id;
+        int     id;
         CString name;
         HKEY    hKey = AfxGetApp()->GetSectionKey(_T("Colors"));
 
@@ -3196,7 +3196,7 @@ void CTView::OnDelColorProfile() {
     if (id == 0 || !NextColorProfile())
         return;
 
-    HKEY	hKey = AfxGetApp()->GetSectionKey(_T("Colors"));
+    HKEY hKey = AfxGetApp()->GetSectionKey(_T("Colors"));
     if (hKey == NULL)
         return;
 
