@@ -120,6 +120,7 @@ protected:
     afx_msg void OnFileOpen();
     afx_msg void OnInitView();
     afx_msg BOOL OnCopyData(CWnd *pWnd, COPYDATASTRUCT *pcd);
+    afx_msg void OnDropFiles(HDROP hDropInfo);
     afx_msg void OnUpdateMainTools(CCmdUI* pCmdUI);
     afx_msg void OnUpdateMainOptions(CCmdUI* pCmdUI);
     afx_msg void OnInitMenuPopup(CMenu* pPopupMenu, UINT nIndex, BOOL bSysMenu);

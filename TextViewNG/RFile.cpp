@@ -91,7 +91,7 @@ bool RFile::Reopen()
         m_fh = INVALID_HANDLE_VALUE;
     }
 
-    HANDLE fh = CreateFile(m_fn, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+    HANDLE fh = CreateFile(m_fn, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
     if (fh == INVALID_HANDLE_VALUE)
     {
         m_didreopen = true;

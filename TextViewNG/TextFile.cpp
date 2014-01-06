@@ -158,7 +158,7 @@ TextFile *TextFile::Open(const CString& filename)
     // normalize filename
     TCHAR buffer[MAX_PATH], *filepart;
     DWORD nc = GetFullPathName(cur, sizeof(buffer) / sizeof(TCHAR), buffer, &filepart);
-    if (nc > 0 && nc < sizeof(buffer) / sizeof(TCHAR))
+    if (nc > 0 && nc < sizeof(buffer) / sizeof(buffer[0]))
         FILENAME = buffer;
     else
         FILENAME = filename;
@@ -180,6 +180,15 @@ TextFile *TextFile::Open(const CString& filename)
             {
                 delete tf;
                 tf = NULL;
+            }
+            else
+            {
+                CString ipath(FILENAME);
+                int i = ipath.ReverseFind(_T('\\'));
+                if (i != -1)
+                {
+                    CTVApp::SetStr(_T("OpenPath"), ipath.Left(i));
+                }
             }
             break;
         }

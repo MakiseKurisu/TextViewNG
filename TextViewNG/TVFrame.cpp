@@ -77,6 +77,7 @@ BEGIN_MESSAGE_MAP(CTVFrame, CFrameWnd)
     ON_COMMAND(ID_FILE_OPEN, OnFileOpen)
     ON_COMMAND(ID_INIT, OnInitView)
     ON_WM_COPYDATA()
+    ON_WM_DROPFILES()
     ON_UPDATE_COMMAND_UI(ID_MAIN_TOOLS, OnUpdateMainTools)
     ON_UPDATE_COMMAND_UI(ID_MAIN_OPTIONS, OnUpdateMainOptions)
     ON_WM_INITMENUPOPUP()
@@ -333,6 +334,19 @@ BOOL CTVFrame::OnCopyData(CWnd *pWnd, COPYDATASTRUCT *pcd)
     return TRUE;
 }
 
+void CTVFrame::OnDropFiles(HDROP hDropInfo)
+{
+    if (::DragQueryFile(hDropInfo, (UINT) -1, NULL, 0))
+    {
+        UINT cch = DragQueryFile(hDropInfo, 0, NULL, 0) + 1;
+        LPTSTR lpszFile = (LPTSTR) malloc(cch * sizeof(lpszFile[0]));
+        DragQueryFile(hDropInfo, 0, lpszFile, cch);
+        CString szFile(lpszFile);
+        TryOpenFile(szFile);
+        free(lpszFile);
+    }
+}
+
 void CTVFrame::SaveWndPos()
 {
     WINDOWPLACEMENT pl;
@@ -347,8 +361,6 @@ void CTVFrame::SaveWndPos()
 bool CTVFrame::InitView()
 {
     bool dictmode = false;
-    // initialize xml parser
-    //XMLParser::LoadStyles();
     bool triednoquote = false;
     CString filename(AfxGetApp()->m_lpCmdLine);
     if (filename == _T("-d")) // show dictionary
@@ -407,6 +419,8 @@ bool CTVFrame::InitView()
     SetWindowText(_T("TextViewNG: ") + FileName(filename));
     m_wndView.reset(tv);
     m_realview = true;
+
+    DragAcceptFiles(TRUE);
     return true;
 }
 
