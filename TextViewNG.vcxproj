@@ -323,7 +323,6 @@
     <ClInclude Include="TextViewNG\Keys.h" />
     <ClInclude Include="TextViewNG\MiscOptDlg.h" />
     <ClInclude Include="TextViewNG\OptionsDialog.h" />
-    <ClInclude Include="TextViewNG\PDBFile.h" />
     <ClInclude Include="TextViewNG\ProgressDlg.h" />
     <ClInclude Include="TextViewNG\ptr.h" />
     <ClInclude Include="TextViewNG\resource.h" />
@@ -331,7 +330,6 @@
     <ClInclude Include="TextViewNG\Rotate.h" />
     <ClInclude Include="TextViewNG\StrBuf.h" />
     <ClInclude Include="TextViewNG\StylesDlg.h" />
-    <ClInclude Include="TextViewNG\TCRFile.h" />
     <ClInclude Include="TextViewNG\TextFile.h" />
     <ClInclude Include="TextViewNG\TextFormatter.h" />
     <ClInclude Include="TextViewNG\TextParser.h" />
@@ -357,13 +355,11 @@
     <ClCompile Include="TextViewNG\Keys.cpp" />
     <ClCompile Include="TextViewNG\MiscOptDlg.cpp" />
     <ClCompile Include="TextViewNG\OptionsDialog.cpp" />
-    <ClCompile Include="TextViewNG\PDBFile.cpp" />
     <ClCompile Include="TextViewNG\ProgressDlg.cpp" />
     <ClCompile Include="TextViewNG\RFile.cpp" />
     <ClCompile Include="TextViewNG\Rotate.cpp" />
     <ClCompile Include="TextViewNG\StrBuf.cpp" />
     <ClCompile Include="TextViewNG\StylesDlg.cpp" />
-    <ClCompile Include="TextViewNG\TCRFile.cpp" />
     <ClCompile Include="TextViewNG\TextFile.cpp" />
     <ClCompile Include="TextViewNG\TextFormatter.cpp" />
     <ClCompile Include="TextViewNG\TextParser.cpp" />

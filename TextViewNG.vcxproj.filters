@@ -66,9 +66,6 @@
     <ClInclude Include="TextViewNG\OptionsDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextViewNG\PDBFile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TextViewNG\ProgressDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -88,9 +85,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TextViewNG\StylesDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextViewNG\TCRFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TextViewNG\TextFile.h">
@@ -170,9 +164,6 @@
     <ClCompile Include="TextViewNG\OptionsDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TextViewNG\PDBFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TextViewNG\ProgressDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -186,9 +177,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TextViewNG\StylesDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextViewNG\TCRFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TextViewNG\TextFile.cpp">

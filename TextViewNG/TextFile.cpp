@@ -37,8 +37,6 @@
 #include "resource.h"
 
 #include "TextFile.h"
-#include "PDBFile.h"
-#include "TCRFile.h"
 #include "TextViewNG.h"
 #include "ProgressDlg.h"
 #include "Unicode.h"
@@ -153,8 +151,8 @@ TextFile *TextFile::Open(const CString& filename)
 {
     auto_ptr<RFile> fp;
     CString cur(filename);
-    bool zip = false;
     RFile *rf = NULL;
+    TextFile *tf = NULL;
 
     CString FILENAME;
     // normalize filename
@@ -170,42 +168,34 @@ TextFile *TextFile::Open(const CString& filename)
         fp = new RFile(cur);
         if (fp->Reopen())
         {
-            if (PDBFile::IsPDB(fp.get()))
-                rf = new PDBFile(cur);
-            else if (TCRFile::IsTCR(fp.get()))
-                rf = new TCRFile(cur);
-            else
-                rf = fp.release();
-            goto ok;
+            rf = fp.release();
+            TRY{
+                tf = new TextFile(rf, FILENAME);
+            } CATCH_ALL(e)
+            {
+                tf = NULL;
+            }
+            END_CATCH_ALL;
+            if (tf && !tf->Ok())
+            {
+                delete tf;
+                tf = NULL;
+            }
+            break;
         }
         else
         {
             // unable to open, chop last piece
             int spos = cur.ReverseFind(_T('\\'));
             if (spos <= 0) // we failed
+            {
                 break;
+            }
             cur.Delete(spos, cur.GetLength() - spos);
         }
-        zip = true;
     }
     // when we get here we failed to open any prefix of filename
-    return NULL;
-ok:{
-    TextFile *tf;
-    TRY{
-        tf = new TextFile(rf, FILENAME);
-    } CATCH_ALL(e)
-    {
-        tf = NULL;
-    }
-    END_CATCH_ALL
-        if (tf && !tf->Ok())
-        {
-            delete tf;
-            tf = NULL;
-        }
     return tf;
-}
 }
 
 // these tricks are needed to distinguish between a true end of paragraph
