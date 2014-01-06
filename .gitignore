@@ -5,3 +5,7 @@ ARM/*
 *.sdf
 *.suo
 *.vcxproj.user
+
+*.bsc
+*.pdb
+*.lastcodeanalysis*

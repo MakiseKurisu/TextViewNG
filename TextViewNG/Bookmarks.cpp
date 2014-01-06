@@ -309,19 +309,19 @@ void Bookmarks::SaveToRegistry()
 
 bool Bookmarks::SaveInfo()
 {
-    if (m_changed)
+    if (m_changed && m_shortname != _T("NUL"))
     {
-        if (m_shortname == _T("NUL"))
-            return false;
         SYSTEMTIME tm;
         FILETIME ftm = { 0, 0 };
         GetLocalTime(&tm);
-        SystemTimeToFileTime(&tm, &ftm);
-        CString info;
-        info.Format(_T("%d,%d,%u,%u,%s"), m_format, m_encoding, ftm.dwLowDateTime, ftm.dwHighDateTime, (LPCTSTR) m_filename);
-        AfxGetApp()->WriteProfileString(_T("Bookmarks"), escape2(m_shortname), info);
-        m_changed = false;
-        return true;
+        if (SystemTimeToFileTime(&tm, &ftm))
+        {
+            CString info;
+            info.Format(_T("%d,%d,%u,%u,%s"), m_format, m_encoding, ftm.dwLowDateTime, ftm.dwHighDateTime, (LPCTSTR) m_filename);
+            AfxGetApp()->WriteProfileString(_T("Bookmarks"), escape2(m_shortname), info);
+            m_changed = false;
+            return true;
+        }
     }
     return false;
 }
