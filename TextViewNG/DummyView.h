@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -42,15 +42,15 @@
 class DummyView : public CWnd
 {
 public:
-    DummyView() { }
-    virtual ~DummyView() { }
+ DummyView() { }
+ virtual ~DummyView() { }
 
 protected:
-    //{{AFX_MSG(DummyView)
-    afx_msg void OnPaint();
-    afx_msg BOOL OnEraseBkgnd(CDC* pDC);
-    //}}AFX_MSG
-    DECLARE_MESSAGE_MAP()
+ //{{AFX_MSG(DummyView)
+ afx_msg void OnPaint();
+ afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+ //}}AFX_MSG
+ DECLARE_MESSAGE_MAP()
 };
 
 /////////////////////////////////////////////////////////////////////////////

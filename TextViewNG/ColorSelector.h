@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -44,38 +44,38 @@
 
 class CColorSelector : public CDialog
 {
-    // Construction
+ // Construction
 public:
-    CColorSelector(ColorItem *colors, CWnd* pParent = NULL);   // standard constructor
+ CColorSelector(ColorItem *colors, CWnd* pParent = NULL); // standard constructor
 
-    // Dialog Data
-    //{{AFX_DATA(CColorSelector)
-    enum { IDD = IDD_COLORSEL };
-    // NOTE: the ClassWizard will add data members here
-    int m_gamma;
-    //}}AFX_DATA
+ // Dialog Data
+ //{{AFX_DATA(CColorSelector)
+ enum { IDD = IDD_COLORSEL };
+ // NOTE: the ClassWizard will add data members here
+ int m_gamma;
+ //}}AFX_DATA
 
 
-    // Overrides
-    // ClassWizard generated virtual function overrides
-    //{{AFX_VIRTUAL(CColorSelector)
+ // Overrides
+ // ClassWizard generated virtual function overrides
+ //{{AFX_VIRTUAL(CColorSelector)
 protected:
-    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-    //}}AFX_VIRTUAL
+ virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV support
+ //}}AFX_VIRTUAL
 
-    // Implementation
+ // Implementation
 protected:
-    int     m_index;
-    ColorItem *m_colors;
+ int m_index;
+ ColorItem *m_colors;
 
-    // Generated message map functions
-    //{{AFX_MSG(CColorSelector)
-    afx_msg void OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct);
-    afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
-    virtual BOOL OnInitDialog();
-    afx_msg void OnSelendokColors();
-    //}}AFX_MSG
-    DECLARE_MESSAGE_MAP()
+ // Generated message map functions
+ //{{AFX_MSG(CColorSelector)
+ afx_msg void OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct);
+ afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
+ virtual BOOL OnInitDialog();
+ afx_msg void OnSelendokColors();
+ //}}AFX_MSG
+ DECLARE_MESSAGE_MAP()
 };
 
 bool myChooseColors(ColorItem *colors, int *gamma, CWnd *parent = NULL);

@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -55,26 +55,26 @@ static char THIS_FILE[] = __FILE__;
 CFileFormatDialog::CFileFormatDialog(CWnd* pParent /*=NULL*/)
 : CDialog(CFileFormatDialog::IDD, pParent)
 {
-    //{{AFX_DATA_INIT(CFileFormatDialog)
-    m_encoding = 0;
-    m_format = 0;
-    m_defencoding = 0;
-    //}}AFX_DATA_INIT
+ //{{AFX_DATA_INIT(CFileFormatDialog)
+ m_encoding = 0;
+ m_format = 0;
+ m_defencoding = 0;
+ //}}AFX_DATA_INIT
 }
 
 void CFileFormatDialog::DoDataExchange(CDataExchange* pDX)
 {
-    CDialog::DoDataExchange(pDX);
-    //{{AFX_DATA_MAP(CFileFormatDialog)
-    DDX_CBIndex(pDX, IDC_ENCODING, m_encoding);
-    DDX_CBIndex(pDX, IDC_FILEFORMAT, m_format);
-    DDX_CBIndex(pDX, IDC_DEF_ENCODING, m_defencoding);
-    //}}AFX_DATA_MAP
+ CDialog::DoDataExchange(pDX);
+ //{{AFX_DATA_MAP(CFileFormatDialog)
+ DDX_CBIndex(pDX, IDC_ENCODING, m_encoding);
+ DDX_CBIndex(pDX, IDC_FILEFORMAT, m_format);
+ DDX_CBIndex(pDX, IDC_DEF_ENCODING, m_defencoding);
+ //}}AFX_DATA_MAP
 }
 
 BEGIN_MESSAGE_MAP(CFileFormatDialog, CDialog)
-    //{{AFX_MSG_MAP(CFileFormatDialog)
-    //}}AFX_MSG_MAP
+ //{{AFX_MSG_MAP(CFileFormatDialog)
+ //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -82,22 +82,22 @@ END_MESSAGE_MAP()
 
 BOOL CFileFormatDialog::OnInitDialog()
 {
-    // initialize combo boxes
-    CComboBox   *cb = (CComboBox*)GetDlgItem(IDC_FILEFORMAT);
-    if (cb) {
-        for (int i = -1; i < TextParser::GetNumFormats(); ++i)
-            cb->AddString(TextFile::GetFormatName(i));
-    }
-    cb = (CComboBox*)GetDlgItem(IDC_ENCODING);
-    CComboBox   *cb2 = (CComboBox*)GetDlgItem(IDC_DEF_ENCODING);
-    if (cb) {
-        cb->AddString(_T("Auto"));
-        cb2->AddString(_T("Auto"));
-        for (int i = 0; i < Unicode::GetNumCodePages(); ++i) {
-            cb->AddString(Unicode::GetCodePageName(i));
-            cb2->AddString(Unicode::GetCodePageName(i));
-        }
-    }
-    CDialog::OnInitDialog();
-    return TRUE;
+ // initialize combo boxes
+ CComboBox *cb = (CComboBox*)GetDlgItem(IDC_FILEFORMAT);
+ if (cb) {
+ for (int i = -1; i < TextParser::GetNumFormats(); ++i)
+ cb->AddString(TextFile::GetFormatName(i));
+ }
+ cb = (CComboBox*)GetDlgItem(IDC_ENCODING);
+ CComboBox *cb2 = (CComboBox*)GetDlgItem(IDC_DEF_ENCODING);
+ if (cb) {
+ cb->AddString(_T("Auto"));
+ cb2->AddString(_T("Auto"));
+ for (int i = 0; i < Unicode::GetNumCodePages(); ++i) {
+ cb->AddString(Unicode::GetCodePageName(i));
+ cb2->AddString(Unicode::GetCodePageName(i));
+ }
+ }
+ CDialog::OnInitDialog();
+ return TRUE;
 }

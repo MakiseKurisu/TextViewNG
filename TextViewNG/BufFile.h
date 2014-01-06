@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -43,35 +43,35 @@
 class CBufFile
 {
 public:
-    CBufFile(auto_ptr<RFile> file);
-    ~CBufFile() { }
+ CBufFile(auto_ptr<RFile> file);
+ ~CBufFile() { }
 
-    int     ch() { return m_ptr < m_cur->len ? m_cur->buf[m_ptr++] : nextbuf_ch(); }
-    int     read(void *buf, int count); // read plain chars
+ int ch() { return m_ptr < m_cur->len ? m_cur->buf[m_ptr++] : nextbuf_ch(); }
+ int read(void *buf, int count); // read plain chars
 
-    DWORD     pos() { return m_cur->off + m_ptr; }
-    void     seek(DWORD pos);
-    DWORD     size() { return m_fp->size(); }
-    DWORD     prevpos() { return m_cur->off + m_ptr - 1; }
+ DWORD pos() { return m_cur->off + m_ptr; }
+ void seek(DWORD pos);
+ DWORD size() { return m_fp->size(); }
+ DWORD prevpos() { return m_cur->off + m_ptr - 1; }
 
-    CString   CompressionInfo() { return m_fp->CompressionInfo(); }
+ CString CompressionInfo() { return m_fp->CompressionInfo(); }
 
 protected:
-    int    nextbuf_ch();
-    void    swapbuf();
+ int nextbuf_ch();
+ void swapbuf();
 
-    struct Buf {
-        Buffer<BYTE>  buf;
-        DWORD   off;
-        DWORD   len;
-        Buf() : buf(RFile::BSZ), off(0), len(0) { }
-    };
+ struct Buf {
+ Buffer<BYTE> buf;
+ DWORD off;
+ DWORD len;
+ Buf() : buf(RFile::BSZ), off(0), len(0) { }
+ };
 
-    auto_ptr<RFile> m_fp;
+ auto_ptr<RFile> m_fp;
 
-    DWORD    m_ptr;
-    Buf    m_b1, m_b2;
-    Buf    *m_cur;
+ DWORD m_ptr;
+ Buf m_b1, m_b2;
+ Buf *m_cur;
 };
 
 #endif // !defined(AFX_BUFFILE_H__867464A4_888C_4590_A2F7_7126AC072CB6__INCLUDED_)

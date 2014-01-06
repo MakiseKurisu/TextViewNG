@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -44,44 +44,44 @@
 
 class CFileOpenDialog : public CDialog
 {
-    // Construction
+ // Construction
 public:
-    CFileOpenDialog(CWnd* pParent = NULL);   // standard constructor
+ CFileOpenDialog(CWnd* pParent = NULL); // standard constructor
 
-    CString m_filename;
-    CString m_path;
-    CString m_vpath;
-    // Dialog Data
-    //{{AFX_DATA(CFileOpenDialog)
-    enum { IDD = IDD_FILEOPEN };
-    // NOTE: the ClassWizard will add data members here
-    //}}AFX_DATA
+ CString m_filename;
+ CString m_path;
+ CString m_vpath;
+ // Dialog Data
+ //{{AFX_DATA(CFileOpenDialog)
+ enum { IDD = IDD_FILEOPEN };
+ // NOTE: the ClassWizard will add data members here
+ //}}AFX_DATA
 
 
-    // Overrides
-    // ClassWizard generated virtual function overrides
-    //{{AFX_VIRTUAL(CFileOpenDialog)
+ // Overrides
+ // ClassWizard generated virtual function overrides
+ //{{AFX_VIRTUAL(CFileOpenDialog)
 protected:
-    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-    //}}AFX_VIRTUAL
+ virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV support
+ //}}AFX_VIRTUAL
 
-    // Implementation
+ // Implementation
 protected:
-    void OpenItem(const CString& path);
-    void ActivateItem(HWND hWnd, int item);
-    void FindFiles(bool showall = true);
+ void OpenItem(const CString& path);
+ void ActivateItem(HWND hWnd, int item);
+ void FindFiles(bool showall = true);
 
-    // Generated message map functions
-    //{{AFX_MSG(CFileOpenDialog)
-    virtual void OnOK();
-    virtual BOOL OnInitDialog();
-    afx_msg void OnSize(UINT nType, int cx, int cy);
-    afx_msg LRESULT OnXClick(WPARAM wParam, LPARAM lParam);
-    //}}AFX_MSG
-    DECLARE_MESSAGE_MAP()
+ // Generated message map functions
+ //{{AFX_MSG(CFileOpenDialog)
+ virtual void OnOK();
+ virtual BOOL OnInitDialog();
+ afx_msg void OnSize(UINT nType, int cx, int cy);
+ afx_msg LRESULT OnXClick(WPARAM wParam, LPARAM lParam);
+ //}}AFX_MSG
+ DECLARE_MESSAGE_MAP()
 };
 
-CString   GetFileName(CString *startpath, CWnd *parent = NULL);
+CString GetFileName(CString *startpath, CWnd *parent = NULL);
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

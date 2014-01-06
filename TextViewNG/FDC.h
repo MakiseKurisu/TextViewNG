@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -38,35 +38,35 @@
 
 class CFDC
 {
-    HDC  m_hDC;
-    void  *m_hFont;
-    HGDIOBJ m_hOrigFont, m_hOrigPen;
-    HWND  m_hWnd;
-    PAINTSTRUCT *m_ps;
-    COLORREF m_fg, m_bg, m_pfg;
-    int  m_lpx;
+ HDC m_hDC;
+ void *m_hFont;
+ HGDIOBJ m_hOrigFont, m_hOrigPen;
+ HWND m_hWnd;
+ PAINTSTRUCT *m_ps;
+ COLORREF m_fg, m_bg, m_pfg;
+ int m_lpx;
 public:
-    enum {
-        FORCENORMALWEIGHT = 0x10000,
-        FORCETAHOMA = 0x20000,
-    };
-    CFDC(HWND hWnd, PAINTSTRUCT *ps = NULL);
-    ~CFDC();
+ enum {
+ FORCENORMALWEIGHT = 0x10000,
+ FORCETAHOMA = 0x20000,
+ };
+ CFDC(HWND hWnd, PAINTSTRUCT *ps = NULL);
+ ~CFDC();
 
-    void   SelectFont(int size, unsigned flags, bool zesc = false);
-    void   SelectFontAbs(int size, unsigned flags, bool zesc = false);
-    HDC   DC() { return m_hDC; }
-    void   GetFontSize(int& height, int& ascent);
-    void   SetBkColor(COLORREF c) { if (c != m_bg) ::SetBkColor(m_hDC, m_bg = c); }
-    void   SetTextColor(COLORREF c) { if (c != m_fg) ::SetTextColor(m_hDC, m_fg = c); }
-    void   SetColor(COLORREF c);
-    int   GetLPX();
-    int   GetHypWidth();
-    void   GetTextExtent(const wchar_t *str, int len, int width, int& nch, int *dx, SIZE& sz);
+ void SelectFont(int size, unsigned flags, bool zesc = false);
+ void SelectFontAbs(int size, unsigned flags, bool zesc = false);
+ HDC DC() { return m_hDC; }
+ void GetFontSize(int& height, int& ascent);
+ void SetBkColor(COLORREF c) { if (c != m_bg) ::SetBkColor(m_hDC, m_bg = c); }
+ void SetTextColor(COLORREF c) { if (c != m_fg) ::SetTextColor(m_hDC, m_fg = c); }
+ void SetColor(COLORREF c);
+ int GetLPX();
+ int GetHypWidth();
+ void GetTextExtent(const wchar_t *str, int len, int width, int& nch, int *dx, SIZE& sz);
 
-    static void SetDefaultFont(const TCHAR *face, int basesize, bool bold,
-        int cleartype, int angle);
-    static void SetCacheSize(int cs);
+ static void SetDefaultFont(const TCHAR *face, int basesize, bool bold,
+ int cleartype, int angle);
+ static void SetCacheSize(int cs);
 };
 
 #endif // !defined(AFX_FDC_H__28915DD2_B307_42CF_9BF9_F27108F0EDC3__INCLUDED_)

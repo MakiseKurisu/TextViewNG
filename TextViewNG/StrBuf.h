@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -33,33 +33,33 @@
 #define STRBUF_H
 
 class StrBuf {
-    enum {
-        MAX_WASTE = 256,
-        BLOCKSADD = 64
-    };
-    struct Block {
-        wchar_t   *data;
-        int       cur;
-        int       max;
-    };
-    Block       *m_blocks;
-    int       m_cblk;
-    int       m_numblk;
-    HANDLE      m_heap;
-    int       m_blocksize;
-    bool       m_freemem;
+ enum {
+ MAX_WASTE = 256,
+ BLOCKSADD = 64
+ };
+ struct Block {
+ wchar_t *data;
+ int cur;
+ int max;
+ };
+ Block *m_blocks;
+ int m_cblk;
+ int m_numblk;
+ HANDLE m_heap;
+ int m_blocksize;
+ bool m_freemem;
 public:
-    StrBuf(HANDLE heap, bool release_mem = false, int bsz = 4096) : m_blocks(0),
-        m_cblk(-1), m_numblk(0), m_heap(heap), m_blocksize(bsz),
-        m_freemem(release_mem) { }
-    ~StrBuf();
-    wchar_t   *Get(int char_length);
-    wchar_t   *Append(const wchar_t *str, int char_length) {
-        wchar_t   *space = Get(char_length);
-        memcpy(space, str, char_length*sizeof(wchar_t));
-        return space;
-    }
-    void     RemoveAll();
+ StrBuf(HANDLE heap, bool release_mem = false, int bsz = 4096) : m_blocks(0),
+ m_cblk(-1), m_numblk(0), m_heap(heap), m_blocksize(bsz),
+ m_freemem(release_mem) { }
+ ~StrBuf();
+ wchar_t *Get(int char_length);
+ wchar_t *Append(const wchar_t *str, int char_length) {
+ wchar_t *space = Get(char_length);
+ memcpy(space, str, char_length*sizeof(wchar_t));
+ return space;
+ }
+ void RemoveAll();
 };
 
 #endif

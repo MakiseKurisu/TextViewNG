@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -32,9 +32,9 @@
 #ifndef XLISTBOX_H
 #define XLISTBOX_H
 
-#define XLM_CONTEXTMENU   (WM_USER+1)
-#define XLM_DBLCLK   (WM_USER+2)
-#define XLM_CLICK   (WM_USER+3)
+#define XLM_CONTEXTMENU (WM_USER+1)
+#define XLM_DBLCLK (WM_USER+2)
+#define XLM_CLICK (WM_USER+3)
 
 void XLB_Init();
 void XLB_SetImageList(HWND hWnd, HIMAGELIST hIml, bool shared = false);
@@ -42,12 +42,12 @@ void XLB_SetImageList(HWND hWnd, HIMAGELIST hIml, bool shared = false);
 struct XLB_Handle;
 struct XLB_Handle *XLB_GetHandle(HWND hWnd);
 bool XLB_AppendItem(struct XLB_Handle *handle,
-    const TCHAR *text1, const TCHAR *text2,
-    int icon, int level,
-    LONG user_data);
+ const TCHAR *text1, const TCHAR *text2,
+ int icon, int level,
+ LONG user_data);
 void XLB_DeleteItem(HWND hWnd, int item);
 void XLB_SetItemText1(HWND hWnd, int item, const TCHAR *text);
-LONG    XLB_GetData(HWND hWnd, int item);
+LONG XLB_GetData(HWND hWnd, int item);
 int XLB_GetSelection(HWND hWnd);
 void XLB_SetSelection(HWND hWnd, int sel);
 int XLB_GetItemCount(HWND hWnd);

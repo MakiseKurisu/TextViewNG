@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -43,46 +43,46 @@
 
 class CProgressDlg : public CDialog, public TextParser::Meter
 {
-    // Construction
+ // Construction
 public:
-    CProgressDlg(const CString& msg, CWnd* pParent = NULL);   // standard constructor
+ CProgressDlg(const CString& msg, CWnd* pParent = NULL); // standard constructor
 
-    virtual void SetMax(DWORD max);
-    virtual void SetCur(DWORD cur);
+ virtual void SetMax(DWORD max);
+ virtual void SetCur(DWORD cur);
 
-    // Dialog Data
-    //{{AFX_DATA(CProgressDlg)
-    enum { IDD = IDD_PROGRESS };
-    // NOTE: the ClassWizard will add data members here
-    //}}AFX_DATA
+ // Dialog Data
+ //{{AFX_DATA(CProgressDlg)
+ enum { IDD = IDD_PROGRESS };
+ // NOTE: the ClassWizard will add data members here
+ //}}AFX_DATA
 
 
-    // Overrides
-    // ClassWizard generated virtual function overrides
-    //{{AFX_VIRTUAL(CProgressDlg)
+ // Overrides
+ // ClassWizard generated virtual function overrides
+ //{{AFX_VIRTUAL(CProgressDlg)
 protected:
-    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-    //}}AFX_VIRTUAL
+ virtual void DoDataExchange(CDataExchange* pDX); // DDX/DDV support
+ //}}AFX_VIRTUAL
 
-    // Implementation
+ // Implementation
 protected:
-    enum { MAXSAMP = 128 };
-    CString   m_msg;
-    DWORD    m_last;
-    DWORD    m_starttime;
-    DWORD    m_samples[2 * MAXSAMP];
-    DWORD    m_tail;
-    DWORD    m_nsamp;
-    DWORD    m_curbytes;
-    DWORD    m_lastbytes;
-    DWORD    m_lastupdate;
-    bool    m_visible;
-    // Generated message map functions
-    //{{AFX_MSG(CProgressDlg)
-    virtual BOOL OnInitDialog();
-    //}}AFX_MSG
-    afx_msg void OnSettingChange(UINT uFlags, LPCTSTR lpszSection);
-    DECLARE_MESSAGE_MAP()
+ enum { MAXSAMP = 128 };
+ CString m_msg;
+ DWORD m_last;
+ DWORD m_starttime;
+ DWORD m_samples[2 * MAXSAMP];
+ DWORD m_tail;
+ DWORD m_nsamp;
+ DWORD m_curbytes;
+ DWORD m_lastbytes;
+ DWORD m_lastupdate;
+ bool m_visible;
+ // Generated message map functions
+ //{{AFX_MSG(CProgressDlg)
+ virtual BOOL OnInitDialog();
+ //}}AFX_MSG
+ afx_msg void OnSettingChange(UINT uFlags, LPCTSTR lpszSection);
+ DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

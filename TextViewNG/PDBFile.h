@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -44,33 +44,33 @@
 class PDBFile : public RFile
 {
 public:
-    PDBFile(const CString& fn);
+ PDBFile(const CString& fn);
 
-    // generic file operations
-    virtual DWORD   size() { return m_length; }
-    virtual DWORD   read(void *buf);
-    virtual void   seek(DWORD pos);
+ // generic file operations
+ virtual DWORD size() { return m_length; }
+ virtual DWORD read(void *buf);
+ virtual void seek(DWORD pos);
 
-    // compression
-    virtual CString CompressionInfo();
+ // compression
+ virtual CString CompressionInfo();
 
-    // check if this is a pdb file
-    static bool   IsPDB(RFile *fp);
+ // check if this is a pdb file
+ static bool IsPDB(RFile *fp);
 protected:
-    DWORD    m_length;
-    DWORD    m_ptr;
-    DWORD    m_rsz;
-    bool    m_comp;
-    struct Rec {
-        DWORD   usize;
-        DWORD   uoff;
-        DWORD   off;
-        DWORD   csize;
-    };
-    Buffer<Rec>   m_blocks;
+ DWORD m_length;
+ DWORD m_ptr;
+ DWORD m_rsz;
+ bool m_comp;
+ struct Rec {
+ DWORD usize;
+ DWORD uoff;
+ DWORD off;
+ DWORD csize;
+ };
+ Buffer<Rec> m_blocks;
 
-    static bool   CheckPDB(RFile *fp, struct PDBHdr&, struct PDBRec0&);
-    int    findblock(DWORD uoff);
+ static bool CheckPDB(RFile *fp, struct PDBHdr&, struct PDBRec0&);
+ int findblock(DWORD uoff);
 };
 
 #endif // !defined(AFX_PDBFILE_H__777AC4E9_AB31_44B8_9A41_80B433927455__INCLUDED_)

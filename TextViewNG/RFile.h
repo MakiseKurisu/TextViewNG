@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -40,42 +40,42 @@
 class RFile
 {
 public:
-    static int  BSZ, BMASK; // block size, must be a power of two
+ static int BSZ, BMASK; // block size, must be a power of two
 
-    RFile(const CString& filename) : m_fh(INVALID_HANDLE_VALUE),
-        m_fn(filename), m_didreopen(false), m_diderror(false),
-        m_ptr(0) { }
-    virtual ~RFile() {
-        if (m_fh != INVALID_HANDLE_VALUE)
-            CloseHandle(m_fh);
-    }
+ RFile(const CString& filename) : m_fh(INVALID_HANDLE_VALUE),
+ m_fn(filename), m_didreopen(false), m_diderror(false),
+ m_ptr(0) { }
+ virtual ~RFile() {
+ if (m_fh != INVALID_HANDLE_VALUE)
+ CloseHandle(m_fh);
+ }
 
-    // generic file operations
-    virtual DWORD   size();
-    virtual DWORD   read(void *buf);
-    virtual void   seek(DWORD pos);
+ // generic file operations
+ virtual DWORD size();
+ virtual DWORD read(void *buf);
+ virtual void seek(DWORD pos);
 
-    // compression
-    virtual CString CompressionInfo() { return _T("None"); }
+ // compression
+ virtual CString CompressionInfo() { return _T("None"); }
 
-    // buffer size setting
-    static void   InitBufSize();
+ // buffer size setting
+ static void InitBufSize();
 
-    // RFile helpers
-    bool    Reopen();
-    void    ShowError();
-    DWORD    read2(void *buf, DWORD size);
+ // RFile helpers
+ bool Reopen();
+ void ShowError();
+ DWORD read2(void *buf, DWORD size);
 
 protected:
-    HANDLE   m_fh;
-    CString   m_fn;
-    DWORD    m_ptr;
+ HANDLE m_fh;
+ CString m_fn;
+ DWORD m_ptr;
 
-    bool    m_didreopen;
-    bool    m_diderror;
+ bool m_didreopen;
+ bool m_diderror;
 
-    void    seek2(DWORD where, DWORD how);
-    DWORD    pos();
+ void seek2(DWORD where, DWORD how);
+ DWORD pos();
 };
 
 // I/O error messages

@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -33,26 +33,26 @@
 #define FILEPOS_H
 
 struct FilePos {
-    int   para;
-    int   off;
-    int   docid;
+ int para;
+ int off;
+ int docid;
 
-    FilePos() : para(0), off(0), docid(0) { }
-    FilePos(int p, int o, int did) : para(p), off(o), docid(did) { }
-    FilePos(const FilePos& p) : para(p.para), off(p.off), docid(p.docid) { }
-    FilePos& operator=(const FilePos& p) { para = p.para; off = p.off; docid = p.docid; return *this; }
-    bool operator==(int p) const { return para == p && off == 0 && docid == 0; }
-    bool operator!=(int p) const { return !operator==(p); }
-    bool operator==(const FilePos& p) const { return para == p.para && off == p.off && docid == p.docid; }
-    bool operator!=(const FilePos& p) const { return !operator==(p); }
-    bool operator < (const FilePos& p) const {
-        return docid < p.docid || (docid == p.docid &&
-            (para < p.para || (para == p.para && off < p.off)));
-    }
-    bool operator >(const FilePos& p) const { return !operator < (p) && !operator==(p); }
-    bool operator<=(const FilePos& p) const { return operator < (p) || operator==(p); }
-    bool operator>=(const FilePos& p) const { return !operator < (p); }
-    FilePos operator+(int i) { return FilePos(para, off + i, docid); }
+ FilePos() : para(0), off(0), docid(0) { }
+ FilePos(int p, int o, int did) : para(p), off(o), docid(did) { }
+ FilePos(const FilePos& p) : para(p.para), off(p.off), docid(p.docid) { }
+ FilePos& operator=(const FilePos& p) { para = p.para; off = p.off; docid = p.docid; return *this; }
+ bool operator==(int p) const { return para == p && off == 0 && docid == 0; }
+ bool operator!=(int p) const { return !operator==(p); }
+ bool operator==(const FilePos& p) const { return para == p.para && off == p.off && docid == p.docid; }
+ bool operator!=(const FilePos& p) const { return !operator==(p); }
+ bool operator < (const FilePos& p) const {
+ return docid < p.docid || (docid == p.docid &&
+ (para < p.para || (para == p.para && off < p.off)));
+ }
+ bool operator >(const FilePos& p) const { return !operator < (p) && !operator==(p); }
+ bool operator<=(const FilePos& p) const { return operator < (p) || operator==(p); }
+ bool operator>=(const FilePos& p) const { return !operator < (p); }
+ FilePos operator+(int i) { return FilePos(para, off + i, docid); }
 };
 
 #endif

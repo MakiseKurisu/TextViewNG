@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -46,60 +46,60 @@ CBufFile::CBufFile(auto_ptr<RFile> file) :
 m_fp(file),
 m_ptr(0)
 {
-    m_cur = &m_b1;
+ m_cur = &m_b1;
 }
 
 void CBufFile::swapbuf() {
-    if (m_cur->len)
-        m_cur = m_cur == &m_b1 ? &m_b2 : &m_b1;
+ if (m_cur->len)
+ m_cur = m_cur == &m_b1 ? &m_b2 : &m_b1;
 }
 
 int CBufFile::nextbuf_ch()
 {
-    seek(m_cur->off + m_ptr);
-    return m_ptr < m_cur->len ? m_cur->buf[m_ptr++] : BEOF;
+ seek(m_cur->off + m_ptr);
+ return m_ptr < m_cur->len ? m_cur->buf[m_ptr++] : BEOF;
 }
 
 int CBufFile::read(void *buf, int count) {
-    BYTE   *bp = (BYTE*)buf;
-    while (count > 0) {
-        // fill in our buffer
-        if (m_ptr >= m_cur->len)
-            seek(m_cur->off + m_ptr);
-        // if there are no bytes still, then exit
-        if (m_ptr >= m_cur->len)
-            break;
-        // copy whatever is left in our buffer
-        int   nb = m_cur->len - m_ptr;
-        if (nb > count)
-            nb = count;
-        memcpy(bp, m_cur->buf + m_ptr, nb);
-        m_ptr += nb;
-        bp += nb;
-        count -= nb;
-    }
-    return bp - (BYTE*)buf;
+ BYTE *bp = (BYTE*)buf;
+ while (count > 0) {
+ // fill in our buffer
+ if (m_ptr >= m_cur->len)
+ seek(m_cur->off + m_ptr);
+ // if there are no bytes still, then exit
+ if (m_ptr >= m_cur->len)
+ break;
+ // copy whatever is left in our buffer
+ int nb = m_cur->len - m_ptr;
+ if (nb > count)
+ nb = count;
+ memcpy(bp, m_cur->buf + m_ptr, nb);
+ m_ptr += nb;
+ bp += nb;
+ count -= nb;
+ }
+ return bp - (BYTE*)buf;
 }
 
-void  CBufFile::seek(DWORD pos) {
-    if (pos >= m_cur->off && pos < m_cur->off + m_cur->len) // inside current buffer
-        m_ptr = pos - m_cur->off;
-    else {
-        swapbuf();
-        if (pos >= m_cur->off && pos < m_cur->off + m_cur->len) // inside other buffer
-            m_ptr = pos - m_cur->off;
-        else if (pos >= m_fp->size()) {
-            // don't seek past eof
-            m_cur->off = pos;
-            m_cur->len = m_ptr = 0;
-        }
-        else {
-            // do seek on underlying file and fill next buffer
-            m_cur->off = pos&RFile::BMASK;
-            m_fp->seek(m_cur->off);
-            m_cur->len = m_fp->read(m_cur->buf);
-            m_ptr = pos - m_cur->off;
-        }
-    }
+void CBufFile::seek(DWORD pos) {
+ if (pos >= m_cur->off && pos < m_cur->off + m_cur->len) // inside current buffer
+ m_ptr = pos - m_cur->off;
+ else {
+ swapbuf();
+ if (pos >= m_cur->off && pos < m_cur->off + m_cur->len) // inside other buffer
+ m_ptr = pos - m_cur->off;
+ else if (pos >= m_fp->size()) {
+ // don't seek past eof
+ m_cur->off = pos;
+ m_cur->len = m_ptr = 0;
+ }
+ else {
+ // do seek on underlying file and fill next buffer
+ m_cur->off = pos&RFile::BMASK;
+ m_fp->seek(m_cur->off);
+ m_cur->len = m_fp->read(m_cur->buf);
+ m_ptr = pos - m_cur->off;
+ }
+ }
 }
 

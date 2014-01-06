@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -49,50 +49,50 @@ static char THIS_FILE[] = __FILE__;
 
 
 InputBox::InputBox(const CString& prompt, const CString& title,
-    CWnd* pParent /*=NULL*/)
-    : CDialog(InputBox::IDD, pParent),
-    m_prompt(prompt), m_title(title)
+ CWnd* pParent /*=NULL*/)
+ : CDialog(InputBox::IDD, pParent),
+ m_prompt(prompt), m_title(title)
 {
-    //{{AFX_DATA_INIT(InputBox)
-    m_str = _T("");
-    //}}AFX_DATA_INIT
+ //{{AFX_DATA_INIT(InputBox)
+ m_str = _T("");
+ //}}AFX_DATA_INIT
 }
 
 
 void InputBox::DoDataExchange(CDataExchange* pDX)
 {
-    CDialog::DoDataExchange(pDX);
-    //{{AFX_DATA_MAP(InputBox)
-    DDX_Text(pDX, IDC_WORD, m_str);
-    //}}AFX_DATA_MAP
+ CDialog::DoDataExchange(pDX);
+ //{{AFX_DATA_MAP(InputBox)
+ DDX_Text(pDX, IDC_WORD, m_str);
+ //}}AFX_DATA_MAP
 }
 
 BEGIN_MESSAGE_MAP(InputBox, CDialog)
-    //{{AFX_MSG_MAP(InputBox)
-    //}}AFX_MSG_MAP
+ //{{AFX_MSG_MAP(InputBox)
+ //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // InputBox message handlers
 
 bool GetUserInput(const CString& prompt, const CString& title,
-    CString& str, CWnd *parent)
+ CString& str, CWnd *parent)
 {
-    InputBox    box(prompt, title, parent);
-    box.m_str = str;;
-    if (box.DoModal() == IDOK) {
-        str = box.m_str;
-        return true;
-    }
-    return false;
+ InputBox box(prompt, title, parent);
+ box.m_str = str;;
+ if (box.DoModal() == IDOK) {
+ str = box.m_str;
+ return true;
+ }
+ return false;
 }
 
 BOOL InputBox::OnInitDialog()
 {
-    CDialog::OnInitDialog();
-    SetDlgItemText(IDC_LABEL, m_prompt);
-    SetWindowText(m_title);
-    return TRUE;
+ CDialog::OnInitDialog();
+ SetDlgItemText(IDC_LABEL, m_prompt);
+ SetWindowText(m_title);
+ return TRUE;
 }
 /////////////////////////////////////////////////////////////////////////////
 // CAddBmDialog dialog
@@ -101,25 +101,25 @@ BOOL InputBox::OnInitDialog()
 CAddBmDialog::CAddBmDialog(CWnd* pParent /*=NULL*/)
 : CDialog(CAddBmDialog::IDD, pParent)
 {
-    //{{AFX_DATA_INIT(CAddBmDialog)
-    // NOTE: the ClassWizard will add member initialization here
-    //}}AFX_DATA_INIT
+ //{{AFX_DATA_INIT(CAddBmDialog)
+ // NOTE: the ClassWizard will add member initialization here
+ //}}AFX_DATA_INIT
 }
 
 
 void CAddBmDialog::DoDataExchange(CDataExchange* pDX)
 {
-    CDialog::DoDataExchange(pDX);
-    //{{AFX_DATA_MAP(CAddBmDialog)
-    DDX_Text(pDX, IDC_BMKEDIT, m_text);
-    //}}AFX_DATA_MAP
+ CDialog::DoDataExchange(pDX);
+ //{{AFX_DATA_MAP(CAddBmDialog)
+ DDX_Text(pDX, IDC_BMKEDIT, m_text);
+ //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CAddBmDialog, CDialog)
-    //{{AFX_MSG_MAP(CAddBmDialog)
-    ON_WM_SIZE()
-    //}}AFX_MSG_MAP
+ //{{AFX_MSG_MAP(CAddBmDialog)
+ ON_WM_SIZE()
+ //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -127,13 +127,13 @@ END_MESSAGE_MAP()
 
 void CAddBmDialog::OnSize(UINT nType, int cx, int cy)
 {
-    CDialog::OnSize(nType, cx, cy);
-    RECT rc;
-    GetClientRect(&rc);
-    HWND   hWnd;
-    GetDlgItem(IDC_BMKEDIT, &hWnd);
-    if (hWnd)
-        ::SetWindowPos(hWnd, NULL, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, SWP_NOZORDER | SWP_NOACTIVATE);
+ CDialog::OnSize(nType, cx, cy);
+ RECT rc;
+ GetClientRect(&rc);
+ HWND hWnd;
+ GetDlgItem(IDC_BMKEDIT, &hWnd);
+ if (hWnd)
+ ::SetWindowPos(hWnd, NULL, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, SWP_NOZORDER | SWP_NOACTIVATE);
 }
 
 
@@ -144,27 +144,27 @@ void CAddBmDialog::OnSize(UINT nType, int cx, int cy)
 CFindDlg::CFindDlg(CWnd* pParent /*=NULL*/)
 : CDialog(CFindDlg::IDD, pParent)
 {
-    //{{AFX_DATA_INIT(CFindDlg)
-    // NOTE: the ClassWizard will add member initialization here
-    m_matchcase = 0;
-    //}}AFX_DATA_INIT
+ //{{AFX_DATA_INIT(CFindDlg)
+ // NOTE: the ClassWizard will add member initialization here
+ m_matchcase = 0;
+ //}}AFX_DATA_INIT
 }
 
 
 void CFindDlg::DoDataExchange(CDataExchange* pDX)
 {
-    CDialog::DoDataExchange(pDX);
-    //{{AFX_DATA_MAP(CFindDlg)
-    DDX_Text(pDX, IDC_FINDTEXT, m_text);
-    DDX_Check(pDX, IDC_MATCHCASE, m_matchcase);
-    DDX_Check(pDX, IDC_FROMCURPOS, m_fromcurpos);
-    //}}AFX_DATA_MAP
+ CDialog::DoDataExchange(pDX);
+ //{{AFX_DATA_MAP(CFindDlg)
+ DDX_Text(pDX, IDC_FINDTEXT, m_text);
+ DDX_Check(pDX, IDC_MATCHCASE, m_matchcase);
+ DDX_Check(pDX, IDC_FROMCURPOS, m_fromcurpos);
+ //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CFindDlg, CDialog)
-    //{{AFX_MSG_MAP(CFindDlg)
-    //}}AFX_MSG_MAP
+ //{{AFX_MSG_MAP(CFindDlg)
+ //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -172,11 +172,11 @@ END_MESSAGE_MAP()
 
 BOOL CAddBmDialog::OnInitDialog()
 {
-    CDialog::OnInitDialog();
-    return TRUE;
+ CDialog::OnInitDialog();
+ return TRUE;
 }
 
 BOOL CFindDlg::OnInitDialog() {
-    CDialog::OnInitDialog();
-    return TRUE;
+ CDialog::OnInitDialog();
+ return TRUE;
 }

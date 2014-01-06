@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -42,20 +42,20 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 BEGIN_MESSAGE_MAP(DummyView, CWnd)
-    //{{AFX_MSG_MAP(DummyView)
-    ON_WM_PAINT()
-    ON_WM_ERASEBKGND()
-    //}}AFX_MSG_MAP
+ //{{AFX_MSG_MAP(DummyView)
+ ON_WM_PAINT()
+ ON_WM_ERASEBKGND()
+ //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 void DummyView::OnPaint() {
-    CPaintDC dc(this);
+ CPaintDC dc(this);
 }
 
 BOOL DummyView::OnEraseBkgnd(CDC* pDC)
 {
-    RECT rc;
-    GetClientRect(&rc);
-    pDC->FillSolidRect(&rc, RGB(255, 255, 255));
-    return TRUE;
+ RECT rc;
+ GetClientRect(&rc);
+ pDC->FillSolidRect(&rc, RGB(255, 255, 255));
+ return TRUE;
 }

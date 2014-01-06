@@ -1,18 +1,18 @@
 /*
-* Copyright (c) 2001,2002,2003 Mike Matsnev.  All Rights Reserved.
+* Copyright (c) 2001,2002,2003 Mike Matsnev. All Rights Reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
 * are met:
 *
 * 1. Redistributions of source code must retain the above copyright
-*    notice immediately at the beginning of the file, without modification,
-*    this list of conditions, and the following disclaimer.
+* notice immediately at the beginning of the file, without modification,
+* this list of conditions, and the following disclaimer.
 * 2. Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the
-*    documentation and/or other materials provided with the distribution.
+* notice, this list of conditions and the following disclaimer in the
+* documentation and/or other materials provided with the distribution.
 * 3. Absolutely no warranty of function or purpose is made by the author
-*    Mike Matsnev.
+* Mike Matsnev.
 *
 * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -37,15 +37,15 @@
 #endif // _MSC_VER >= 1000
 
 // common image list
-#define IM_BLANK  0
-#define IM_BMK   1
-#define IM_TEXT   2
-#define IM_DIR   3
-#define IM_ZIP   4
-#define IM_FILE   5
-#define IM_CNODE  6
-#define IM_CLEAF  7
-#define IM_IMAGE  8
+#define IM_BLANK 0
+#define IM_BMK 1
+#define IM_TEXT 2
+#define IM_DIR 3
+#define IM_ZIP 4
+#define IM_FILE 5
+#define IM_CNODE 6
+#define IM_CLEAF 7
+#define IM_IMAGE 8
 
 /////////////////////////////////////////////////////////////////////////////
 // CTVApp:
@@ -57,40 +57,40 @@ class CImageList;
 class CTVApp : public CWinApp
 {
 public:
-    static CImageList *ImageList();
-    static void QueueCmd(UINT cmd);
-    static UINT TopQueuedCmd();
-    static CString  GetStr(const TCHAR *name, const TCHAR *def = NULL) {
-        return AfxGetApp()->GetProfileString(_T("Parameters"), name, def);
-    }
-    static int   GetInt(const TCHAR *name, int def = 0) {
-        return AfxGetApp()->GetProfileInt(_T("Parameters"), name, def);
-    }
-    static void   SetStr(const TCHAR *name, const TCHAR *val) {
-        AfxGetApp()->WriteProfileString(_T("Parameters"), name, val);
-    }
-    static void   SetInt(const TCHAR *name, int val) {
-        AfxGetApp()->WriteProfileInt(_T("Parameters"), name, val);
-    }
-    static void   Barf(const TCHAR *format, ...);
-    CTVApp();
+ static CImageList *ImageList();
+ static void QueueCmd(UINT cmd);
+ static UINT TopQueuedCmd();
+ static CString GetStr(const TCHAR *name, const TCHAR *def = NULL) {
+ return AfxGetApp()->GetProfileString(_T("Parameters"), name, def);
+ }
+ static int GetInt(const TCHAR *name, int def = 0) {
+ return AfxGetApp()->GetProfileInt(_T("Parameters"), name, def);
+ }
+ static void SetStr(const TCHAR *name, const TCHAR *val) {
+ AfxGetApp()->WriteProfileString(_T("Parameters"), name, val);
+ }
+ static void SetInt(const TCHAR *name, int val) {
+ AfxGetApp()->WriteProfileInt(_T("Parameters"), name, val);
+ }
+ static void Barf(const TCHAR *format, ...);
+ CTVApp();
 
-    // Overrides
-    // ClassWizard generated virtual function overrides
-    //{{AFX_VIRTUAL(CTVApp)
+ // Overrides
+ // ClassWizard generated virtual function overrides
+ //{{AFX_VIRTUAL(CTVApp)
 public:
-    virtual BOOL InitInstance();
-    virtual BOOL OnIdle(LONG lCount);
-    //}}AFX_VIRTUAL
+ virtual BOOL InitInstance();
+ virtual BOOL OnIdle(LONG lCount);
+ //}}AFX_VIRTUAL
 
-    // Implementation
+ // Implementation
 
-    //{{AFX_MSG(CTVApp)
-    //}}AFX_MSG
-    DECLARE_MESSAGE_MAP()
+ //{{AFX_MSG(CTVApp)
+ //}}AFX_MSG
+ DECLARE_MESSAGE_MAP()
 protected:
-    CUIntArray       m_cmdqueue;
-    auto_ptr<CImageList> m_imagelist;
+ CUIntArray m_cmdqueue;
+ auto_ptr<CImageList> m_imagelist;
 };
 
 
