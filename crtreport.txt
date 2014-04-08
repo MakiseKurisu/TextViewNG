@@ -1,2 +1,0 @@
-f:\dd\vctools\vc7libs\ship\atlmfc\src\mfc\dlgcore.cpp(136) : AppMsg - Warning: calling DestroyWindow in CDialog::~CDialog --
-f:\dd\vctools\vc7libs\ship\atlmfc\src\mfc\dlgcore.cpp(137) : AppMsg - 	OnDestroy or PostNcDestroy in derived class will not be called.

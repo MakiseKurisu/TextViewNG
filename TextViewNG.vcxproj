@@ -285,7 +285,7 @@
       <AdditionalIncludeDirectories>TextViewNG;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>ernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;advapi32.lib;shell32.lib;shlwapi.lib;propsys.lib;comctl32.lib;comdlg32.lib;uxtheme.lib;dwmapi.lib;msimg32.lib;windowscodecs.lib;winmm.lib;msxml6.lib;winspool.lib;imm32.lib;ole32.lib;oledlg.lib;oleaut32.lib;oleacc.lib;uuid.lib;uafxcwd.lib;atls.lib;libcmtd.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;gdiplus.lib;advapi32.lib;shell32.lib;shlwapi.lib;propsys.lib;comctl32.lib;comdlg32.lib;uxtheme.lib;dwmapi.lib;msimg32.lib;windowscodecs.lib;winmm.lib;msxml6.lib;winspool.lib;imm32.lib;ole32.lib;oledlg.lib;oleaut32.lib;oleacc.lib;uuid.lib;uafxcwd.lib;atls.lib;libcmtd.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>

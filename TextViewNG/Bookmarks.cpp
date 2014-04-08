@@ -140,6 +140,51 @@ static CString unescape(const CString& str)
     return ret;
 }
 
+#include <Wincrypt.h>
+CString HashCString(CString szContext)
+{
+    TCHAR szResult[60];
+
+    HCRYPTPROV hProv;
+    if (!CryptAcquireContextW(&hProv, NULL, NULL, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT))
+    {
+        return "";
+    }
+
+    HCRYPTHASH hHash;
+    if (!CryptCreateHash(hProv, CALG_SHA1, 0, 0, &hHash))
+    {
+        CryptReleaseContext(hProv, 0);
+        return "";
+    }
+
+    if (!CryptHashData(hHash, (BYTE *) (LPCTSTR) szContext, szContext.GetLength() * sizeof(TCHAR), 0))
+    {
+        CryptReleaseContext(hProv, 0);
+        CryptDestroyHash(hHash);
+        return "";
+    }
+
+    BYTE rgbHash[20];      //SHA1LEN == 20
+    DWORD cbHash = 20;     //MD5LEN == 16
+    if (CryptGetHashParam(hHash, HP_HASHVAL, rgbHash, &cbHash, 0))
+    {
+        TCHAR rgbDigits[] = TEXT("0123456789ABCDEF");
+        DWORD i, n;
+        for (i = 0, n = 0; i < cbHash; i++)
+        {
+            szResult[n++] = rgbDigits[rgbHash[i] >> 4];
+            szResult[n++] = rgbDigits[rgbHash[i] & 0xf];
+        }
+        szResult[n++] = 0;
+    }
+
+    CryptDestroyHash(hHash);
+    CryptReleaseContext(hProv, 0);
+
+    return szResult;
+}
+
 Bookmarks::Bookmarks(const CString& filename) : m_filename(filename),
 m_shortname(filename), m_changed(true), m_topbmk(0), m_ubmk(0)
 {
@@ -147,7 +192,7 @@ m_shortname(filename), m_changed(true), m_topbmk(0), m_ubmk(0)
     int last = max(m_shortname.ReverseFind(_T('\\')), m_shortname.ReverseFind(_T('/')));
     m_shortname.Delete(0, last + 1);
     // find info in registry
-    CString info = AfxGetApp()->GetProfileString(_T("Bookmarks"), escape2(m_shortname));
+    CString info = AfxGetApp()->GetProfileString(_T("Bookmarks"), HashCString(m_filename));
     DWORD dummy;
     if (!info.GetLength() || _stscanf_s(info, _T("%d,%d,%u,%u"), &m_format, &m_encoding, &dummy, &dummy) != 4)
     {
@@ -280,7 +325,7 @@ void Bookmarks::SaveToRegistry()
     HKEY hBmk = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
     if (!hBmk)
         return;
-    CString sect(escape2(m_shortname));
+    CString sect(HashCString(m_filename));
     RegDeleteKey(hBmk, sect);
     HKEY res;
     DWORD disp;
@@ -318,7 +363,7 @@ bool Bookmarks::SaveInfo()
         {
             CString info;
             info.Format(_T("%d,%d,%u,%u,%s"), m_format, m_encoding, ftm.dwLowDateTime, ftm.dwHighDateTime, (LPCTSTR) m_filename);
-            AfxGetApp()->WriteProfileString(_T("Bookmarks"), escape2(m_shortname), info);
+            AfxGetApp()->WriteProfileString(_T("Bookmarks"), HashCString(m_filename), info);
             m_changed = false;
             return true;
         }
@@ -331,7 +376,7 @@ void Bookmarks::LoadFromRegistry()
     HKEY hBmk = AfxGetApp()->GetSectionKey(_T("Bookmarks"));
     if (!hBmk)
         return;
-    CString sect(escape2(m_shortname));
+    CString sect(HashCString(m_filename));
     HKEY res;
     CString name, value;
     if (RegOpenKeyEx(hBmk, sect, 0, HR_REG_PERM, &res) == ERROR_SUCCESS)
@@ -524,26 +569,26 @@ int Bookmarks::BFind(FilePos p, int type)
         {
             switch (type)
             {
-            case SPREVCH:
-                while (mid > 0 && m_bmk[mid].flags&BMK)
-                    --mid;
-                break;
-            case SNEXTICH:
-                while (mid < m_bmk.GetSize() && m_bmk[mid].ref == p && !(m_bmk[mid].flags&BMK))
-                    ++mid;
-                break;
-            case SNEXTCH:
-                while (mid < m_bmk.GetSize() && m_bmk[mid].flags&BMK)
-                    ++mid;
-                break;
-            case SPREVANY: case SNEXTANY:
-                break;
-            case SPREVBMK:
-                while (mid > 0 && !(m_bmk[mid].flags&BMK))
-                    --mid;
-                if (!(m_bmk[mid].flags&BMK))
-                    return -1;
-                break;
+                case SPREVCH:
+                    while (mid > 0 && m_bmk[mid].flags&BMK)
+                        --mid;
+                    break;
+                case SNEXTICH:
+                    while (mid < m_bmk.GetSize() && m_bmk[mid].ref == p && !(m_bmk[mid].flags&BMK))
+                        ++mid;
+                    break;
+                case SNEXTCH:
+                    while (mid < m_bmk.GetSize() && m_bmk[mid].flags&BMK)
+                        ++mid;
+                    break;
+                case SPREVANY: case SNEXTANY:
+                    break;
+                case SPREVBMK:
+                    while (mid > 0 && !(m_bmk[mid].flags&BMK))
+                        --mid;
+                    if (!(m_bmk[mid].flags&BMK))
+                        return -1;
+                    break;
             }
             return mid;
         }
@@ -551,25 +596,25 @@ int Bookmarks::BFind(FilePos p, int type)
     // no exact match, this is expected
     switch (type)
     {
-    case SPREVBMK:
-        while (high > 0 && !(m_bmk[high].flags&BMK))
-            --high;
-        if (high < 0 || !(m_bmk[high].flags&BMK))
-            return -1;
-        break;
-    case SPREVCH:
-        while (high > 0 && m_bmk[high].flags&BMK)
-            --high;
-        break;
-    case SNEXTICH:
-        return low;
-    case SNEXTCH:
-        while (low < m_bmk.GetSize() && m_bmk[low].flags&BMK)
-            ++low;
-    case SNEXTANY:
-        return low;
-    case SPREVANY:
-        break;
+        case SPREVBMK:
+            while (high > 0 && !(m_bmk[high].flags&BMK))
+                --high;
+            if (high < 0 || !(m_bmk[high].flags&BMK))
+                return -1;
+            break;
+        case SPREVCH:
+            while (high > 0 && m_bmk[high].flags&BMK)
+                --high;
+            break;
+        case SNEXTICH:
+            return low;
+        case SNEXTCH:
+            while (low < m_bmk.GetSize() && m_bmk[low].flags&BMK)
+                ++low;
+        case SNEXTANY:
+            return low;
+        case SPREVANY:
+            break;
     }
     return high < 0 ? 0 : high;
 }
